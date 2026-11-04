@@ -1,0 +1,2069 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Elemental Tower — Portrait Mobile v0.5</title>
+<style>
+:root { color-scheme: dark; }
+html, body { height: 100%; }
+:root {
+  --bg: #0d0f14;
+  --panel: rgba(14, 18, 28, 0.86);
+  --line: rgba(255, 255, 255, 0.14);
+  --text: #eef2ff;
+  --muted: #9aa4bf;
+  --gold: #ffd84a;
+  --accent: #5b8cff;
+  --danger: #ff5a5a;
+  --good: #6aff8a;
+  --fire: #ff6a2b; --water: #3fa7ff; --earth: #b07a45; --wind: #9df0c8; --gen: #f2c94c;
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); color: var(--text);
+  font: 14px/1.3 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; user-select: none; -webkit-user-select: none; }
+#game { position: fixed; inset: 0; width: 100vw; height: 100vh; height: 100dvh; display: block; touch-action: none; }
+button { font: inherit; color: var(--text); background: #232a3d; border: 1px solid var(--line); border-radius: 8px;
+  padding: 6px 10px; cursor: pointer; touch-action: manipulation; }
+button:hover:not(:disabled) { background: #2e3750; }
+button:disabled { opacity: 0.4; cursor: not-allowed; }
+button.primary { background: #8a2b2b; border-color: #c24a4a; font-weight: 600; }
+button.primary:hover { background: #a33636; }
+
+/* ---------------------------------------------------------------- barre du haut */
+#hud-top { position: fixed; top: 0; left: 0; right: 0; display: flex; align-items: center; gap: 14px;
+  padding: 6px max(10px, env(safe-area-inset-right)) 6px max(10px, env(safe-area-inset-left));
+  background: linear-gradient(var(--panel), rgba(14, 18, 28, 0.55)); pointer-events: none; }
+#hud-top > * { pointer-events: auto; }
+.stat { display: flex; align-items: baseline; gap: 6px; white-space: nowrap; }
+.stat small { color: var(--muted); font-size: 12px; }
+.stat .ico { font-size: 15px; }
+.gold .ico, .gold b { color: var(--gold); }
+.gold b { font-size: 18px; min-width: 3ch; }
+.castle .ico { color: #6fb8ff; }
+.demon .ico { color: #ff6a6a; }
+.wave { flex-direction: column; gap: 0; align-items: flex-start; }
+.btns { margin-left: auto; display: flex; gap: 6px; }
+.eco { flex-direction: column; gap: 2px; align-items: stretch; min-width: 150px; }
+.eco-line { display: flex; align-items: baseline; gap: 5px; }
+.eco-lbl { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; }
+.eco b { color: var(--good); font-size: 16px; }
+#inc-detail { color: #9fe8b4; }
+.cycle { position: relative; height: 12px; background: rgba(255,255,255,.08); border-radius: 6px; overflow: hidden; }
+.cycle i { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: linear-gradient(90deg, #b8901c, var(--gold)); }
+.cycle small { position: absolute; inset: 0; font-size: 10px; line-height: 12px; text-align: center; color: #fff; text-shadow: 0 0 3px #000; }
+.eco.idle .cycle i { background: #5a5f70; }
+.unit-btn .inc { font-size: 11px; color: var(--good); font-weight: 700; }
+.toast.income { border-color: var(--good); color: #c9ffd6; font-weight: 700; background: rgba(20,60,34,.92); }
+.panel .ecobox { background: rgba(106,255,138,.08); border: 1px solid rgba(106,255,138,.35); border-radius: 8px; padding: 6px 10px; margin: 6px 0; }
+.panel textarea { width: 100%; height: 70px; font: 11px monospace; background: #0b0e16; color: #cfd6ea; border: 1px solid var(--line); border-radius: 6px; }
+
+/* ---------------------------------------------------------------- armée */
+#hud-army { position: fixed; bottom: max(6px, env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 10px; padding: 6px 10px; background: var(--panel);
+  border: 1px solid var(--line); border-radius: 12px; }
+.army-label { font-weight: 700; color: var(--muted); text-transform: uppercase; font-size: 11px; letter-spacing: .08em; }
+#hud-army .row { display: flex; gap: 4px; }
+.chip { padding: 4px 8px; border-radius: 999px; font-size: 12px; display: flex; gap: 4px; align-items: center; }
+.chip.active { outline: 2px solid #fff; background: #3a4566; }
+.chip .rk { font-weight: 700; font-size: 11px; opacity: .85; }
+.el-fire { border-color: var(--fire); } .el-water { border-color: var(--water); }
+.el-earth { border-color: var(--earth); } .el-wind { border-color: var(--wind); } .el-generator { border-color: var(--gen); }
+.chip.el-fire .nm { color: var(--fire); } .chip.el-water .nm { color: var(--water); }
+.chip.el-earth .nm { color: #d9a46f; } .chip.el-wind .nm { color: var(--wind); }
+.unit-btn { display: flex; flex-direction: column; align-items: center; padding: 4px 10px; min-width: 84px; }
+.unit-btn .cost { font-size: 11px; color: var(--gold); }
+
+/* ---------------------------------------------------------------- menu de case */
+#popup { position: fixed; z-index: 5; background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+  padding: 8px; max-width: 320px; box-shadow: 0 6px 24px rgba(0,0,0,.5); }
+.pop-title { font-weight: 700; margin-bottom: 6px; }
+.pop-info { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+.pop-hint { font-size: 11px; color: var(--muted); font-style: italic; margin-bottom: 6px; }
+.pop-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
+.build-btn { display: flex; flex-direction: column; align-items: center; padding: 6px 4px; border-width: 2px; min-width: 56px; }
+.build-btn span { font-size: 11px; color: var(--gold); }
+.sell-btn { width: 100%; border-color: var(--gold); }
+
+/* ---------------------------------------------------------------- messages */
+#toasts { position: fixed; top: 52px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column;
+  align-items: center; gap: 4px; pointer-events: none; z-index: 4; }
+.toast { background: var(--panel); border: 1px solid var(--line); padding: 4px 12px; border-radius: 999px;
+  font-size: 13px; animation: fade 2.6s forwards; }
+.toast.error { border-color: var(--danger); color: #ffc0c0; }
+.toast.good { border-color: var(--good); color: #c9ffd6; }
+.toast.warn { border-color: #ff9a3a; color: #ffd9b0; }
+@keyframes fade { 0%, 75% { opacity: 1; } 100% { opacity: 0; } }
+
+#pause-banner { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: 800; letter-spacing: .1em;
+  background: rgba(10, 14, 30, .75); padding: 8px 18px; border-radius: 10px; display: none; pointer-events: none; }
+body.paused #pause-banner { display: block; }
+
+/* ---------------------------------------------------------------- écrans */
+#overlay { position: fixed; inset: 0; z-index: 10; background: rgba(5, 7, 12, .7); display: flex; align-items: center;
+  justify-content: center; padding: 12px; }
+#overlay[hidden] { display: none; }
+.panel { background: #141a28; border: 1px solid var(--line); border-radius: 16px; padding: 16px 22px; max-width: 640px;
+  max-height: 100%; overflow: auto; }
+.panel h1 { margin: 0 0 4px; letter-spacing: .12em; }
+.panel .sub { color: var(--muted); margin: 0 0 8px; }
+.panel ul { padding-left: 18px; margin: 6px 0; }
+.panel li { margin: 4px 0; }
+.panel .keys { color: var(--muted); font-size: 12px; }
+.panel table { width: 100%; border-collapse: collapse; margin: 8px 0 12px; }
+.panel td { padding: 3px 0; border-bottom: 1px solid var(--line); }
+.panel td:last-child { text-align: right; font-weight: 600; }
+.end { text-align: center; min-width: 300px; }
+.end.win h1 { color: var(--good); }
+.end.lose h1 { color: var(--danger); }
+button.big { display: block; margin: 10px auto 0; padding: 10px 28px; font-size: 16px; font-weight: 700; background: var(--accent); border: none; }
+
+#rotate { display: none; position: fixed; inset: 0; z-index: 20; background: var(--bg); align-items: center; justify-content: center;
+  text-align: center; font-size: 20px; }
+#rotate div { font-size: 18px; }
+@media (orientation: portrait) and (max-width: 900px) { #rotate { display: flex; } }
+
+/* ---------------------------------------------------------------- petits écrans (mobile paysage) */
+@media (max-height: 500px) {
+  body { font-size: 12px; }
+  #hud-top { gap: 8px; padding-top: 3px; padding-bottom: 3px; }
+  .gold b { font-size: 15px; }
+  .stat small { font-size: 10px; }
+  button { padding: 4px 7px; border-radius: 6px; }
+  #hud-army { gap: 6px; padding: 4px 6px; bottom: 2px; }
+  .army-label { display: none; }
+  .chip { padding: 3px 6px; font-size: 11px; }
+  .unit-btn { min-width: 64px; padding: 2px 6px; }
+  #toasts { top: 36px; }
+  .panel { padding: 10px 14px; }
+  .panel li { margin: 2px 0; }
+}
+@media (max-width: 760px) {
+  .wave small, #income { display: none; }
+  .stat.castle span:last-child, .stat.demon span:last-child { font-size: 11px; }
+}
+.chip, .unit-btn .cost { white-space: nowrap; }
+@media (max-height: 500px) {
+  .unit-btn b { font-size: 11px; }
+  .unit-btn .cost, .unit-btn .inc { font-size: 10px; }
+  .eco { min-width: 120px; }
+  .eco b { font-size: 13px; }
+  #inc-detail { display: none; }
+}
+
+
+/* v0.5 — Application mobile en portrait : surface de jeu entre les deux HUD. */
+#rotate { display: none !important; }
+#game { left: 50%; right: auto; transform: translateX(-50%); top: 110px; bottom: 164px;
+  width: min(100%, 460px); height: auto; }
+#hud-top { left: 50%; right: auto; transform: translateX(-50%); width: min(100%, 460px);
+  display: grid; grid-template-columns: 0.85fr 1fr 1fr; gap: 4px 8px;
+  padding: max(5px, env(safe-area-inset-top)) 9px 7px; background: #141a28; z-index: 3; }
+#hud-top .stat { min-width: 0; }
+#hud-top .gold { grid-area: 1 / 1; }
+#hud-top .eco { grid-area: 1 / 2; min-width: 0; }
+#hud-top .wave { grid-area: 1 / 3; }
+#hud-top .castle { grid-area: 2 / 1; }
+#hud-top .demon { grid-area: 2 / 2 / 3 / 4; }
+#hud-top .btns { grid-area: 3 / 1 / 4 / 4; margin: 0; width: 100%; display: flex; gap: 5px; }
+#hud-top .btns button { min-height: 35px; min-width: 35px; padding: 6px 8px; }
+#btn-wave { flex: 1; font-size: 12px; min-width: 0 !important; }
+#hud-top .gold b { font-size: 18px; min-width: 0; }
+#hud-top .eco b { font-size: 14px; }
+#hud-top .eco .eco-lbl, #hud-top .stat small { font-size: 10px; }
+#hud-top .wave { white-space: nowrap; font-size: 12px; }
+#hud-top .castle, #hud-top .demon { font-size: 11px; white-space: nowrap; }
+#hud-top #inc-detail, #hud-top #wave-info { display: none; }
+#hud-army { left: 50%; bottom: 0; transform: translateX(-50%); width: min(100%, 460px);
+  display: grid; grid-template-columns: 1fr; gap: 5px; padding: 7px 9px max(7px, env(safe-area-inset-bottom));
+  border-radius: 12px 12px 0 0; background: #141a28; z-index: 3; }
+#hud-army .army-label { display: none; }
+#hud-army .row { display: grid; gap: 5px; width: 100%; }
+#army-elements { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+#army-roads { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+#army-classes { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+#army-elements .chip { min-width: 0; min-height: 38px; flex-direction: column; justify-content: center; gap: 1px;
+  padding: 3px 2px; font-size: 10px; line-height: 1.1; border-radius: 8px; }
+#army-elements .chip .nm { overflow: hidden; max-width: 100%; text-overflow: ellipsis; }
+#army-roads .chip { justify-content: center; min-height: 28px; font-size: 11px; }
+#army-classes .unit-btn { min-width: 0; min-height: 53px; padding: 3px 2px; }
+#army-classes .unit-btn b { font-size: 12px; }
+#army-classes .unit-btn .cost, #army-classes .unit-btn .inc { font-size: 10px; }
+#popup { left: 50% !important; top: auto !important; bottom: var(--portrait-popup-bottom, 168px);
+  width: min(94vw, 420px); max-width: 420px; transform: translateX(-50%); z-index: 6; }
+#popup .pop-grid { grid-template-columns: repeat(4, 1fr); }
+#popup .build-btn { min-width: 0; min-height: 46px; }
+#toasts { top: calc(var(--portrait-top, 110px) + 5px); max-width: 90vw; }
+#toasts .toast { text-align: center; }
+#pause-banner { z-index: 2; }
+#overlay { padding: max(12px, env(safe-area-inset-top)) 12px max(12px, env(safe-area-inset-bottom)); }
+.panel { width: min(100%, 460px); max-height: 96%; }
+@media (orientation: landscape) and (max-height: 600px) { #rotate { display: flex !important; } }
+@media (max-height: 670px) and (orientation: portrait) {
+  #hud-top .cycle { height: 8px; }
+  #hud-top .cycle small { display: none; }
+  #hud-top .btns button { min-height: 30px; }
+  #hud-army { gap: 3px; padding-top: 4px; }
+  #army-elements .chip { min-height: 31px; }
+  #army-roads .chip { min-height: 25px; }
+  #army-classes .unit-btn { min-height: 43px; }
+}
+</style>
+
+  <canvas id="game"></canvas>
+
+  <div id="hud-top">
+    <div class="stat gold" title="Or disponible"><span class="ico">●</span><b id="gold">260</b></div>
+    <div class="stat eco" title="Revenu périodique : versé toutes les 10 s de combat. Chaque unité envoyée l'augmente pour toute la partie.">
+      <div class="eco-line"><span class="eco-lbl">Revenu</span><b id="inc">+30</b><small id="inc-unit">/ 10 s</small><small id="inc-detail"></small></div>
+      <div class="cycle"><i id="cycle-bar"></i><small id="cycle-time"></small></div>
+    </div>
+    <div class="stat castle" title="Votre château"><span class="ico">♜</span><span id="php"></span></div>
+    <div class="stat wave"><span>Vague <b id="wave">0</b></span><small id="wave-info"></small></div>
+    <div class="stat demon" title="Base démoniaque"><span class="ico">☠</span><span id="dhp"></span></div>
+    <div class="btns">
+      <button id="btn-wave" class="primary">Lancer la vague 1</button>
+      <button id="btn-pause" title="Pause tactique (Espace)">⏸</button>
+      <button id="btn-speed" title="Vitesse">x1</button>
+      <button id="btn-mute" title="Son">🔊</button>
+      <button id="btn-help" title="Aide">?</button>
+    </div>
+  </div>
+
+  <div id="hud-army">
+    <div class="army-label">Armée</div>
+    <div class="row" id="army-elements"></div>
+    <div class="row" id="army-roads">
+      <button class="chip" data-road="top" title="Route gauche">← Gauche</button>
+      <button class="chip" data-road="bottom" title="Route droite">→ Droite</button>
+    </div>
+    <div class="row" id="army-classes"></div>
+  </div>
+
+  <div id="popup" hidden></div>
+  <div id="toasts"></div>
+  <div id="pause-banner">PAUSE — la gestion reste possible</div>
+  <div id="overlay" hidden></div>
+  <div id="rotate"><div>↻<br>Tournez votre appareil en mode portrait</div></div>
+
+  
+
+<script type="module">
+
+// ===== src/config/version.js =====
+// Version du build, affichée dans l'écran d'aide.
+const VERSION = '0.5.0-portrait';
+
+// ===== src/config/balance.js =====
+// =============================================================================
+// ELEMENTAL TOWER — Équilibrage centralisé
+// -----------------------------------------------------------------------------
+// Toutes les valeurs numériques du jeu sont ici.
+//   [MB]  = valeur issue du Mainbook (chapitres 03 / 05 ou annexe des décisions)
+//   [PROV] = valeur provisoire choisie pour le prototype (à équilibrer en test)
+// Aucune logique ici : uniquement des données.
+// =============================================================================
+
+const BALANCE = {
+  // --------------------------------------------------------------- Économie
+  // VARIANTE B (v0.4, inspirée de Stronghold TD) : AUCUNE MINE, AUCUN PLAFOND.
+  // Le revenu périodique ne grandit que par les unités offensives envoyées.
+  economy: {
+    startGold: 260,                // [MB] B05
+    cycleSeconds: 10,              // [PROV] un versement toutes les N s de temps économique actif
+    baseIncomePerCycle: 30,        // [PROV] = 3 or/s du v0.3, pour comparer A et B
+    sellRatio: 0.5,                // [MB] B10 : revente = 50 % de l'investissement total
+    unitKillRewardRatio: 1.0,      // [PROV] part de la prime versée quand un démon est tué par une unité
+    // Pas de plafond : aucune clé de limite ici, volontairement.
+  },
+
+  // --------------------------------------------------------------- Pression (anti-attente, sans plafond)
+  pressure: {
+    enrageAfter: 45,               // [PROV] s de vie d'un démon avant la rage
+    enrageSpeedMult: 2,            // [PROV] vitesse ×2 et insensible ralentissement/étourdissement/recul
+    fortifyPerCycle: 0.01,         // [PROV] +1 % PV max et dégâts des défenses démoniaques par versement
+    earlyLaunchBonusBase: 20,      // [PROV] prime d'anticipation = base + parWave × n° de vague
+    earlyLaunchBonusPerWave: 4,
+  },
+
+  // --------------------------------------------------------------- Tourelles
+  maxRank: 5,                      // [MB] M09 / M10
+
+  // Multiplicateurs appliqués selon le rang (index 0 = rang 1). [PROV]
+  towerRank: {
+    damage:   [1, 2.1, 4.4, 9.2, 19],
+    range:    [1, 1.06, 1.12, 1.18, 1.25],
+    cooldown: [1, 0.97, 0.94, 0.9, 0.85],
+    effect:   [1, 1.15, 1.3, 1.45, 1.6],   // intensité des effets (durée, ralentissement…)
+  },
+
+  // Modificateurs de dégâts selon la cible. [PROV]
+  // Règle anti-aérienne : toutes les tourelles touchent les volants, mais pas avec la même efficacité.
+  targetModifiers: {
+    fire:  { air: 1.0, heavy: 1.0 },
+    water: { air: 1.0, heavy: 1.0 },
+    earth: { air: 0.5, heavy: 1.5 },   // [MB] efficace contre les résistants
+    wind:  { air: 1.6, heavy: 0.7 },   // [MB] efficace contre les volants
+  },
+
+  // Quatre éléments [MB] chapitre 03 (dégâts, cadence, portée, coût)
+  elements: {
+    fire:  { name: 'Feu',   color: '#ff6a2b', cost: 120, damage: 22, cooldown: 0.75, range: 155,
+             effect: { type: 'burn', dpsRatio: 0.3, duration: 2 } },          // [PROV] brûlure
+    water: { name: 'Eau',   color: '#3fa7ff', cost: 120, damage: 13, cooldown: 0.58, range: 155,
+             effect: { type: 'slow', amount: 0.3, duration: 1.2 } },          // [PROV] ralentissement
+    earth: { name: 'Terre', color: '#9b6b3c', cost: 150, damage: 33, cooldown: 1.40, range: 125,
+             effect: null },
+    wind:  { name: 'Vent',  color: '#9df0c8', cost: 140, damage: 10, cooldown: 0.40, range: 175,
+             effect: null },
+  },
+
+  // Six hybrides [MB] recettes + pouvoirs ; statistiques [PROV]
+  hybrids: {
+    steam:      { name: 'Vapeur', recipe: ['fire', 'water'], damage: 16, cooldown: 0.8, range: 150,
+                  effect: { type: 'slowZone', radius: 60, amount: 0.45, duration: 2.0 } },
+    magma:      { name: 'Magma', recipe: ['fire', 'earth'], damage: 30, cooldown: 1.2, range: 135,
+                  effect: { type: 'burnZone', radius: 45, dps: 14, duration: 3.0 } },
+    firestorm:  { name: 'Tempête de feu', recipe: ['fire', 'wind'], damage: 18, cooldown: 0.7, range: 165,
+                  effect: { type: 'multi', targets: [3, 3, 4, 4, 5] } },
+    mud:        { name: 'Boue', recipe: ['water', 'earth'], damage: 22, cooldown: 1.0, range: 140,
+                  effect: { type: 'stun', duration: 0.7, immunity: 1.5 } },
+    blizzard:   { name: 'Blizzard', recipe: ['water', 'wind'], damage: 14, cooldown: 0.5, range: 165,
+                  effect: { type: 'frost', duration: 3.0 } },                 // prochaine attaque ratée
+    stonestorm: { name: 'Tempête de pierres', recipe: ['earth', 'wind'], damage: 26, cooldown: 1.1, range: 150,
+                  effect: { type: 'knockback', distance: 38, heavyResist: 0.5 } },
+  },
+
+  // Les rangs des hybrides débloquent-ils les rangs offensifs de leurs composants ?
+  // Le Mainbook (B06, §8) ne compte que les tourelles « de cet élément ». [PROV] désactivé.
+  hybridRankUnlocksComponents: false,
+
+  // --------------------------------------------------------------- Unités offensives
+  // [MB] chapitre 03.4 : PV, dégâts, cadence, vitesse, coût, portée
+  // Variante B : prix baissés ; incomeRatio = coût / bonus de revenu (plus bas = plus rentable).
+  units: {
+    warrior: { name: 'Guerrier', hp: 85, damage: 13, cooldown: 0.70, speed: 68, cost: 55, range: 24,
+               layer: 'ground', hitsAir: false, incomeRatio: 18 },
+    archer:  { name: 'Archer',   hp: 45, damage: 10, cooldown: 0.90, speed: 57, cost: 70, range: 145,
+               layer: 'ground', hitsAir: true, incomeRatio: 17.5, structureMult: 1.5 },
+    flyer:   { name: 'Volant',   hp: 40, damage: 8,  cooldown: 0.65, speed: 90, cost: 90, range: 80,
+               layer: 'air', hitsAir: true, incomeRatio: 15 },
+  },
+  unitAggro: 175,                  // [PROV] distance de détection des structures démoniaques
+  // Multiplicateurs selon le rang offensif de l'élément choisi (index 0 = rang 1). [PROV]
+  unitRank: {
+    hp:     [1, 1.5, 2.1, 2.8, 3.6],
+    damage: [1, 1.5, 2.1, 2.8, 3.6],
+    cost:   [1, 1.2, 1.4, 1.6, 1.8],
+  },
+  // Saveur élémentaire des unités offensives. [PROV] — association élément/classe non arbitrée (annexe C)
+  unitElements: {
+    neutral: { name: 'Neutre' },
+    fire:    { name: 'Feu',   damageMult: 1.15, onHit: { type: 'burn', dpsRatio: 0.3, duration: 2 } },
+    water:   { name: 'Eau',   onHit: { type: 'slow', amount: 0.3, duration: 1.2 } },
+    earth:   { name: 'Terre', hpMult: 1.3 },
+    wind:    { name: 'Vent',  speedMult: 1.25, damageMult: 1.05 },
+  },
+
+  // --------------------------------------------------------------- Démons
+  // Récompenses [MB] 5.3 ; statistiques [PROV]
+  enemies: {
+    normal: { name: 'Démon',        hp: 70,  speed: 42, damage: 9,  cooldown: 1.0, range: 22,
+              castleDamage: 60,  reward: 8,  layer: 'ground', hitsAir: false, radius: 10 },
+    fast:   { name: 'Démon rapide', hp: 42,  speed: 82, damage: 6,  cooldown: 0.7, range: 20,
+              castleDamage: 40,  reward: 6,  layer: 'ground', hitsAir: false, radius: 8 },
+    heavy:  { name: 'Démon lourd',  hp: 280, speed: 26, damage: 20, cooldown: 1.4, range: 24,
+              castleDamage: 150, reward: 18, layer: 'ground', hitsAir: false, radius: 15, heavy: true },
+    flyer:  { name: 'Démon volant', hp: 55,  speed: 55, damage: 7,  cooldown: 0.9, range: 60,
+              castleDamage: 60,  reward: 12, layer: 'air', hitsAir: true, radius: 10 },
+  },
+  demonTower: { name: 'Tourelle démoniaque', hp: 900, damage: 22, cooldown: 1.0, range: 165, reward: 50 }, // reward [MB]
+
+  castles: {
+    playerHp: 1000,                       // [PROV]
+    demonHp: 2500,                        // [PROV] variante B
+    demonShieldedWhileTowersAlive: true,  // [MB] M16 : tourelles puis base
+    // Décision D04 du 03/11/2026 : les châteaux se défendent seuls. [PROV]
+    // Le château allié tire sur les démons, le château démoniaque sur nos unités offensives.
+    // Mettre `null` pour désactiver une défense.
+    playerDefense: { damage: 14, cooldown: 0.8, range: 190, hitsAir: true },
+    demonDefense:  { damage: 20, cooldown: 0.9, range: 180, hitsAir: true },
+  },
+
+  // --------------------------------------------------------------- Vagues
+  waves: {
+    // Décision du 03/11/2026 (remplace B02) : aucune vague ne part sans action du joueur.
+    // Mettre un nombre de secondes pour réactiver le lancement automatique.
+    autoLaunchDelay: null,
+    // Décision du 03/11/2026 : lancement anticipé autorisé seulement quand tous les démons
+    // des vagues en cours sont sortis du château démoniaque (apparition terminée).
+    earlyLaunchRequiresSpawnComplete: true,
+    hpScalingPerWave: 0.15,       // [PROV] variante B : +15 % de PV par vague au-delà de la 1re
+    rewardScalingPerWave: 0.0,    // [PROV] récompense constante (anti-abus)
+  },
+};
+
+// ===== src/config/level1.js =====
+// =============================================================================
+// Niveau 1 — géométrie du terrain (coordonnées logiques 1280 x 720, paysage)
+// Le château du joueur est à gauche, la base démoniaque à droite.
+// Les routes sont décrites dans le sens des démons (de la base démoniaque vers le joueur).
+// =============================================================================
+
+const LEVEL1 = {
+  // Portrait 720 x 1000: démons en haut, château allié en bas.
+  width: 720,
+  height: 1000,
+  playerCastle: { x: 360, y: 910, radius: 46 },
+  demonCastle: { x: 360, y: 90, radius: 46 },
+  roads: {
+    // Les noms techniques 'top'/'bottom' sont conservés dans la simulation;
+    // ils correspondent désormais aux routes gauche/droite de l'écran.
+    top: [
+      { x: 340, y: 158 }, { x: 184, y: 195 }, { x: 122, y: 320 },
+      { x: 150, y: 500 }, { x: 126, y: 670 }, { x: 192, y: 784 }, { x: 343, y: 848 },
+    ],
+    bottom: [
+      { x: 380, y: 158 }, { x: 536, y: 195 }, { x: 598, y: 320 },
+      { x: 570, y: 500 }, { x: 594, y: 670 }, { x: 528, y: 784 }, { x: 377, y: 848 },
+    ],
+    air: [{ x: 360, y: 158 }, { x: 360, y: 848 }],
+  },
+  slots: [
+    { id: 0, x: 278, y: 285 }, { id: 1, x: 278, y: 428 },
+    { id: 2, x: 278, y: 572 }, { id: 3, x: 278, y: 716 },
+    { id: 4, x: 442, y: 285 }, { id: 5, x: 442, y: 428 },
+    { id: 6, x: 442, y: 572 }, { id: 7, x: 442, y: 716 },
+    { id: 8, x: 360, y: 359 }, { id: 9, x: 360, y: 640 },
+  ],
+  slotRadius: 34,
+  demonTowers: [
+    { id: 'dt-top', x: 188, y: 226 },
+    { id: 'dt-bottom', x: 532, y: 226 },
+    { id: 'dt-gate', x: 360, y: 204 },
+  ],
+  allySpawn: { x: 360, y: 848 },
+};
+
+// ===== src/config/waves.js =====
+// =============================================================================
+// Modèles de vagues prédéfinis [MB] M20 — composition [PROV]
+// Chaque groupe : type d'ennemi, nombre, intervalle (s), délai (s), route.
+// route : 'top' | 'bottom' | 'alt' (alterne haut/bas) | 'air'
+// Au-delà de la liste, les vagues sont générées procéduralement (escalade infinie, §5.11).
+// =============================================================================
+
+const WAVE_TEMPLATES = [
+  /* 1 */ [ { type: 'normal', count: 6, interval: 1.6, delay: 0, road: 'alt' } ],
+  /* 2 */ [ { type: 'normal', count: 8, interval: 1.3, delay: 0, road: 'alt' },
+            { type: 'fast', count: 3, interval: 1.0, delay: 6, road: 'top' } ],
+  /* 3 */ [ { type: 'normal', count: 6, interval: 1.2, delay: 0, road: 'alt' },
+            { type: 'flyer', count: 3, interval: 2.0, delay: 4, road: 'air' } ],
+  /* 4 */ [ { type: 'heavy', count: 2, interval: 4.0, delay: 0, road: 'alt' },
+            { type: 'normal', count: 8, interval: 1.0, delay: 2, road: 'alt' } ],
+  /* 5 */ [ { type: 'fast', count: 10, interval: 0.6, delay: 0, road: 'alt' },
+            { type: 'flyer', count: 4, interval: 1.5, delay: 5, road: 'air' } ],
+  /* 6 */ [ { type: 'heavy', count: 3, interval: 3.0, delay: 0, road: 'bottom' },
+            { type: 'normal', count: 10, interval: 0.9, delay: 1, road: 'top' } ],
+  /* 7 */ [ { type: 'normal', count: 12, interval: 0.8, delay: 0, road: 'alt' },
+            { type: 'fast', count: 6, interval: 0.6, delay: 4, road: 'alt' },
+            { type: 'flyer', count: 5, interval: 1.2, delay: 6, road: 'air' } ],
+  /* 8 */ [ { type: 'heavy', count: 5, interval: 2.5, delay: 0, road: 'alt' },
+            { type: 'flyer', count: 6, interval: 1.0, delay: 3, road: 'air' } ],
+];
+
+/** Composition d'une vague au-delà des modèles prédéfinis. [PROV] */
+function proceduralWave(number) {
+  const k = number - WAVE_TEMPLATES.length; // 1, 2, 3…
+  return [
+    { type: 'normal', count: 10 + 2 * k, interval: 0.7, delay: 0, road: 'alt' },
+    { type: 'fast',   count: 5 + k,      interval: 0.5, delay: 3, road: 'alt' },
+    { type: 'heavy',  count: 3 + Math.floor(k / 2), interval: 2.2, delay: 2, road: 'alt' },
+    { type: 'flyer',  count: 4 + k,      interval: 1.0, delay: 5, road: 'air' },
+  ];
+}
+
+function waveComposition(number) {
+  return number <= WAVE_TEMPLATES.length ? WAVE_TEMPLATES[number - 1] : proceduralWave(number);
+}
+
+// ===== src/engine/path.js =====
+// Outils géométriques : chemins polylignes parcourus par distance.
+
+function dist(a, b) {
+  return Math.hypot(a.x - b.x, a.y - b.y);
+}
+
+function buildPath(points) {
+  const cum = [0];
+  for (let i = 1; i < points.length; i++) cum.push(cum[i - 1] + dist(points[i - 1], points[i]));
+  return { points, cum, length: cum[cum.length - 1] };
+}
+
+function reversePath(path) {
+  return buildPath([...path.points].reverse());
+}
+
+/** Position sur le chemin à la distance d (bornée). */
+function pointAt(path, d) {
+  const { points, cum, length } = path;
+  if (d <= 0) return { x: points[0].x, y: points[0].y };
+  if (d >= length) { const p = points[points.length - 1]; return { x: p.x, y: p.y }; }
+  let i = 1;
+  while (cum[i] < d) i++;
+  const t = (d - cum[i - 1]) / (cum[i] - cum[i - 1]);
+  const a = points[i - 1], b = points[i];
+  return { x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t };
+}
+
+/** Déplace (x,y) vers (tx,ty) d'au plus `step`. Retourne true si arrivé. */
+function moveToward(e, tx, ty, step) {
+  const dx = tx - e.x, dy = ty - e.y;
+  const d = Math.hypot(dx, dy);
+  if (d <= step || d === 0) { e.x = tx; e.y = ty; return true; }
+  e.x += (dx / d) * step;
+  e.y += (dy / d) * step;
+  return false;
+}
+
+// ===== src/engine/catalog.js =====
+// Règles de catalogue : fusion, statistiques par rang, coûts. Fonctions pures.
+
+const BASE_ELEMENTS = ['fire', 'water', 'earth', 'wind'];
+const HYBRIDS = Object.keys(BALANCE.hybrids);
+
+function isElement(type) { return BASE_ELEMENTS.includes(type); }
+function isHybrid(type) { return HYBRIDS.includes(type); }
+
+/** Type hybride issu de deux éléments différents (ordre indifférent), ou null. */
+function hybridOf(a, b) {
+  for (const [id, h] of Object.entries(BALANCE.hybrids)) {
+    const [x, y] = h.recipe;
+    if ((x === a && y === b) || (x === b && y === a)) return id;
+  }
+  return null;
+}
+
+/**
+ * Résultat d'une fusion entre deux bâtiments (source déposée sur destination).
+ * Bâtiment = { kind: 'tower' | 'generator', type, rank }
+ * Retourne { ok: true, kind, type, rank } ou { ok: false, reason }.
+ * Règles [MB] bloc 04 §2, §3, §6.3, §7.
+ */
+function fusionResult(a, b, cfg = BALANCE) {
+  if (!a || !b) return { ok: false, reason: 'Aucune construction à fusionner.' };
+  if (a.kind !== 'tower' || b.kind !== 'tower') return { ok: false, reason: 'Seules les tourelles fusionnent.' };
+  if (a.rank !== b.rank) return { ok: false, reason: 'Les rangs doivent être identiques.' };
+  if (a.type === b.type) {
+    if (a.rank >= cfg.maxRank) return { ok: false, reason: `Rang maximal (${cfg.maxRank}) déjà atteint.` };
+    return { ok: true, kind: a.kind, type: a.type, rank: a.rank + 1 };
+  }
+  if (a.kind === 'tower' && isElement(a.type) && isElement(b.type)) {
+    const h = hybridOf(a.type, b.type);
+    if (h) return { ok: true, kind: 'tower', type: h, rank: a.rank };
+  }
+  if (isHybrid(a.type) && isHybrid(b.type)) return { ok: false, reason: 'Deux hybrides différents ne fusionnent pas.' };
+  return { ok: false, reason: 'Combinaison incompatible.' };
+}
+
+function towerDef(type) {
+  return BALANCE.elements[type] || BALANCE.hybrids[type];
+}
+
+function displayName(b) {
+  return `${towerDef(b.type).name} ${b.rank}`;
+}
+
+/** Statistiques effectives d'une tourelle selon son rang. */
+function towerStats(type, rank) {
+  const def = towerDef(type);
+  const r = rank - 1, R = BALANCE.towerRank;
+  return {
+    damage: def.damage * R.damage[r],
+    cooldown: def.cooldown * R.cooldown[r],
+    range: def.range * R.range[r],
+    effect: def.effect,
+    effectMult: R.effect[r],
+  };
+}
+
+/** Modificateur de dégâts d'une tourelle contre une cible (air / lourd). */
+function damageModifier(type, target) {
+  const comps = isElement(type) ? [type] : BALANCE.hybrids[type].recipe;
+  let m = 1;
+  // Pour un hybride, on prend la moyenne des modificateurs de ses composants.
+  let air = 0, heavy = 0;
+  for (const c of comps) {
+    air += BALANCE.targetModifiers[c].air;
+    heavy += BALANCE.targetModifiers[c].heavy;
+  }
+  if (target.layer === 'air') m *= air / comps.length;
+  if (target.heavy) m *= heavy / comps.length;
+  return m;
+}
+
+/** Variante B : seules les quatre tourelles élémentaires se construisent (aucune mine). */
+function buildCost(kind) {
+  return BALANCE.elements[kind]?.cost ?? null;
+}
+
+/** Coût d'invocation d'une unité offensive selon son rang. */
+function unitCost(cls, rank) {
+  return Math.round(BALANCE.units[cls].cost * BALANCE.unitRank.cost[rank - 1]);
+}
+
+/** Bonus permanent de revenu périodique accordé par l'envoi d'une unité (variante B, sans plafond). */
+function unitIncome(cls, rank) {
+  return Math.round(unitCost(cls, rank) / BALANCE.units[cls].incomeRatio);
+}
+
+/** Statistiques d'une unité offensive (classe × élément × rang). */
+function unitStats(cls, element, rank) {
+  const base = BALANCE.units[cls];
+  const el = BALANCE.unitElements[element] || {};
+  const r = rank - 1;
+  return {
+    hp: Math.round(base.hp * BALANCE.unitRank.hp[r] * (el.hpMult || 1)),
+    damage: base.damage * BALANCE.unitRank.damage[r] * (el.damageMult || 1),
+    cooldown: base.cooldown,
+    speed: base.speed * (el.speedMult || 1),
+    range: base.range,
+    layer: base.layer,
+    hitsAir: base.hitsAir,
+    structureMult: base.structureMult || 1,
+    onHit: el.onHit || null,
+  };
+}
+
+// ===== src/engine/game.js =====
+// =============================================================================
+// ELEMENTAL TOWER — Moteur de partie (simulation pure, sans DOM)
+// -----------------------------------------------------------------------------
+// - Les commandes du joueur (build, fuse, sell, summon, launchWave, setPaused)
+//   renvoient { ok, reason } et restent utilisables pendant la pause (B11).
+// - update(dt) fait avancer la simulation ; rien ne bouge en pause ou en fin de partie.
+// =============================================================================
+
+
+
+
+
+const TOWER_RADIUS = 20;
+const FREE_AGGRO = 120;     // [PROV] rayon de poursuite des démons par les unités hors route
+
+class Game {
+  constructor(opts = {}) {
+    this.cfg = opts.balance || BALANCE;
+    this.level = opts.level || LEVEL1;
+    this.reset();
+  }
+
+  reset() {
+    const cfg = this.cfg, L = this.level;
+    this.time = 0;
+    this.state = 'playing';            // 'playing' | 'victory' | 'defeat'
+    this.paused = false;
+    this.gold = cfg.economy.startGold;
+    this.stats = {
+      kills: 0, goldEarnedKills: 0, goldEarnedPassive: 0, goldEarnedEarlyBonus: 0, wavesCleared: 0, unitsSummoned: 0, fusions: 0,
+      firstSendTime: null, sendsByClass: { warrior: 0, archer: 0, flyer: 0 }, sendTimes: [],
+      goldSpentDefense: 0, goldSpentOffense: 0, fusionsByType: {}, incomeHistory: [], maxWave: 0,
+    };
+    // Variante B : revenu périodique = base + bonus acquis par les envois (conservé toute la partie, sans plafond).
+    this.sendIncome = 0;
+    this.ecoClock = 0;      // secondes écoulées dans le cycle économique en cours (conservées entre les vagues)
+    this.cycles = 0;        // versements effectués
+    this.fortify = 1;       // multiplicateur des défenses démoniaques (fortification)
+    this.nextId = 1;
+
+    this.paths = {
+      demon: { top: buildPath(L.roads.top), bottom: buildPath(L.roads.bottom), air: buildPath(L.roads.air) },
+    };
+    this.paths.ally = { top: reversePath(this.paths.demon.top), bottom: reversePath(this.paths.demon.bottom) };
+
+    this.slots = L.slots.map(s => ({ id: s.id, x: s.x, y: s.y, building: null }));
+    this.playerCastle = { ...L.playerCastle, hp: cfg.castles.playerHp, maxHp: cfg.castles.playerHp, cd: 0, defense: cfg.castles.playerDefense };
+    this.demonCastle = { ...L.demonCastle, hp: cfg.castles.demonHp, maxHp: cfg.castles.demonHp, cd: 0, defense: cfg.castles.demonDefense };
+    this.demonTowers = L.demonTowers.map(t => ({
+      ...t, hp: cfg.demonTower.hp, maxHp: cfg.demonTower.hp, cd: 0, alive: true, radius: TOWER_RADIUS,
+    }));
+
+    this.demons = [];
+    this.allies = [];
+    this.zones = [];
+    this.fx = [];          // effets visuels éphémères (lus par le rendu)
+    this.messages = [];    // messages pour l'interface (consommés par l'UI)
+
+    this.waves = [];       // vagues actives
+    this.waveNumber = 0;   // dernière vague lancée
+    this.firstWaveLaunched = false;
+    this.autoTimer = 0;
+
+    // Rang offensif débloqué par élément (B06) — ne diminue jamais pendant la partie.
+    this.elementRank = Object.fromEntries(BASE_ELEMENTS.map(e => [e, 0]));
+  }
+
+  // =========================================================== Requêtes
+  /** Revenu versé à chaque cycle (variante B). */
+  get income() {
+    return this.cfg.economy.baseIncomePerCycle + this.sendIncome;
+  }
+
+  /** Le temps économique avance-t-il ? (au moins une vague active, hors pause) */
+  get passiveActive() {
+    return this.waves.length > 0 && !this.paused && this.state === 'playing';
+  }
+
+  /** Secondes de temps économique actif avant le prochain versement. */
+  get nextPayoutIn() {
+    return this.cfg.economy.cycleSeconds - this.ecoClock;
+  }
+
+  /** Prime d'anticipation si une vague est lancée maintenant (0 si aucune vague active). */
+  get earlyLaunchBonus() {
+    if (!this.waves.length) return 0;
+    const P = this.cfg.pressure;
+    return P.earlyLaunchBonusBase + P.earlyLaunchBonusPerWave * (this.waveNumber + 1);
+  }
+
+  get demonCastleVulnerable() {
+    return !this.cfg.castles.demonShieldedWhileTowersAlive || this.demonTowers.every(t => !t.alive);
+  }
+
+  sellValue(building) {
+    return Math.floor(building.invested * this.cfg.economy.sellRatio);
+  }
+
+  canAfford(cost) { return Math.floor(this.gold) >= cost; }
+
+  /** Rang auquel une unité serait invoquée avec cet élément (0 = verrouillé). */
+  unitRankFor(element) {
+    return element === 'neutral' ? 1 : (this.elementRank[element] || 0);
+  }
+
+  // =========================================================== Commandes
+  _msg(text, kind = 'info') {
+    this.messages.push({ text, kind, time: this.time });
+    if (this.messages.length > 30) this.messages.shift();
+  }
+
+  _fail(reason) { this._msg(reason, 'error'); return { ok: false, reason }; }
+
+  _noteTower(type, rank) {
+    if (isElement(type)) this.elementRank[type] = Math.max(this.elementRank[type], rank);
+    else if (isHybrid(type) && this.cfg.hybridRankUnlocksComponents) {
+      for (const c of this.cfg.hybrids[type].recipe) this.elementRank[c] = Math.max(this.elementRank[c], rank);
+    }
+  }
+
+  build(slotId, kind) {
+    if (this.state !== 'playing') return this._fail('Partie terminée.');
+    const slot = this.slots[slotId];
+    if (!slot) return this._fail('Case inconnue.');
+    if (slot.building) return this._fail('Case déjà occupée.');
+    const cost = buildCost(kind);
+    if (cost == null) return this._fail('Construction inconnue.');
+    if (!this.canAfford(cost)) return this._fail(`Or insuffisant (${cost} requis).`);
+    this.gold -= cost;
+    this.stats.goldSpentDefense += cost;
+    slot.building = { kind: 'tower', type: kind, rank: 1, invested: cost, cd: 0 };
+    this._noteTower(kind, 1);
+    this.fx.push({ kind: 'build', x: slot.x, y: slot.y, ttl: 0.4, max: 0.4 });
+    return { ok: true };
+  }
+
+  /** Fusionne la construction de srcId sur celle de dstId (la case source se libère). */
+  fuse(srcId, dstId) {
+    if (this.state !== 'playing') return this._fail('Partie terminée.');
+    if (srcId === dstId) return { ok: false, reason: 'Même case.' };
+    const src = this.slots[srcId], dst = this.slots[dstId];
+    if (!src?.building || !dst?.building) return this._fail('Il faut deux constructions.');
+    const res = fusionResult(src.building, dst.building, this.cfg);
+    if (!res.ok) return this._fail(res.reason);
+    dst.building = {
+      kind: res.kind, type: res.type, rank: res.rank,
+      invested: src.building.invested + dst.building.invested, cd: 0,
+    };
+    src.building = null;
+    if (res.kind === 'tower') this._noteTower(res.type, res.rank);
+    this.stats.fusions++;
+    this.stats.fusionsByType[res.type] = (this.stats.fusionsByType[res.type] || 0) + 1;
+    this.fx.push({ kind: 'fusion', x: dst.x, y: dst.y, ttl: 0.6, max: 0.6 });
+    this._msg(`Fusion : ${displayName(dst.building)}`, 'good');
+    return { ok: true, result: dst.building };
+  }
+
+  /** Déplacement gratuit, uniquement sur une case vide. */
+  move(srcId, dstId) {
+    if (this.state !== 'playing') return this._fail('Partie terminée.');
+    const src = this.slots[srcId], dst = this.slots[dstId];
+    if (!src?.building || !dst || dst.building || srcId === dstId) return this._fail('Déplacement impossible.');
+    dst.building = src.building;
+    src.building = null;
+    this.fx.push({ kind: 'build', x: dst.x, y: dst.y, ttl: 0.3, max: 0.3 });
+    return { ok: true };
+  }
+
+  sell(slotId) {
+    if (this.state !== 'playing') return this._fail('Partie terminée.');
+    const slot = this.slots[slotId];
+    if (!slot?.building) return this._fail('Rien à revendre.');
+    const value = this.sellValue(slot.building);
+    this.gold += value;
+    this.fx.push({ kind: 'text', text: `+${value}`, color: '#ffd84a', x: slot.x, y: slot.y - 20, ttl: 1, max: 1 });
+    slot.building = null;
+    return { ok: true, value };
+  }
+
+  summon(cls, element = 'neutral', road = 'top') {
+    if (this.state !== 'playing') return this._fail('Partie terminée.');
+    const base = this.cfg.units[cls];
+    if (!base) return this._fail('Unité inconnue.');
+    const rank = this.unitRankFor(element);
+    if (rank < 1) return this._fail(`Élément ${this.cfg.unitElements[element]?.name ?? element} non débloqué : construisez une tourelle de cet élément.`);
+    const cost = unitCost(cls, rank);
+    if (!this.canAfford(cost)) return this._fail(`Or insuffisant (${cost} requis).`);
+    this.gold -= cost;
+    const st = unitStats(cls, element, rank);
+    // Variante B : l'envoi réussi augmente le revenu périodique, une seule fois, de façon permanente.
+    const bonus = unitIncome(cls, rank);
+    this.sendIncome += bonus;
+    this.stats.goldSpentOffense += cost;
+    this.stats.sendsByClass[cls]++;
+    this.stats.sendTimes.push(Math.round(this.time));
+    if (this.stats.firstSendTime == null) this.stats.firstSendTime = this.time;
+    const u = {
+      id: this.nextId++, side: 'ally', cls, element, rank,
+      hp: st.hp, maxHp: st.hp, damage: st.damage, cooldown: st.cooldown, cd: 0,
+      speed: st.speed, range: st.range, layer: st.layer, hitsAir: st.hitsAir, onHit: st.onHit,
+      radius: cls === 'warrior' ? 11 : 9, structureMult: st.structureMult, incomeBonus: bonus,
+    };
+    if (st.layer === 'ground') {
+      u.mode = 'road'; u.road = road === 'bottom' ? 'bottom' : 'top';
+      u.path = this.paths.ally[u.road]; u.d = 0;
+      Object.assign(u, pointAt(u.path, 0));
+    } else {
+      u.mode = 'free';
+      Object.assign(u, { x: this.level.allySpawn.x, y: this.level.allySpawn.y });
+    }
+    this.allies.push(u);
+    this.stats.unitsSummoned++;
+    this._msg(`${base.name} envoyé — Revenu +${bonus}`, 'income');
+    this.fx.push({ kind: 'text', text: `+${bonus}/cycle`, color: '#7dffa8', x: u.x, y: u.y - 18, ttl: 1.2, max: 1.2 });
+    return { ok: true, unit: u };
+  }
+
+  /** Le joueur peut-il lancer une vague maintenant ? { ok, reason } */
+  canLaunchWave() {
+    if (this.state !== 'playing') return { ok: false, reason: 'Partie terminée.' };
+    if (this.cfg.waves.earlyLaunchRequiresSpawnComplete) {
+      const spawning = this.waves.find(w => w.queue.length > 0);
+      if (spawning) return { ok: false, reason: `Attendez que tous les démons de la vague ${spawning.number} soient sortis du château.` };
+    }
+    return { ok: true };
+  }
+
+  /** Démons restant à faire apparaître dans les vagues en cours. */
+  get demonsToSpawn() {
+    return this.waves.reduce((n, w) => n + w.queue.length, 0);
+  }
+
+  launchWave() {
+    const can = this.canLaunchWave();
+    if (!can.ok) return this._fail(can.reason);
+    const early = this.earlyLaunchBonus;
+    const number = ++this.waveNumber;
+    this.stats.maxWave = number;
+    const queue = [];
+    for (const g of waveComposition(number)) {
+      for (let i = 0; i < g.count; i++) {
+        const road = g.road === 'alt' ? (i % 2 === 0 ? 'top' : 'bottom') : g.road;
+        queue.push({ t: g.delay + i * g.interval, type: g.type, road });
+      }
+    }
+    queue.sort((a, b) => a.t - b.t);
+    this.waves.push({ number, queue, elapsed: 0, total: queue.length });
+    this.firstWaveLaunched = true;
+    this.autoTimer = this.cfg.waves.autoLaunchDelay ?? Infinity;
+    if (early > 0) {
+      this.gold += early;
+      this.stats.goldEarnedEarlyBonus += early;
+      this._msg(`Vague ${number} lancée en avance — prime +${early} or`, 'warn');
+    } else this._msg(`Vague ${number} lancée !`, 'warn');
+    return { ok: true, number, bonus: early };
+  }
+
+  setPaused(p) { if (this.state === 'playing') this.paused = !!p; return { ok: true }; }
+
+  // =========================================================== Simulation
+  update(dt) {
+    if (this.state !== 'playing' || this.paused || dt <= 0) return;
+    this.time += dt;
+    this._updateWaves(dt);
+    this._updateTowers(dt);
+    this._updateDemonTowers(dt);
+    this._updateCastleDefense(dt);
+    this._updateDemons(dt);
+    this._updateAllies(dt);
+    this._updateZonesAndStatus(dt);
+    this._cleanup();
+    this._checkEnd();
+    for (const f of this.fx) f.ttl -= dt;
+    this.fx = this.fx.filter(f => f.ttl > 0);
+  }
+
+  _updateWaves(dt) {
+    // Variante B : chronomètre économique unique (jamais multiplié par le nombre de vagues),
+    // qui n'avance que si au moins une vague est active. Aucun plafond.
+    if (this.waves.length > 0) {
+      const C = this.cfg.economy.cycleSeconds;
+      this.ecoClock += dt;
+      while (this.ecoClock >= C) {
+        this.ecoClock -= C;
+        this._payout();
+      }
+    }
+    for (const w of this.waves) {
+      w.elapsed += dt;
+      while (w.queue.length && w.queue[0].t <= w.elapsed) this._spawnDemon(w.queue.shift(), w.number);
+    }
+    // Lancement automatique : désactivé par défaut (autoLaunchDelay = null).
+    if (this.firstWaveLaunched && this.cfg.waves.autoLaunchDelay != null) {
+      this.autoTimer -= dt;
+      if (this.autoTimer <= 0 && this.canLaunchWave().ok) this.launchWave();
+    }
+  }
+
+  _payout() {
+    const g = this.income;
+    this.gold += g;
+    this.stats.goldEarnedPassive += g;
+    this.cycles++;
+    this.stats.incomeHistory.push({ t: Math.round(this.time), income: g });
+    this.fx.push({ kind: 'text', text: `+${g} revenu`, color: '#ffd84a', x: this.playerCastle.x + 10, y: this.playerCastle.y - 60, ttl: 1.4, max: 1.4 });
+    // Fortification démoniaque : les défenses adverses se renforcent avec le temps de combat.
+    const f = 1 + this.cfg.pressure.fortifyPerCycle * this.cycles;
+    const k = f / this.fortify;
+    for (const s of [...this.demonTowers.filter(t => t.alive), this.demonCastle]) {
+      s.hp *= k; s.maxHp *= k;
+    }
+    this.fortify = f;
+  }
+
+  _spawnDemon(entry, waveNumber) {
+    const def = this.cfg.enemies[entry.type];
+    const hpMult = 1 + this.cfg.waves.hpScalingPerWave * (waveNumber - 1);
+    const path = this.paths.demon[def.layer === 'air' ? 'air' : entry.road];
+    const p = pointAt(path, 0);
+    this.demons.push({
+      id: this.nextId++, side: 'demon', type: entry.type, wave: waveNumber,
+      x: p.x, y: p.y, path, d: 0,
+      hp: def.hp * hpMult, maxHp: def.hp * hpMult,
+      speed: def.speed, damage: def.damage, cooldown: def.cooldown, cd: 0, range: def.range,
+      layer: def.layer, hitsAir: def.hitsAir, heavy: !!def.heavy, radius: def.radius,
+      reward: Math.round(def.reward * (1 + this.cfg.waves.rewardScalingPerWave * (waveNumber - 1))),
+      castleDamage: def.castleDamage,
+      slowAmt: 0, slowUntil: 0, stunUntil: 0, stunImmuneUntil: 0, frostUntil: 0,
+      burnDps: 0, burnUntil: 0, dead: false, rewarded: false, born: this.time, enraged: false, killedByUnit: false,
+    });
+  }
+
+  // ---------------------------------------------------- tourelles alliées
+  _updateTowers(dt) {
+    for (const slot of this.slots) {
+      const b = slot.building;
+      if (!b || b.kind !== 'tower') continue;
+      b.cd -= dt;
+      if (b.cd > 0) continue;
+      const st = towerStats(b.type, b.rank);
+      const inRange = this.demons.filter(e => !e.dead && dist(slot, e) <= st.range + e.radius);
+      if (!inRange.length) continue;
+      // M14 : ennemi le plus avancé en premier.
+      inRange.sort((a, c) => c.d / c.path.length - a.d / a.path.length);
+      const eff = st.effect;
+      const targets = eff?.type === 'multi' ? inRange.slice(0, eff.targets[b.rank - 1]) : [inRange[0]];
+      for (const t of targets) {
+        this._damageDemon(t, st.damage * damageModifier(b.type, t));
+        if (eff) this._applyEffect(t, eff, st, b.type);
+        this.fx.push({ kind: 'shot', x1: slot.x, y1: slot.y, x2: t.x, y2: t.y, color: this._typeColor(b.type), ttl: 0.12, max: 0.12 });
+      }
+      b.cd = st.cooldown;
+    }
+  }
+
+  _typeColor(type) {
+    return (this.cfg.elements[type] || this.cfg.hybrids[type])?.color
+      || this.cfg.elements[this.cfg.hybrids[type]?.recipe[0]]?.color || '#fff';
+  }
+
+  _applyEffect(t, eff, st, sourceType) {
+    const m = st.effectMult;
+    const now = this.time;
+    switch (eff.type) {
+      case 'burn': {
+        const dps = st.damage * eff.dpsRatio;
+        if (dps >= t.burnDps || now > t.burnUntil) t.burnDps = dps;
+        t.burnUntil = now + eff.duration * m;
+        break;
+      }
+      case 'slow': this._slow(t, Math.min(0.7, eff.amount * m), eff.duration * m); break;
+      case 'slowZone':
+        this.zones.push({ x: t.x, y: t.y, radius: eff.radius * Math.sqrt(m), slow: Math.min(0.75, eff.amount * m),
+          dps: 0, until: now + eff.duration * m, max: eff.duration * m, color: '#d8e8f0' });
+        break;
+      case 'burnZone': {
+        const rankDmg = st.damage / (this.cfg.hybrids[sourceType]?.damage || st.damage);
+        this.zones.push({ x: t.x, y: t.y, radius: eff.radius * Math.sqrt(m), slow: 0,
+          dps: eff.dps * rankDmg, until: now + eff.duration, max: eff.duration, color: '#ff7a2b' });
+        break;
+      }
+      case 'stun':
+        if (!t.enraged && now >= t.stunImmuneUntil) {
+          t.stunUntil = now + eff.duration * m;
+          t.stunImmuneUntil = t.stunUntil + eff.immunity;
+        }
+        break;
+      case 'frost': t.frostUntil = now + eff.duration * m; break;
+      case 'knockback':
+        if (t.enraged) break;
+        if (t.path) t.d = Math.max(0, t.d - eff.distance * m * (t.heavy ? eff.heavyResist : 1));
+        Object.assign(t, pointAt(t.path, t.d));
+        break;
+      default: break; // 'multi' est géré au ciblage
+    }
+  }
+
+  _slow(t, amount, duration) {
+    if (t.enraged) return;
+    if (amount >= t.slowAmt || this.time > t.slowUntil) t.slowAmt = amount;
+    t.slowUntil = Math.max(t.slowUntil, this.time + duration);
+  }
+
+  _damageDemon(t, amount) {
+    if (t.dead) return;
+    t.hp -= amount;
+    if (t.hp <= 0) t.dead = true;
+  }
+
+  // ---------------------------------------------------- tourelles démoniaques (B09)
+  _updateDemonTowers(dt) {
+    const T = this.cfg.demonTower;
+    for (const tw of this.demonTowers) {
+      if (!tw.alive) continue;
+      tw.cd -= dt;
+      if (tw.cd > 0) continue;
+      let best = null, bd = Infinity;
+      for (const a of this.allies) {
+        if (a.hp <= 0) continue;
+        const d = dist(tw, a);
+        if (d <= T.range + a.radius && d < bd) { best = a; bd = d; }
+      }
+      if (!best) continue;
+      best.hp -= T.damage * this.fortify;
+      this.fx.push({ kind: 'shot', x1: tw.x, y1: tw.y, x2: best.x, y2: best.y, color: '#c03cff', ttl: 0.12, max: 0.12 });
+      tw.cd = T.cooldown;
+    }
+  }
+
+  // ---------------------------------------------------- défense des châteaux (D04)
+  _updateCastleDefense(dt) {
+    // Château allié : vise le démon le plus avancé à portée.
+    const pc = this.playerCastle, pd = pc.defense;
+    if (pd && pc.hp > 0) {
+      pc.cd -= dt;
+      if (pc.cd <= 0) {
+        const targets = this.demons.filter(e => !e.dead && (e.layer === 'ground' || pd.hitsAir) && dist(pc, e) <= pd.range + e.radius);
+        if (targets.length) {
+          targets.sort((a, c) => c.d / c.path.length - a.d / a.path.length);
+          const t = targets[0];
+          this._damageDemon(t, pd.damage);
+          this.fx.push({ kind: 'shot', x1: pc.x, y1: pc.y - 20, x2: t.x, y2: t.y, color: '#ffe680', ttl: 0.12, max: 0.12 });
+          pc.cd = pd.cooldown;
+        }
+      }
+    }
+    // Château démoniaque : vise l'unité alliée la plus proche, même sous bouclier.
+    const dc = this.demonCastle, dd = dc.defense;
+    if (dd && dc.hp > 0) {
+      dc.cd -= dt;
+      if (dc.cd <= 0) {
+        const t = this._nearestInRange(dc, this.allies, dd.range, a => a.layer === 'ground' || dd.hitsAir);
+        if (t) {
+          t.hp -= dd.damage * this.fortify;
+          this.fx.push({ kind: 'shot', x1: dc.x, y1: dc.y - 20, x2: t.x, y2: t.y, color: '#ff3a3a', ttl: 0.12, max: 0.12 });
+          dc.cd = dd.cooldown;
+        }
+      }
+    }
+  }
+
+  // ---------------------------------------------------- démons
+  _canHit(attacker, target) {
+    return target.layer === 'ground' || attacker.hitsAir;
+  }
+
+  _nearestInRange(from, list, range, filter) {
+    let best = null, bd = Infinity;
+    for (const t of list) {
+      if (t.hp <= 0 || t.dead) continue;
+      if (filter && !filter(t)) continue;
+      const d = dist(from, t) - (t.radius || 0);
+      if (d <= range && d < bd) { best = t; bd = d; }
+    }
+    return best;
+  }
+
+  _updateDemons(dt) {
+    const now = this.time;
+    for (const e of this.demons) {
+      if (e.dead) continue;
+      e.cd -= dt;
+      // Rage : un démon qui traîne trop longtemps accélère et ignore le contrôle (anti-attente, sans plafond).
+      if (!e.enraged && now - e.born >= this.cfg.pressure.enrageAfter) {
+        e.enraged = true; e.speed *= this.cfg.pressure.enrageSpeedMult;
+        e.stunUntil = 0; e.slowUntil = 0;
+        this.fx.push({ kind: 'text', text: 'RAGE', color: '#ff4040', x: e.x, y: e.y - 14, ttl: 0.8, max: 0.8 });
+      }
+      if (now < e.stunUntil) continue;                       // Boue : ni attaque ni déplacement
+      // B08 : affronte automatiquement les unités alliées rencontrées.
+      const target = this._nearestInRange(e, this.allies, e.range + e.radius, a => this._canHit(e, a));
+      if (target) {
+        if (e.cd <= 0) {
+          e.cd = e.cooldown;
+          if (now < e.frostUntil) { e.frostUntil = 0; this.fx.push({ kind: 'text', text: 'raté', color: '#bfe8ff', x: e.x, y: e.y - 14, ttl: 0.6, max: 0.6 }); }
+          else target.hp -= e.damage;
+        }
+        continue;
+      }
+      // B07 : avance vers la base alliée.
+      const slow = now < e.slowUntil ? e.slowAmt : 0;
+      e.d += e.speed * (1 - slow) * dt;
+      Object.assign(e, pointAt(e.path, e.d));
+      if (e.d >= e.path.length) {
+        this.playerCastle.hp -= e.castleDamage;
+        e.dead = true; e.rewarded = true;   // atteint la base : aucune récompense
+        this.fx.push({ kind: 'hit', x: this.playerCastle.x, y: this.playerCastle.y, ttl: 0.4, max: 0.4 });
+      }
+    }
+  }
+
+  // ---------------------------------------------------- unités alliées (M15, M16)
+  _demonStructures() {
+    const list = this.demonTowers.filter(t => t.alive);
+    if (this.demonCastleVulnerable && this.demonCastle.hp > 0) list.push(this.demonCastle);
+    return list;
+  }
+
+  _updateAllies(dt) {
+    const aggro = this.cfg.unitAggro;
+    for (const u of this.allies) {
+      if (u.hp <= 0) continue;
+      u.cd -= dt;
+      // 1) Ennemi rencontré à portée.
+      const foe = this._nearestInRange(u, this.demons, u.range + u.radius, e => this._canHit(u, e));
+      if (foe) { this._allyAttack(u, foe); continue; }
+
+      if (u.mode === 'road') {
+        const structNear = this._demonStructures().some(s => dist(u, s) <= aggro);
+        if (structNear || u.d >= u.path.length) u.mode = 'free';
+        else {
+          u.d += u.speed * dt;
+          Object.assign(u, pointAt(u.path, u.d));
+          continue;
+        }
+      }
+      // Mode libre : poursuite d'un démon proche, sinon tourelles démoniaques, puis château.
+      const chase = this._nearestInRange(u, this.demons, FREE_AGGRO, e => this._canHit(u, e));
+      if (chase) { moveToward(u, chase.x, chase.y, u.speed * dt); continue; }
+      const towers = this.demonTowers.filter(t => t.alive);
+      let target = null;
+      if (towers.length) target = towers.reduce((a, b) => (dist(u, a) <= dist(u, b) ? a : b));
+      else if (this.demonCastle.hp > 0) target = this.demonCastle;
+      if (!target) continue;
+      if (dist(u, target) - target.radius <= u.range + u.radius) this._allyAttackStructure(u, target);
+      else moveToward(u, target.x, target.y, u.speed * dt);
+    }
+  }
+
+  _allyAttack(u, foe) {
+    if (u.cd > 0) return;
+    u.cd = u.cooldown;
+    this._damageDemon(foe, u.damage);
+    if (foe.dead) foe.killedByUnit = true;
+    if (u.onHit) this._applyEffect(foe, u.onHit, { damage: u.damage, effectMult: 1 }, null);
+    this.fx.push({ kind: 'shot', x1: u.x, y1: u.y, x2: foe.x, y2: foe.y, color: '#ffffff', ttl: 0.1, max: 0.1 });
+  }
+
+  _allyAttackStructure(u, s) {
+    if (u.cd > 0) return;
+    u.cd = u.cooldown;
+    if (s === this.demonCastle && !this.demonCastleVulnerable) return;
+    s.hp -= u.damage * (u.structureMult || 1);
+    this.fx.push({ kind: 'shot', x1: u.x, y1: u.y, x2: s.x, y2: s.y, color: '#ffffff', ttl: 0.1, max: 0.1 });
+  }
+
+  // ---------------------------------------------------- zones et altérations
+  _updateZonesAndStatus(dt) {
+    const now = this.time;
+    for (const z of this.zones) {
+      for (const e of this.demons) {
+        if (e.dead || dist(z, e) > z.radius + e.radius) continue;
+        if (z.slow) this._slow(e, z.slow, 0.2);
+        if (z.dps) this._damageDemon(e, z.dps * dt);
+      }
+    }
+    this.zones = this.zones.filter(z => z.until > now);
+    for (const e of this.demons) {
+      if (!e.dead && now < e.burnUntil) this._damageDemon(e, e.burnDps * dt);
+    }
+  }
+
+  // ---------------------------------------------------- nettoyage et fin
+  _cleanup() {
+    for (const e of this.demons) {
+      if (e.dead && !e.rewarded) {
+        e.rewarded = true;                 // récompense versée une seule fois (5.3)
+        const reward = e.killedByUnit ? Math.round(e.reward * this.cfg.economy.unitKillRewardRatio) : e.reward;
+        this.gold += reward;
+        this.stats.kills++;
+        this.stats.goldEarnedKills += reward;
+        this.fx.push({ kind: 'text', text: `+${reward}`, color: '#ffd84a', x: e.x, y: e.y - 12, ttl: 0.9, max: 0.9 });
+      }
+    }
+    this.demons = this.demons.filter(e => !e.dead);
+    for (const a of this.allies) {
+      if (a.hp <= 0) this.fx.push({ kind: 'hit', x: a.x, y: a.y, ttl: 0.3, max: 0.3 });
+    }
+    this.allies = this.allies.filter(a => a.hp > 0);
+    for (const t of this.demonTowers) {
+      if (t.alive && t.hp <= 0) {
+        t.alive = false; t.hp = 0;
+        this.gold += this.cfg.demonTower.reward;
+        this.stats.goldEarnedKills += this.cfg.demonTower.reward;
+        this.fx.push({ kind: 'text', text: `+${this.cfg.demonTower.reward}`, color: '#ffd84a', x: t.x, y: t.y - 20, ttl: 1.2, max: 1.2 });
+        this.fx.push({ kind: 'fusion', x: t.x, y: t.y, ttl: 0.6, max: 0.6 });
+        this._msg('Tourelle démoniaque détruite !', 'good');
+        if (this.demonCastleVulnerable) this._msg('Le château démoniaque est vulnérable !', 'good');
+      }
+    }
+    // Fin automatique des vagues dont tous les ennemis sont éliminés.
+    const remaining = this.waves.filter(w => w.queue.length || this.demons.some(e => e.wave === w.number));
+    for (const w of this.waves) {
+      if (!remaining.includes(w)) { this.stats.wavesCleared++; this._msg(`Vague ${w.number} repoussée.`, 'good'); }
+    }
+    this.waves = remaining;
+  }
+
+  _checkEnd() {
+    if (this.demonCastle.hp <= 0) {
+      this.demonCastle.hp = 0;
+      this.state = 'victory';
+      this._msg('VICTOIRE !', 'good');
+    } else if (this.playerCastle.hp <= 0) {
+      this.playerCastle.hp = 0;
+      this.state = 'defeat';
+      this._msg('DÉFAITE…', 'error');
+    }
+  }
+}
+
+// ===== src/render/renderer.js =====
+// =============================================================================
+// Rendu Canvas — graphismes provisoires (M23), lit l'état du jeu sans le modifier.
+// =============================================================================
+
+
+const ENEMY_COLORS = { normal: '#d8423a', fast: '#ff8f3a', heavy: '#7d1f1f', flyer: '#b04ad8' };
+const ELEMENT_COLORS = { neutral: '#e8e8e8', fire: '#ff6a2b', water: '#3fa7ff', earth: '#b07a45', wind: '#9df0c8' };
+
+class Renderer {
+  constructor(canvas, game) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext('2d');
+    this.game = game;
+    this.view = { scale: 1, ox: 0, oy: 0 };
+    this.ui = { selectedSlot: null, drag: null };   // renseigné par les commandes
+  }
+
+  resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const w = this.canvas.clientWidth, h = this.canvas.clientHeight;
+    this.canvas.width = Math.round(w * dpr);
+    this.canvas.height = Math.round(h * dpr);
+    const L = this.game.level;
+    const scale = Math.min(w / L.width, h / L.height);
+    this.view = { scale, ox: (w - L.width * scale) / 2, oy: (h - L.height * scale) / 2, dpr };
+  }
+
+  screenToWorld(sx, sy) {
+    const v = this.view;
+    return { x: (sx - v.ox) / v.scale, y: (sy - v.oy) / v.scale };
+  }
+
+  worldToScreen(x, y) {
+    const v = this.view;
+    return { x: x * v.scale + v.ox, y: y * v.scale + v.oy };
+  }
+
+  draw() {
+    const { ctx, game: g, view: v } = this;
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.fillStyle = '#0d0f14';
+    ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    ctx.setTransform(v.dpr * v.scale, 0, 0, v.dpr * v.scale, v.dpr * v.ox, v.dpr * v.oy);
+
+    this.drawTerrain();
+    this.drawZones();
+    this.drawCastles();
+    this.drawDemonTowers();
+    this.drawSlots();
+    this.drawDemons();
+    this.drawAllies();
+    this.drawFx();
+    this.drawDrag();
+    if (g.paused) {
+      ctx.fillStyle = 'rgba(10,14,30,0.35)';
+      ctx.fillRect(0, 0, g.level.width, g.level.height);
+    }
+  }
+
+  // ---------------------------------------------------------------- terrain
+  drawTerrain() {
+    const { ctx, game: g } = this;
+    const L = g.level;
+    const grad = ctx.createLinearGradient(0, L.height, 0, 0);
+    grad.addColorStop(0, '#2f5a3a');
+    grad.addColorStop(0.62, '#3b5634');
+    grad.addColorStop(0.8, '#4a3a33');
+    grad.addColorStop(1, '#3a1d22');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, L.width, L.height);
+
+    for (const key of ['top', 'bottom']) {
+      const pts = L.roads[key];
+      ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+      ctx.strokeStyle = '#6b5a3f'; ctx.lineWidth = 44; this.poly(pts);
+      ctx.strokeStyle = '#8c7651'; ctx.lineWidth = 34; this.poly(pts);
+    }
+    ctx.setLineDash([8, 10]);
+    ctx.strokeStyle = 'rgba(200,160,255,0.25)'; ctx.lineWidth = 2;
+    this.poly(L.roads.air);
+    ctx.setLineDash([]);
+  }
+
+  poly(pts) {
+    const ctx = this.ctx;
+    ctx.beginPath();
+    pts.forEach((p, i) => (i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y)));
+    ctx.stroke();
+  }
+
+  hpBar(x, y, w, ratio, color = '#5ee05e') {
+    const ctx = this.ctx;
+    ctx.fillStyle = 'rgba(0,0,0,0.6)';
+    ctx.fillRect(x - w / 2 - 1, y - 1, w + 2, 6);
+    ctx.fillStyle = ratio > 0.5 ? color : ratio > 0.25 ? '#e8c440' : '#e04a3a';
+    ctx.fillRect(x - w / 2, y, w * Math.max(0, ratio), 4);
+  }
+
+  // ---------------------------------------------------------------- bases
+  drawCastles() {
+    const { ctx, game: g } = this;
+    const pc = g.playerCastle, dc = g.demonCastle;
+    // Portée de défense des châteaux (D04)
+    ctx.lineWidth = 1;
+    if (pc.defense) { ctx.strokeStyle = 'rgba(255,230,128,0.18)'; ctx.beginPath(); ctx.arc(pc.x, pc.y, pc.defense.range, 0, Math.PI * 2); ctx.stroke(); }
+    if (dc.defense) { ctx.strokeStyle = 'rgba(255,58,58,0.22)'; ctx.beginPath(); ctx.arc(dc.x, dc.y, dc.defense.range, 0, Math.PI * 2); ctx.stroke(); }
+    // Château allié
+    ctx.fillStyle = '#5b7fc7'; ctx.strokeStyle = '#d9e6ff'; ctx.lineWidth = 3;
+    ctx.fillRect(pc.x - 38, pc.y - 44, 76, 88); ctx.strokeRect(pc.x - 38, pc.y - 44, 76, 88);
+    ctx.fillStyle = '#3a5ba0';
+    for (let i = -1; i <= 1; i++) ctx.fillRect(pc.x + i * 26 - 9, pc.y - 58, 18, 16);
+    ctx.fillStyle = '#ffe680'; ctx.beginPath(); ctx.arc(pc.x, pc.y, 12, 0, Math.PI * 2); ctx.fill();
+    this.hpBar(pc.x, pc.y + 52, 80, pc.hp / pc.maxHp, '#6fb8ff');
+    // Château démoniaque
+    ctx.fillStyle = '#5a1a2a'; ctx.strokeStyle = '#ff5a6a';
+    ctx.beginPath();
+    ctx.moveTo(dc.x - 40, dc.y + 44); ctx.lineTo(dc.x - 40, dc.y - 30); ctx.lineTo(dc.x - 20, dc.y - 58);
+    ctx.lineTo(dc.x, dc.y - 34); ctx.lineTo(dc.x + 20, dc.y - 58); ctx.lineTo(dc.x + 40, dc.y - 30);
+    ctx.lineTo(dc.x + 40, dc.y + 44); ctx.closePath(); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#ff3a3a'; ctx.beginPath(); ctx.arc(dc.x, dc.y, 10, 0, Math.PI * 2); ctx.fill();
+    if (!g.demonCastleVulnerable) {
+      ctx.strokeStyle = 'rgba(190,120,255,0.7)'; ctx.lineWidth = 4;
+      ctx.beginPath(); ctx.arc(dc.x, dc.y, 62, 0, Math.PI * 2); ctx.stroke();
+    }
+    this.hpBar(dc.x, dc.y + 52, 80, dc.hp / dc.maxHp, '#ff6a6a');
+  }
+
+  drawDemonTowers() {
+    const { ctx, game: g } = this;
+    for (const t of g.demonTowers) {
+      if (!t.alive) {
+        ctx.fillStyle = '#2a2224';
+        ctx.beginPath(); ctx.arc(t.x, t.y, 16, 0, Math.PI * 2); ctx.fill();
+        continue;
+      }
+      ctx.strokeStyle = 'rgba(192,60,255,0.18)'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.arc(t.x, t.y, BALANCE.demonTower.range, 0, Math.PI * 2); ctx.stroke();
+      ctx.fillStyle = '#3b1450'; ctx.strokeStyle = '#c03cff'; ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(t.x, t.y - 26); ctx.lineTo(t.x + 18, t.y + 16); ctx.lineTo(t.x - 18, t.y + 16);
+      ctx.closePath(); ctx.fill(); ctx.stroke();
+      this.hpBar(t.x, t.y + 22, 40, t.hp / t.maxHp, '#c97cff');
+    }
+  }
+
+  // ---------------------------------------------------------------- cases et bâtiments
+  drawSlots() {
+    const { ctx, game: g, ui } = this;
+    const R = g.level.slotRadius;
+    for (const s of g.slots) {
+      const sel = ui.selectedSlot === s.id;
+      const dragSrc = ui.drag?.from === s.id && ui.drag.active;
+      ctx.fillStyle = 'rgba(0,0,0,0.25)';
+      ctx.strokeStyle = sel ? '#ffffff' : 'rgba(255,255,255,0.35)';
+      ctx.lineWidth = sel ? 3 : 2;
+      ctx.setLineDash(s.building ? [] : [6, 5]);
+      ctx.beginPath(); ctx.arc(s.x, s.y, R, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+      ctx.setLineDash([]);
+      if (!s.building) {
+        ctx.fillStyle = 'rgba(255,255,255,0.45)'; ctx.font = 'bold 22px sans-serif';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('+', s.x, s.y + 1);
+        continue;
+      }
+      if (sel && s.building.kind === 'tower') this.rangeCircle(s.x, s.y, towerStats(s.building.type, s.building.rank).range);
+      ctx.globalAlpha = dragSrc ? 0.35 : 1;
+      this.drawBuilding(s.building, s.x, s.y, 1);
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  rangeCircle(x, y, r) {
+    const ctx = this.ctx;
+    ctx.fillStyle = 'rgba(255,255,255,0.06)'; ctx.strokeStyle = 'rgba(255,255,255,0.4)'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+  }
+
+  buildingColors(b) {
+    if (isHybrid(b.type)) return BALANCE.hybrids[b.type].recipe.map(e => BALANCE.elements[e].color);
+    return [BALANCE.elements[b.type].color];
+  }
+
+  drawBuilding(b, x, y, scale) {
+    const ctx = this.ctx;
+    const r = (20 + b.rank * 1.6) * scale;
+    const colors = this.buildingColors(b);
+    if (false) { // variante B : aucun générateur
+      ctx.fillStyle = '#7a5a16'; ctx.strokeStyle = colors[0]; ctx.lineWidth = 3;
+      ctx.beginPath();
+      for (let i = 0; i < 6; i++) {
+        const a = Math.PI / 6 + (i * Math.PI) / 3;
+        ctx.lineTo(x + Math.cos(a) * r, y + Math.sin(a) * r);
+      }
+      ctx.closePath(); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = colors[0]; ctx.font = `bold ${16 * scale}px sans-serif`;
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('$', x, y - 2 * scale);
+    } else if (colors.length === 2) {
+      // Hybride : disque bicolore
+      ctx.fillStyle = colors[0];
+      ctx.beginPath(); ctx.arc(x, y, r, Math.PI / 2, Math.PI * 1.5); ctx.fill();
+      ctx.fillStyle = colors[1];
+      ctx.beginPath(); ctx.arc(x, y, r, -Math.PI / 2, Math.PI / 2); ctx.fill();
+      ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.stroke();
+      ctx.fillStyle = 'rgba(0,0,0,0.55)'; ctx.font = `bold ${10 * scale}px sans-serif`;
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(BALANCE.hybrids[b.type].name.split(' ').map(w => w[0]).join('').toUpperCase(), x, y - 3 * scale);
+    } else {
+      ctx.fillStyle = colors[0]; ctx.strokeStyle = 'rgba(0,0,0,0.5)'; ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = 'rgba(0,0,0,0.5)'; ctx.font = `bold ${12 * scale}px sans-serif`;
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(BALANCE.elements[b.type].name[0], x, y - 3 * scale);
+    }
+    // Rang : pastilles
+    for (let i = 0; i < b.rank; i++) {
+      ctx.fillStyle = '#fff6c0';
+      ctx.beginPath(); ctx.arc(x - (b.rank - 1) * 4 * scale + i * 8 * scale, y + 9 * scale, 2.6 * scale, 0, Math.PI * 2); ctx.fill();
+    }
+  }
+
+  // ---------------------------------------------------------------- unités
+  drawZones() {
+    const ctx = this.ctx;
+    for (const z of this.game.zones) {
+      const left = Math.max(0, (z.until - this.game.time) / z.max);
+      ctx.globalAlpha = 0.15 + 0.25 * left;
+      ctx.fillStyle = z.color;
+      ctx.beginPath(); ctx.arc(z.x, z.y, z.radius, 0, Math.PI * 2); ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  drawDemons() {
+    const { ctx, game: g } = this;
+    for (const e of g.demons) {
+      const r = e.radius;
+      if (e.layer === 'air') {
+        ctx.fillStyle = 'rgba(0,0,0,0.25)';
+        ctx.beginPath(); ctx.ellipse(e.x, e.y + 16, r, r * 0.4, 0, 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.fillStyle = ENEMY_COLORS[e.type];
+      ctx.strokeStyle = '#1a0606'; ctx.lineWidth = 2;
+      ctx.beginPath();
+      if (e.type === 'heavy') ctx.rect(e.x - r, e.y - r, r * 2, r * 2);
+      else if (e.type === 'fast') { ctx.moveTo(e.x - r, e.y); ctx.lineTo(e.x + r, e.y - r); ctx.lineTo(e.x + r, e.y + r); ctx.closePath(); }
+      else if (e.type === 'flyer') { ctx.moveTo(e.x, e.y - r - 2); ctx.lineTo(e.x + r + 4, e.y); ctx.lineTo(e.x, e.y + r); ctx.lineTo(e.x - r - 4, e.y); ctx.closePath(); }
+      else ctx.arc(e.x, e.y, r, 0, Math.PI * 2);
+      ctx.fill(); ctx.stroke();
+      // altérations
+      const now = g.time;
+      if (now < e.stunUntil) this.ring(e, r + 4, '#ffe14a');
+      else if (now < e.slowUntil && e.slowAmt > 0) this.ring(e, r + 4, '#6fc0ff');
+      if (now < e.frostUntil) this.ring(e, r + 7, '#ffffff');
+      if (now < e.burnUntil) { ctx.fillStyle = '#ffb030'; ctx.beginPath(); ctx.arc(e.x + r * 0.6, e.y - r * 0.8, 3, 0, Math.PI * 2); ctx.fill(); }
+      if (e.hp < e.maxHp) this.hpBar(e.x, e.y - r - 8, r * 2 + 6, e.hp / e.maxHp);
+    }
+  }
+
+  ring(e, r, color) {
+    const ctx = this.ctx;
+    ctx.strokeStyle = color; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(e.x, e.y, r, 0, Math.PI * 2); ctx.stroke();
+  }
+
+  drawAllies() {
+    const { ctx, game: g } = this;
+    for (const u of g.allies) {
+      const c = ELEMENT_COLORS[u.element] || '#fff';
+      const r = u.radius;
+      if (u.layer === 'air') {
+        ctx.fillStyle = 'rgba(0,0,0,0.25)';
+        ctx.beginPath(); ctx.ellipse(u.x, u.y + 16, r, r * 0.4, 0, 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.fillStyle = c; ctx.strokeStyle = '#0a2050'; ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      if (u.cls === 'warrior') ctx.rect(u.x - r, u.y - r, r * 2, r * 2);
+      else if (u.cls === 'archer') { ctx.moveTo(u.x + r + 2, u.y); ctx.lineTo(u.x - r, u.y - r); ctx.lineTo(u.x - r, u.y + r); ctx.closePath(); }
+      else { ctx.moveTo(u.x, u.y - r - 3); ctx.lineTo(u.x + r + 5, u.y + 2); ctx.lineTo(u.x, u.y + r - 2); ctx.lineTo(u.x - r - 5, u.y + 2); ctx.closePath(); }
+      ctx.fill(); ctx.stroke();
+      ctx.fillStyle = '#0a2050'; ctx.font = 'bold 10px sans-serif';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(String(u.rank), u.x, u.y + 1);
+      if (u.hp < u.maxHp) this.hpBar(u.x, u.y - r - 8, r * 2 + 6, u.hp / u.maxHp, '#6fb8ff');
+    }
+  }
+
+  // ---------------------------------------------------------------- effets
+  drawFx() {
+    const ctx = this.ctx;
+    for (const f of this.game.fx) {
+      const k = f.ttl / f.max;
+      ctx.globalAlpha = Math.min(1, k * 1.5);
+      if (f.kind === 'shot') {
+        ctx.strokeStyle = f.color; ctx.lineWidth = 2.5;
+        ctx.beginPath(); ctx.moveTo(f.x1, f.y1); ctx.lineTo(f.x2, f.y2); ctx.stroke();
+        ctx.fillStyle = f.color; ctx.beginPath(); ctx.arc(f.x2, f.y2, 4, 0, Math.PI * 2); ctx.fill();
+      } else if (f.kind === 'text') {
+        ctx.fillStyle = f.color; ctx.font = 'bold 15px sans-serif'; ctx.textAlign = 'center';
+        ctx.strokeStyle = 'rgba(0,0,0,0.7)'; ctx.lineWidth = 3;
+        const y = f.y - (1 - k) * 22;
+        ctx.strokeText(f.text, f.x, y); ctx.fillText(f.text, f.x, y);
+      } else if (f.kind === 'fusion' || f.kind === 'build') {
+        ctx.strokeStyle = f.kind === 'fusion' ? '#fff3a0' : '#ffffff'; ctx.lineWidth = 4;
+        ctx.beginPath(); ctx.arc(f.x, f.y, 20 + (1 - k) * 40, 0, Math.PI * 2); ctx.stroke();
+      } else if (f.kind === 'hit') {
+        ctx.fillStyle = '#ff4a3a';
+        ctx.beginPath(); ctx.arc(f.x, f.y, 10 + (1 - k) * 24, 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  drawDrag() {
+    const { ui, game: g, ctx } = this;
+    const d = ui.drag;
+    if (!d?.active) return;
+    const src = g.slots[d.from];
+    if (!src?.building) return;
+    if (d.hover != null && d.hover !== d.from) {
+      const dst = g.slots[d.hover];
+      ctx.strokeStyle = d.valid ? '#6aff8a' : '#ff5a5a'; ctx.lineWidth = 4;
+      ctx.beginPath(); ctx.arc(dst.x, dst.y, g.level.slotRadius + 6, 0, Math.PI * 2); ctx.stroke();
+    }
+    ctx.globalAlpha = 0.85;
+    this.drawBuilding(src.building, d.x, d.y, 1.1);
+    ctx.globalAlpha = 1;
+  }
+}
+
+// ===== src/input/input.js =====
+// =============================================================================
+// Commandes — souris et tactile unifiés via Pointer Events.
+//  - Toucher/cliquer une case : ouvre le menu de construction ou d'information.
+//  - Glisser une construction sur une autre : fusion (M17).
+// =============================================================================
+
+
+const DRAG_THRESHOLD = 10; // px écran
+
+class Input {
+  constructor(canvas, game, renderer, handlers) {
+    this.canvas = canvas;
+    this.game = game;
+    this.renderer = renderer;
+    this.h = handlers; // { onSlotTap(slotId, screenPos), onBackgroundTap(), onFuse(src, dst) }
+    this.pointerId = null;
+    canvas.addEventListener('pointerdown', e => this.down(e));
+    canvas.addEventListener('pointermove', e => this.move(e));
+    canvas.addEventListener('pointerup', e => this.up(e));
+    canvas.addEventListener('pointercancel', () => this.cancel());
+    canvas.addEventListener('contextmenu', e => e.preventDefault());
+  }
+
+  local(e) {
+    const r = this.canvas.getBoundingClientRect();
+    return { sx: e.clientX - r.left, sy: e.clientY - r.top };
+  }
+
+  slotAt(w, extra = 6) {
+    const R = this.game.level.slotRadius + extra;
+    const hitRadius = Math.max(R, 20 / Math.max(this.renderer.view.scale, 0.01));
+    return this.game.slots.filter(s => dist(s, w) <= hitRadius)
+      .sort((a, b) => dist(a, w) - dist(b, w))[0] || null;
+  }
+
+  down(e) {
+    if (this.pointerId !== null) return;
+    this.pointerId = e.pointerId;
+    this.canvas.setPointerCapture?.(e.pointerId);
+    const { sx, sy } = this.local(e);
+    const w = this.renderer.screenToWorld(sx, sy);
+    const slot = this.slotAt(w);
+    this.start = { sx, sy, slot: slot?.id ?? null };
+    if (slot?.building) this.renderer.ui.drag = { from: slot.id, active: false, x: w.x, y: w.y, hover: null, valid: false };
+  }
+
+  move(e) {
+    if (e.pointerId !== this.pointerId) return;
+    const d = this.renderer.ui.drag;
+    if (!d) return;
+    const { sx, sy } = this.local(e);
+    if (!d.active && Math.hypot(sx - this.start.sx, sy - this.start.sy) > DRAG_THRESHOLD) {
+      d.active = true;
+      this.h.onDragStart?.();
+    }
+    if (!d.active) return;
+    const w = this.renderer.screenToWorld(sx, sy);
+    d.x = w.x; d.y = w.y;
+    const over = this.slotAt(w, 10);
+    d.hover = over?.id ?? null;
+    d.valid = !!(over && over.id !== d.from && (!over.building ||
+      fusionResult(this.game.slots[d.from].building, over.building).ok));
+  }
+
+  up(e) {
+    if (e.pointerId !== this.pointerId) return;
+    this.pointerId = null;
+    const d = this.renderer.ui.drag;
+    this.renderer.ui.drag = null;
+    if (d?.active) {
+      if (d.hover != null && d.hover !== d.from) this.h.onFuse(d.from, d.hover);
+      return;
+    }
+    if (this.start?.slot != null) {
+      const s = this.game.slots[this.start.slot];
+      this.h.onSlotTap(s.id, this.renderer.worldToScreen(s.x, s.y));
+    } else this.h.onBackgroundTap();
+  }
+
+  cancel() {
+    this.pointerId = null;
+    this.renderer.ui.drag = null;
+  }
+}
+
+// ===== src/ui/sfx.js =====
+// Effets sonores minimaux (M24) synthétisés avec WebAudio — aucun fichier audio requis.
+let ctx = null;
+let muted = false;
+
+function unlockAudio() {
+  if (ctx) { if (ctx.state === 'suspended') ctx.resume(); return; }
+  const AC = window.AudioContext || window.webkitAudioContext;
+  if (AC) ctx = new AC();
+}
+
+function setMuted(m) { muted = m; }
+function isMuted() { return muted; }
+
+function tone(freq, dur = 0.12, type = 'sine', vol = 0.12, delay = 0, slideTo = null) {
+  if (!ctx || muted) return;
+  const t0 = ctx.currentTime + delay;
+  const o = ctx.createOscillator(), g = ctx.createGain();
+  o.type = type;
+  o.frequency.setValueAtTime(freq, t0);
+  if (slideTo) o.frequency.exponentialRampToValueAtTime(slideTo, t0 + dur);
+  g.gain.setValueAtTime(vol, t0);
+  g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+  o.connect(g).connect(ctx.destination);
+  o.start(t0); o.stop(t0 + dur + 0.02);
+}
+
+const sfx = {
+  build: () => tone(520, 0.1, 'triangle', 0.12),
+  sell: () => tone(700, 0.08, 'square', 0.06, 0, 400),
+  fusion: () => { tone(440, 0.12, 'triangle'); tone(660, 0.12, 'triangle', 0.12, 0.08); tone(880, 0.2, 'triangle', 0.12, 0.16); },
+  error: () => tone(160, 0.15, 'square', 0.07),
+  summon: () => tone(330, 0.12, 'sawtooth', 0.06, 0, 520),
+  wave: () => { tone(220, 0.25, 'sawtooth', 0.07); tone(180, 0.3, 'sawtooth', 0.07, 0.15); },
+  good: () => tone(780, 0.15, 'triangle', 0.1),
+  victory: () => [523, 659, 784, 1046].forEach((f, i) => tone(f, 0.3, 'triangle', 0.14, i * 0.15)),
+  defeat: () => [392, 330, 262, 196].forEach((f, i) => tone(f, 0.35, 'sine', 0.14, i * 0.18)),
+};
+
+// ===== src/ui/hud.js =====
+// =============================================================================
+// Interface (DOM superposé au canvas) : barre d'état, armée, menus de case,
+// messages, écrans d'aide et de fin. Toutes les actions passent par les
+// commandes publiques du moteur (game.build / fuse / sell / summon / …).
+// =============================================================================
+
+
+
+
+const $ = id => document.getElementById(id);
+const BUILD_OPTIONS = ['fire', 'water', 'earth', 'wind']; // variante B : aucune mine
+const EFFECT_TEXT = {
+  burn: 'Brûlure', slow: 'Ralentit', slowZone: 'Nuage ralentissant', burnZone: 'Sol brûlant',
+  multi: 'Multicible', stun: 'Étourdit', frost: 'Givre : attaque ratée', knockback: 'Repousse',
+};
+
+class HUD {
+  constructor(game, renderer, callbacks) {
+    this.game = game;
+    this.renderer = renderer;
+    this.cb = callbacks; // { restart(), setSpeed(n), getSpeed() }
+    this.army = { element: 'neutral', road: 'top' };
+    this.cache = {};
+    this.msgSeen = 0;
+    this.endShown = false;
+    this.popupSlot = null;
+
+    this.buildArmyPanel();
+    $('btn-wave').onclick = () => { if (this.game.launchWave().ok) sfx.wave(); };
+    $('btn-pause').onclick = () => this.game.setPaused(!this.game.paused);
+    $('btn-speed').onclick = () => this.cb.setSpeed(this.cb.getSpeed() === 1 ? 2 : 1);
+    $('btn-help').onclick = () => this.showHelp();
+    $('btn-mute').onclick = () => { setMuted(!isMuted()); $('btn-mute').textContent = isMuted() ? '🔇' : '🔊'; };
+    $('popup').addEventListener('click', e => this.onPopupClick(e));
+    $('overlay').addEventListener('click', e => this.onOverlayClick(e));
+    window.addEventListener('keydown', e => this.onKey(e));
+  }
+
+  // ---------------------------------------------------------------- armée
+  buildArmyPanel() {
+    const els = $('army-elements');
+    els.innerHTML = ['neutral', 'fire', 'water', 'earth', 'wind'].map(el =>
+      `<button class="chip el-${el}" data-el="${el}"><span class="nm">${BALANCE.unitElements[el].name}</span><span class="rk"></span></button>`).join('');
+    els.onclick = e => {
+      const b = e.target.closest('[data-el]');
+      if (!b || b.disabled) return;
+      this.army.element = b.dataset.el;
+    };
+    $('army-roads').onclick = e => {
+      const b = e.target.closest('[data-road]');
+      if (b) this.army.road = b.dataset.road;
+    };
+    const cls = $('army-classes');
+    cls.innerHTML = Object.entries(BALANCE.units).map(([id, u]) =>
+      `<button class="unit-btn" data-cls="${id}"><b>${u.name}</b><span class="cost"></span><span class="inc"></span></button>`).join('');
+    cls.onclick = e => {
+      const b = e.target.closest('[data-cls]');
+      if (!b) return;
+      const r = this.game.summon(b.dataset.cls, this.army.element, this.army.road);
+      r.ok ? sfx.summon() : sfx.error();
+    };
+  }
+
+  // ---------------------------------------------------------------- menus de case
+  openSlot(slotId, screen) {
+    this.popupSlot = slotId;
+    this.renderer.ui.selectedSlot = slotId;
+    this.renderPopup();
+    const p = $('popup');
+    p.hidden = false;
+    // Positionne le menu près de la case, sans sortir de l'écran.
+    const r = p.getBoundingClientRect();
+    const W = window.innerWidth, H = window.innerHeight;
+    const arena = this.renderer.canvas.getBoundingClientRect();
+    let x = arena.left + screen.x - r.width / 2, y = arena.top + screen.y + 34 * this.renderer.view.scale + 4;
+    if (y + r.height > H - 4) y = arena.top + screen.y - 34 * this.renderer.view.scale - r.height - 4;
+    x = Math.max(4, Math.min(W - r.width - 4, x));
+    y = Math.max(4, Math.min(H - r.height - 4, y));
+    p.style.left = `${x}px`; p.style.top = `${y}px`;
+  }
+
+  closePopup() {
+    this.popupSlot = null;
+    this.renderer.ui.selectedSlot = null;
+    $('popup').hidden = true;
+    this.cache.popup = null;
+  }
+
+  renderPopup() {
+    const g = this.game, s = g.slots[this.popupSlot];
+    if (!s) return;
+    let html;
+    if (!s.building) {
+      html = `<div class="pop-title">Construire</div><div class="pop-grid">` +
+        BUILD_OPTIONS.map(k => {
+          const def = BALANCE.elements[k];
+          const can = g.canAfford(def.cost);
+          return `<button class="build-btn el-${k}" data-build="${k}" ${can ? '' : 'disabled'}>
+            <b>${def.name}</b><span>${def.cost} or</span></button>`;
+        }).join('') + `</div>`;
+    } else {
+      const b = s.building;
+      let info;
+      {
+        const st = towerStats(b.type, b.rank);
+        const eff = st.effect ? ` · ${EFFECT_TEXT[st.effect.type]}` : '';
+        const recipe = isHybrid(b.type) ? ` (${BALANCE.hybrids[b.type].recipe.map(e => BALANCE.elements[e].name).join(' + ')})` : '';
+        info = `Dégâts ${Math.round(st.damage)} · ${(1 / st.cooldown).toFixed(1)} tirs/s · portée ${Math.round(st.range)}${eff}${recipe}`;
+      }
+      html = `<div class="pop-title">${displayName(b)}</div>
+        <div class="pop-info">${info}</div>
+        <div class="pop-hint">Glissez sur une tour compatible pour fusionner, ou sur une case vide pour déplacer.</div>
+        <button class="sell-btn" data-sell="1">Revendre +${g.sellValue(b)} or</button>`;
+    }
+    if (html !== this.cache.popup) { $('popup').innerHTML = html; this.cache.popup = html; }
+  }
+
+  onPopupClick(e) {
+    const b = e.target.closest('button');
+    if (!b || this.popupSlot == null) return;
+    if (b.dataset.build) {
+      const r = this.game.build(this.popupSlot, b.dataset.build);
+      if (r.ok) { sfx.build(); this.closePopup(); } else sfx.error();
+    } else if (b.dataset.sell) {
+      if (this.game.sell(this.popupSlot).ok) sfx.sell();
+      this.closePopup();
+    }
+  }
+
+  fuse(src, dst) {
+    const isMove = !this.game.slots[dst]?.building;
+    const r = isMove ? this.game.move(src, dst) : this.game.fuse(src, dst);
+    r.ok ? (isMove ? sfx.build() : sfx.fusion()) : sfx.error();
+    this.closePopup();
+  }
+
+  // ---------------------------------------------------------------- aide / fin
+  showHelp() {
+    this.game.setPaused(true);
+    $('overlay').innerHTML = `<div class="panel help">
+      <h1>ELEMENTAL TOWER</h1>
+      <p class="sub">MVP v${VERSION} — Élémentaires contre Démons</p>
+      <ul>
+        <li><b>Défendez</b> votre château (en bas) : touchez une case <b>+</b> puis choisissez une tourelle. Il n'y a <b>pas de mine</b> dans cette version.</li>
+        <li><b>Fusionnez</b> en glissant une construction sur une autre : deux identiques de même rang = rang supérieur ; deux éléments différents de même rang = hybride. La fusion est gratuite et libère une case.</li>
+        <li class="ecobox"><b>Attaquer = s'enrichir.</b> Vous recevez votre <b>revenu toutes les ${BALANCE.economy.cycleSeconds} s</b> de combat (base ${BALANCE.economy.baseIncomePerCycle} or). <b>Chaque unité envoyée augmente ce revenu pour toute la partie</b>, même si elle meurt : Guerrier ${BALANCE.units.warrior.cost} or → +${unitIncome('warrior', 1)}, Archer ${BALANCE.units.archer.cost} or → +${unitIncome('archer', 1)}, Volant ${BALANCE.units.flyer.cost} or → +${unitIncome('flyer', 1)}. Aucun plafond.</li>
+        <li><b>Attaquez</b> : panneau en bas (élément, route, classe). Le rang d'un élément = plus haut rang atteint par une tourelle de cet élément, conservé toute la partie. Guerrier : encaisse et intercepte. Archer : ×1,5 contre les bâtiments. Volant : ignore les routes.</li>
+        <li><b>Le temps presse</b> : le revenu ne tombe que pendant les vagues ; les défenses démoniaques se renforcent de 1 % à chaque versement ; un démon en vie depuis 45 s entre en <b>rage</b>. Lancer une vague en avance rapporte une <b>prime</b>.</li>
+        <li>Détruisez les <b>3 tourelles démoniaques</b>, puis le <b>château démoniaque</b> pour gagner. Attention : les deux châteaux tirent sur les ennemis à leur portée.</li>
+        <li>Vous lancez <b>chaque vague</b> vous-même. Pour lancer la suivante en avance, attendez que tous les démons de la vague en cours soient sortis de leur château. <b>Pause</b> : le temps s'arrête, la gestion reste possible.</li>
+      </ul>
+      <p class="keys">Clavier : Espace = pause · N = vague suivante · Échap = fermer</p>
+      <button class="big" data-close="1">${this.game.time > 0 ? 'Reprendre' : 'Commencer'}</button>
+    </div>`;
+    $('overlay').hidden = false;
+  }
+
+  showEnd() {
+    const g = this.game, v = g.state === 'victory';
+    v ? sfx.victory() : sfx.defeat();
+    const m = Math.floor(g.time / 60), s = Math.floor(g.time % 60);
+    $('overlay').innerHTML = `<div class="panel end ${v ? 'win' : 'lose'}">
+      <h1>${v ? 'VICTOIRE' : 'DÉFAITE'}</h1>
+      <p>${v ? 'Le château démoniaque est tombé.' : 'Votre château a été détruit.'}</p>
+      <table>
+        <tr><td>Durée</td><td>${m} min ${String(s).padStart(2, '0')}</td></tr>
+        <tr><td>Vagues repoussées</td><td>${g.stats.wavesCleared} / ${g.waveNumber}</td></tr>
+        <tr><td>Démons éliminés</td><td>${g.stats.kills}</td></tr>
+        <tr><td>Fusions</td><td>${g.stats.fusions}</td></tr>
+        <tr><td>Unités envoyées (G / A / V)</td><td>${g.stats.unitsSummoned} (${g.stats.sendsByClass.warrior} / ${g.stats.sendsByClass.archer} / ${g.stats.sendsByClass.flyer})</td></tr>
+        <tr><td>Premier envoi</td><td>${g.stats.firstSendTime == null ? '—' : Math.round(g.stats.firstSendTime) + ' s'}</td></tr>
+        <tr><td>Revenu final</td><td>${g.income} / ${BALANCE.economy.cycleSeconds} s (dont envois +${g.sendIncome})</td></tr>
+        <tr><td>Dépenses défense / attaque</td><td>${g.stats.goldSpentDefense} / ${g.stats.goldSpentOffense}</td></tr>
+        <tr><td>Or (combats / revenu / primes)</td><td>${Math.round(g.stats.goldEarnedKills)} / ${Math.round(g.stats.goldEarnedPassive)} / ${g.stats.goldEarnedEarlyBonus}</td></tr>
+      </table>
+      <p style="font-size:11px;margin:6px 0 2px">Mesures de la partie (à copier dans le journal de test) :</p>
+      <textarea readonly onclick="this.select()">${JSON.stringify(this.metrics())}</textarea>
+      <button class="big" data-restart="1">Rejouer</button>
+    </div>`;
+    $('overlay').hidden = false;
+  }
+
+  metrics() {
+    const g = this.game, s = g.stats;
+    return {
+      variant: 'B', version: VERSION, result: g.state, durationS: Math.round(g.time), maxWave: s.maxWave,
+      wavesCleared: s.wavesCleared, firstSendS: s.firstSendTime == null ? null : Math.round(s.firstSendTime),
+      sends: s.unitsSummoned, sendsByClass: s.sendsByClass, sendTimes: s.sendTimes,
+      finalIncome: g.income, sendIncome: g.sendIncome, incomeHistory: s.incomeHistory,
+      spentDefense: s.goldSpentDefense, spentOffense: s.goldSpentOffense,
+      fusions: s.fusions, fusionsByType: s.fusionsByType, kills: s.kills,
+      goldKills: Math.round(s.goldEarnedKills), goldIncome: Math.round(s.goldEarnedPassive), goldEarlyBonus: s.goldEarnedEarlyBonus,
+    };
+  }
+
+  onOverlayClick(e) {
+    const b = e.target.closest('button');
+    if (!b) return;
+    if (b.dataset.close) { $('overlay').hidden = true; this.game.setPaused(false); }
+    if (b.dataset.restart) { $('overlay').hidden = true; this.endShown = false; this.closePopup(); this.cb.restart(); }
+  }
+
+  onKey(e) {
+    if (e.code === 'Space') { e.preventDefault(); if ($('overlay').hidden) this.game.setPaused(!this.game.paused); }
+    else if (e.code === 'KeyN') { if (this.game.launchWave().ok) sfx.wave(); }
+    else if (e.code === 'Escape') { this.closePopup(); if (!$('overlay').hidden && this.game.state === 'playing') { $('overlay').hidden = true; this.game.setPaused(false); } }
+  }
+
+  // ---------------------------------------------------------------- mise à jour par image
+  set(id, value, prop = 'textContent') {
+    const key = id + prop;
+    if (this.cache[key] === value) return;
+    this.cache[key] = value;
+    $(id)[prop] = value;
+  }
+
+  update() {
+    const g = this.game;
+    this.set('gold', String(Math.floor(g.gold)));
+    // Variante B : revenu périodique, part due aux envois, temps avant le prochain versement.
+    const C = BALANCE.economy.cycleSeconds;
+    this.set('inc', `+${g.income}`);
+    this.set('inc-detail', `base ${BALANCE.economy.baseIncomePerCycle} · envois +${g.sendIncome}`);
+    const frac = Math.min(1, g.ecoClock / C);
+    $('cycle-bar').style.width = `${(frac * 100).toFixed(1)}%`;
+    this.set('cycle-time', g.waves.length === 0 ? `figé (hors vague) · ${Math.ceil(g.nextPayoutIn)} s`
+      : g.paused ? `pause · ${Math.ceil(g.nextPayoutIn)} s` : `prochain revenu dans ${Math.ceil(g.nextPayoutIn)} s`);
+    document.querySelector('.stat.eco').classList.toggle('idle', g.waves.length === 0 || g.paused);
+    this.set('php', `${Math.ceil(g.playerCastle.hp)} / ${g.playerCastle.maxHp}`);
+    this.set('dhp', g.demonCastleVulnerable
+      ? `${Math.ceil(g.demonCastle.hp)} / ${g.demonCastle.maxHp}`
+      : `Bouclier · ${g.demonTowers.filter(t => t.alive).length} tourelles`);
+    this.set('wave', String(g.waveNumber));
+    const toSpawn = g.demonsToSpawn;
+    this.set('wave-info', !g.waves.length ? 'en préparation'
+      : toSpawn ? `${toSpawn} démon(s) encore à sortir` : `${g.waves.length} en cours · prochaine possible`);
+    const canLaunch = g.canLaunchWave().ok;
+    this.set('btn-wave', g.waves.length ? `Vague ${g.waveNumber + 1} · +${g.earlyLaunchBonus} or` : `Lancer vague ${g.waveNumber + 1}`);
+    if ($('btn-wave').disabled !== !canLaunch) $('btn-wave').disabled = !canLaunch;
+    this.set('btn-pause', g.paused ? '▶' : '⏸');
+    this.set('btn-speed', `x${this.cb.getSpeed()}`);
+    document.body.classList.toggle('paused', g.paused);
+
+    // Armée
+    for (const b of document.querySelectorAll('#army-elements [data-el]')) {
+      const el = b.dataset.el, rank = g.unitRankFor(el);
+      b.disabled = rank < 1;
+      b.classList.toggle('active', this.army.element === el);
+      const txt = el === 'neutral' ? 'R1' : rank ? `R${rank}` : '🔒';
+      if (b.lastChild.textContent !== txt) b.lastChild.textContent = txt;
+    }
+    if (g.unitRankFor(this.army.element) < 1) this.army.element = 'neutral';
+    for (const b of document.querySelectorAll('#army-roads [data-road]')) b.classList.toggle('active', this.army.road === b.dataset.road);
+    const rank = g.unitRankFor(this.army.element);
+    for (const b of document.querySelectorAll('#army-classes [data-cls]')) {
+      const cost = unitCost(b.dataset.cls, rank);
+      b.disabled = !g.canAfford(cost);
+      const txt = `${cost} or · R${rank}`;
+      const inc = `+${unitIncome(b.dataset.cls, rank)} / 10s`;
+      if (b.children[1].textContent !== txt) b.children[1].textContent = txt;
+      if (b.children[2].textContent !== inc) b.children[2].textContent = inc;
+    }
+
+    if (this.popupSlot != null) this.renderPopup();
+
+    // Messages
+    const msgs = g.messages;
+    while (this.msgSeen < msgs.length) this.toast(msgs[this.msgSeen++]);
+    if (msgs.length > 20 && this.msgSeen === msgs.length) { msgs.splice(0, msgs.length); this.msgSeen = 0; }
+
+    if (g.state !== 'playing' && !this.endShown) { this.endShown = true; this.closePopup(); this.showEnd(); }
+  }
+
+  toast(m) {
+    if (m.kind === 'good' && /tourelle démoniaque/i.test(m.text)) sfx.good();
+    if (m.kind === 'income' && document.querySelectorAll('#toasts .toast.income').length >= 2) {
+      // évite d'empiler trop de messages lors d'envois rapides
+      for (const old of document.querySelectorAll('#toasts .toast.income')) old.remove();
+    }
+    const t = document.createElement('div');
+    t.className = `toast ${m.kind}`;
+    t.textContent = m.text;
+    $('toasts').appendChild(t);
+    setTimeout(() => t.remove(), 2600);
+    while ($('toasts').children.length > 4) $('toasts').firstChild.remove();
+  }
+}
+
+// ===== src/main.js =====
+// Point d'entrée navigateur : assemble moteur, rendu, commandes et interface.
+
+
+
+
+
+const STEP = 1 / 60;          // pas fixe de simulation
+const canvas = document.getElementById('game');
+const game = new Game();
+const renderer = new Renderer(canvas, game);
+let speed = 1;
+
+const hud = new HUD(game, renderer, {
+  restart: () => { game.reset(); },
+  setSpeed: n => { speed = n; },
+  getSpeed: () => speed,
+});
+
+new Input(canvas, game, renderer, {
+  onSlotTap: (id, pos) => (hud.popupSlot === id ? hud.closePopup() : hud.openSlot(id, pos)),
+  onBackgroundTap: () => hud.closePopup(),
+  onFuse: (src, dst) => hud.fuse(src, dst),
+  onDragStart: () => hud.closePopup(),
+});
+
+window.addEventListener('pointerdown', unlockAudio, { capture: true });
+function layoutPortrait() {
+  const top = document.getElementById('hud-top').getBoundingClientRect();
+  const bottom = document.getElementById('hud-army').getBoundingClientRect();
+  const topInset = Math.ceil(top.bottom + 5);
+  const bottomInset = Math.ceil(window.innerHeight - bottom.top + 5);
+  canvas.style.top = topInset + 'px';
+  canvas.style.bottom = bottomInset + 'px';
+  document.documentElement.style.setProperty('--portrait-top', topInset + 'px');
+  document.documentElement.style.setProperty('--portrait-popup-bottom', (bottomInset + 6) + 'px');
+  renderer.resize();
+}
+window.addEventListener('resize', () => { layoutPortrait(); hud.closePopup(); });
+window.visualViewport?.addEventListener('resize', () => { layoutPortrait(); hud.closePopup(); });
+layoutPortrait();
+hud.showHelp();
+
+let last = performance.now(), acc = 0;
+function frame(now) {
+  const dt = Math.min(0.1, (now - last) / 1000);
+  last = now;
+  acc += dt * speed;
+  while (acc >= STEP) { game.update(STEP); acc -= STEP; }
+  renderer.draw();
+  hud.update();
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+// Accès console pour les tests manuels : window.RS.game.gold = 5000
+window.RS = { game, renderer, hud };
+
+</script>
+
+</body></html>
