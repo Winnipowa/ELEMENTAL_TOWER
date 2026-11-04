@@ -2040,12 +2040,20 @@ function layoutPortrait() {
   const bottomInset = Math.ceil(window.innerHeight - bottom.top + 5);
   canvas.style.top = topInset + 'px';
   canvas.style.bottom = bottomInset + 'px';
+  // Canvas a un ratio intrinsèque 2:1; imposer la hauteur évite qu'il ignore bottom.
+  canvas.style.height = Math.max(120, window.innerHeight - topInset - bottomInset) + 'px';
   document.documentElement.style.setProperty('--portrait-top', topInset + 'px');
   document.documentElement.style.setProperty('--portrait-popup-bottom', (bottomInset + 6) + 'px');
   renderer.resize();
 }
 window.addEventListener('resize', () => { layoutPortrait(); hud.closePopup(); });
 window.visualViewport?.addEventListener('resize', () => { layoutPortrait(); hud.closePopup(); });
+// Les libellés du HUD changent après la première frame et peuvent modifier sa hauteur.
+if ('ResizeObserver' in window) {
+  const uiResize = new ResizeObserver(() => layoutPortrait());
+  uiResize.observe(document.getElementById('hud-top'));
+  uiResize.observe(document.getElementById('hud-army'));
+}
 layoutPortrait();
 hud.showHelp();
 
