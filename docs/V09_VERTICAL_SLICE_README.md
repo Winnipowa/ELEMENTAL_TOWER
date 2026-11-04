@@ -4,7 +4,7 @@
 
 ## Où jouer
 
-[Ouvrir le prototype HTML V0.9](../../prototypes/elemental_tower_vertical_slice_v09.html) en local dans un navigateur (fichier autonome).
+[Ouvrir le prototype HTML V0.9](../prototypes/elemental_tower_vertical_slice_v09.html) en local dans un navigateur (fichier autonome).
 
 ## Boucle disponible
 
@@ -64,4 +64,4 @@ Progression gardée après la défaite si les vagues ont bien été terminées. 
 
 ## Politique de merge
 
-Cette PR est intentionnellement non fusionnée ; le code reste dans `prototypes/` pour **ne pas remplacer ni gêner le chantier gardiens/familles/effets du collègue**. Elle sert de référence d'intégration. Toutes les autres décisions du [GDD V1.1](../GDD_V1.1.md) restent en place.
+Cette PR est intentionnellement non fusionnée ; le code reste dans `prototypes/` pour **ne pas remplacer ni gêner le chantier gardiens/familles/effets du collègue**. Elle sert de référence d'intégration. Toutes les autres décisions du [GDD V1.1](GDD_V1.1.md) restent en place.
