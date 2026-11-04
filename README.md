@@ -17,3 +17,10 @@ Jeu mobile portrait associant auto-battler, Tower Defense, collection de gardien
 **Attention :** 12 vagues, trois boss, seuil PvP et taux de revente sont des propositions à tester.
 
 Conversion portrait V0.5 dans [PR #1](https://github.com/Winnipowa/ELEMENTAL_TOWER/pull/1), indépendante de ces documents.
+
+## Langage système et augments (V0.1)
+
+- **[Pack structuré pour le collègue](docs/systems/README.md)** — point d’entrée unique : 33 mots-clés, icônes SVG réutilisables, modèle gardien, 27 augments proposés et données JSON importables.
+- [Glossaire](docs/systems/SYSTEM_GLOSSARY.md) · [Conventions UI / tooltips](docs/systems/UI_KEYWORDS_STYLEGUIDE.md) · [Fiche gardien](docs/systems/GUARDIAN_TEMPLATE.md) · [Bibliothèque d’augments](docs/systems/AUGMENT_LIBRARY.md).
+
+> Les valeurs et compétences des augments sont des propositions de test PvE, non des fonctionnalités déjà implémentées ; ne pas intégrer automatiquement au moteur sans l’alignement des IDs et des stats du collègue.
