@@ -1,0 +1,138 @@
+{
+  "schema_version": "0.1.0",
+  "status": "TEMPLATE_PROPOSE",
+  "required_fields": [
+    "id",
+    "display_name",
+    "family_id",
+    "class_id",
+    "rarity",
+    "role",
+    "tags",
+    "base_stats",
+    "attack",
+    "passive",
+    "skill",
+    "star_scaling",
+    "synergy_references",
+    "unlock",
+    "visuals"
+  ],
+  "example_is_official": false,
+  "guardian": {
+    "id": "guardian_demo_aurore_arcaniste",
+    "display_name": "Arcaniste d’Aurore (EXEMPLE, pas un gardien validé)",
+    "family_id": "aurore",
+    "class_id": "arcaniste",
+    "rarity": "common",
+    "role": "magic_ranged",
+    "tags": [
+      "ranged",
+      "projectile_attack",
+      "projectile_skill"
+    ],
+    "base_stats": {
+      "damage": null,
+      "attack_speed": null,
+      "crit_chance": null,
+      "crit_damage": null,
+      "hp": null,
+      "attack_range": null,
+      "mana": null,
+      "mana_gain": null
+    },
+    "attack": {
+      "id": "attack_demo_arcane",
+      "targeting": "first_enemy_on_path",
+      "projectiles": 2,
+      "damage_formula": "damage × coefficients (à définir)",
+      "keywords": [
+        "damage",
+        "projectile_count"
+      ]
+    },
+    "passive": {
+      "id": "passive_demo_twin",
+      "short_text": "Deux projectiles par attaque.",
+      "keywords": [
+        "projectile_count"
+      ],
+      "effects": [
+        "attack_extra_projectile"
+      ]
+    },
+    "skill": {
+      "id": "skill_demo_tonnerre",
+      "name": "Orage",
+      "mana_cost": null,
+      "short_text": "Frappe jusqu’à dix ennemis avec un éclair.",
+      "keywords": [
+        "mana",
+        "skill_damage",
+        "area"
+      ],
+      "target_limit": 10,
+      "visual_id": "fx_skill_lightning_demo",
+      "effects": [
+        "skill_lightning_aoe"
+      ]
+    },
+    "star_scaling": [
+      {
+        "rank": 1,
+        "damage_multiplier": null,
+        "hp_multiplier": null,
+        "visual_variant": "rank_1",
+        "new_mechanic": null
+      },
+      {
+        "rank": 2,
+        "damage_multiplier": null,
+        "hp_multiplier": null,
+        "visual_variant": "rank_2",
+        "new_mechanic": null
+      },
+      {
+        "rank": 3,
+        "damage_multiplier": null,
+        "hp_multiplier": null,
+        "visual_variant": "rank_3",
+        "new_mechanic": null
+      },
+      {
+        "rank": 4,
+        "damage_multiplier": null,
+        "hp_multiplier": null,
+        "visual_variant": "rank_4",
+        "new_mechanic": null
+      },
+      {
+        "rank": 5,
+        "damage_multiplier": null,
+        "hp_multiplier": null,
+        "visual_variant": "rank_5",
+        "new_mechanic": null
+      }
+    ],
+    "synergy_references": [
+      "family:aurore",
+      "class:arcaniste"
+    ],
+    "unlock": {
+      "method": "pve_chapter_milestone",
+      "reference": null
+    },
+    "visuals": {
+      "portrait_id": "portrait_demo",
+      "silhouette_id": "silhouette_demo",
+      "basic_attack_vfx_id": "vfx_projectile_demo",
+      "skill_vfx_id": "vfx_skill_lightning_demo",
+      "skin_ids": []
+    },
+    "tooltip": {
+      "short": "",
+      "long": ""
+    },
+    "balance_notes": "À remplir par le collègue ; les valeurs numériques sont volontairement null."
+  }
+}

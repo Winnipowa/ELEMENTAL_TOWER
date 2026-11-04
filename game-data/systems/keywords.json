@@ -1,0 +1,404 @@
+{
+  "schema_version": "0.1.0",
+  "status": "PROPOSE",
+  "source_of_truth": "game-data/systems/keywords.json",
+  "last_updated": "2026-11-04",
+  "families": [
+    {
+      "id": "aurore",
+      "label": "Aurore"
+    },
+    {
+      "id": "sylve",
+      "label": "Sylve"
+    },
+    {
+      "id": "crepuscule",
+      "label": "Crépuscule"
+    }
+  ],
+  "classes": [
+    {
+      "id": "arcaniste",
+      "label": "Arcaniste"
+    },
+    {
+      "id": "gardien",
+      "label": "Gardien"
+    },
+    {
+      "id": "chasseur",
+      "label": "Chasseur"
+    }
+  ],
+  "keywords": [
+    {
+      "id": "damage",
+      "label": "Dégâts",
+      "category": "stat",
+      "icon_id": "damage",
+      "color_token": "offense",
+      "unit": "points",
+      "definition": "Dégâts de base d’une attaque ; sans bonus contextuels.",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "crit_chance",
+      "label": "Chance de critique",
+      "category": "stat",
+      "icon_id": "crit-chance",
+      "color_token": "offense",
+      "unit": "percent",
+      "definition": "Probabilité qu’un coup admissible soit critique (0 à 100 %).",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "crit_damage",
+      "label": "Dégâts critiques",
+      "category": "stat",
+      "icon_id": "crit-damage",
+      "color_token": "offense",
+      "unit": "percent",
+      "definition": "Multiplicateur des dégâts lors d’un coup critique (ex. 150 % = ×1,5).",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "attack_speed",
+      "label": "Vitesse d’attaque",
+      "category": "stat",
+      "icon_id": "attack-speed",
+      "color_token": "offense",
+      "unit": "percent",
+      "definition": "Cadence d’attaques par seconde, distincte du temps de recharge des sorts.",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "skill_damage",
+      "label": "Dégâts de compétence",
+      "category": "stat",
+      "icon_id": "skill",
+      "color_token": "magic",
+      "unit": "percent",
+      "definition": "Modificateur des dégâts d’un sort ; ne s’applique pas aux attaques ordinaires.",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "boss_damage",
+      "label": "Dégâts aux boss",
+      "category": "stat",
+      "icon_id": "boss",
+      "color_token": "offense",
+      "unit": "percent",
+      "definition": "Bonus de dégâts contre les ennemis marqués boss.",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "hp",
+      "label": "Points de vie",
+      "category": "stat",
+      "icon_id": "health",
+      "color_token": "defense",
+      "unit": "points",
+      "definition": "Quantité de santé de l’unité ou de la structure.",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "armor",
+      "label": "Armure",
+      "category": "stat",
+      "icon_id": "shield",
+      "color_token": "defense",
+      "unit": "points",
+      "definition": "Réduction des dégâts physiques selon une formule encore à valider.",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "attack_range",
+      "label": "Portée",
+      "category": "stat",
+      "icon_id": "range",
+      "color_token": "utility",
+      "unit": "distance",
+      "definition": "Distance maximale de ciblage d’une attaque ordinaire.",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "mana",
+      "label": "Mana",
+      "category": "stat",
+      "icon_id": "mana",
+      "color_token": "magic",
+      "unit": "points",
+      "definition": "Ressource de compétence ; remise à la valeur de départ selon le combat.",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "mana_gain",
+      "label": "Gain de mana",
+      "category": "stat",
+      "icon_id": "mana",
+      "color_token": "magic",
+      "unit": "percent",
+      "definition": "Modificateur de génération de mana, distinct du coût de sort.",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "projectile_count",
+      "label": "Projectiles",
+      "category": "stat",
+      "icon_id": "projectiles",
+      "color_token": "offense",
+      "unit": "count",
+      "definition": "Nombre de projectiles émis par une attaque ou un sort.",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "shield",
+      "label": "Bouclier",
+      "category": "effect",
+      "icon_id": "shield",
+      "color_token": "defense",
+      "unit": "points",
+      "definition": "PV temporaires absorbant des dégâts avant les PV réels.",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "slow",
+      "label": "Ralentissement",
+      "category": "effect",
+      "icon_id": "slow",
+      "color_token": "control",
+      "unit": "percent",
+      "definition": "Réduction de vitesse de déplacement pour une durée définie.",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "root",
+      "label": "Immobilisation",
+      "category": "effect",
+      "icon_id": "root",
+      "color_token": "control",
+      "unit": "seconds",
+      "definition": "Empêche le déplacement sans empêcher par défaut l’attaque.",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "stun",
+      "label": "Étourdissement",
+      "category": "effect",
+      "icon_id": "stun",
+      "color_token": "control",
+      "unit": "seconds",
+      "definition": "Empêche déplacement et attaque pendant la durée.",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "burn",
+      "label": "Brûlure",
+      "category": "effect",
+      "icon_id": "burn",
+      "color_token": "offense",
+      "unit": "damage_per_second",
+      "definition": "Dégâts périodiques durant un temps limité ; critique désactivé par défaut.",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "mark",
+      "label": "Marque",
+      "category": "effect",
+      "icon_id": "mark",
+      "color_token": "magic",
+      "unit": "stacks",
+      "definition": "Étiquette temporaire appliquée à une cible, exploitable par une synergie.",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "chain",
+      "label": "Rebond",
+      "category": "mechanic",
+      "icon_id": "chain",
+      "color_token": "magic",
+      "unit": "targets",
+      "definition": "Effet ou projectile qui passe à une autre cible valide.",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "pierce",
+      "label": "Perforation",
+      "category": "mechanic",
+      "icon_id": "pierce",
+      "color_token": "offense",
+      "unit": "targets",
+      "definition": "Projectile traversant un nombre limité de cibles.",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "area",
+      "label": "Zone",
+      "category": "mechanic",
+      "icon_id": "area",
+      "color_token": "magic",
+      "unit": "distance",
+      "definition": "Zone d’application d’un effet ; rayon exprimé dans les unités du terrain.",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "execute",
+      "label": "Exécution",
+      "category": "mechanic",
+      "icon_id": "execute",
+      "color_token": "offense",
+      "unit": "percent",
+      "definition": "Dégâts ou élimination conditionnés à un seuil de PV ; règle boss spécifique.",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "fusion",
+      "label": "Fusion",
+      "category": "mechanic",
+      "icon_id": "fusion",
+      "color_token": "utility",
+      "unit": "count",
+      "definition": "Deux copies du même gardien et du même rang donnent une copie du rang supérieur.",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "reroll",
+      "label": "Relance",
+      "category": "mechanic",
+      "icon_id": "reroll",
+      "color_token": "economy",
+      "unit": "count",
+      "definition": "Renouvelle les offres de recrutement contre de l’or de combat, ou via jeton gratuit.",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "gold",
+      "label": "Or",
+      "category": "currency",
+      "icon_id": "gold",
+      "color_token": "economy",
+      "unit": "gold",
+      "definition": "Monnaie temporaire d’expédition ; réinitialisée à chaque partie.",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "diamonds",
+      "label": "Diamants",
+      "category": "currency",
+      "icon_id": "diamond",
+      "color_token": "premium",
+      "unit": "diamonds",
+      "definition": "Monnaie premium persistante : cosmétiques et Pass, jamais la puissance.",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "augment",
+      "label": "Augment",
+      "category": "mechanic",
+      "icon_id": "augment",
+      "color_token": "utility",
+      "unit": "choice",
+      "definition": "Modificateur de partie choisi lors d’une fenêtre de sélection ; non conservé.",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "synergy",
+      "label": "Synergie",
+      "category": "mechanic",
+      "icon_id": "synergy",
+      "color_token": "magic",
+      "unit": "count",
+      "definition": "Bonus lié à une combinaison de familles/classes placées en combat.",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "wave",
+      "label": "Vague",
+      "category": "mechanic",
+      "icon_id": "wave",
+      "color_token": "utility",
+      "unit": "count",
+      "definition": "Phase PvE délimitée par un début et une fin.",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "bench",
+      "label": "Réserve",
+      "category": "mechanic",
+      "icon_id": "bench",
+      "color_token": "utility",
+      "unit": "slots",
+      "definition": "Cases de stockage des gardiens hors terrain ; ne déclenchent pas les synergies.",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "skill",
+      "label": "Compétence",
+      "category": "mechanic",
+      "icon_id": "skill",
+      "color_token": "magic",
+      "unit": "cast",
+      "definition": "Action spéciale déclenchée selon la charge et les règles du gardien.",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "cooldown",
+      "label": "Recharge",
+      "category": "stat",
+      "icon_id": "cooldown",
+      "color_token": "utility",
+      "unit": "seconds",
+      "definition": "Temps entre deux utilisations d’une même action.",
+      "status": "PROPOSE",
+      "implemented": false
+    },
+    {
+      "id": "healing",
+      "label": "Soin",
+      "category": "effect",
+      "icon_id": "health",
+      "color_token": "defense",
+      "unit": "points",
+      "definition": "Restauration de PV sans dépasser les PV maximum sauf règle explicite.",
+      "status": "PROPOSE",
+      "implemented": false
+    }
+  ],
+  "notes": [
+    "Les IDs existants du code du collègue priment tant qu’une migration n’a pas été convenue.",
+    "Les stats armor, healing, root, mark, pierce et execute ne sont pas promises au build actuel : à implémenter seulement si retenues.",
+    "Les descriptions sont des règles de langage de design ; la programmation des effets reste à faire."
+  ]
+}

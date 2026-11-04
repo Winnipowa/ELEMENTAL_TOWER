@@ -1,0 +1,818 @@
+{
+  "schema_version": "0.1.0",
+  "status": "PROPOSE",
+  "pve_first": true,
+  "pvp_policy": "not_enabled_before_balance_validation",
+  "windows_after_waves": [
+    5,
+    10
+  ],
+  "long_mode_optional_after_wave": 15,
+  "choices_per_window": 3,
+  "picks_per_window": 1,
+  "rarities": [
+    "silver",
+    "gold",
+    "prismatic"
+  ],
+  "values_are_provisional": true,
+  "selection_rules": [
+    "Générer trois offres DISTINCTES dont les prérequis sont satisfaits par la collection actuellement placée.",
+    "Si moins de trois candidats sont admissibles, compléter avec des augments universels.",
+    "Une fois choisi, un augment est actif seulement durant l’expédition ; pas de dépense en diamants.",
+    "La sélection se fait entre les vagues, pendant la préparation ; aucun achat intégré ne donne de puissance."
+  ],
+  "effect_contract": {
+    "note": "Intentions de design déclaratives, NON exécutables sans adaptateur moteur ; chaque op doit être implémenté et testé.",
+    "allowed_triggers": [
+      "passive",
+      "wave_start",
+      "wave_clear",
+      "critical_hit",
+      "attack_hit",
+      "skill_cast",
+      "skill_hit",
+      "skill_hit_first_per_wave",
+      "fusion_success",
+      "fusion_success_every_n"
+    ],
+    "allowed_ops": [
+      "modify_stat",
+      "grant_shield",
+      "modify_effect_duration",
+      "grant_gold",
+      "grant_reroll",
+      "chain_damage",
+      "extra_projectile",
+      "grant_ally_shield",
+      "apply_status",
+      "grant_stack_buff",
+      "pierce_next_target",
+      "grant_mana",
+      "grant_guardian_copy",
+      "conditional_bonus_damage"
+    ]
+  },
+  "augments": [
+    {
+      "id": "ag_s01_eclat_critique",
+      "title": "Éclat précis",
+      "tier": "silver",
+      "category": "offense",
+      "requires": [],
+      "description": "Tous vos gardiens gagnent +10 % de chance de critique.",
+      "keywords": [
+        "crit_chance"
+      ],
+      "design_effects": [
+        {
+          "trigger": "passive",
+          "op": "modify_stat",
+          "selector": "all",
+          "stat": "crit_chance",
+          "amount": 0.1,
+          "unit": "ratio"
+        }
+      ],
+      "visual_cue": "Étoile blanche discrète lors d’un coup critique.",
+      "tradeoff": null,
+      "status": "PROPOSE",
+      "pvp_allowed": false
+    },
+    {
+      "id": "ag_s02_cadence",
+      "title": "Cadence harmonieuse",
+      "tier": "silver",
+      "category": "offense",
+      "requires": [],
+      "description": "Tous vos gardiens gagnent +12 % de vitesse d’attaque.",
+      "keywords": [
+        "attack_speed"
+      ],
+      "design_effects": [
+        {
+          "trigger": "passive",
+          "op": "modify_stat",
+          "selector": "all",
+          "stat": "attack_speed",
+          "amount": 0.12,
+          "unit": "ratio"
+        }
+      ],
+      "visual_cue": "Traînée courte sur les projectiles.",
+      "tradeoff": null,
+      "status": "PROPOSE",
+      "pvp_allowed": false
+    },
+    {
+      "id": "ag_s03_rempart",
+      "title": "Rempart vivant",
+      "tier": "silver",
+      "category": "defense",
+      "requires": [
+        "class:gardien"
+      ],
+      "description": "Au début de chaque vague, vos Gardiens reçoivent un bouclier de 12 % de leurs PV max.",
+      "keywords": [
+        "shield",
+        "hp"
+      ],
+      "design_effects": [
+        {
+          "trigger": "wave_start",
+          "op": "grant_shield",
+          "selector": "class:gardien",
+          "amount": 0.12,
+          "unit": "max_hp_ratio"
+        }
+      ],
+      "visual_cue": "Halo autour du bouclier.",
+      "tradeoff": null,
+      "status": "PROPOSE",
+      "pvp_allowed": false
+    },
+    {
+      "id": "ag_s04_flux",
+      "title": "Flux arcanique",
+      "tier": "silver",
+      "category": "mana",
+      "requires": [
+        "class:arcaniste"
+      ],
+      "description": "Vos Arcanistes génèrent 15 % de mana supplémentaire.",
+      "keywords": [
+        "mana_gain"
+      ],
+      "design_effects": [
+        {
+          "trigger": "passive",
+          "op": "modify_stat",
+          "selector": "class:arcaniste",
+          "stat": "mana_gain",
+          "amount": 0.15,
+          "unit": "ratio"
+        }
+      ],
+      "visual_cue": "Orbe de mana plus lumineuse.",
+      "tradeoff": null,
+      "status": "PROPOSE",
+      "pvp_allowed": false
+    },
+    {
+      "id": "ag_s05_oeil_chasseur",
+      "title": "Œil du Chasseur",
+      "tier": "silver",
+      "category": "offense",
+      "requires": [
+        "class:chasseur"
+      ],
+      "description": "Vos Chasseurs gagnent +25 % de dégâts critiques (multiplicateur).",
+      "keywords": [
+        "crit_damage"
+      ],
+      "design_effects": [
+        {
+          "trigger": "passive",
+          "op": "modify_stat",
+          "selector": "class:chasseur",
+          "stat": "crit_damage",
+          "amount": 0.25,
+          "unit": "ratio"
+        }
+      ],
+      "visual_cue": "Flash en pointe sur un critique.",
+      "tradeoff": null,
+      "status": "PROPOSE",
+      "pvp_allowed": false
+    },
+    {
+      "id": "ag_s06_racines_douces",
+      "title": "Racines tenaces",
+      "tier": "silver",
+      "category": "control",
+      "requires": [
+        "family:sylve"
+      ],
+      "description": "Les ralentissements appliqués par la Sylve durent 25 % plus longtemps.",
+      "keywords": [
+        "slow"
+      ],
+      "design_effects": [
+        {
+          "trigger": "passive",
+          "op": "modify_effect_duration",
+          "selector": "family:sylve",
+          "effect_id": "slow",
+          "amount": 0.25,
+          "unit": "ratio"
+        }
+      ],
+      "visual_cue": "Fines racines sous les ennemis ralentis.",
+      "tradeoff": null,
+      "status": "PROPOSE",
+      "pvp_allowed": false
+    },
+    {
+      "id": "ag_s07_aubaine",
+      "title": "Aubaine de combat",
+      "tier": "silver",
+      "category": "economy",
+      "requires": [],
+      "description": "Après chaque vague terminée, gagnez 10 or de combat supplémentaires.",
+      "keywords": [
+        "gold",
+        "wave"
+      ],
+      "design_effects": [
+        {
+          "trigger": "wave_clear",
+          "op": "grant_gold",
+          "selector": "player",
+          "amount": 10,
+          "unit": "gold"
+        }
+      ],
+      "visual_cue": "Pièces dorées au bilan de vague.",
+      "tradeoff": null,
+      "status": "PROPOSE",
+      "pvp_allowed": false
+    },
+    {
+      "id": "ag_s08_choix",
+      "title": "Second regard",
+      "tier": "silver",
+      "category": "economy",
+      "requires": [],
+      "description": "Après chaque vague terminée, gagnez une relance gratuite, non cumulable au-delà de 2.",
+      "keywords": [
+        "reroll",
+        "wave"
+      ],
+      "design_effects": [
+        {
+          "trigger": "wave_clear",
+          "op": "grant_reroll",
+          "selector": "player",
+          "amount": 1,
+          "cap": 2,
+          "unit": "count"
+        }
+      ],
+      "visual_cue": "Icône de relance éclairée.",
+      "tradeoff": null,
+      "status": "PROPOSE",
+      "pvp_allowed": false
+    },
+    {
+      "id": "ag_s09_sombre",
+      "title": "Morsure du Crépuscule",
+      "tier": "silver",
+      "category": "magic",
+      "requires": [
+        "family:crepuscule"
+      ],
+      "description": "Les compétences du Crépuscule infligent +12 % de dégâts.",
+      "keywords": [
+        "skill_damage"
+      ],
+      "design_effects": [
+        {
+          "trigger": "passive",
+          "op": "modify_stat",
+          "selector": "family:crepuscule",
+          "stat": "skill_damage",
+          "amount": 0.12,
+          "unit": "ratio"
+        }
+      ],
+      "visual_cue": "Impulsion violette sur les sorts.",
+      "tradeoff": null,
+      "status": "PROPOSE",
+      "pvp_allowed": false
+    },
+    {
+      "id": "ag_s10_vie",
+      "title": "Endurance",
+      "tier": "silver",
+      "category": "defense",
+      "requires": [],
+      "description": "Tous vos gardiens gagnent +12 % de PV maximum.",
+      "keywords": [
+        "hp"
+      ],
+      "design_effects": [
+        {
+          "trigger": "passive",
+          "op": "modify_stat",
+          "selector": "all",
+          "stat": "hp",
+          "amount": 0.12,
+          "unit": "ratio"
+        }
+      ],
+      "visual_cue": "Halo vert doux.",
+      "tradeoff": null,
+      "status": "PROPOSE",
+      "pvp_allowed": false
+    },
+    {
+      "id": "ag_s11_tueur",
+      "title": "Étude des colosses",
+      "tier": "silver",
+      "category": "offense",
+      "requires": [],
+      "description": "Tous vos gardiens infligent +18 % de dégâts aux boss.",
+      "keywords": [
+        "boss_damage"
+      ],
+      "design_effects": [
+        {
+          "trigger": "passive",
+          "op": "modify_stat",
+          "selector": "all",
+          "stat": "boss_damage",
+          "amount": 0.18,
+          "unit": "ratio"
+        }
+      ],
+      "visual_cue": "Éclat de couronne sur boss.",
+      "tradeoff": null,
+      "status": "PROPOSE",
+      "pvp_allowed": false
+    },
+    {
+      "id": "ag_g01_rebond_crit",
+      "title": "Arc de précision",
+      "tier": "gold",
+      "category": "offense",
+      "requires": [
+        "class:chasseur"
+      ],
+      "description": "Les critiques des Chasseurs rebondissent vers 2 ennemis proches, infligeant 45 % des dégâts initiaux.",
+      "keywords": [
+        "crit_chance",
+        "chain"
+      ],
+      "design_effects": [
+        {
+          "trigger": "critical_hit",
+          "op": "chain_damage",
+          "selector": "class:chasseur",
+          "targets": 2,
+          "damage_ratio": 0.45
+        }
+      ],
+      "visual_cue": "Liaison lumineuse entre cibles.",
+      "tradeoff": null,
+      "status": "PROPOSE",
+      "pvp_allowed": false
+    },
+    {
+      "id": "ag_g02_projectiles",
+      "title": "Double convergence",
+      "tier": "gold",
+      "category": "magic",
+      "requires": [
+        "class:arcaniste"
+      ],
+      "description": "Les compétences offensives des Arcanistes créent un projectile supplémentaire à 45 % des dégâts normaux.",
+      "keywords": [
+        "projectile_count",
+        "skill_damage"
+      ],
+      "design_effects": [
+        {
+          "trigger": "skill_cast",
+          "op": "extra_projectile",
+          "selector": "class:arcaniste",
+          "count": 1,
+          "damage_ratio": 0.45,
+          "requires_tag": "projectile_skill"
+        }
+      ],
+      "visual_cue": "Projectile secondaire distinct.",
+      "tradeoff": null,
+      "status": "PROPOSE",
+      "pvp_allowed": false
+    },
+    {
+      "id": "ag_g03_rempart_partage",
+      "title": "Protection partagée",
+      "tier": "gold",
+      "category": "defense",
+      "requires": [
+        "class:gardien"
+      ],
+      "description": "Au début de la vague, chaque Gardien donne un bouclier de 8 % de ses PV max à un allié proche, sans se cibler lui-même.",
+      "keywords": [
+        "shield"
+      ],
+      "design_effects": [
+        {
+          "trigger": "wave_start",
+          "op": "grant_ally_shield",
+          "selector": "class:gardien",
+          "amount": 0.08,
+          "unit": "source_max_hp_ratio",
+          "radius": 140,
+          "target_count": 1
+        }
+      ],
+      "visual_cue": "Lien de bouclier entre voisins.",
+      "tradeoff": null,
+      "status": "PROPOSE",
+      "pvp_allowed": false
+    },
+    {
+      "id": "ag_g04_etreinte",
+      "title": "Étreinte de Sylve",
+      "tier": "gold",
+      "category": "control",
+      "requires": [
+        "family:sylve"
+      ],
+      "description": "La première compétence de zone d’un Sylve par vague immobilise ses cibles pendant 1,2 s.",
+      "keywords": [
+        "root",
+        "area"
+      ],
+      "design_effects": [
+        {
+          "trigger": "skill_hit_first_per_wave",
+          "op": "apply_status",
+          "selector": "family:sylve",
+          "requires_tag": "area_skill",
+          "status_id": "root",
+          "duration_s": 1.2
+        }
+      ],
+      "visual_cue": "Racines lumineuses sur les cibles.",
+      "tradeoff": null,
+      "status": "PROPOSE",
+      "pvp_allowed": false
+    },
+    {
+      "id": "ag_g05_orage_captif",
+      "title": "Orage captif",
+      "tier": "gold",
+      "category": "synergy",
+      "requires": [
+        "class:arcaniste",
+        "family:sylve"
+      ],
+      "description": "Les dégâts de compétence d’un Arcaniste sur un ennemi immobilisé rebondissent vers 2 autres cibles à 35 % de puissance.",
+      "keywords": [
+        "root",
+        "chain",
+        "skill_damage"
+      ],
+      "design_effects": [
+        {
+          "trigger": "skill_hit",
+          "op": "chain_damage",
+          "selector": "class:arcaniste",
+          "target_condition": "has_status:root",
+          "targets": 2,
+          "damage_ratio": 0.35
+        }
+      ],
+      "visual_cue": "Arc électrique reliant les immobilisés.",
+      "tradeoff": null,
+      "status": "PROPOSE",
+      "pvp_allowed": false
+    },
+    {
+      "id": "ag_g06_fusion_lucrative",
+      "title": "Art de la récupération",
+      "tier": "gold",
+      "category": "economy",
+      "requires": [],
+      "description": "Chaque fusion réussie rapporte 25 or de combat.",
+      "keywords": [
+        "fusion",
+        "gold"
+      ],
+      "design_effects": [
+        {
+          "trigger": "fusion_success",
+          "op": "grant_gold",
+          "selector": "player",
+          "amount": 25,
+          "unit": "gold"
+        }
+      ],
+      "visual_cue": "Pièces au-dessus des fusions.",
+      "tradeoff": null,
+      "status": "PROPOSE",
+      "pvp_allowed": false
+    },
+    {
+      "id": "ag_g07_elan_fusion",
+      "title": "Élan de fusion",
+      "tier": "gold",
+      "category": "offense",
+      "requires": [],
+      "description": "Le gardien issu d’une fusion gagne +8 % de vitesse d’attaque pour la partie, jusqu’à 3 charges.",
+      "keywords": [
+        "fusion",
+        "attack_speed"
+      ],
+      "design_effects": [
+        {
+          "trigger": "fusion_success",
+          "op": "grant_stack_buff",
+          "selector": "fusion_result",
+          "stat": "attack_speed",
+          "amount": 0.08,
+          "cap_stacks": 3,
+          "unit": "ratio"
+        }
+      ],
+      "visual_cue": "Couronne de trois petites barres.",
+      "tradeoff": null,
+      "status": "PROPOSE",
+      "pvp_allowed": false
+    },
+    {
+      "id": "ag_g08_percee",
+      "title": "Flèches perforantes",
+      "tier": "gold",
+      "category": "offense",
+      "requires": [
+        "class:chasseur"
+      ],
+      "description": "Les projectiles de base des Chasseurs traversent 1 ennemi supplémentaire, à 50 % des dégâts.",
+      "keywords": [
+        "pierce",
+        "projectile_count"
+      ],
+      "design_effects": [
+        {
+          "trigger": "attack_hit",
+          "op": "pierce_next_target",
+          "selector": "class:chasseur",
+          "targets": 1,
+          "damage_ratio": 0.5,
+          "requires_tag": "projectile_attack"
+        }
+      ],
+      "visual_cue": "Sillage lumineux continu.",
+      "tradeoff": null,
+      "status": "PROPOSE",
+      "pvp_allowed": false
+    },
+    {
+      "id": "ag_g09_retour_mana",
+      "title": "Écho critique",
+      "tier": "gold",
+      "category": "mana",
+      "requires": [],
+      "description": "Chaque coup critique donne 5 mana à son auteur. Maximum une fois par seconde et par gardien.",
+      "keywords": [
+        "crit_chance",
+        "mana"
+      ],
+      "design_effects": [
+        {
+          "trigger": "critical_hit",
+          "op": "grant_mana",
+          "selector": "source",
+          "amount": 5,
+          "unit": "mana",
+          "internal_cooldown_s": 1
+        }
+      ],
+      "visual_cue": "Petite orbe après critique.",
+      "tradeoff": null,
+      "status": "PROPOSE",
+      "pvp_allowed": false
+    },
+    {
+      "id": "ag_g10_brumes",
+      "title": "Brumes du Crépuscule",
+      "tier": "gold",
+      "category": "control",
+      "requires": [
+        "family:crepuscule"
+      ],
+      "description": "À chaque compétence de zone du Crépuscule, les ennemis touchés sont ralentis de 25 % pendant 2 s.",
+      "keywords": [
+        "slow",
+        "area"
+      ],
+      "design_effects": [
+        {
+          "trigger": "skill_hit",
+          "op": "apply_status",
+          "selector": "family:crepuscule",
+          "requires_tag": "area_skill",
+          "status_id": "slow",
+          "amount": 0.25,
+          "unit": "ratio",
+          "duration_s": 2
+        }
+      ],
+      "visual_cue": "Nuage violet au sol.",
+      "tradeoff": null,
+      "status": "PROPOSE",
+      "pvp_allowed": false
+    },
+    {
+      "id": "ag_p01_surcharge",
+      "title": "Surcharge arcanique",
+      "tier": "prismatic",
+      "category": "tradeoff",
+      "requires": [
+        "class:arcaniste"
+      ],
+      "description": "Les Arcanistes gagnent +35 % de génération de mana, mais leurs compétences infligent −15 % de dégâts.",
+      "keywords": [
+        "mana_gain",
+        "skill_damage"
+      ],
+      "design_effects": [
+        {
+          "trigger": "passive",
+          "op": "modify_stat",
+          "selector": "class:arcaniste",
+          "stat": "mana_gain",
+          "amount": 0.35,
+          "unit": "ratio"
+        },
+        {
+          "trigger": "passive",
+          "op": "modify_stat",
+          "selector": "class:arcaniste",
+          "stat": "skill_damage",
+          "amount": -0.15,
+          "unit": "ratio"
+        }
+      ],
+      "visual_cue": "Aura électrique instable.",
+      "tradeoff": "Fréquence de sort accrue contre puissance réduite.",
+      "status": "PROPOSE",
+      "pvp_allowed": false
+    },
+    {
+      "id": "ag_p02_rage_projectiles",
+      "title": "Pluie de météores",
+      "tier": "prismatic",
+      "category": "tradeoff",
+      "requires": [
+        "class:arcaniste"
+      ],
+      "description": "Les compétences à projectiles des Arcanistes tirent 2 projectiles supplémentaires à 35 % de dégâts chacun ; leur attaque de base perd 15 % de dégâts.",
+      "keywords": [
+        "projectile_count",
+        "damage"
+      ],
+      "design_effects": [
+        {
+          "trigger": "skill_cast",
+          "op": "extra_projectile",
+          "selector": "class:arcaniste",
+          "requires_tag": "projectile_skill",
+          "count": 2,
+          "damage_ratio": 0.35
+        },
+        {
+          "trigger": "passive",
+          "op": "modify_stat",
+          "selector": "class:arcaniste",
+          "stat": "damage",
+          "amount": -0.15,
+          "unit": "ratio"
+        }
+      ],
+      "visual_cue": "Pluie de projectiles roses.",
+      "tradeoff": "Attaque de base plus faible.",
+      "status": "PROPOSE",
+      "pvp_allowed": false
+    },
+    {
+      "id": "ag_p03_forge",
+      "title": "Forge sans fin",
+      "tier": "prismatic",
+      "category": "economy",
+      "requires": [],
+      "description": "Toutes les 3 fusions réussies, recevez gratuitement une copie 1★ du gardien fusionné, si une case de réserve est libre. Sinon, l’effet attend une place.",
+      "keywords": [
+        "fusion",
+        "bench"
+      ],
+      "design_effects": [
+        {
+          "trigger": "fusion_success_every_n",
+          "op": "grant_guardian_copy",
+          "selector": "player",
+          "every": 3,
+          "rank": 1,
+          "copy_of": "fusion_result",
+          "overflow": "pending_until_space"
+        }
+      ],
+      "visual_cue": "Petit éclair sur la réserve.",
+      "tradeoff": "Accélération potentiellement forte ; test PvE uniquement.",
+      "status": "PROPOSE",
+      "pvp_allowed": false
+    },
+    {
+      "id": "ag_p04_etincelle",
+      "title": "Critiques en cascade",
+      "tier": "prismatic",
+      "category": "offense",
+      "requires": [],
+      "description": "Les coups critiques rebondissent vers 3 ennemis proches pour 40 % de leurs dégâts initiaux. Ne déclenche pas d'autres rebonds.",
+      "keywords": [
+        "crit_chance",
+        "chain"
+      ],
+      "design_effects": [
+        {
+          "trigger": "critical_hit",
+          "op": "chain_damage",
+          "selector": "all",
+          "targets": 3,
+          "damage_ratio": 0.4,
+          "no_recursive_procs": true
+        }
+      ],
+      "visual_cue": "Éclairs en cascade.",
+      "tradeoff": "Les rebonds ne peuvent pas déclencher le même augment.",
+      "status": "PROPOSE",
+      "pvp_allowed": false
+    },
+    {
+      "id": "ag_p05_rempart_lourd",
+      "title": "Forteresse rapprochée",
+      "tier": "prismatic",
+      "category": "tradeoff",
+      "requires": [
+        "class:gardien"
+      ],
+      "description": "Les Gardiens gagnent +45 % de PV max et un bouclier de 20 % au début de vague, mais perdent 15 % de portée.",
+      "keywords": [
+        "hp",
+        "shield",
+        "attack_range"
+      ],
+      "design_effects": [
+        {
+          "trigger": "passive",
+          "op": "modify_stat",
+          "selector": "class:gardien",
+          "stat": "hp",
+          "amount": 0.45,
+          "unit": "ratio"
+        },
+        {
+          "trigger": "passive",
+          "op": "modify_stat",
+          "selector": "class:gardien",
+          "stat": "attack_range",
+          "amount": -0.15,
+          "unit": "ratio"
+        },
+        {
+          "trigger": "wave_start",
+          "op": "grant_shield",
+          "selector": "class:gardien",
+          "amount": 0.2,
+          "unit": "max_hp_ratio"
+        }
+      ],
+      "visual_cue": "Fortification avec runes.",
+      "tradeoff": "La portée plus courte pousse au placement stratégique.",
+      "status": "PROPOSE",
+      "pvp_allowed": false
+    },
+    {
+      "id": "ag_p06_seuil",
+      "title": "Jugement du Crépuscule",
+      "tier": "prismatic",
+      "category": "offense",
+      "requires": [
+        "family:crepuscule"
+      ],
+      "description": "Les compétences du Crépuscule infligent 60 % de dégâts bonus aux ennemis sous 20 % PV. Contre les boss, bonus limité à 15 %.",
+      "keywords": [
+        "execute",
+        "skill_damage"
+      ],
+      "design_effects": [
+        {
+          "trigger": "skill_hit",
+          "op": "conditional_bonus_damage",
+          "selector": "family:crepuscule",
+          "target_hp_ratio_below": 0.2,
+          "damage_ratio": 0.6,
+          "boss_damage_ratio": 0.15
+        }
+      ],
+      "visual_cue": "Marque noire et éclat violet.",
+      "tradeoff": "Effet plafonné contre les boss.",
+      "status": "PROPOSE",
+      "pvp_allowed": false
+    }
+  ]
+}
