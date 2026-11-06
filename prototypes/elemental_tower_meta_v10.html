@@ -189,6 +189,88 @@
 @media(max-height:610px){.meta-subtitle{display:none}.meta-chapter-row{margin-top:4px}.meta-map-hint{display:none}.meta-footer{padding-top:4px}.meta-objective-copy small{display:none}.meta-region span{display:none}.meta-region{padding:5px}.meta-nav button{height:34px}.meta-nav-icon{font-size:15px}.meta-footnote{display:none}}
 @media(max-width:344px){.meta-head{gap:4px;padding-left:7px;padding-right:7px}.meta-user small{display:none}.meta-diamonds{padding:6px}.meta-region{min-width:73px}.meta-region strong{font-size:8px}}
 
+
+.meta-side-actions{position:absolute;left:7px;top:47px;display:flex;flex-direction:column;gap:6px;z-index:5;pointer-events:auto}
+.meta-side-actions button{width:62px;min-height:53px;border-radius:12px;background:linear-gradient(150deg,#39224eee,#1a1238e8);color:#ecdcff;border:1px solid #7254a3;box-shadow:0 4px 14px #0b061d9c;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}
+.meta-side-actions b{font-size:20px;color:#f6d198}.meta-side-actions span{font-size:9px;letter-spacing:.015em;font-weight:900}
+.meta-head{padding-left:10px;padding-right:9px}.meta-profile{flex:1;padding:5px 6px;border-color:#73528b;background:linear-gradient(110deg,#352053ee,#201538cc)}
+.meta-avatar{flex:none;width:36px;height:36px;border-radius:12px;padding:1px;overflow:hidden}
+.meta-avatar svg{height:42px;width:42px;transform:translate(-3px,-4px)}
+.meta-profile:hover,.meta-region:hover,.meta-side-actions button:hover,.meta-nav button:hover{filter:brightness(1.15)}
+.meta-profile:focus-visible,.meta-side-actions button:focus-visible,.meta-region:focus-visible,.meta-nav button:focus-visible{outline:2px solid #ffedb5;outline-offset:2px}
+.meta-settings-icon{font-size:17px}
+.meta-chapter{padding-top:6px}
+.meta-map-hint{left:auto;right:9px;top:8px}
+.meta-reward .meta-gift{height:37px;width:44px;display:flex;align-items:center;justify-content:center}
+.meta-reward .meta-gift svg{height:44px;width:44px}
+.meta-prep-next{background:#231838;border:1px solid #695084;color:#f2d49a;padding:8px 11px;border-radius:10px;font-size:11px;font-weight:800}
+.meta-panel{z-index:21}
+.meta-panel-body{padding:12px 13px 20px}
+.meta-panel-head{padding:calc(10px + env(safe-area-inset-top)) 13px 10px;background:linear-gradient(115deg,#322153,#20143d);gap:10px}
+.meta-panel-head h2{font-family:Georgia,serif;font-size:21px;letter-spacing:-.02em;color:#fff0ca}
+.meta-detail{z-index:23}
+.meta-panel-lead{font-size:12px;color:#dac8f0;line-height:1.5;margin:2px 1px 12px}
+.meta-segment{display:flex;gap:5px;overflow:auto;padding:3px 0 10px;scrollbar-width:none}
+.meta-segment button{padding:9px 12px;white-space:nowrap;flex:none;border-radius:10px;background:#2e2148;border:1px solid #5e4a7d;color:#ddc7f2;font-size:11px;font-weight:800}
+.meta-segment button.active{background:linear-gradient(130deg,#7651ac,#563987);border-color:#dbb5fc;color:#fff}
+.meta-hero-card{padding:14px;border:1px solid #8e69b3;border-radius:16px;background:radial-gradient(circle at 83% 30%,#7253a48f,transparent 64%),linear-gradient(125deg,#493166,#241a3d);position:relative;overflow:hidden}
+.meta-hero-card .eyebrow{font-size:9px;letter-spacing:.14em;color:#f3d08e}
+.meta-hero-card h3{margin:5px 0 6px;font-size:17px;font-family:Georgia,serif;color:#fff0cc}
+.meta-hero-card p{font-size:11px;color:#e5d5ee;line-height:1.5;margin:0}
+.meta-hero-portrait{position:absolute;right:4px;bottom:-20px;width:112px;height:127px;filter:drop-shadow(0 0 16px #d09eff75)}
+.meta-hero-portrait svg{width:100%;height:100%}
+.meta-hero-content{position:relative;z-index:1;padding-right:93px}
+.meta-mini-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.meta-micro-card{min-height:92px;padding:11px;border:1px solid #644681;border-radius:14px;background:linear-gradient(145deg,#3d295e,#291a43);display:flex;flex-direction:column;gap:6px}
+.meta-micro-card .micro-icon{font-size:23px;color:#f7d18d}
+.meta-micro-card strong{font-size:12px;color:#f4e4ff}.meta-micro-card small{font-size:10px;color:#cbb7de;line-height:1.3}
+.meta-section-label{display:flex;justify-content:space-between;align-items:center;margin:15px 1px 8px;color:#e2b8f5;font-size:10px;letter-spacing:.1em;font-weight:950;text-transform:uppercase}
+.meta-section-label small{color:#ad9dc9;font-size:10px;letter-spacing:0;text-transform:none}
+.meta-guardian-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.meta-guardian-card{position:relative;min-height:137px;border-radius:14px;padding:7px 4px 8px;border-color:#6e5498;background:radial-gradient(circle at 50% 19%,var(--guardian-glow,#75529b) 0%,transparent 70%),linear-gradient(#412955,#211536)}
+.meta-guardian-card .meta-guardian-art{height:92px}
+.meta-guardian-card .meta-guardian-art svg{width:100px;height:100px}
+.meta-guardian-card strong{font-size:11px;letter-spacing:-.015em}.meta-guardian-card small{display:block;font-size:9px;margin-top:2px}
+.meta-guardian-card.locked .meta-guardian-art svg{filter:grayscale(1) brightness(.22) drop-shadow(0 0 8px #c4b0e0)}
+.meta-guardian-card.locked{border-style:dashed;opacity:.86}
+.meta-guardian-card .unlock-pill{position:absolute;top:4px;left:5px;padding:3px 5px;background:#22152edc;border:1px solid #795b93;border-radius:6px;font-size:8px;color:#e5c4e5}
+.meta-guardian-card .unlock-pill.is-ready{border-color:#6cae9e;color:#a2f4d8}
+.meta-detail-art{height:190px;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 68%,#9b62cd9e,transparent 65%),linear-gradient(135deg,#42265f,#201431);border:1px solid #7756a0;border-radius:16px;overflow:hidden;position:relative}
+.meta-detail-art svg{width:195px;height:195px;filter:drop-shadow(0 8px 12px #140d30)}
+.meta-detail-art.locked svg{filter:grayscale(1) brightness(.28)}
+.meta-detail-rank{position:absolute;bottom:9px;right:10px;color:#fff0af;font-size:15px;font-weight:900}
+.meta-stat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:11px 0}
+.meta-stat{background:#322149;border:1px solid #614880;border-radius:11px;padding:9px 5px;text-align:center}
+.meta-stat strong{display:block;color:#f6d49c;font-size:17px}.meta-stat span{display:block;color:#c7b2d8;font-size:9px;margin-top:4px}
+.meta-detail-description{padding:11px;border:1px solid #655084;background:#271b3d;border-radius:11px;font-size:11px;color:#e6d7f1;line-height:1.65;margin-top:8px}
+.meta-keyword-icon{display:inline-block;width:17px;height:17px;vertical-align:-3px;color:#eebc8b}
+.meta-quest-row,.meta-mission{display:flex;align-items:center;gap:10px;background:linear-gradient(130deg,#3e2a5d,#25193d);border:1px solid #765794;border-radius:12px;padding:10px 11px;margin-bottom:8px}
+.meta-quest-icon{font-size:25px;color:#f6d08e;flex:none;width:35px;text-align:center}
+.meta-quest-row .text,.meta-mission .text{flex:1}
+.meta-quest-row strong,.meta-mission strong{display:block;font-size:12px}.meta-quest-row small,.meta-mission small{display:block;font-size:10px;color:#d6c1e5;line-height:1.4;margin-top:3px}
+.meta-quest-row .status{font-size:9px;white-space:nowrap;color:#fff0b3}
+.meta-progress-track{height:5px;border-radius:8px;background:#1d1430;margin-top:7px;overflow:hidden}
+.meta-progress-track span{display:block;height:100%;background:linear-gradient(90deg,#a96bea,#f3c9f3);border-radius:8px}
+.meta-shop-pack{position:relative;border:1px solid #845cb5;background:radial-gradient(circle at 85% 27%,#824abd85,transparent 45%),linear-gradient(125deg,#493066,#281a44);border-radius:15px;padding:15px;margin-bottom:10px;overflow:hidden}
+.meta-shop-pack h3{margin:0 0 4px;font-size:16px;color:#ffe4b0}.meta-shop-pack p{margin:0 0 12px;font-size:11px;color:#dbcaea;max-width:70%;line-height:1.4}
+.meta-shop-pack .pack-art{position:absolute;right:10px;top:11px;font-size:43px;filter:drop-shadow(0 0 14px #aa7af0)}
+.meta-shop-pack button{background:#533479;border:1px solid #a37bcb;border-radius:10px;padding:8px 12px;color:#f0e0ff;font-size:11px}
+.meta-shop-pack button:disabled{opacity:.8}
+.meta-pass-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin:14px 0}
+.meta-pass-step{padding:11px 3px;text-align:center;background:#37244b;border:1px solid #71548f;border-radius:9px}
+.meta-pass-step b{display:block;font-size:17px;color:#ffe0a5}.meta-pass-step small{font-size:8px;color:#c5aedc}
+.meta-empty-state{padding:25px 15px;border:1px dashed #715490;background:#261a40;border-radius:14px;text-align:center}
+.meta-empty-state .symbol{font-size:38px;color:#f1b6fd}.meta-empty-state h3{margin:8px 0 5px;font-size:16px;color:#f5e1f7}.meta-empty-state p{font-size:11px;line-height:1.5;color:#d6c3e8;margin:0}
+.meta-cta-secondary{padding:10px 15px;border:1px solid #946dbb;background:#4c3570;border-radius:11px;color:#f4e4ff;font-weight:850;font-size:11px;margin-top:12px}
+.meta-button-row{display:flex;gap:7px;margin-top:10px}
+.meta-button-row button{flex:1;padding:10px 7px;background:#453061;border:1px solid #9163b1;border-radius:11px;font-size:11px;font-weight:800}
+.meta-button-row button.active{background:#7351a7;border-color:#e6b5fb}
+.meta-settings-item{display:flex;align-items:center;justify-content:space-between;padding:14px 12px;border:1px solid #675086;background:#34224c;border-radius:12px;margin-bottom:8px;gap:12px}
+.meta-settings-item span{font-size:12px}.meta-settings-item button{background:#694ca0;border:1px solid #a27fba;border-radius:9px;padding:8px 10px;font-size:11px}
+@media(max-height:720px){.meta-side-actions{top:32px}.meta-side-actions button{min-height:43px;width:53px}.meta-side-actions b{font-size:18px}.meta-side-actions span{font-size:8px}.meta-map-hint{font-size:8px}}
+@media(max-height:610px){.meta-side-actions button{width:42px;min-height:38px}.meta-side-actions span{display:none}}
+@media(prefers-reduced-motion:reduce){.meta-map,.meta-map *,#metaPanel *{animation:none!important}}
+
 </style>
 </head>
 <body>
@@ -228,11 +310,11 @@
   <section id="home" class="screen meta-home" aria-label="Accueil et carte du monde">
     <header class="meta-head">
       <button type="button" class="meta-profile" id="profileBtn" aria-label="Ouvrir le profil">
-        <span class="meta-avatar" aria-hidden="true">✦</span><span class="meta-user"><strong>Tacticien</strong><small>Démo V0.9</small></span>
+        <span class="meta-avatar" id="metaAvatarArt" aria-hidden="true">✦</span><span class="meta-user"><strong>Mon profil</strong><small id="metaProfileHint">4 / 9 gardiens</small></span>
       </button>
       <div class="meta-resources">
         <span class="meta-diamonds" title="Diamants : achats non intégrés à cette démo">◆ <b>0</b></span>
-        <button class="sound-btn" type="button" id="homeSound" aria-label="Activer ou couper le son">♪</button>
+        <button class="sound-btn" type="button" id="homeSound" aria-label="Activer ou couper le son">♪</button><button type="button" class="sound-btn" id="metaSettings" aria-label="Paramètres">⚙</button>
       </div>
     </header>
     <div class="meta-chapter">
@@ -240,7 +322,7 @@
       <div class="meta-subtitle">Le monde des gardiens</div>
       <div class="meta-chapter-row">
         <h2 id="metaRegionTitle">Chapitre I · Royaume d'Aurore</h2>
-        <span class="meta-progress-index" id="metaRegionStatus">Démo jouable</span>
+        <span class="meta-progress-index" id="metaRegionStatus">Expédition disponible</span>
       </div>
     </div>
     <div class="meta-map" id="worldMap" aria-label="Régions du monde, sélectionner une destination">
@@ -306,8 +388,8 @@
         <path d="M252 165C243 207 185 201 163 233S176 302 220 307C270 313 241 361 193 407" fill="none" stroke="#ffd79c" stroke-width="3" stroke-linecap="round" stroke-dasharray="5 10"/>
         <g fill="#ffe8ab" stroke="#fff4ce" stroke-width="2"><circle cx="252" cy="165" r="7"/><circle cx="164" cy="233" r="6"/><circle cx="218" cy="306" r="6"/><circle cx="193" cy="406" r="7"/></g>
         <g opacity=".72"><circle cx="46" cy="82" r="2" fill="#e9c8ff"/><circle cx="130" cy="58" r="1.5" fill="#ffddad"/><circle cx="316" cy="69" r="2.5" fill="#d8b6ff"/><path d="M142 117l3 -11 3 11 11 3 -11 3 -3 11 -3 -11 -11 -3z" fill="#f5d8ff"/></g>
-      </svg>
-      <span class="meta-map-hint">Touchez une région pour la découvrir</span>
+      <g opacity=".76"><path d="M39 285l8 -26 10 26 -9 19z" fill="#d490ff"/><path d="M304 285l9 -24 11 25 -10 15z" fill="#9be5ff"/><path d="M96 321l8 -21 8 22 -8 12z" fill="#aafbc6"/><path d="M142 299l8 -26 9 28 -9 17z" fill="#bc9fff"/><path d="M239 347l10 -26 9 25 -9 15z" fill="#83ddff"/><path d="M211 438l11 -29 12 31 -12 14z" fill="#d57dff"/></g><g fill="#f8d2ff" opacity=".68"><circle cx="26" cy="138" r="2"/><circle cx="145" cy="178" r="2.5"/><circle cx="322" cy="169" r="2"/><circle cx="311" cy="383" r="2"/><circle cx="59" cy="353" r="2"/></g></svg>
+      <span class="meta-map-hint">✧ Explore les royaumes</span><div class="meta-side-actions"><button type="button" data-quick-page="synergies" aria-label="Voir les synergies"><b>✧</b><span>Synergies</span></button><button type="button" data-quick-page="challenges" aria-label="Voir les défis"><b>♜</b><span>Défis</span></button><button type="button" data-quick-page="pass" aria-label="Voir le Pass"><b>✦</b><span>Pass</span></button></div>
       <span class="meta-location-pin aurora" aria-hidden="true"></span>
       <span class="meta-location-pin sylve" aria-hidden="true"></span>
       <span class="meta-location-pin flux" aria-hidden="true"></span>
@@ -321,16 +403,16 @@
       <div class="meta-objective">
         <div class="meta-objective-copy">
           <div class="meta-eyebrow">✧ Prochain objectif</div>
-          <strong id="metaQuestTitle">Repousser les douze vagues</strong>
+          <strong id="metaQuestTitle">Débloquer Néma</strong>
           <div class="meta-meter" aria-hidden="true"><i id="metaQuestFill"></i></div>
           <small id="metaQuestProgress">Record 0 / 12 vagues</small>
         </div>
         <div class="meta-reward" aria-label="Aperçu des récompenses">
-          <span class="meta-gift">✦</span><span id="metaQuestReward">Défi PvE</span>
+          <span class="meta-gift" id="metaRewardArt">✦</span><span id="metaQuestReward">Prochain gardien</span>
         </div>
       </div>
       <button type="button" id="playBtn" class="meta-play">⚔ Préparer l'expédition</button>
-      <div class="meta-footnote">Prototype jouable · Déblocages permanents à venir</div>
+      <div class="meta-footnote">12 vagues · Boss 4/8/12 · Collection sauvegardée</div>
       <nav class="meta-nav" aria-label="Navigation principale">
         <button type="button" data-meta-nav="world" aria-current="page"><span class="meta-nav-icon">✥</span><span class="meta-nav-label">Monde</span></button>
         <button type="button" data-meta-nav="collection"><span class="meta-nav-icon">❀</span><span class="meta-nav-label">Gardiens</span></button>
@@ -347,19 +429,26 @@
     </section>
     <div class="meta-prep hidden" id="metaPrep" role="dialog" aria-modal="true" aria-labelledby="metaPrepTitle">
       <div class="meta-prep-card">
-        <span class="meta-prep-kicker">EXPÉDITION · CHAPITRE I</span>
+        <span class="meta-prep-kicker">EXPÉDITION · 12 VAGUES / 3 BOSS</span>
         <h2 id="metaPrepTitle">Citadelle d'Aurore</h2>
-        <p>Choisis et fusionne tes gardiens, active les synergies et protège ton sanctuaire. La composition se construit pendant le combat.</p>
+        <p>Choisis et fusionne tes gardiens, active les synergies et protège ton sanctuaire. La composition se construit pendant le combat. Choisis un augment après les vagues 5 et 10.</p>
         <div class="meta-prep-info">
           <div><b>12</b><span>Vagues jouables</span></div>
-          <div><b>9</b><span>Gardiens de test</span></div>
-          <div><b>1★–5★</b><span>Fusion</span></div>
+          <div><b id="metaPrepRoster">4</b><span>Gardiens recrutables</span></div>
+          <div><b>4·8·12</b><span>Boss</span></div>
         </div>
-        <p>Les nouvelles régions sont des aperçus. Les déblocages permanents sont intégrés au mode Expédition.</p>
-        <div class="meta-prep-actions"><button type="button" class="meta-cancel" id="metaCancel">Retour</button><button type="button" class="meta-start" id="metaStart">Commencer</button></div>
+        <p>Les déblocages de gardiens sont permanents, mais l’or, les rangs et les augments repartent à zéro à chaque expédition.</p>
+        <div class="meta-prep-next" id="metaPrepNext">Prochain déblocage : Néma · vague 2</div><div class="meta-prep-actions"><button type="button" class="meta-cancel" id="metaCancel">Retour</button><button type="button" class="meta-start" id="metaStart">Commencer</button></div>
         <button type="button" class="meta-sandbox" id="sandboxBtn">Atelier libre · Tester les fusions</button>
       </div>
     </div>
+    <section id="metaDetail" class="meta-panel meta-detail hidden" aria-label="Fiche détaillée">
+      <header class="meta-panel-head"><button type="button" class="meta-back" id="metaDetailBack" aria-label="Retour">‹</button><div><h2 id="metaDetailTitle">Gardien</h2><small id="metaDetailSubtitle">Rôle, synergies et compétences</small></div></header>
+      <div id="metaDetailBody" class="meta-panel-body"></div>
+    </section>
+    <span id="profileSummary" class="hidden"></span>
+    <button type="button" id="collectionBtn" class="hidden" aria-hidden="true">Collection classique</button>
+    <div id="homeHero" class="hidden" aria-hidden="true"></div>
   </section>
   <section id="battle" class="screen hidden" aria-label="Combat">
     <header class="battle-top"><div class="toprow"><div class="mini-brand">✦</div><div class="wave-hud">LE SANCTUAIRE<br><strong id="waveText">Vague 1 / 6</strong><span class="countdown" id="countdown">Préparation</span></div><div class="stat-pill health"><span class="ico">♥</span><span id="lifeText">100</span></div><div class="stat-pill coin"><span class="ico">✦</span><span id="goldText">180</span></div><button class="sound-btn" style="width:33px;height:33px;border-radius:10px" id="battleSound" aria-label="Activer ou couper le son">♪</button></div><div class="health-track"><span id="healthFill"></span></div></header>
