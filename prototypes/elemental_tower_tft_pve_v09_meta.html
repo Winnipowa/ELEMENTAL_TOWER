@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#120e27">
-<title>Elemental Tower — Monde des gardiens · Meta & PvE V0.9</title>
+<title>Elemental Tower — Hub complet, collection et PvE V1.0 (prototype)</title>
 <style>
 :root{font-family:ui-rounded,"Trebuchet MS",system-ui,-apple-system,sans-serif;color:#f8f2ff;--violet:#a982ff;--pink:#ff91d8;--mint:#83f8ed;--gold:#ffdd91;--ink:#17102d;--glass:rgba(41,28,75,.83);--line:rgba(224,197,255,.27)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent} html,body{width:100%;height:100%;margin:0;background:#080b1b;overflow:hidden}button{font:inherit;cursor:pointer;color:inherit;border:0}button:focus-visible,.drop:focus-visible{outline:2px solid #ffe59c;outline-offset:2px}button:disabled{opacity:.5;cursor:not-allowed}svg{display:block} .hidden{display:none!important} .center{text-align:center}
@@ -174,6 +174,103 @@
 @media(max-height:610px){.meta-subtitle{display:none}.meta-chapter-row{margin-top:4px}.meta-map-hint{display:none}.meta-footer{padding-top:4px}.meta-objective-copy small{display:none}.meta-region span{display:none}.meta-region{padding:5px}.meta-nav button{height:34px}.meta-nav-icon{font-size:15px}.meta-footnote{display:none}}
 @media(max-width:344px){.meta-head{gap:4px;padding-left:7px;padding-right:7px}.meta-user small{display:none}.meta-diamonds{padding:6px}.meta-region{min-width:73px}.meta-region strong{font-size:8px}}
 
+
+/* META UX — all selectable panels and real data screens */
+.meta-kicon{display:inline-block;vertical-align:middle;flex-shrink:0;color:#c5aaff}
+.meta-panel-body{padding:16px 14px 32px;scrollbar-width:thin;scrollbar-color:#78629c #211539}
+.meta-panel-body h3{margin:0 0 6px;font-size:18px;color:#fff1fb;letter-spacing:-.025em}
+.meta-hero-panel,.meta-pass-intro,.meta-region-showcase{padding:18px;border-radius:18px;background:radial-gradient(circle at 90% 0%,#8b4bb349,transparent 56%),linear-gradient(125deg,#4a2d6b,#2b1a48);border:1px solid #815c9d;margin-bottom:16px;box-shadow:inset 0 1px #c29ed037}
+.meta-hero-panel.shop{background:radial-gradient(circle at 85% 12%,#f6b4fa40,transparent 48%),linear-gradient(135deg,#53327b,#291a46)}
+.meta-hero-panel.rank{background:radial-gradient(circle at 85% 12%,#f2c47542,transparent 50%),linear-gradient(135deg,#513074,#27173f)}
+.meta-overline{display:block;font-size:9px;font-weight:1000;letter-spacing:.13em;color:#e4c195;margin-bottom:6px}
+.meta-hero-panel p,.meta-pass-intro p,.meta-region-showcase p{margin:0;font-size:12px;line-height:1.52;color:#dfcdea}
+.meta-token{display:inline-flex;border:1px solid #8564b4;border-radius:20px;padding:4px 8px;background:#5a3889;color:#f2e4ff;font-size:10px;font-weight:800;margin:4px 4px 0 0}
+.meta-token.gold{background:#60416b;border-color:#e0b57b;color:#ffe6ae}
+.meta-subhead{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:15px 0 10px}
+.meta-subhead h3{font-size:14px;margin:0}
+.meta-subhead span{font-size:9px;color:#ad9cc7;text-align:right}
+.meta-filter-row{display:flex;gap:6px;overflow:auto;scrollbar-width:none;margin-bottom:8px;padding-bottom:2px}
+.meta-filter-row::-webkit-scrollbar{display:none}
+.meta-filter{background:#342049;border:1px solid #795a9d;border-radius:11px;color:#d8c5ee;font-size:11px;font-weight:800;padding:9px 11px;white-space:nowrap;min-height:37px;flex:none}
+.meta-filter.small{font-size:10px;padding:7px 9px;min-height:33px}
+.meta-filter.selected{background:#71509b;color:#fff0c8;border-color:#e9c18f;box-shadow:0 0 10px #cca2e52d}
+.meta-collection-head{display:flex;justify-content:space-between;color:#eee0fd;font-size:11px;margin:12px 0 8px}
+.meta-collection-head span{color:#b9a0d5}
+.meta-v2-grid{gap:7px}
+.meta-v2-guardian{border-color:#6e568b;border-top:2px solid var(--guardian-accent);cursor:pointer;min-height:148px;background:radial-gradient(circle at 45% 27%,#976cc83a,transparent 75%),linear-gradient(#45305c,#241936)}
+.meta-v2-guardian:focus-visible{outline:2px solid #ffe7b4}
+.meta-v2-guardian .meta-guardian-art{height:83px}
+.meta-v2-guardian .meta-guardian-art svg{width:82px;height:82px}
+.meta-v2-guardian small{display:block;margin-top:3px;font-size:9px}
+.meta-small-tag{display:inline-block;margin-top:5px;font-size:9px;color:#ffe3b2;background:#21142f;border:1px solid #7a597f;border-radius:8px;padding:3px 5px}
+.meta-inline-back{font-size:12px;background:transparent;color:#e9d3ff;padding:7px 0 11px}
+.meta-detail-hero{display:flex;align-items:center;gap:8px;border:1px solid var(--detail-accent);border-radius:18px;padding:9px 11px;margin-bottom:13px;background:radial-gradient(circle at 20% 40%,#bc8aeb51,#2c1b48 62%)}
+.meta-detail-art{width:40%;flex:none}.meta-detail-art svg{width:100%;height:auto;max-height:176px}
+.meta-detail-hero h3{font-size:22px;margin:1px 0 3px;color:#fff3d1}
+.meta-detail-hero p{margin:0 0 7px;color:#d8bfed;font-size:11px}
+.meta-stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.meta-stat{display:grid;grid-template-columns:24px 1fr;grid-template-rows:auto auto;gap:2px 5px;border:1px solid #745995;padding:11px;background:#302049;border-radius:12px}
+.meta-stat svg{grid-row:span 2;align-self:center}
+.meta-stat span{font-size:10px;color:#c7b0db}.meta-stat b{font-size:15px;color:#f8ecff}
+.meta-info-line{display:flex;align-items:flex-start;gap:10px;background:#34224e;border:1px solid #6e5292;padding:12px;margin:8px 0;border-radius:13px}
+.meta-info-line strong{display:block;color:#f9e9ff;font-size:12px}
+.meta-info-line p{font-size:11px;line-height:1.5;color:#cdb9e0;margin:4px 0 0}
+.meta-stars-road{display:flex;align-items:center;justify-content:space-around;gap:4px;background:#322048;border:1px solid #71538e;padding:14px 6px;border-radius:12px}
+.meta-stars-road span{font-size:11px;font-weight:900;color:#ffe2a4}.meta-stars-road i{font-size:15px;color:#b98ee0;font-style:normal}
+.meta-offer-look{display:grid;place-items:center;min-height:170px;border:1px solid #755891;background:radial-gradient(circle at 50% 43%,#8157b3,#26173c 67%);border-radius:14px}
+.meta-offer-look svg{height:180px}
+.meta-indicator{height:6px;border-radius:20px;background:#1a102b;border:1px solid #6c4b8a;overflow:hidden}
+.meta-indicator i{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,#9d6ce2,#e9bf93)}
+.meta-switcher{display:grid;grid-template-columns:repeat(2,1fr);gap:5px;padding:4px;border:1px solid #765395;background:#241638;border-radius:13px;margin-bottom:14px}
+.meta-switcher button{padding:9px 10px;border-radius:10px;background:transparent;font-size:12px;font-weight:900;color:#cbb8da}
+.meta-switcher button.active{background:#7650a0;color:#fff3d1;box-shadow:0 2px 10px #14061c}
+.meta-task-stack{display:grid;gap:9px;margin-top:12px}
+.meta-task{display:flex;gap:9px;background:#33224e;border:1px solid #6f5394;border-radius:14px;padding:12px}
+.meta-task-symbol{flex:none;display:grid;place-items:center;width:31px;height:31px;border-radius:11px;background:#624189;color:#ffe5ac;border:1px solid #906fb2;font-size:18px}
+.meta-task-content{flex:1;min-width:0}.meta-task-content strong{font-size:12px;display:block}
+.meta-task-content p{font-size:10px;margin:4px 0 9px;color:#c5b2da;line-height:1.45}
+.meta-task-content small{font-size:9px;color:#d3aefa;display:block;margin-top:6px}
+.meta-task-reward{font-size:18px;color:#f5ce95}
+.meta-shop-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.meta-shop-card{padding:0 0 11px;background:#35224f;border:1px solid #8665a9;border-radius:14px;overflow:hidden;text-align:left}
+.meta-shop-visual{height:99px;display:grid;place-items:center;background:radial-gradient(circle at center,var(--product-glow),#402257 49%,#21152d);margin-bottom:9px}
+.meta-shop-visual span{font-size:51px;color:#ffffffbf;text-shadow:0 0 20px var(--product-glow)}
+.meta-shop-card strong,.meta-shop-card small,.meta-shop-card em{display:block;padding:0 10px}
+.meta-shop-card strong{font-size:12px;color:#fff0fb}.meta-shop-card small{font-size:10px;line-height:1.4;color:#cfb7df;min-height:43px;margin-top:6px}
+.meta-shop-card em{color:#ffe0a3;font-style:normal;font-size:10px;font-weight:900;margin-top:9px}
+.meta-pass-intro{background:linear-gradient(140deg,#6e426e,#30204d)}
+.meta-pass-list{display:grid;gap:8px}
+.meta-pass-step{display:grid;grid-template-columns:33px 1fr 1fr;align-items:center;gap:7px;background:#322047;border:1px solid #6d5389;padding:10px 6px;border-radius:12px}
+.meta-pass-level{display:grid;place-items:center;border-radius:50%;width:30px;height:30px;background:#7d5096;border:1px solid #daa7e3;font-size:12px;font-weight:1000;color:#fff2c5}
+.meta-pass-step small{display:block;font-size:9px;color:#c3a9d7}
+.meta-pass-step strong{font-size:11px;color:#f4e7fc;display:block;margin-top:3px}
+.meta-preview-offer{background:radial-gradient(circle at center,var(--product-glow),#442456 40%,#241739 75%);border:1px solid #9371ae;border-radius:18px;padding:28px 15px;text-align:center}
+.meta-preview-offer>div{font-size:59px;color:#ffeed8;text-shadow:0 0 20px #fff}
+.meta-preview-offer h3{font-size:20px}.meta-preview-offer span{font-size:9px;letter-spacing:.12em;color:#e6c8fa}
+.meta-wide-secondary,.meta-wide-primary{width:100%;border-radius:12px;border:1px solid #8461a4;background:#513371;padding:12px 10px;font-size:12px;font-weight:900;margin-top:10px}
+.meta-wide-primary{background:linear-gradient(#f1d699,#e9a47c);color:#492957;border-color:#f9e2ba}
+.meta-rank-card{padding:16px;border-radius:14px;background:linear-gradient(135deg,#50365e,#322147);border:1px solid #9673ac;margin-bottom:12px}
+.meta-rank-line{display:flex;align-items:baseline;gap:9px;margin-bottom:10px}
+.meta-rank-line b{font-size:29px;color:#ffe4ac}.meta-rank-line span{font-size:11px;color:#d7c5eb}
+.meta-profile-banner{display:flex;align-items:center;gap:12px;background:linear-gradient(145deg,#54346d,#2e1e4a);border:1px solid #8464ad;border-radius:18px;padding:16px}
+.meta-profile-banner h3{margin:0;color:#fff0ca}.meta-profile-banner p{margin:4px 0 0;font-size:11px;color:#d9c4e9}
+.meta-profile-sigil{display:grid;place-items:center;flex:none;width:65px;height:65px;border-radius:17px;background:radial-gradient(circle,#a26ac9,#4b286f);font-size:39px;color:#ffedb6;border:1px solid #e8bbba}
+.meta-stats-overview{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.meta-stats-overview div{display:flex;flex-direction:column;gap:4px;background:#35224f;border:1px solid #785b9e;border-radius:13px;padding:16px 12px}
+.meta-stats-overview b{font-size:25px;color:#ffdcaa}.meta-stats-overview span{font-size:10px;color:#cfb8e5}
+.meta-mini-action{margin-left:auto;background:#6f4d94;border:1px solid #a17cc1;border-radius:9px;padding:8px;font-weight:800;font-size:10px;flex:none}
+.meta-map-stages{display:grid;gap:9px;margin-bottom:13px}
+.meta-stage{display:flex;align-items:center;gap:11px;background:#33214b;border:1px solid #8462a1;border-radius:13px;padding:12px}
+.meta-stage>span{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:#bd8d54;border:1px solid #fff1b6;color:#30172f;font-weight:1000}
+.meta-stage strong{flex:1;font-size:12px}.meta-stage small{font-size:9px;color:#e0cae5}
+.meta-stage.locked{opacity:.58}.meta-stage.locked>span{background:#52415e;color:#e6c8f7;border-color:#977ba9}
+.meta-region-showcase{background:radial-gradient(circle at 80% 0%,#8a6bea70,transparent 60%),linear-gradient(130deg,#4e2c75,#21163f)}
+.meta-map-quick{position:absolute;z-index:4;right:10px;top:7px;display:flex;gap:5px}
+.meta-map-quick button{width:40px;height:40px;border:1px solid #b28dd4;border-radius:11px;background:#251640db;color:#fff0c0;font-size:17px;box-shadow:0 3px 8px #0b0719b6}
+.meta-location-card{position:absolute;bottom:9px;left:10px;z-index:5;background:#1a1038de;border:1px solid #9873c2;border-radius:11px;padding:7px 10px;text-align:left;max-width:64%;box-shadow:0 4px 16px #130a28}
+.meta-location-card small{display:block;color:#c3addb;font-size:9px}.meta-location-card strong{font-size:11px;color:#fff1d1}
+@media(max-width:350px){.meta-hero-panel{padding:13px}.meta-stat{padding:8px}.meta-task{padding:8px}.meta-shop-card strong{font-size:11px}.meta-panel-body{padding:12px}}
+
 </style>
 </head>
 <body>
@@ -197,7 +294,7 @@
       </div>
     </div>
     <div class="meta-map" id="worldMap" aria-label="Régions du monde, sélectionner une destination">
-      <div class="meta-map-constellation"></div>
+      <div class="meta-map-constellation"></div><div class="meta-map-quick"><button type="button" data-quick="rank" aria-label="Défis hebdomadaires" title="Défis">♜</button><button type="button" data-quick="shop" aria-label="Pass saisonnier" title="Pass">✧</button><button type="button" data-quick="settings" aria-label="Réglages" title="Réglages">⚙</button></div><button type="button" id="metaLocationCard" class="meta-location-card"><small>Région sélectionnée · voir les chapitres</small><strong id="metaLocationLabel">Citadelle d’Aurore ›</strong></button>
       <svg class="meta-map-art" viewBox="0 0 360 510" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Carte illustrée des îles flottantes d'Aurore, de Sylve, des Flux et du royaume des Ombres">
         <defs>
           <linearGradient id="mw-sky" x1="0" y1="0" x2=".3" y2="1"><stop stop-color="#3b266d"/><stop offset=".62" stop-color="#29225b"/><stop offset="1" stop-color="#151035"/></linearGradient>
@@ -345,7 +442,7 @@
     </footer>
   </section>
   <div class="drag-ghost" id="dragGhost"></div>
-  <div class="modal-shade hidden" id="endOverlay"><div class="modal"><div class="medal" id="endMedal">✦</div><h2 id="endTitle">Victoire !</h2><p id="endDescription">Votre sanctuaire est sauvé.</p><div class="modal-stats"><span>Vagues <b id="endWaves">6</b></span><span>Fusion max <b id="endRank">2★</b></span><span>Ennemis <b id="endKills">0</b></span></div><button class="cta" id="replayBtn">REJOUER</button><button class="text-btn" id="menuBtn">Retour au menu</button></div></div>
+  <div class="modal-shade hidden" id="endOverlay"><div class="modal"><div class="medal" id="endMedal">✦</div><h2 id="endTitle">Victoire !</h2><p id="endDescription">Votre sanctuaire est sauvé.</p><div id="metaResultSummary" class="meta-result-summary" style="border:1px solid #825c9f;border-radius:12px;background:#25183c;padding:10px;margin:10px 0;color:#ffe4b1;font-size:12px">Progression enregistrée sur cet appareil.</div><div class="modal-stats"><span>Vagues <b id="endWaves">6</b></span><span>Fusion max <b id="endRank">2★</b></span><span>Ennemis <b id="endKills">0</b></span></div><button class="cta" id="replayBtn">REJOUER</button><button class="text-btn" id="menuBtn">Retour au menu</button></div></div>
 </div>
 <script>
 
@@ -427,7 +524,7 @@ function loadMeta(){try{const data=JSON.parse(localStorage.getItem('elemental-to
 const metaProgress=loadMeta();let metaRegion='aurore';
 function persistMeta(){try{localStorage.setItem('elemental-tower-meta-v09',JSON.stringify(metaProgress))}catch{/*private browser*/}}
 function renderMetaHome(){
- const info=META_REGIONS[metaRegion];$('metaRegionTitle').textContent=info.name;$('metaRegionStatus').textContent=info.status;
+ const info=META_REGIONS[metaRegion];$('metaLocationLabel').textContent=info.name+' ›';$('metaRegionTitle').textContent=info.name;$('metaRegionStatus').textContent=info.status;
  $('metaQuestTitle').textContent=info.quest;$('metaQuestReward').textContent=info.reward;
  $('metaQuestProgress').textContent=info.playable?('Record '+metaProgress.bestWaves+' / '+WAVES+' vagues'):'Contenu non encore jouable';
  $('metaQuestFill').style.width=info.playable?(Math.min(100,metaProgress.bestWaves/WAVES*100)+'%'):'0%';
@@ -435,32 +532,188 @@ function renderMetaHome(){
  home.querySelectorAll('[data-region]').forEach(btn=>{const selected=btn.dataset.region===metaRegion;btn.classList.toggle('is-active',selected);btn.setAttribute('aria-pressed',String(selected))});
 }
 function closeMetaPanel(){$('metaPanel').classList.add('hidden');home.querySelectorAll('[data-meta-nav]').forEach(b=>b.setAttribute('aria-current',b.dataset.metaNav==='world'?'page':'false'))}
-function openMetaPanel(page){
- if(page==='world'){closeMetaPanel();return}
- const panel=$('metaPanel'),body=$('metaPanelBody'),title=$('metaPanelTitle'),subtitle=$('metaPanelSubtitle');
- const headings={collection:['Collection de gardiens','Catalogue actuellement présent dans le combat'],missions:['Missions','Vos objectifs et résultats de démonstration'],shop:['Boutique','Cosmétiques — aperçu uniquement'],profile:['Profil','Vos records du prototype']};
- const info=headings[page]||headings.collection;title.textContent=info[0];subtitle.textContent=info[1];
- if(page==='collection'){
-  body.innerHTML='<p class="meta-panel-lead">Les neuf gardiens ci-dessous sont réellement utilisables dans le prototype PvE. Les déblocages permanents ne sont pas encore codés.</p><div class="meta-guardian-grid">'+Object.entries(UNITS).map(([key,d])=>'<div class="meta-guardian-card"><div class="meta-guardian-art">'+guardianSVG(1,true,key)+'</div><strong>'+d.name+'</strong><small>'+d.family+' · '+d.role+'</small></div>').join('')+'</div><div class="meta-note">Les formes des futurs gardiens de la direction artistique (Mira, Élya, Orage, Raïka…) seront intégrées après livraison des assets validés, sans remplacer les unités du moteur.</div>';
- }else if(page==='missions'){
-  body.innerHTML='<p class="meta-panel-lead">Ces informations reflètent les records de cette démo sur cet appareil. Le système de missions quotidiennes et hebdomadaires est prévu, mais pas encore connecté.</p>'+
-  '<div class="meta-list-item"><span class="meta-icon">⚔</span><div><strong>Explorer le chapitre d’Aurore</strong><small>Meilleur résultat : '+metaProgress.bestWaves+' / '+WAVES+' vagues</small></div></div>'+
-  '<div class="meta-list-item"><span class="meta-icon">✦</span><div><strong>Expérimenter les fusions</strong><small>Fusions de la dernière partie : '+metaProgress.lastFusions+'</small></div></div>'+
-  '<div class="meta-list-item"><span class="meta-icon">◇</span><div><strong>Maîtriser les synergies</strong><small>À mesurer lors d’une prochaine version</small></div></div>'+
-  '<div class="meta-note">Aucune récompense permanente n’est attribuée par cet écran de démonstration.</div>';
- }else if(page==='shop'){
-  body.innerHTML='<p class="meta-panel-lead">Les packs thématiques cosmétiques sont prévus dans le GDD. Aucun achat, diamant ou bonus de combat n’est vendu ici.</p>'+
-  '<div class="meta-list-item"><span class="meta-icon">❀</span><div><strong>Collection Aurore</strong><small>Skins et effets cosmétiques — concept à produire</small></div></div>'+
-  '<div class="meta-list-item"><span class="meta-icon">✧</span><div><strong>Pass saisonnier</strong><small>Simple démonstration future, sans paiement</small></div></div>'+
-  '<div class="meta-note">Respect des règles du GDD : zéro puissance ou gardien achetable.</div>';
- }else{
-  body.innerHTML='<p class="meta-panel-lead">Statistiques enregistrées localement sur cet appareil. Aucune connexion de compte n’est encore intégrée.</p>'+
-  '<div class="meta-list-item"><span class="meta-icon">☷</span><div><strong>'+metaProgress.attempts+' expédition(s)</strong><small>Parties terminées</small></div></div>'+
-  '<div class="meta-list-item"><span class="meta-icon">★</span><div><strong>'+metaProgress.wins+' victoire(s)</strong><small>Chapitre de démonstration</small></div></div>'+
-  '<div class="meta-list-item"><span class="meta-icon">✦</span><div><strong>'+metaProgress.bestWaves+' / '+WAVES+' vagues</strong><small>Meilleur résultat</small></div></div>';
- }
- panel.classList.remove('hidden');home.querySelectorAll('[data-meta-nav]').forEach(b=>b.setAttribute('aria-current',b.dataset.metaNav===page?'page':'false'));
+
+/* Meta V1.0: real prototype interactions around the validated PvE data, with clearly signalled demo content. */
+const META = {
+ familyDetails:{
+  Aurore:{color:'#f0d297',lore:'Les gardiens de la lumière défendent les sentiers du sanctuaire.'},
+  Sylve:{color:'#9fe6b4',lore:'La Sylve protège les chemins grâce à son contrôle du terrain.'},
+  'Crépuscule':{color:'#d7a4f7',lore:'Le Crépuscule manipule les ombres et perturbe les assauts.'}
+ },
+ regionDetails:{
+  aurore:{lore:'Le premier sanctuaire est assiégé. Compose ta défense et découvre tes premières synergies.',stars:3,chapters:['Sentier des éveillés','Les trois arches','Gardien du portail']},
+  sylve:{lore:'Une forêt suspendue de racines magiques et de cascades. Cette région reste une proposition artistique.',stars:3,chapters:['Le cœur des racines','Bosquet du silence','L’esprit ancien']},
+  flux:{lore:'Le monde des cascades cristallines et des courants élémentaires. Contenu à concevoir.',stars:3,chapters:['Passage des cristaux','La faille brillante','Gardiens des eaux']},
+  shadow:{lore:'Royaume des démons, encore inaccessible dans cette démo.',stars:3,chapters:['Le seuil obscur','La forteresse','Le cœur du Néant']}
+ },
+ offers:[
+  {id:'aurora',name:'Éclats d’Aurore',note:'Skin, effet de fusion, décor de terrain',color:'#f9d59f',status:'Concept'},
+  {id:'sylve',name:'Jardin de Sylve',note:'Teinte de gardien, particules végétales, terrain',color:'#a7e9b8',status:'Concept'},
+  {id:'night',name:'Échos du Crépuscule',note:'Skin, aura violette, effet de victoire',color:'#e5b2ff',status:'Concept'}
+ ],
+ pass:[
+  {level:1,free:'Cadre de profil',premium:'Skin d’Aurore'},
+  {level:2,free:'Icône de gardien',premium:'Animation de fusion'},
+  {level:3,free:'Bannière de profil',premium:'Décor cristallin'},
+  {level:4,free:'Titre explorateur',premium:'Effet de victoire'},
+  {level:5,free:'Cadre de saison',premium:'Skin de saison'}
+ ],
+ missionTemplates:[
+  {id:'first',name:'Lancer sa première expédition',desc:'Terminer une partie, victoire ou défaite',kind:'daily',goal:1,metric:'attempts'},
+  {id:'waves',name:'Franchir les premières vagues',desc:'Atteindre la vague 3 lors d’une expédition',kind:'daily',goal:3,metric:'bestWaves'},
+  {id:'fusion',name:'Expérimenter les fusions',desc:'Réaliser deux fusions dans une expédition',kind:'daily',goal:2,metric:'lastFusions'},
+  {id:'mastery',name:'Percer les défenses du boss',desc:'Terminer les six vagues du chapitre de test',kind:'weekly',goal:1,metric:'wins'},
+  {id:'veteran',name:'Affiner sa stratégie',desc:'Terminer cinq expéditions de test',kind:'weekly',goal:5,metric:'attempts'}
+ ]
+};
+let metaView={page:'world',family:'Toutes',role:'Toutes',guardian:null,guardianTab:'talents',missionTab:'daily',storeTab:'packs',detailOffer:null,passShown:false,rankTab:'hebdo'};
+const familyNames=['Toutes','Aurore','Sylve','Crépuscule'],roleNames=['Toutes','Gardien','Arcaniste','Chasseur'];
+const escapeText=t=>String(t).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+const glyph=(name,size=19)=>'<svg class="meta-kicon" width="'+size+'" height="'+size+'" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/ui/system-icons.svg#'+name+'"></use></svg>';
+const metaPill=(text,kind='')=>'<span class="meta-token '+kind+'">'+escapeText(text)+'</span>';
+const meter=(value,max)=>'<div class="meta-indicator" role="progressbar" aria-valuenow="'+Math.min(value,max)+'" aria-valuemin="0" aria-valuemax="'+max+'"><i style="width:'+Math.max(0,Math.min(100,value/max*100))+'%"></i></div>';
+const metaSection=(title,desc='')=>'<div class="meta-subhead"><h3>'+title+'</h3>'+(desc?'<span>'+desc+'</span>':'')+'</div>';
+function renderMetaCollection(){
+ const selected=Object.entries(UNITS).filter(([,g])=>(metaView.family==='Toutes'||g.family===metaView.family)&&(metaView.role==='Toutes'||g.role===metaView.role));
+ return '<div class="meta-hero-panel"><span class="meta-overline">GRIMOIRE DES GARDIENS</span><h3>Compose ton équipe</h3><p>9 gardiens utilisables dans la démo · 3 familles · 3 classes. Les déblocages définitifs restent à intégrer.</p></div>'+
+ metaSection('Familles','Filtrer le catalogue')+
+ '<div class="meta-filter-row">'+familyNames.map(f=>'<button type="button" class="meta-filter '+(metaView.family===f?'selected':'')+'" data-family="'+f+'">'+f+'</button>').join('')+'</div>'+
+ '<div class="meta-filter-row">'+roleNames.map(role=>'<button type="button" class="meta-filter small '+(metaView.role===role?'selected':'')+'" data-role="'+role+'">'+role+'</button>').join('')+'</div>'+
+ '<div class="meta-collection-head"><strong>'+selected.length+' gardiens</strong><span>Appuyer pour consulter</span></div>'+
+ '<div class="meta-guardian-grid meta-v2-grid">'+selected.map(([key,g])=>{
+ const fam=META.familyDetails[g.family];return '<button type="button" class="meta-guardian-card meta-v2-guardian" data-guardian="'+key+'" style="--guardian-accent:'+fam.color+'">'+
+ '<div class="meta-guardian-art">'+guardianSVG(1,true,key)+'</div><strong>'+g.name+'</strong>'+
+ '<small>'+g.family+'</small><span class="meta-small-tag">'+g.role+'</span></button>'}).join('')+'</div>'+
+ '<div class="meta-note"><b>Évolution :</b> 2 copies du même gardien et du même rang → rang supérieur, jusqu’à 5★. Les étoiles sont réinitialisées à chaque expédition.</div>';
 }
+function renderMetaGuardianDetail(key){
+ const g=UNITS[key];if(!g)return renderMetaCollection();const f=META.familyDetails[g.family],trait=TRAITS[g.family],role=TRAITS[g.role],t=metaView.guardianTab;
+ const hero='<div class="meta-detail-hero" style="--detail-accent:'+f.color+'"><div class="meta-detail-art">'+guardianSVG(3,false,key)+'</div><div><span class="meta-overline">FICHE GARDIEN · DÉMO</span><h3>'+g.name+'</h3><p>'+g.family+' · '+g.role+'</p><div>'+metaPill('Démo PvE','violet')+metaPill('1★–5★','gold')+'</div></div></div>';
+ const tabs='<div class="meta-filter-row">'+[['talents','Capacités'],['synergy','Synergies'],['evolution','Évolution'],['looks','Apparences']].map(([id,label])=>'<button class="meta-filter small '+(id===t?'selected':'')+'" data-gtab="'+id+'">'+label+'</button>').join('')+'</div>';
+ let body='';
+ if(t==='talents')body=metaSection('Rôle et stats','Données du moteur V0.8')+
+ '<div class="meta-stat-grid">'+[['Dégâts',g.damage,'damage'],['Cadence',(1/g.cooldown).toFixed(2)+'/s','attack-speed'],['Coût',g.price+' or','gold'],['Rang max','5★','fusion']].map(([n,v,ico])=>'<div class="meta-stat">'+glyph(ico)+'<span>'+n+'</span><b>'+v+'</b></div>').join('')+'</div>'+
+ '<div class="meta-info-line">'+glyph('skill')+'<div><strong>Compétence active</strong><p>La compétence spéciale s’active pendant le combat lorsque le mana est chargé. Son effet dépend du rôle et de la famille.</p></div></div>'+
+ '<div class="meta-note">Les valeurs sont celles du prototype et peuvent changer avec l’équilibrage du collègue. Les capacités avancées des 27 augments ne sont pas encore implémentées.</div>';
+ if(t==='synergy')body=metaSection('Synergies de composition','Gardiens distincts placés sur le terrain')+
+ '<div class="meta-info-line">'+glyph('synergy',26)+'<div><strong>'+g.family+' · 2 différents</strong><p>'+trait.desc+'</p></div></div>'+
+ '<div class="meta-info-line">'+glyph('augment',26)+'<div><strong>'+g.role+' · 2 différents</strong><p>'+role.desc+'</p></div></div>'+
+ '<div class="meta-note">Le rang des gardiens, leurs classes et les bonus actifs sont visibles pendant la partie. Aucun bonus n’est appliqué depuis cette fiche.</div>';
+ if(t==='evolution')body=metaSection('Fusion de 1★ à 5★','Progression propre à chaque expédition')+
+ '<div class="meta-stars-road">'+[1,2,3,4,5].map(n=>'<span>'+n+'★</span>').join('<i>›</i>')+'</div>'+
+ '<div class="meta-info-line">'+glyph('fusion',26)+'<div><strong>Fusion identique</strong><p>Deux copies du même type et du même rang fusionnent pour devenir une seule unité du rang suivant. Le coût en exemplaires augmente à chaque rang.</p></div></div>'+
+ '<div class="meta-note">La fusion 5★ réclame 16 exemplaires de base. Sur six vagues, elle n’est pas garantie. Le rang ne reste pas acquis entre deux parties.</div>';
+ if(t==='looks')body=metaSection('Apparences et effets','Cosmétiques uniquement')+
+ '<div class="meta-offer-look">'+guardianSVG(3,false,key)+'</div>'+
+ '<div class="meta-note">Aucun skin commercial n’est encore chargé dans le dépôt. Les illustrations de référence ne sont pas des sprites importables ni des assets validés de production.</div>'+
+ '<button type="button" class="meta-wide-secondary" data-open-page="shop">Explorer les concepts de boutique</button>';
+ return '<button class="meta-inline-back" data-back-collection>‹ Tous les gardiens</button>'+hero+tabs+body;
+}
+function renderMetaMissions(){
+ const set=metaView.missionTab;
+ const templates=META.missionTemplates.filter(m=>m.kind===set);
+ const checked=templates.filter(m=>Number(metaProgress[m.metric]||0)>=m.goal).length;
+ return '<div class="meta-hero-panel"><span class="meta-overline">TABLEAU DES OBJECTIFS</span><h3>Petites victoires, grandes synergies</h3><p>Les missions ci-dessous sont des scénarios de prototype. Leur suivi utilise seulement les parties terminées sur cet appareil ; aucune récompense monétaire n’est créditée.</p></div>'+
+ '<div class="meta-switcher"><button data-mission-tab="daily" class="'+(set==='daily'?'active':'')+'">Quotidiennes</button><button data-mission-tab="weekly" class="'+(set==='weekly'?'active':'')+'">Hebdomadaires</button></div>'+
+ metaSection('Objectifs','Complétés '+checked+' / '+templates.length)+meter(checked,Math.max(1,templates.length))+
+ '<div class="meta-task-stack">'+templates.map((m,i)=>{const v=Math.min(m.goal,Number(metaProgress[m.metric]||0)),ok=v>=m.goal;return '<div class="meta-task"><div class="meta-task-symbol">'+(ok?'✓':['◇','✧','⚔'][i%3])+'</div><div class="meta-task-content"><strong>'+m.name+'</strong><p>'+m.desc+'</p>'+meter(v,m.goal)+'<small>'+v+' / '+m.goal+(ok?' · suivi local validé':'')+'</small></div><span class="meta-task-reward">'+(ok?'✓':'✦')+'</span></div>'}).join('')+'</div>'+
+ '<div class="meta-note">La date quotidienne et les récompenses ne sont pas actives : les compteurs ici ne se réinitialisent pas automatiquement. Cette présentation valide le parcours UX, pas le système de missions de production.</div>';
+}
+function renderMetaShop(){
+ const t=metaView.storeTab;
+ return '<div class="meta-hero-panel shop"><span class="meta-overline">ÉCHOPPE DES GARDIENS</span><h3>Un univers à ton image</h3><p>Packs cosmétiques à l’étude. Aucune transaction réelle, aucun bonus de combat, aucun achat de gardiens.</p><span class="meta-token gold">◆ 0 diamants · démo</span></div>'+
+ '<div class="meta-switcher"><button data-shop-tab="packs" class="'+(t==='packs'?'active':'')+'">Collections</button><button data-shop-tab="pass" class="'+(t==='pass'?'active':'')+'">Pass saisonnier</button></div>'+
+ (t==='packs'?metaSection('Collections thématiques','Aperçus non commercialisés')+
+ '<div class="meta-shop-grid">'+META.offers.map((o,i)=>'<button class="meta-shop-card" style="--product-glow:'+o.color+'" data-offer="'+o.id+'"><div class="meta-shop-visual"><span>'+['✦','❀','◈'][i]+'</span></div><strong>'+o.name+'</strong><small>'+o.note+'</small><em>Voir le concept ›</em></button>').join('')+'</div>'+
+ '<div class="meta-note">Tarifs, effets 2D et assets finaux restent à valider ; aucune offre n’a de prix inventé.</div>':
+ renderMetaPass());
+}
+function renderMetaPass(){
+ return '<div class="meta-pass-intro"><span class="meta-overline">SAISON COSMÉTIQUE · MAQUETTE</span><h3>Le Chemin des Éclats</h3><p>Une saison de présentation, sans date de fin ni progression réelle. Une voie gratuite et une voie premium purement cosmétique.</p></div>'+
+ metaSection('Paliers de démonstration','5 étapes conceptuelles')+
+ '<div class="meta-pass-list">'+META.pass.map((p,i)=>'<div class="meta-pass-step"><div class="meta-pass-level">'+p.level+'</div><div><small>GRATUIT</small><strong>'+p.free+'</strong></div><div><small>PREMIUM</small><strong>'+p.premium+'</strong></div></div>').join('')+'</div>'+
+ '<div class="meta-note">Les 20 niveaux et la durée de saison mentionnés dans le GDD sont des propositions de test, pas un catalogue implémenté. Aucun achat ni progression payante n’est autorisé dans cette maquette.</div>';
+}
+function renderMetaOfferDetail(id){
+ const offer=META.offers.find(o=>o.id===id);if(!offer)return renderMetaShop();
+ return '<button class="meta-inline-back" data-back-shop>‹ Retour à la boutique</button>'+
+ '<div class="meta-preview-offer" style="--product-glow:'+offer.color+'"><div>✦</div><h3>'+offer.name+'</h3><span>PACK THÉMATIQUE · CONCEPT</span></div>'+
+ metaSection('Contenu envisagé')+
+ offer.note.split(', ').map((part,i)=>'<div class="meta-info-line"><span class="meta-task-symbol">'+['✧','❖','✦'][i%3]+'</span><div><strong>'+part+'</strong><p>Aperçu graphique à produire ; pas de donnée commerciale réelle.</p></div></div>').join('')+
+ '<button class="meta-wide-secondary" data-back-shop>Fermer l’aperçu</button>'+
+ '<div class="meta-note">Évaluation uniquement. Le prototype ne simule pas une transaction et ne crédite aucun diamant.</div>';
+}
+function renderMetaRankings(){
+ return '<div class="meta-hero-panel rank"><span class="meta-overline">CLASSEMENTS · DÉFIS HEBDOMADAIRES</span><h3>Les meilleurs tacticiens</h3><p>Cette page présente l’architecture prévue. Aucun adversaire ni score distant n’est inventé.</p></div>'+
+ '<div class="meta-rank-card"><span class="meta-overline">TON RECORD LOCAL</span><div class="meta-rank-line"><b>'+metaProgress.bestWaves+' / '+WAVES+'</b><span>vagues atteintes</span></div>'+meter(metaProgress.bestWaves,WAVES)+'</div>'+
+ metaSection('Défi hebdomadaire','Non encore disponible')+
+ '<div class="meta-list-item"><span class="meta-icon">⚔</span><div><strong>Scénario commun</strong><small>Même carte et vagues, gardiens de la collection personnelle</small></div></div>'+
+ '<div class="meta-list-item"><span class="meta-icon">◇</span><div><strong>Classement vérifié</strong><small>Validation serveur requise avant un score officiel</small></div></div>'+
+ '<div class="meta-list-item"><span class="meta-icon">✧</span><div><strong>Récompenses cosmétiques</strong><small>Aucun avantage de puissance payé ou classé</small></div></div>'+
+ '<div class="meta-note">Le PvP de production utilisera uniquement les gardiens débloqués personnellement, et les écarts de collections seront explicités. Ce prototype ne possède ni réseau, ni matchmaking, ni classement officiel.</div>';
+}
+function renderMetaProfile(){
+ return '<div class="meta-profile-banner"><div class="meta-profile-sigil">✦</div><div><span class="meta-overline">TACTICIEN · DÉMO LOCALE</span><h3>Explorateur d’Aurore</h3><p>Profil non connecté · données sur cet appareil</p></div></div>'+
+ metaSection('Tableau de bord','Statistiques mesurées')+
+ '<div class="meta-stats-overview">'+[['Parties',metaProgress.attempts],['Victoires',metaProgress.wins],['Vagues max',metaProgress.bestWaves+'/'+WAVES],['Fusions (dernière)',metaProgress.lastFusions]].map(([n,v])=>'<div><b>'+v+'</b><span>'+n+'</span></div>').join('')+'</div>'+
+ metaSection('Succès','Présentation des jalons')+
+ '<div class="meta-list-item"><span class="meta-icon">✦</span><div><strong>Premier pas</strong><small>'+ (metaProgress.attempts?'Accompli · une expédition terminée':'À découvrir · terminer une expédition')+'</small></div></div>'+
+ '<div class="meta-list-item"><span class="meta-icon">★</span><div><strong>Défenseur du sanctuaire</strong><small>'+(metaProgress.wins?'Accompli · une victoire':'À découvrir · remporter le chapitre de test')+'</small></div></div>'+
+ '<button class="meta-wide-secondary" data-open-page="rank">Consulter les défis et classements</button>'+
+ '<button class="meta-wide-secondary" data-open-page="settings">Réglages et informations</button>';
+}
+function renderMetaSettings(){
+ return '<div class="meta-hero-panel"><span class="meta-overline">PARAMÈTRES</span><h3>Ton expérience</h3><p>Réglages du prototype local.</p></div>'+
+ metaSection('Audio et accessibilité')+
+ '<div class="meta-list-item"><span class="meta-icon">♪</span><div><strong>Effets sonores</strong><small>Actuellement '+(audioEnabled?'activés':'coupés')+'</small></div><button type="button" class="meta-mini-action" data-toggle-sound>'+(audioEnabled?'Couper':'Activer')+'</button></div>'+
+ '<div class="meta-list-item"><span class="meta-icon">◈</span><div><strong>Animations réduites</strong><small>Le navigateur suit « Réduire les animations » dans le système</small></div></div>'+
+ metaSection('Informations de version')+
+ '<div class="meta-note"><strong>Meta UI V1.0 · prototype.</strong> Moteur de combat V0.8 inchangé. Les données de missions et le record local ne sont pas synchronisés avec un compte. Sans achat, sans compte, sans prétention de conformité App Store.</div>';
+}
+function renderMetaRegion(){
+ const id=metaRegion,info=META.regionDetails[id],r=META_REGIONS[id],isAurore=id==='aurore';
+ return '<div class="meta-region-showcase"><span class="meta-overline">CARTE DU MONDE · '+(isAurore?'CHAPITRE I':'APERÇU')+'</span><h3>'+r.name+'</h3><p>'+info.lore+'</p><span class="meta-token '+(isAurore?'gold':'')+'">'+r.status+'</span></div>'+
+ metaSection('Parcours de la région',isAurore?'Démo PvE : 6 vagues':'Chapitres proposés')+
+ '<div class="meta-map-stages">'+info.chapters.map((name,i)=>'<div class="meta-stage '+(isAurore?'':'locked')+'"><span>'+(i+1)+'</span><strong>'+name+'</strong><small>'+(isAurore?'Scénario de présentation':'À produire')+'</small></div>').join('')+'</div>'+
+ (isAurore?'<button class="meta-wide-primary" data-prepare>Préparer l’expédition</button>':'<div class="meta-note">Les chapitres affichés sont des concepts éditoriaux : pas d’ennemis, récompenses ni niveaux codés dans cette région.</div>')+
+ '<button class="meta-wide-secondary" data-open-page="collection">Explorer les gardiens</button>';
+}
+function renderMetaPanelContent(){
+ const page=metaView.page,body=$('metaPanelBody'),titles={collection:['Collection','Gardiens et synergies'],missions:['Missions','Objectifs de progression'],shop:['Boutique','Packs et Pass cosmétiques'],profile:['Profil','Progression et statistiques'],rank:['Défis','Classements hebdomadaires'],settings:['Réglages','Audio et informations'],region:['Région','Carte du monde']};
+ const t=titles[page]||titles.collection;$('metaPanelTitle').textContent=t[0];$('metaPanelSubtitle').textContent=t[1];
+ if(page==='collection')body.innerHTML=metaView.guardian?renderMetaGuardianDetail(metaView.guardian):renderMetaCollection();
+ else if(page==='missions')body.innerHTML=renderMetaMissions();
+ else if(page==='shop')body.innerHTML=metaView.detailOffer?renderMetaOfferDetail(metaView.detailOffer):renderMetaShop();
+ else if(page==='profile')body.innerHTML=renderMetaProfile();
+ else if(page==='rank')body.innerHTML=renderMetaRankings();
+ else if(page==='settings')body.innerHTML=renderMetaSettings();
+ else if(page==='region')body.innerHTML=renderMetaRegion();
+ $('metaPanel').classList.remove('hidden');
+ home.querySelectorAll('[data-meta-nav]').forEach(b=>b.setAttribute('aria-current',b.dataset.metaNav===page?'page':'false'));
+}
+function openMetaPanel(page){
+ if(page==='world'){metaView.page='world';metaView.guardian=null;metaView.detailOffer=null;closeMetaPanel();return}
+ metaView.page=page;metaView.guardian=null;metaView.detailOffer=null;
+ renderMetaPanelContent();$('metaPanelBody').scrollTop=0;
+}
+$('metaPanelBody').addEventListener('click',e=>{
+ const control=e.target.closest('button');if(!control)return;
+ if(control.hasAttribute('data-family')){metaView.family=control.dataset.family;renderMetaPanelContent()}
+ else if(control.hasAttribute('data-role')){metaView.role=control.dataset.role;renderMetaPanelContent()}
+ else if(control.hasAttribute('data-guardian')){metaView.guardian=control.dataset.guardian;metaView.guardianTab='talents';renderMetaPanelContent();$('metaPanelBody').scrollTop=0}
+ else if(control.hasAttribute('data-gtab')){metaView.guardianTab=control.dataset.gtab;renderMetaPanelContent()}
+ else if(control.hasAttribute('data-back-collection')){metaView.guardian=null;renderMetaPanelContent()}
+ else if(control.hasAttribute('data-mission-tab')){metaView.missionTab=control.dataset.missionTab;renderMetaPanelContent()}
+ else if(control.hasAttribute('data-shop-tab')){metaView.storeTab=control.dataset.shopTab;metaView.detailOffer=null;renderMetaPanelContent()}
+ else if(control.hasAttribute('data-offer')){metaView.detailOffer=control.dataset.offer;renderMetaPanelContent();$('metaPanelBody').scrollTop=0}
+ else if(control.hasAttribute('data-back-shop')){metaView.detailOffer=null;renderMetaPanelContent()}
+ else if(control.hasAttribute('data-open-page'))openMetaPanel(control.dataset.openPage)
+ else if(control.hasAttribute('data-prepare')){closeMetaPanel();$('metaPrep').classList.remove('hidden');$('metaStart').focus()}
+ else if(control.hasAttribute('data-toggle-sound')){setAudio(!audioEnabled);renderMetaPanelContent()}
+});
+
+home.querySelectorAll('[data-quick]').forEach(btn=>btn.addEventListener('click',()=>{if(btn.dataset.quick==='shop'){openMetaPanel('shop');metaView.storeTab='pass';renderMetaPanelContent()}else openMetaPanel(btn.dataset.quick)}));
+$('metaLocationCard').addEventListener('click',()=>openMetaPanel('region'));
 home.querySelectorAll('[data-region]').forEach(btn=>btn.addEventListener('click',()=>{metaRegion=btn.dataset.region;renderMetaHome()}));
 home.querySelectorAll('[data-meta-nav]').forEach(btn=>btn.addEventListener('click',()=>openMetaPanel(btn.dataset.metaNav)));
 $('profileBtn').addEventListener('click',()=>openMetaPanel('profile'));
@@ -590,7 +843,7 @@ function updateBattle(dt){if(!game||game.finished)return;if(!game.waveActive){if
  game.enemies=game.enemies.filter(e=>e.hp>0);renderEnemies();if(!game.finished&&!game.spawn.length&&!game.enemies.length)completeWave();
 }
 function renderEnemies(){if(!game)return;const ids=new Set(game.enemies.map(e=>e.id));for(const el of [...enemyLayer.children])if(!ids.has(Number(el.dataset.eid)))el.remove();for(const e of game.enemies){let node=enemyLayer.querySelector(`[data-eid="${e.id}"]`);if(!node){node=document.createElement('div');node.className='enemy '+(e.kind==='boss'?'boss':'');node.dataset.eid=e.id;node.innerHTML=demonSVG(e.kind==='boss')+'<div class="enemy-health"><span></span></div>';enemyLayer.appendChild(node)}node.style.left=(e.x/W*100)+'%';node.style.top=(e.y/H*100)+'%';node.querySelector('.enemy-health span').style.width=(e.hp/e.maxHp*100)+'%'}}
-function finish(win){if(!game||game.finished)return;metaProgress.attempts++;metaProgress.bestWaves=Math.max(metaProgress.bestWaves,game.completedWaves);metaProgress.lastFusions=game.fusions;if(win)metaProgress.wins++;persistMeta();game.finished=true;game.waveActive=false;game.spawn=[];$('endMedal').textContent=win?'✦':'◈';$('endTitle').textContent=win?'SANCTUAIRE SAUVÉ !':'LES OMBRES ONT GAGNÉ';$('endDescription').textContent=win?'Tes combinaisons de familles et tes fusions ont survécu aux vagues PvE.':'Recrute différentes familles et fusionne plus tôt pour renforcer ta défense.';$('endWaves').textContent=game.completedWaves;$('endRank').textContent=game.highest+'★';$('endKills').textContent=game.kills;$('endOverlay').classList.remove('hidden');createSound(win?880:180,.32,win?'sine':'sawtooth',.07)}
+function finish(win){if(!game||game.finished)return;metaProgress.attempts++;metaProgress.bestWaves=Math.max(metaProgress.bestWaves,game.completedWaves);metaProgress.lastFusions=game.fusions;if(win)metaProgress.wins++;persistMeta();$('metaResultSummary').textContent=(win?'Victoire du chapitre de test ! ':'Expédition terminée. ')+ 'Nouveau record : '+metaProgress.bestWaves+' / '+WAVES+' vagues. '+game.fusions+' fusion(s) sur cette partie. Aucun déblocage durable n’est attribué en démo.';game.finished=true;game.waveActive=false;game.spawn=[];$('endMedal').textContent=win?'✦':'◈';$('endTitle').textContent=win?'SANCTUAIRE SAUVÉ !':'LES OMBRES ONT GAGNÉ';$('endDescription').textContent=win?'Tes combinaisons de familles et tes fusions ont survécu aux vagues PvE.':'Recrute différentes familles et fusionne plus tôt pour renforcer ta défense.';$('endWaves').textContent=game.completedWaves;$('endRank').textContent=game.highest+'★';$('endKills').textContent=game.kills;$('endOverlay').classList.remove('hidden');createSound(win?880:180,.32,win?'sine':'sawtooth',.07)}
 $('replayBtn').onclick=()=>newGame('story');$('menuBtn').onclick=()=>{game=null;enemyLayer.innerHTML='';fx.innerHTML='';$('endOverlay').classList.add('hidden');battle.classList.add('hidden');home.classList.remove('hidden');renderMetaHome()};
 $('rerollBtn').onclick=reroll;$('waveNowBtn').onclick=startWave;$('secondaryBtn').onclick=()=>toast('2 types distincts activent un bonus. Arcanistes : 2 tirs, orage chargé. Tape un gardien pour le revendre.');$('sellBtn').onclick=sellSelected;
 shop.addEventListener('click',e=>{const btn=e.target.closest('[data-buy]');if(btn)buyOffer(Number(btn.dataset.buy))});
