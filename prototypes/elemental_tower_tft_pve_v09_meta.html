@@ -1,0 +1,898 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#120e27">
+<title>Elemental Tower — Hub complet, collection et PvE V1.0 (prototype)</title>
+<style>
+:root{font-family:ui-rounded,"Trebuchet MS",system-ui,-apple-system,sans-serif;color:#f8f2ff;--violet:#a982ff;--pink:#ff91d8;--mint:#83f8ed;--gold:#ffdd91;--ink:#17102d;--glass:rgba(41,28,75,.83);--line:rgba(224,197,255,.27)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent} html,body{width:100%;height:100%;margin:0;background:#080b1b;overflow:hidden}button{font:inherit;cursor:pointer;color:inherit;border:0}button:focus-visible,.drop:focus-visible{outline:2px solid #ffe59c;outline-offset:2px}button:disabled{opacity:.5;cursor:not-allowed}svg{display:block} .hidden{display:none!important} .center{text-align:center}
+#app{height:100dvh;height:100vh;max-width:430px;position:relative;margin:auto;overflow:hidden;background:#130d29;box-shadow:0 0 70px rgba(0,0,0,.5)}@supports(height:100dvh){#app{height:100dvh}} @media(min-width:480px){body{display:grid;place-items:center;background:radial-gradient(ellipse at 52% 20%,#372453,#0d0b1b 65%)}#app{height:min(930px,96dvh);width:min(430px,100vw);border-radius:25px;border:1px solid #655288}}
+.screen{position:absolute;inset:0;display:flex;flex-direction:column;overflow:hidden}
+#home{background:radial-gradient(ellipse at 50% 27%,#624087 0%,#2d194c 40%,#0e1028 77%)}
+.home-stars{position:absolute;inset:0;background-image:radial-gradient(2px 2px at 12% 14%,#e3cbff 99%,transparent),radial-gradient(2px 2px at 81% 17%,#ffc9f9 99%,transparent),radial-gradient(2px 2px at 47% 9%,#fff 99%,transparent),radial-gradient(2px 2px at 73% 47%,#b4e9ff 99%,transparent),radial-gradient(3px 3px at 22% 53%,#ad7cfb 99%,transparent);opacity:.75;animation:twinkle 3s ease-in-out infinite alternate;pointer-events:none}@keyframes twinkle{from{opacity:.4}to{opacity:1}}
+.home-head{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:max(20px,env(safe-area-inset-top)) 24px 8px}.tag{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid rgba(255,230,255,.2);border-radius:99px;background:rgba(16,11,36,.38);font-size:10px;letter-spacing:.13em;color:#eee1ff;font-weight:800;text-transform:uppercase}.tag i{width:6px;height:6px;background:#91ffeb;border-radius:50%;box-shadow:0 0 9px #85ffee}.sound-btn{display:grid;place-items:center;width:37px;height:37px;border:1px solid var(--line);background:rgba(29,19,60,.6);border-radius:13px;color:#e9d1ff;font-size:18px}
+.home-title{position:relative;z-index:2;margin-top:clamp(16px,5vh,43px);text-align:center}.eyebrow{letter-spacing:.35em;color:#edc6ff;font-size:10px;font-weight:900}.home-title h1{font-weight:1000;font-size:clamp(34px,8vw,44px);letter-spacing:-.065em;line-height:.93;margin:10px 0 8px;text-shadow:0 4px 26px #1a0733}.home-title h1 span{display:block;color:#ffc1eb;text-shadow:0 2px 22px rgba(248,134,231,.6)}.home-title p{font-size:13px;color:#ddd0fa;margin:14px 0 0}
+.home-art{position:relative;flex:1;min-height:215px;max-height:530px}.home-art:before{content:"";position:absolute;left:10%;right:10%;top:14%;height:60%;border-radius:50%;background:radial-gradient(ellipse,#9d62f35f,#b05da626 52%,transparent 72%);filter:blur(11px)}.home-landscape{position:absolute;bottom:-8%;left:0;width:100%;height:100%;pointer-events:none}.hero-character{position:absolute;width:min(54%,240px);aspect-ratio:1;left:23%;top:18%;filter:drop-shadow(0 15px 8px rgba(14,7,31,.5));animation:float 3s ease-in-out infinite;z-index:2}.hero-character svg{width:100%;height:100%}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}.home-sparkle{position:absolute;color:#fff0bf;font-size:25px;text-shadow:0 0 18px #eda7f0;animation:twinkle 1.3s infinite alternate}.spark-a{left:18%;top:24%}.spark-b{right:16%;top:39%;font-size:35px}.spark-c{left:25%;bottom:20%;font-size:15px}
+.home-bottom{position:relative;z-index:4;padding:0 30px max(28px,env(safe-area-inset-bottom));text-align:center;background:linear-gradient(transparent,#11102a 65%)}.cta{width:100%;min-height:58px;border-radius:19px;background:linear-gradient(180deg,#ffe6a3,#f3ad7a);color:#543257;font-size:17px;letter-spacing:.04em;font-weight:1000;box-shadow:0 8px 0 #ad5671,0 13px 33px rgba(255,135,167,.3);transition:transform .1s,box-shadow .1s}.cta:active{transform:translateY(4px);box-shadow:0 4px 0 #ad5671,0 9px 20px rgba(255,135,167,.3)}.home-caption{font-size:11px;color:#bcb2d6;margin-top:22px}.home-bottom .small-rule{margin:0 0 19px;color:#e7c9f8;font-size:12px;letter-spacing:.05em}
+/* Combat */
+#battle{background:#100e26}.battle-top{position:relative;z-index:5;padding:max(10px,env(safe-area-inset-top)) 13px 10px;background:linear-gradient(180deg,#27183e,#281a46);box-shadow:0 7px 19px #0b051b88;flex:none}.toprow{display:flex;align-items:center;gap:8px}.mini-brand{border-radius:10px;width:33px;height:33px;display:grid;place-items:center;font-size:21px;color:#f6d6ff;border:1px solid #7c5d9b;background:linear-gradient(160deg,#49306e,#241738)}.wave-hud{flex:1;font-size:10px;font-weight:900;color:#dbbbfa;letter-spacing:.07em;line-height:1.3}.wave-hud strong{font-size:16px;color:white;letter-spacing:.005em}.stat-pill{display:flex;align-items:center;gap:6px;padding:7px 9px;border:1px solid #8a6eaa75;border-radius:13px;background:#1c1535;font-size:14px;font-weight:900;min-width:56px;justify-content:center}.stat-pill .ico{font-size:15px}.stat-pill.health{color:#ffa0d0}.stat-pill.coin{color:#ffe2a2}.health-track{height:4px;background:#170e2e;margin-top:9px;border-radius:7px;overflow:hidden}.health-track span{display:block;width:100%;height:100%;background:linear-gradient(90deg,#fa7ba1,#ffd5d8);transition:width .25s}
+.battle-zone{position:relative;flex:1;min-height:0;background:#1b1534;overflow:hidden;touch-action:none}.map-art{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.field-shimmer{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 49%,transparent 42%,rgba(9,4,28,.23));pointer-events:none}.board-layer,.enemy-layer,.fx-layer{position:absolute;inset:0;pointer-events:none}.board-layer{z-index:2}.enemy-layer{z-index:3}.fx-layer{z-index:4}.board-slot{position:absolute;width:13.2%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;border:2px dashed rgba(227,198,255,.45);background:radial-gradient(circle,#b3a3ff28 9%,#25205248 60%);box-shadow:inset 0 0 12px #9982ff44,0 0 16px #8868f733;display:grid;place-items:center;pointer-events:auto;touch-action:none;cursor:pointer}.board-slot:before{content:"";position:absolute;inset:6px;border:1px solid #ddc1ff45;border-radius:50%;pointer-events:none}.board-slot .plus{font-size:23px;font-weight:200;color:#e3d1ff99}.board-slot.available{animation:pulse 1.1s ease-in-out infinite alternate;border-color:#ffefa4;box-shadow:0 0 20px #fae0a65c}.board-slot.selected{border-color:#fff2b0;box-shadow:0 0 21px #ffe196a6}.board-slot.compatible{border-color:#c1ffed;box-shadow:0 0 20px #a5ffe9a6}.board-slot.drag-over{transform:translate(-50%,-50%) scale(1.11);border-color:#fff0b8}.board-slot .item-unit{position:absolute;inset:-22%;pointer-events:auto}
+@keyframes pulse{0%{box-shadow:0 0 9px #fae0a64f}100%{box-shadow:0 0 23px #f5dd8ca0}}
+.item-unit{display:grid;place-items:center;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none;filter:drop-shadow(0 5px 4px rgba(10,0,25,.6));transition:filter .15s}.item-unit:active{cursor:grabbing}.item-unit svg{width:100%;height:100%;overflow:visible}.item-unit .rank-bubble{position:absolute;bottom:0;left:50%;transform:translateX(-50%);background:#25133f;box-shadow:0 1px 5px #070316;border:1px solid #ffe3aa;border-radius:10px;padding:1px 5px;color:#ffdf97;font-size:9px;font-weight:1000;white-space:nowrap;line-height:1.4}.item-unit.unit-rank-2{filter:drop-shadow(0 0 7px #a8a4ff9e)}.item-unit.unit-rank-3{filter:drop-shadow(0 0 9px #a4effbb0)}.item-unit.unit-rank-4{filter:drop-shadow(0 0 11px #f69addce)}.item-unit.unit-rank-5{filter:drop-shadow(0 0 17px #ffdda6)}.item-unit.highlight{animation:unitPulsate .8s infinite alternate}@keyframes unitPulsate{to{transform:scale(1.08)}}
+.enemy{position:absolute;width:34px;height:34px;transform:translate(-50%,-50%);pointer-events:none;filter:drop-shadow(0 4px 3px #080414aa)}.enemy.boss{width:61px;height:61px;filter:drop-shadow(0 0 14px #ea5ac6aa)}.enemy svg{width:100%;height:100%}.enemy-health{position:absolute;top:-6px;width:80%;left:10%;height:4px;border-radius:5px;background:#150e26;border:1px solid #501448}.enemy-health span{display:block;height:100%;background:#f285be;border-radius:5px}.enemy.hit svg{filter:brightness(2)}.floating-number{position:absolute;font-size:14px;font-weight:1000;color:#ffe29f;text-shadow:0 0 8px #000,0 0 14px #fa91de;pointer-events:none;transform:translate(-50%,-50%);animation:floatUp .9s ease-out forwards}@keyframes floatUp{to{opacity:0;transform:translate(-50%,-130%)}}.shot{position:absolute;height:3px;border-radius:10px;background:linear-gradient(90deg,#f5f4ff,#ffbbf2);transform-origin:left center;box-shadow:0 0 8px #ebb3ff;pointer-events:none;animation:shotOut .18s ease-out forwards}@keyframes shotOut{to{opacity:0}}.burst{position:absolute;font-size:25px;pointer-events:none;transform:translate(-50%,-50%);animation:burst .75s ease-out forwards;text-shadow:0 0 12px #fff3b7}@keyframes burst{from{opacity:1;transform:translate(-50%,-50%) scale(.4) rotate(-20deg)}to{opacity:0;transform:translate(-50%,-50%) scale(2) rotate(60deg)}}
+.map-label{position:absolute;z-index:1;left:50%;transform:translateX(-50%);font-weight:1000;text-shadow:0 2px 10px #0b041d;letter-spacing:.16em;white-space:nowrap;color:#e6baf3;font-size:9px;pointer-events:none}.map-label.top{top:6%}.map-label.bottom{bottom:4.5%;color:#b5f9f4}.wave-banner{position:absolute;top:22%;left:50%;transform:translateX(-50%);font-weight:1000;color:#ffe5ad;letter-spacing:.13em;white-space:nowrap;text-shadow:0 3px 11px #1c082f,0 0 17px #d98ee8;pointer-events:none;font-size:20px;z-index:8;animation:banner 2s ease-out forwards}@keyframes banner{0%{opacity:0;transform:translate(-50%,30px) scale(.7)}20%{opacity:1;transform:translate(-50%,0) scale(1.05)}70%{opacity:1}100%{opacity:0}}
+/* deck */
+.battle-bottom{z-index:5;position:relative;flex:none;padding:10px 12px max(12px,env(safe-area-inset-bottom));background:linear-gradient(180deg,#36214e,#211635 45%,#170f2c);box-shadow:0 -8px 22px #100928a8;border-top:1px solid #775595}.coach{display:flex;gap:9px;align-items:center;min-height:43px;padding:5px 9px 6px;background:linear-gradient(100deg,#5e3f7b,#372453);border:1px solid #bd90d96b;border-radius:12px;margin-bottom:9px}.coach-avatar{width:31px;height:31px;flex:none;border-radius:50%;background:#23123e;display:grid;place-items:center;border:1px solid #9d82b7;overflow:hidden}.coach-avatar svg{width:36px;height:36px}.coach-copy{flex:1;min-width:0}.coach-copy strong{display:block;color:#ffdfa8;font-size:10px;letter-spacing:.13em;line-height:1.25}.coach-copy span{font-size:11px;font-weight:700;color:#fcf4ff;line-height:1.25;display:block}.coach-step{font-size:10px;opacity:.65;font-weight:800}.deck-label{font-size:9px;letter-spacing:.17em;color:#d5b6e5;font-weight:900;display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}.deck-label span:last-child{font-size:9px;color:#a7efdf;letter-spacing:0}.bench{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin-bottom:9px}.bench-cell{height:52px;border:1px solid #695384;border-radius:13px;background:linear-gradient(#493665,#2b2045);display:grid;place-items:center;position:relative;touch-action:none;cursor:pointer}.bench-cell .item-unit{position:absolute;inset:-6px 1px}.bench-cell:after{content:"";position:absolute;inset:5px;border:1px solid #ba8ada31;border-radius:8px;pointer-events:none}.bench-cell.empty:before{content:"+";font-size:19px;color:#bb9fdb78}.bench-cell.selected{outline:2px solid #ffdf9a}.bench-cell.compatible{border-color:#b6fff0;box-shadow:0 0 12px #b6fff071}.bench-cell.drag-over{outline:2px solid white}.deck-actions{display:flex;gap:8px}.summon{flex:1;border-radius:13px;min-height:45px;color:#342049;background:linear-gradient(180deg,#ffe1a0,#f4ae85);box-shadow:inset 0 2px #fff3cb,0 4px 0 #ad5d87;font-size:13px;font-weight:1000}.summon span{font-size:11px;font-weight:800;opacity:.85;padding-left:7px}.summon:active{transform:translateY(2px);box-shadow:inset 0 1px #fff2c0,0 2px 0 #ad5d87}.icon-action{width:48px;min-width:48px;border-radius:13px;border:1px solid #795d9c;background:#3a2a57;font-size:18px;color:#dfc5fb}.battle-bottom .subhelp{font-size:9px;opacity:.72;margin:10px 0 0;text-align:center}
+.toast{position:absolute;z-index:20;top:16%;left:50%;transform:translate(-50%,-50%);max-width:87%;border:1px solid #ffdba6;background:#36224bea;color:#fff0c8;padding:8px 15px;border-radius:99px;box-shadow:0 8px 20px #0d0626;font-size:12px;font-weight:900;text-align:center;pointer-events:none;animation:toast 2.2s ease-out forwards;white-space:nowrap}@keyframes toast{0%{opacity:0;transform:translate(-50%,-70%)}15%,70%{opacity:1;transform:translate(-50%,-50%)}100%{opacity:0}}
+.drag-ghost{position:fixed;pointer-events:none;z-index:100;width:66px;height:66px;opacity:.92;transform:translate(-50%,-50%);filter:drop-shadow(0 0 15px #e8b3ff);display:none}.drag-ghost .item-unit{width:100%;height:100%}
+/* end screen */
+.modal-shade{position:absolute;inset:0;z-index:30;background:rgba(8,6,28,.7);display:grid;place-items:center;padding:25px;backdrop-filter:blur(8px)}.modal{max-width:350px;width:100%;background:linear-gradient(160deg,#513678,#271a48 70%);border:1px solid #b58ccc;border-radius:24px;padding:29px 22px;text-align:center;box-shadow:0 25px 60px #060414ab,0 0 30px #a376ff40}.modal .medal{font-size:66px;line-height:1.3;filter:drop-shadow(0 0 20px #eeb5ff)}.modal h2{font-size:27px;margin:12px 0 4px;letter-spacing:-.04em}.modal p{color:#ddcdec;font-size:13px;line-height:1.5}.modal-stats{display:flex;gap:10px;justify-content:center;margin:20px 0}.modal-stats span{background:#221733;padding:10px 12px;border-radius:12px;font-size:13px;border:1px solid #8d67a3}.modal-stats b{color:#ffe5a0}.modal .cta{min-height:49px;box-shadow:0 4px 0 #ad5671}.text-btn{margin-top:16px;background:transparent;color:#ddc5f2;text-decoration:underline;font-size:12px}
+/* small phones */
+@media(max-width:345px){.mini-brand{display:none}.battle-top .toprow{gap:5px}.wave-hud strong{font-size:14px}.stat-pill{padding:6px 7px;min-width:54px}.wave-hud{letter-spacing:0}}
+@media(max-height:720px){.home-title{margin-top:8px}.home-art{min-height:180px}.home-bottom{padding-bottom:max(14px,env(safe-area-inset-bottom))}.home-caption{margin-top:15px}.battle-top{padding-top:max(5px,env(safe-area-inset-top));padding-bottom:6px}.health-track{margin-top:5px}.battle-bottom{padding-top:7px;padding-bottom:max(7px,env(safe-area-inset-bottom))}.coach{min-height:36px;margin-bottom:6px;padding:3px 7px}.coach-avatar{width:26px;height:26px}.bench-cell{height:43px}.deck-label{margin-bottom:4px}.bench{margin-bottom:6px}.summon{min-height:38px}.icon-action{width:42px;min-width:42px}.battle-bottom .subhelp{display:none}}
+@media(max-height:610px){.home-title h1{font-size:30px}.home-title p{font-size:11px;margin-top:8px}.home-art{min-height:140px}.coach{gap:6px}.coach-copy span{font-size:10px}.battle-bottom{padding-left:8px;padding-right:8px}.bench{gap:4px}.bench-cell{height:39px}.deck-label{font-size:8px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+
+
+/* TFT-inspired PvE shop, synergies, and round preparation */
+.trait-strip{display:flex;gap:5px;overflow-x:auto;padding:2px 0 7px;scrollbar-width:none;min-height:26px}.trait-strip::-webkit-scrollbar{display:none}
+.trait-chip{white-space:nowrap;padding:4px 8px;border:1px solid #765d93;border-radius:9px;background:#251939;color:#ccb8da;font-size:10px;font-weight:850;display:flex;gap:5px;align-items:center}
+.trait-chip.active{background:linear-gradient(120deg,#6a427e,#47395e);border-color:#ffdf9c;color:#fff4d5;box-shadow:inset 0 0 9px #fbe4a122}
+.trait-chip .trait-count{font-size:9px;color:#e8d5fd;opacity:.9}
+.shop-header{display:flex;align-items:center;justify-content:space-between;margin:2px 0 5px;font-size:10px;color:#dbc1f6;font-weight:900;letter-spacing:.12em}
+.reroll-btn{background:#45305f;border:1px solid #9e76c0;border-radius:8px;padding:5px 9px;color:#ffe8b6;font-size:10px;font-weight:900;letter-spacing:0}
+.shop-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-bottom:8px}
+.offer-card{min-width:0;position:relative;display:flex;align-items:center;justify-content:flex-start;gap:4px;text-align:left;min-height:70px;border:1px solid var(--card-stroke,#8e75b6);border-bottom:3px solid var(--card-stroke,#8e75b6);border-radius:11px;background:linear-gradient(155deg,#584179,#2d204a 70%);padding:4px 5px;overflow:hidden}
+.offer-card:disabled{opacity:.44}.offer-card:before{content:"";pointer-events:none;position:absolute;inset:0;background:radial-gradient(circle at 35% 25%,var(--card-glow,#8459b3) 0%,transparent 70%);opacity:.3}
+.offer-art{width:43px;height:49px;flex:none;display:grid;place-items:center;filter:hue-rotate(var(--unit-hue,0deg));position:relative}
+.offer-art svg{width:100%;height:100%}.offer-copy{position:relative;min-width:0;display:flex;flex-direction:column;gap:3px;flex:1}
+.offer-copy strong{font-size:11px;color:#fff4ff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.offer-traits{font-size:8.5px;color:#e5d4f7;line-height:1.15;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.offer-price{font-size:11px;color:#ffe0a5;font-weight:1000}
+.offer-card.sold{justify-content:center;background:#241b3c;color:#a899ba;border-color:#5d4a72;font-size:11px}
+.offer-card.sold:before{display:none}
+.battle-actions{display:flex;gap:7px}.wave-now{flex:1;min-height:35px;padding:6px 8px;border-radius:11px;background:linear-gradient(180deg,#ffe19a,#eca16f);box-shadow:0 3px 0 #ac6282;color:#4c2b52;font-size:12px;font-weight:1000}.wave-now:disabled{box-shadow:none;background:#5c4771;color:#dfcae4}.help-button{width:38px;border:1px solid #9676ba;border-radius:11px;background:#3c2b54;font-size:16px}
+.battle-top .wave-hud .countdown{display:block;font-size:9px;color:#ffe4a8;font-weight:750;letter-spacing:0}.bench{margin-bottom:6px}.bench-cell{height:43px}
+.item-unit .unit-gem{position:absolute;top:5%;right:2%;font-size:10px;color:var(--unit-color,#fff);text-shadow:0 0 8px currentColor}
+.item-unit .rank-bubble{font-size:9px}.board-slot .item-unit{filter:hue-rotate(var(--unit-hue,0deg)) drop-shadow(0 5px 4px rgba(10,0,25,.6))}.bench-cell .item-unit{filter:hue-rotate(var(--unit-hue,0deg))}
+.board-slot .unit-name{position:absolute;bottom:-15px;left:50%;transform:translateX(-50%);font-size:8px;color:#f3e8ff;font-weight:900;text-shadow:0 1px 5px #130c28;white-space:nowrap}
+.sigil-pill{position:absolute;z-index:5;top:8px;left:10px;background:#1c1537d6;border:1px solid #ad87d4a6;border-radius:9px;padding:5px 9px;font-size:10px;font-weight:800;color:#e5d1f5;pointer-events:none}
+.coach{margin-bottom:5px;min-height:36px;padding:4px 8px}.coach-avatar{width:26px;height:26px}.coach-avatar svg{width:32px;height:32px}
+.battle-bottom .subhelp{margin-top:5px}.battle-bottom{padding-top:8px;padding-bottom:max(9px,env(safe-area-inset-bottom))}
+@media(max-width:345px){.offer-card{padding:3px;gap:2px}.offer-art{width:34px;height:43px}.offer-copy strong{font-size:10px}.offer-traits{font-size:8px}.shop-row{gap:4px}.trait-chip{padding:3px 6px}.bench-cell{height:37px}.coach{min-height:34px}.shop-row{margin-bottom:5px}}
+@media(max-height:720px){.battle-bottom{padding-top:5px}.coach{min-height:31px;margin-bottom:3px}.coach-avatar{display:none}.trait-strip{min-height:22px;padding-bottom:4px}.shop-row{margin-bottom:4px}.offer-card{min-height:60px}.offer-art{width:34px;height:43px}.bench-cell{height:35px}.battle-actions .wave-now{min-height:31px}.shop-header{margin:0 0 3px}.deck-label{margin-bottom:3px}}
+@media(max-height:610px){.coach-copy span{font-size:9px}.coach{min-height:28px}.offer-card{min-height:53px}.offer-art{width:29px;height:37px}.offer-traits{font-size:7.5px}.trait-strip{min-height:18px}.trait-chip{padding:2px 5px;font-size:9px}.bench-cell{height:31px}.shop-header{font-size:9px}.battle-actions .wave-now{min-height:27px;font-size:10px}.battle-bottom .subhelp{display:none}}
+
+/* v0.8: readable class identity, mana, and unit resale */
+.coach.unit-focus{background:linear-gradient(105deg,#463263,#2e224e);border-color:#e0b1ff}
+.coach.unit-focus .coach-copy strong{letter-spacing:.035em;color:#ffe6ad;font-size:10px}
+.coach.unit-focus .coach-copy span{font-size:10px;color:#ebdbff;line-height:1.3}
+.sell-btn{flex:none;border:1px solid #ffbea5;background:linear-gradient(180deg,#71405b,#4a2646);color:#ffe5bd;padding:6px 8px;border-radius:9px;font-size:10px;font-weight:950;max-width:90px;line-height:1.15;box-shadow:0 2px 6px #120b26}
+.sell-btn:active{transform:scale(.97)}
+.item-unit .mana-meter{position:absolute;left:21%;right:21%;bottom:14%;height:5px;background:#24153b;border:1px solid #ffffff9e;border-radius:20px;overflow:hidden;box-shadow:0 1px 2px #110626}
+.item-unit .mana-meter>i{display:block;height:100%;width:var(--mana,0%);background:linear-gradient(90deg,#8cecf2,#f1a4ff);border-radius:20px;transition:width .13s}
+.item-unit .mana-meter.ready{box-shadow:0 0 9px #ffd9f5}
+.item-unit .unit-gem{font-weight:1000;font-size:13px;top:0;right:-2px;filter:drop-shadow(0 0 3px #171032)}
+.board-slot .item-unit,.bench-cell .item-unit{filter:drop-shadow(0 4px 4px #0d0926)}
+.offer-art{filter:drop-shadow(0 4px 3px #110921)}
+.skill-flash{position:absolute;z-index:4;width:12px;height:12px;border-radius:50%;border:3px solid var(--skill-color,#bff8fc);pointer-events:none;transform:translate(-50%,-50%);box-shadow:0 0 20px var(--skill-color,#bff8fc);animation:skillRipple .65s ease-out forwards}
+.skill-flash.big{border-width:5px;animation-duration:.8s}
+@keyframes skillRipple{0%{opacity:1;width:15px;height:15px}100%{opacity:0;width:145px;height:145px}}
+.skill-label{position:absolute;z-index:5;transform:translate(-50%,-60%);font-size:11px;color:#fff5c3;font-weight:1000;white-space:nowrap;text-shadow:0 0 12px #5b2ca9,0 2px 3px #100825;pointer-events:none;animation:floatUp 1s ease-out forwards}
+.board-slot .unit-name{bottom:-12px;font-size:9px;letter-spacing:.015em}
+@media(max-width:345px){.sell-btn{max-width:72px;padding:5px 4px;font-size:9px}.coach.unit-focus .coach-copy span{font-size:9px}}
+
+/* PRODUCT META V0.9 — isolated from the battle engine. */
+#home.meta-home{background:radial-gradient(ellipse at 58% 34%,#492a87,#190d3a 62%,#0d0a20 100%);isolation:isolate}
+.meta-home *{min-width:0}
+.meta-head{display:flex;align-items:center;justify-content:space-between;gap:9px;padding:calc(8px + env(safe-area-inset-top)) 12px 7px;flex:none;z-index:3;background:linear-gradient(#20133eec,#24143dd6)}
+.meta-profile{display:flex;align-items:center;gap:7px;background:#251743b9;border:1px solid #7956af;border-radius:13px;padding:5px 9px 5px 6px;text-align:left}
+.meta-avatar{display:grid;place-items:center;width:31px;height:31px;border-radius:11px;background:radial-gradient(circle at 40% 20%,#8761c6,#281542);font-size:21px;color:#f2d3ff}
+.meta-user{display:flex;flex-direction:column;line-height:1.16}.meta-user strong{font-size:12px}.meta-user small{font-size:9px;color:#c9b6e9}
+.meta-resources{display:flex;align-items:center;gap:7px}
+.meta-diamonds{border:1px solid #7453aa;border-radius:11px;background:#211339;padding:6px 9px;font-size:12px;color:#dfd3fe;white-space:nowrap;font-weight:900}
+.meta-diamonds b{color:#a4efff}
+.meta-home .sound-btn{height:34px;width:34px;border-radius:11px;font-size:19px}
+.meta-chapter{flex:none;position:relative;z-index:2;text-align:center;padding:6px 12px 3px;background:linear-gradient(#2d1b4a99,#321d5000)}
+.meta-brand{font-family:Georgia,serif;font-weight:800;font-size:clamp(19px,5.5vw,24px);color:#f7e4ff;letter-spacing:-.035em;line-height:1.1;text-shadow:0 0 17px #bc73ec91}
+.meta-subtitle{font-size:9px;letter-spacing:.19em;color:#dbbcff;text-transform:uppercase;font-weight:900;margin-top:4px}
+.meta-chapter-row{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:7px}
+.meta-chapter-row h2{margin:0;font-size:16px;color:#fff1cf;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.meta-chapter-row .meta-progress-index{background:#221538cb;border:1px solid #8c6cbd;color:#f3d8ff;font-size:10px;border-radius:12px;padding:5px 7px;white-space:nowrap}
+.meta-map{position:relative;flex:1;min-height:130px;overflow:hidden;background:radial-gradient(ellipse at 60% 31%,#452c74 5%,#1e1545 56%,#140d34 85%);z-index:1}
+.meta-map:after{position:absolute;inset:0;pointer-events:none;content:'';box-shadow:inset 0 10px 25px #100a27b8,inset 0 -18px 29px #130c2fd9}
+.meta-map-art{width:100%;height:100%;display:block}
+.meta-map-constellation{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 12% 17%,#ffffffa4 0 1px,transparent 2px),radial-gradient(circle at 77% 10%,#f6c9ffb0 0 1.5px,transparent 3px),radial-gradient(circle at 38% 69%,#e9e2ff9c 0 1px,transparent 2px);opacity:.72}
+.meta-region{position:absolute;z-index:3;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:2px;min-width:96px;max-width:39%;background:linear-gradient(180deg,#271544e6,#150d2adc);border:1px solid #8664b8;border-radius:11px;padding:6px 9px;text-align:center;box-shadow:0 5px 18px #07051f9e}
+.meta-region strong{font-size:10px;white-space:nowrap;line-height:1.15}
+.meta-region span{font-size:9px;color:#d6c1f0;line-height:1.1}
+.meta-region.is-active{border-color:#ffdf98;box-shadow:0 0 0 2px #d8a96c69,0 0 20px #dfa26b8a;background:#332052ee}
+.meta-region.is-active strong{color:#fff0c0}
+.meta-region.is-preview{opacity:.86}
+.meta-region:focus-visible{outline:3px solid #fff5c6}
+.meta-location-pin{position:absolute;z-index:2;width:15px;height:15px;border-radius:50%;background:#ffdb89;border:3px solid #fff9db;box-shadow:0 0 0 7px #edb87839,0 0 20px #f6df82}
+.meta-location-pin.aurora{left:71%;top:24%}
+.meta-location-pin.sylve{left:24%;top:48%;background:#a0eec9;box-shadow:0 0 0 7px #82efb33b,0 0 20px #7af3c7}
+.meta-location-pin.flux{left:73%;top:57%;background:#bdefff;box-shadow:0 0 0 7px #76c9ff3b,0 0 20px #7af5ff}
+.meta-location-pin.shadow{left:52%;top:79%;background:#df9bf5;box-shadow:0 0 0 7px #a252f33b,0 0 20px #c066fa}
+.meta-region[data-region="aurore"]{left:71%;top:36%}
+.meta-region[data-region="sylve"]{left:24%;top:59%}
+.meta-region[data-region="flux"]{left:76%;top:69%}
+.meta-region[data-region="shadow"]{left:49%;top:90%}
+.meta-map-hint{position:absolute;z-index:3;top:8px;left:10px;padding:5px 8px;border:1px solid #6a4d95;border-radius:10px;background:#241440c9;font-size:9px;color:#dec7ff;letter-spacing:.035em}
+.meta-footer{flex:none;z-index:3;background:linear-gradient(180deg,#1e113e,#140b2b);border-top:1px solid #654599;padding:9px 11px 0;box-shadow:0 -10px 24px #10092175}
+.meta-objective{display:flex;align-items:center;gap:9px;padding:10px;background:linear-gradient(130deg,#40265d,#2a1949);border:1px solid #8161ad;border-radius:15px;box-shadow:inset 0 1px #af81c03d}
+.meta-objective-copy{flex:1}.meta-eyebrow{font-size:9px;letter-spacing:.105em;font-weight:950;color:#e8bf7e;text-transform:uppercase}
+.meta-objective-copy strong{display:block;font-size:13px;margin-top:3px;line-height:1.2;color:#f8f0ff}
+.meta-objective-copy small{display:block;margin-top:5px;font-size:10px;color:#d9bbea}
+.meta-meter{height:5px;border-radius:20px;background:#16102d;margin-top:7px;overflow:hidden;border:1px solid #69488f}
+.meta-meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,#8c58d7,#f1bffb);transition:width .25s}
+.meta-reward{flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle,#7649b3aa,#2a1746);border:1px solid #80589b;width:68px;height:69px;border-radius:13px;text-align:center}
+.meta-reward .meta-gift{font-size:27px;color:#ffe1a0;line-height:1.1;text-shadow:0 0 12px #fbc16a}
+.meta-reward span{font-size:8px;color:#edd2ff}
+.meta-play{width:100%;min-height:48px;margin-top:9px;border-radius:13px;background:linear-gradient(180deg,#f7d99b,#de9a68);color:#3f254a;font-size:16px;font-weight:1000;box-shadow:inset 0 1px #fff4cc,0 3px 0 #7e3b6b,0 9px 20px #6e377750}
+.meta-play:disabled{background:#4e416a;box-shadow:none;color:#bfb2d0}
+.meta-play:active:not(:disabled){transform:translateY(2px);box-shadow:inset 0 1px #fff4cc,0 1px 0 #7e3b6b}
+.meta-footnote{font-size:9px;line-height:1;color:#ad9aca;text-align:center;margin:8px 0 4px}
+.meta-nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;padding:7px 0 calc(7px + env(safe-area-inset-bottom));border-top:1px solid #4f356e}
+.meta-nav button{border-radius:11px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;height:45px;background:#28183f;border:1px solid #4a356d;color:#d7c6ed}
+.meta-nav button[aria-current="page"]{border-color:#d9b475;background:#533468;color:#fff1d2}
+.meta-nav-icon{font-size:18px;line-height:1}
+.meta-nav-label{font-size:9px;font-weight:900}
+.meta-panel{position:absolute;inset:0;z-index:11;background:radial-gradient(circle at 54% 3%,#4e2b7a,#201339 52%,#120d29 100%);display:flex;flex-direction:column;min-height:0}
+.meta-panel-head{flex:none;display:flex;align-items:center;gap:12px;padding:calc(14px + env(safe-area-inset-top)) 16px 13px;border-bottom:1px solid #65508b}
+.meta-back{width:36px;height:36px;border-radius:11px;background:#50356f;border:1px solid #8d6ab4;font-size:22px}
+.meta-panel-head h2{font-size:19px;margin:0;color:#f5e5ff}.meta-panel-head small{font-size:10px;color:#d1badf}
+.meta-panel-body{min-height:0;overflow:auto;padding:16px;flex:1}
+.meta-panel-lead{font-size:12px;color:#d6c5e9;line-height:1.5;margin:0 0 12px}
+.meta-guardian-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.meta-guardian-card{background:linear-gradient(160deg,#4d3270,#29193f);border:1px solid #775397;border-radius:13px;padding:7px 4px;text-align:center}
+.meta-guardian-art{height:83px;display:grid;place-items:center}
+.meta-guardian-art svg{height:80px;width:80px;max-width:100%}
+.meta-guardian-card strong{display:block;font-size:11px;color:#fff2ff}
+.meta-guardian-card small{font-size:9px;color:#cbb4e0}
+.meta-list-item{display:flex;align-items:center;gap:10px;background:#34234f;border:1px solid #684e90;border-radius:13px;padding:12px;margin-bottom:9px}
+.meta-list-item .meta-icon{font-size:23px;color:#f0d699;min-width:34px;text-align:center}
+.meta-list-item strong{display:block;font-size:12px}.meta-list-item small{color:#cab8df;font-size:11px}
+.meta-note{border:1px solid #624982;background:#241638;border-radius:12px;color:#c7b4d7;padding:11px;font-size:11px;line-height:1.5;margin-top:12px}
+.meta-prep{position:absolute;inset:0;z-index:20;background:#070515c7;display:flex;align-items:center;justify-content:center;padding:17px;backdrop-filter:blur(7px)}
+.meta-prep-card{width:min(100%,355px);border:1px solid #c6a4dd;background:linear-gradient(155deg,#54346f,#27173f 65%,#1c1437);border-radius:21px;padding:20px;box-shadow:0 20px 55px #060314d9}
+.meta-prep-card h2{font-family:Georgia,serif;color:#f9e8b8;margin:4px 0 7px;font-size:25px}
+.meta-prep-card p{font-size:12px;line-height:1.55;color:#e1d1f0;margin:9px 0}
+.meta-prep-kicker{font-size:10px;letter-spacing:.16em;color:#e6b6ff;font-weight:900}
+.meta-prep-info{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:14px 0}
+.meta-prep-info div{background:#291942;border:1px solid #704c8f;border-radius:12px;padding:11px 5px;text-align:center}
+.meta-prep-info b{display:block;color:#ffe4a5;font-size:17px}.meta-prep-info span{font-size:9px;color:#d5c0e5}
+.meta-prep-actions{display:flex;gap:7px;margin-top:16px}
+.meta-prep-actions button{min-height:45px;border-radius:12px;font-weight:900}
+.meta-cancel{background:#34224c;border:1px solid #785f9a;flex:1}
+.meta-start{background:linear-gradient(#ffe0a1,#e4aa79);color:#47254e;flex:2}
+.meta-sandbox{background:none;border:1px solid #765696;border-radius:11px;margin-top:9px;width:100%;padding:9px;color:#e3cafa;font-size:11px}
+@media(max-height:750px){.meta-head{padding-top:calc(4px + env(safe-area-inset-top));padding-bottom:4px}.meta-brand{font-size:19px}.meta-chapter-row{margin-top:3px}.meta-footer{padding-top:6px}.meta-objective{padding:7px}.meta-reward{height:57px;width:58px}.meta-play{min-height:42px}.meta-nav{padding-top:4px;padding-bottom:calc(4px + env(safe-area-inset-bottom))}.meta-nav button{height:41px}.meta-footnote{margin:5px 0 3px}.meta-region{padding:4px 5px;min-width:77px}.meta-region strong{font-size:9px}.meta-region span{font-size:8px}}
+@media(max-height:610px){.meta-subtitle{display:none}.meta-chapter-row{margin-top:4px}.meta-map-hint{display:none}.meta-footer{padding-top:4px}.meta-objective-copy small{display:none}.meta-region span{display:none}.meta-region{padding:5px}.meta-nav button{height:34px}.meta-nav-icon{font-size:15px}.meta-footnote{display:none}}
+@media(max-width:344px){.meta-head{gap:4px;padding-left:7px;padding-right:7px}.meta-user small{display:none}.meta-diamonds{padding:6px}.meta-region{min-width:73px}.meta-region strong{font-size:8px}}
+
+
+/* META UX — all selectable panels and real data screens */
+.meta-kicon{display:inline-block;vertical-align:middle;flex-shrink:0;color:#c5aaff}
+.meta-panel-body{padding:16px 14px 32px;scrollbar-width:thin;scrollbar-color:#78629c #211539}
+.meta-panel-body h3{margin:0 0 6px;font-size:18px;color:#fff1fb;letter-spacing:-.025em}
+.meta-hero-panel,.meta-pass-intro,.meta-region-showcase{padding:18px;border-radius:18px;background:radial-gradient(circle at 90% 0%,#8b4bb349,transparent 56%),linear-gradient(125deg,#4a2d6b,#2b1a48);border:1px solid #815c9d;margin-bottom:16px;box-shadow:inset 0 1px #c29ed037}
+.meta-hero-panel.shop{background:radial-gradient(circle at 85% 12%,#f6b4fa40,transparent 48%),linear-gradient(135deg,#53327b,#291a46)}
+.meta-hero-panel.rank{background:radial-gradient(circle at 85% 12%,#f2c47542,transparent 50%),linear-gradient(135deg,#513074,#27173f)}
+.meta-overline{display:block;font-size:9px;font-weight:1000;letter-spacing:.13em;color:#e4c195;margin-bottom:6px}
+.meta-hero-panel p,.meta-pass-intro p,.meta-region-showcase p{margin:0;font-size:12px;line-height:1.52;color:#dfcdea}
+.meta-token{display:inline-flex;border:1px solid #8564b4;border-radius:20px;padding:4px 8px;background:#5a3889;color:#f2e4ff;font-size:10px;font-weight:800;margin:4px 4px 0 0}
+.meta-token.gold{background:#60416b;border-color:#e0b57b;color:#ffe6ae}
+.meta-subhead{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:15px 0 10px}
+.meta-subhead h3{font-size:14px;margin:0}
+.meta-subhead span{font-size:9px;color:#ad9cc7;text-align:right}
+.meta-filter-row{display:flex;gap:6px;overflow:auto;scrollbar-width:none;margin-bottom:8px;padding-bottom:2px}
+.meta-filter-row::-webkit-scrollbar{display:none}
+.meta-filter{background:#342049;border:1px solid #795a9d;border-radius:11px;color:#d8c5ee;font-size:11px;font-weight:800;padding:9px 11px;white-space:nowrap;min-height:37px;flex:none}
+.meta-filter.small{font-size:10px;padding:7px 9px;min-height:33px}
+.meta-filter.selected{background:#71509b;color:#fff0c8;border-color:#e9c18f;box-shadow:0 0 10px #cca2e52d}
+.meta-collection-head{display:flex;justify-content:space-between;color:#eee0fd;font-size:11px;margin:12px 0 8px}
+.meta-collection-head span{color:#b9a0d5}
+.meta-v2-grid{gap:7px}
+.meta-v2-guardian{border-color:#6e568b;border-top:2px solid var(--guardian-accent);cursor:pointer;min-height:148px;background:radial-gradient(circle at 45% 27%,#976cc83a,transparent 75%),linear-gradient(#45305c,#241936)}
+.meta-v2-guardian:focus-visible{outline:2px solid #ffe7b4}
+.meta-v2-guardian .meta-guardian-art{height:83px}
+.meta-v2-guardian .meta-guardian-art svg{width:82px;height:82px}
+.meta-v2-guardian small{display:block;margin-top:3px;font-size:9px}
+.meta-small-tag{display:inline-block;margin-top:5px;font-size:9px;color:#ffe3b2;background:#21142f;border:1px solid #7a597f;border-radius:8px;padding:3px 5px}
+.meta-inline-back{font-size:12px;background:transparent;color:#e9d3ff;padding:7px 0 11px}
+.meta-detail-hero{display:flex;align-items:center;gap:8px;border:1px solid var(--detail-accent);border-radius:18px;padding:9px 11px;margin-bottom:13px;background:radial-gradient(circle at 20% 40%,#bc8aeb51,#2c1b48 62%)}
+.meta-detail-art{width:40%;flex:none}.meta-detail-art svg{width:100%;height:auto;max-height:176px}
+.meta-detail-hero h3{font-size:22px;margin:1px 0 3px;color:#fff3d1}
+.meta-detail-hero p{margin:0 0 7px;color:#d8bfed;font-size:11px}
+.meta-stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.meta-stat{display:grid;grid-template-columns:24px 1fr;grid-template-rows:auto auto;gap:2px 5px;border:1px solid #745995;padding:11px;background:#302049;border-radius:12px}
+.meta-stat svg{grid-row:span 2;align-self:center}
+.meta-stat span{font-size:10px;color:#c7b0db}.meta-stat b{font-size:15px;color:#f8ecff}
+.meta-info-line{display:flex;align-items:flex-start;gap:10px;background:#34224e;border:1px solid #6e5292;padding:12px;margin:8px 0;border-radius:13px}
+.meta-info-line strong{display:block;color:#f9e9ff;font-size:12px}
+.meta-info-line p{font-size:11px;line-height:1.5;color:#cdb9e0;margin:4px 0 0}
+.meta-stars-road{display:flex;align-items:center;justify-content:space-around;gap:4px;background:#322048;border:1px solid #71538e;padding:14px 6px;border-radius:12px}
+.meta-stars-road span{font-size:11px;font-weight:900;color:#ffe2a4}.meta-stars-road i{font-size:15px;color:#b98ee0;font-style:normal}
+.meta-offer-look{display:grid;place-items:center;min-height:170px;border:1px solid #755891;background:radial-gradient(circle at 50% 43%,#8157b3,#26173c 67%);border-radius:14px}
+.meta-offer-look svg{height:180px}
+.meta-indicator{height:6px;border-radius:20px;background:#1a102b;border:1px solid #6c4b8a;overflow:hidden}
+.meta-indicator i{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,#9d6ce2,#e9bf93)}
+.meta-switcher{display:grid;grid-template-columns:repeat(2,1fr);gap:5px;padding:4px;border:1px solid #765395;background:#241638;border-radius:13px;margin-bottom:14px}
+.meta-switcher button{padding:9px 10px;border-radius:10px;background:transparent;font-size:12px;font-weight:900;color:#cbb8da}
+.meta-switcher button.active{background:#7650a0;color:#fff3d1;box-shadow:0 2px 10px #14061c}
+.meta-task-stack{display:grid;gap:9px;margin-top:12px}
+.meta-task{display:flex;gap:9px;background:#33224e;border:1px solid #6f5394;border-radius:14px;padding:12px}
+.meta-task-symbol{flex:none;display:grid;place-items:center;width:31px;height:31px;border-radius:11px;background:#624189;color:#ffe5ac;border:1px solid #906fb2;font-size:18px}
+.meta-task-content{flex:1;min-width:0}.meta-task-content strong{font-size:12px;display:block}
+.meta-task-content p{font-size:10px;margin:4px 0 9px;color:#c5b2da;line-height:1.45}
+.meta-task-content small{font-size:9px;color:#d3aefa;display:block;margin-top:6px}
+.meta-task-reward{font-size:18px;color:#f5ce95}
+.meta-shop-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.meta-shop-card{padding:0 0 11px;background:#35224f;border:1px solid #8665a9;border-radius:14px;overflow:hidden;text-align:left}
+.meta-shop-visual{height:99px;display:grid;place-items:center;background:radial-gradient(circle at center,var(--product-glow),#402257 49%,#21152d);margin-bottom:9px}
+.meta-shop-visual span{font-size:51px;color:#ffffffbf;text-shadow:0 0 20px var(--product-glow)}
+.meta-shop-card strong,.meta-shop-card small,.meta-shop-card em{display:block;padding:0 10px}
+.meta-shop-card strong{font-size:12px;color:#fff0fb}.meta-shop-card small{font-size:10px;line-height:1.4;color:#cfb7df;min-height:43px;margin-top:6px}
+.meta-shop-card em{color:#ffe0a3;font-style:normal;font-size:10px;font-weight:900;margin-top:9px}
+.meta-pass-intro{background:linear-gradient(140deg,#6e426e,#30204d)}
+.meta-pass-list{display:grid;gap:8px}
+.meta-pass-step{display:grid;grid-template-columns:33px 1fr 1fr;align-items:center;gap:7px;background:#322047;border:1px solid #6d5389;padding:10px 6px;border-radius:12px}
+.meta-pass-level{display:grid;place-items:center;border-radius:50%;width:30px;height:30px;background:#7d5096;border:1px solid #daa7e3;font-size:12px;font-weight:1000;color:#fff2c5}
+.meta-pass-step small{display:block;font-size:9px;color:#c3a9d7}
+.meta-pass-step strong{font-size:11px;color:#f4e7fc;display:block;margin-top:3px}
+.meta-preview-offer{background:radial-gradient(circle at center,var(--product-glow),#442456 40%,#241739 75%);border:1px solid #9371ae;border-radius:18px;padding:28px 15px;text-align:center}
+.meta-preview-offer>div{font-size:59px;color:#ffeed8;text-shadow:0 0 20px #fff}
+.meta-preview-offer h3{font-size:20px}.meta-preview-offer span{font-size:9px;letter-spacing:.12em;color:#e6c8fa}
+.meta-wide-secondary,.meta-wide-primary{width:100%;border-radius:12px;border:1px solid #8461a4;background:#513371;padding:12px 10px;font-size:12px;font-weight:900;margin-top:10px}
+.meta-wide-primary{background:linear-gradient(#f1d699,#e9a47c);color:#492957;border-color:#f9e2ba}
+.meta-rank-card{padding:16px;border-radius:14px;background:linear-gradient(135deg,#50365e,#322147);border:1px solid #9673ac;margin-bottom:12px}
+.meta-rank-line{display:flex;align-items:baseline;gap:9px;margin-bottom:10px}
+.meta-rank-line b{font-size:29px;color:#ffe4ac}.meta-rank-line span{font-size:11px;color:#d7c5eb}
+.meta-profile-banner{display:flex;align-items:center;gap:12px;background:linear-gradient(145deg,#54346d,#2e1e4a);border:1px solid #8464ad;border-radius:18px;padding:16px}
+.meta-profile-banner h3{margin:0;color:#fff0ca}.meta-profile-banner p{margin:4px 0 0;font-size:11px;color:#d9c4e9}
+.meta-profile-sigil{display:grid;place-items:center;flex:none;width:65px;height:65px;border-radius:17px;background:radial-gradient(circle,#a26ac9,#4b286f);font-size:39px;color:#ffedb6;border:1px solid #e8bbba}
+.meta-stats-overview{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.meta-stats-overview div{display:flex;flex-direction:column;gap:4px;background:#35224f;border:1px solid #785b9e;border-radius:13px;padding:16px 12px}
+.meta-stats-overview b{font-size:25px;color:#ffdcaa}.meta-stats-overview span{font-size:10px;color:#cfb8e5}
+.meta-mini-action{margin-left:auto;background:#6f4d94;border:1px solid #a17cc1;border-radius:9px;padding:8px;font-weight:800;font-size:10px;flex:none}
+.meta-map-stages{display:grid;gap:9px;margin-bottom:13px}
+.meta-stage{display:flex;align-items:center;gap:11px;background:#33214b;border:1px solid #8462a1;border-radius:13px;padding:12px}
+.meta-stage>span{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:#bd8d54;border:1px solid #fff1b6;color:#30172f;font-weight:1000}
+.meta-stage strong{flex:1;font-size:12px}.meta-stage small{font-size:9px;color:#e0cae5}
+.meta-stage.locked{opacity:.58}.meta-stage.locked>span{background:#52415e;color:#e6c8f7;border-color:#977ba9}
+.meta-region-showcase{background:radial-gradient(circle at 80% 0%,#8a6bea70,transparent 60%),linear-gradient(130deg,#4e2c75,#21163f)}
+.meta-map-quick{position:absolute;z-index:4;right:10px;top:7px;display:flex;gap:5px}
+.meta-map-quick button{width:40px;height:40px;border:1px solid #b28dd4;border-radius:11px;background:#251640db;color:#fff0c0;font-size:17px;box-shadow:0 3px 8px #0b0719b6}
+.meta-location-card{position:absolute;bottom:9px;left:10px;z-index:5;background:#1a1038de;border:1px solid #9873c2;border-radius:11px;padding:7px 10px;text-align:left;max-width:64%;box-shadow:0 4px 16px #130a28}
+.meta-location-card small{display:block;color:#c3addb;font-size:9px}.meta-location-card strong{font-size:11px;color:#fff1d1}
+@media(max-width:350px){.meta-hero-panel{padding:13px}.meta-stat{padding:8px}.meta-task{padding:8px}.meta-shop-card strong{font-size:11px}.meta-panel-body{padding:12px}}
+
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden" id="metaIconSprite">
+  <symbol id="et-icon-damage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 19 5-5m-3 7-4-4m2-12 14 14M13 3l8 8-4 2-6-6z"/></symbol>
+  <symbol id="et-icon-crit-chance" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 2.7 6.4L22 12l-7.3 3.6L12 22l-2.7-6.4L2 12l7.3-3.6z"/><circle cx="12" cy="12" r="2"/></symbol>
+  <symbol id="et-icon-crit-damage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3m8 8 3 3m0-14-3 3M8 16l-3 3"/><path d="m12 6 2 4 4 2-4 2-2 4-2-4-4-2 4-2z"/></symbol>
+  <symbol id="et-icon-attack-speed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h10M3 12h7M3 17h10m-2-14 8 9-8 9"/></symbol>
+  <symbol id="et-icon-skill" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m4 20 13-13M15 3l1.1 2.9L19 7l-2.9 1.1L15 11l-1.1-2.9L11 7l2.9-1.1zM6 5l.7 1.3L8 7l-1.3.7L6 9l-.7-1.3L4 7l1.3-.7z"/></symbol>
+  <symbol id="et-icon-boss" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 8 4 4 5-7 5 7 4-4-2 11H5z"/></symbol>
+  <symbol id="et-icon-health" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 5.5a5 5 0 0 0-7 0L12 7l-1.5-1.5a5 5 0 0 0-7 7L12 21l8.5-8.5a5 5 0 0 0 0-7z"/></symbol>
+  <symbol id="et-icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 20 6v6c0 6-4 9-8 10-4-1-8-4-8-10V6z"/><path d="m8 12 3 3 5-6"/></symbol>
+  <symbol id="et-icon-range" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/></symbol>
+  <symbol id="et-icon-mana" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C10 7 5 11 5 15a7 7 0 0 0 14 0c0-4-5-8-7-13z"/><path d="M10 18c-2-1-2-4-1-5"/></symbol>
+  <symbol id="et-icon-projectiles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h14m-5-4 5 4-5 4M3 17h14m-5-4 5 4-5 4"/></symbol>
+  <symbol id="et-icon-slow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M4 6l16 12M20 6 4 18M4 12h16"/><circle cx="12" cy="12" r="2"/></symbol>
+  <symbol id="et-icon-root" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v11m0 0-6 7m6-7 6 7M6 13l6-3 6 3M3 21h18"/></symbol>
+  <symbol id="et-icon-stun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-8 11h7l-1 9 8-12h-7z"/></symbol>
+  <symbol id="et-icon-burn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c3 5 0 7 3 10 2-1 3-3 3-5 4 5 5 9 2 13a10 10 0 0 1-16-2C2 13 8 8 12 2z"/><path d="M12 12c-1 3-3 4-2 7a3 3 0 0 0 5-1z"/></symbol>
+  <symbol id="et-icon-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 21 12 12 21 3 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="et-icon-chain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 9 5 12l3 3m8-6 3 3-3 3M9 12h6"/><path d="M3 7c0-3 3-4 6-4m6 18c3 0 6-2 6-5"/></symbol>
+  <symbol id="et-icon-pierce" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20m-7-6 7 6-7 6M5 6v12M10 6v12"/></symbol>
+  <symbol id="et-icon-area" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7"/><path d="M12 1v3M12 20v3M1 12h3M20 12h3"/></symbol>
+  <symbol id="et-icon-execute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m4 4 16 16M20 4 4 20"/><circle cx="12" cy="12" r="9"/></symbol>
+  <symbol id="et-icon-fusion" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h9l-3-3m3 3-3 3M3 17h9l-3-3m3 3-3 3m3-12 6 5-6 5"/></symbol>
+  <symbol id="et-icon-reroll" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 8A8 8 0 0 0 6 5L4 7M4 3v4h4M4 16a8 8 0 0 0 14 3l2-2m0 4v-4h-4"/></symbol>
+  <symbol id="et-icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15 8c-4-2-7 1-4 3l3 2c3 2 0 5-4 3M12 6v12"/></symbol>
+  <symbol id="et-icon-diamond" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m2 9 5-6h10l5 6-10 13zM2 9h20M7 3l5 19L17 3"/></symbol>
+  <symbol id="et-icon-augment" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="et-icon-synergy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="3"/><circle cx="19" cy="5" r="3"/><circle cx="19" cy="19" r="3"/><path d="m8 11 8-5M8 13l8 5"/></symbol>
+  <symbol id="et-icon-wave" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 14c4-8 6 8 10 0s6-8 10 0M2 20c4-8 6 8 10 0s6-8 10 0"/></symbol>
+  <symbol id="et-icon-bench" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18v12H3zM3 12h18M9 7v12M15 7v12"/></symbol>
+  <symbol id="et-icon-cooldown" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 3M12 2v3"/></symbol>
+</svg>
+
+<div id="app">
+  <section id="home" class="screen meta-home" aria-label="Accueil et carte du monde">
+    <header class="meta-head">
+      <button type="button" class="meta-profile" id="profileBtn" aria-label="Ouvrir le profil">
+        <span class="meta-avatar" aria-hidden="true">✦</span><span class="meta-user"><strong>Tacticien</strong><small>Démo V0.9</small></span>
+      </button>
+      <div class="meta-resources">
+        <span class="meta-diamonds" title="Diamants : achats non intégrés à cette démo">◆ <b>0</b></span>
+        <button class="sound-btn" type="button" id="homeSound" aria-label="Activer ou couper le son">♪</button>
+      </div>
+    </header>
+    <div class="meta-chapter">
+      <div class="meta-brand">✧ Elemental Tower ✧</div>
+      <div class="meta-subtitle">Le monde des gardiens</div>
+      <div class="meta-chapter-row">
+        <h2 id="metaRegionTitle">Chapitre I · Royaume d'Aurore</h2>
+        <span class="meta-progress-index" id="metaRegionStatus">Démo jouable</span>
+      </div>
+    </div>
+    <div class="meta-map" id="worldMap" aria-label="Régions du monde, sélectionner une destination">
+      <div class="meta-map-constellation"></div><div class="meta-map-quick"><button type="button" data-quick="rank" aria-label="Défis hebdomadaires" title="Défis">♜</button><button type="button" data-quick="shop" aria-label="Pass saisonnier" title="Pass">✧</button><button type="button" data-quick="settings" aria-label="Réglages" title="Réglages">⚙</button></div><button type="button" id="metaLocationCard" class="meta-location-card"><small>Région sélectionnée · voir les chapitres</small><strong id="metaLocationLabel">Citadelle d’Aurore ›</strong></button>
+      <svg class="meta-map-art" viewBox="0 0 360 510" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Carte illustrée des îles flottantes d'Aurore, de Sylve, des Flux et du royaume des Ombres">
+        <defs>
+          <linearGradient id="mw-sky" x1="0" y1="0" x2=".3" y2="1"><stop stop-color="#3b266d"/><stop offset=".62" stop-color="#29225b"/><stop offset="1" stop-color="#151035"/></linearGradient>
+          <linearGradient id="mw-soil" x1="0" y1="0" x2=".7" y2="1"><stop stop-color="#675196"/><stop offset=".6" stop-color="#332657"/><stop offset="1" stop-color="#211a45"/></linearGradient>
+          <linearGradient id="mw-top" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#5b6f87"/><stop offset=".5" stop-color="#49707f"/><stop offset="1" stop-color="#253b68"/></linearGradient>
+          <linearGradient id="mw-grass" x1="0" y1="0" x2="1" y2=".4"><stop stop-color="#7ec487"/><stop offset=".6" stop-color="#468b83"/><stop offset="1" stop-color="#3e537e"/></linearGradient>
+          <linearGradient id="mw-water" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#307cc7"/><stop offset=".35" stop-color="#a0faff"/><stop offset=".65" stop-color="#51c6ff"/><stop offset="1" stop-color="#275aaa"/></linearGradient>
+          <radialGradient id="mw-magic"><stop stop-color="#f0c6ff" stop-opacity=".9"/><stop offset=".45" stop-color="#9b5be9" stop-opacity=".35"/><stop offset="1" stop-color="#6f46a7" stop-opacity="0"/></radialGradient>
+          <filter id="mw-glow"><feGaussianBlur stdDeviation="4"/></filter>
+          <filter id="mw-shadow" x="-35%" width="170%" y="-40%" height="185%"><feDropShadow dx="0" dy="10" stdDeviation="7" flood-color="#080624" flood-opacity=".82"/></filter>
+          <pattern id="mw-stars" width="48" height="48" patternUnits="userSpaceOnUse"><circle cx="7" cy="14" r="1" fill="#e3caff" opacity=".32"/><circle cx="31" cy="38" r=".7" fill="#cae8ff" opacity=".5"/></pattern>
+        </defs>
+        <rect width="360" height="510" fill="url(#mw-sky)"/><rect width="360" height="510" fill="url(#mw-stars)"/>
+        <path d="M0 140L27 94 55 139 88 80 124 147 159 102 198 157 247 85 295 158 329 106 360 149V265H0Z" fill="#4e3a79" opacity=".39"/>
+        <path d="M0 178L41 131 78 162 117 119 150 180 195 144 230 170 293 118 329 163 360 135V300H0Z" fill="#35305d" opacity=".49"/>
+        <ellipse cx="191" cy="290" rx="160" ry="205" fill="url(#mw-magic)" opacity=".66"/>
+        <g filter="url(#mw-shadow)">
+          <!-- Aurora castle island -->
+          <path d="M185 119L254 83 332 118 329 173 290 208 253 220 190 169Z" fill="url(#mw-soil)" stroke="#6b5298" stroke-width="2"/>
+          <path d="M185 119L254 74 332 116 255 160Z" fill="url(#mw-top)" stroke="#9ed0c9" stroke-width="1.5"/>
+          <path d="M204 132L248 108 312 125 255 153Z" fill="#91a7ad" opacity=".4"/>
+          <g transform="translate(252 106)">
+            <path d="M-44 2L-44 -26 -31 -37 -13 -27 -13 2 -27 11Z" fill="#8d76b6" stroke="#d5bdff" stroke-width="2"/>
+            <path d="M14 2L14 -40 28 -50 41 -40 41 5 28 13Z" fill="#9880c6" stroke="#edd7ff" stroke-width="2"/>
+            <path d="M-22 7V-49L0 -67 19 -51V11L0 24Z" fill="#d7aed2" stroke="#f6dafa" stroke-width="2"/>
+            <path d="M-28 -49L0 -82 24 -50 0 -38Z" fill="#f6cf95" stroke="#fff0cc" stroke-width="2"/>
+            <path d="M-49 -26L-31 -49 -8 -26Z M9 -40L28 -61 47 -40Z" fill="#bfa6ff" stroke="#ffe2b1" stroke-width="2"/>
+            <path d="M-9 10v-24l10 -11 10 11v28" fill="#6d60bb" stroke="#e3d4ff"/>
+            <path d="M-2 -66L3 -54 -2 -39 -8 -53Z" fill="#fff8db"/>
+            <path d="M-22 -13h8v12h-8z M26 -30h7v12h-7z" fill="#ffedac"/>
+          </g>
+          <!-- sylve island -->
+          <path d="M3 240L73 195 161 227 169 300 123 349 44 341 4 286Z" fill="url(#mw-soil)" stroke="#4a3477" stroke-width="2"/>
+          <path d="M3 240L80 192 168 232 85 281Z" fill="url(#mw-grass)" stroke="#9ac89e" stroke-width="2"/>
+          <path d="M74 257L78 193" stroke="#6e4a62" stroke-width="12"/>
+          <path d="M77 217L46 201M77 210L104 194" stroke="#906374" stroke-width="8"/>
+          <circle cx="77" cy="186" r="50" fill="#a04af7" opacity=".19" filter="url(#mw-glow)"/>
+          <circle cx="57" cy="185" r="26" fill="#b36fdb"/><circle cx="91" cy="170" r="34" fill="#d69df2"/><circle cx="118" cy="195" r="25" fill="#af79e0"/><circle cx="76" cy="160" r="28" fill="#daabff"/><circle cx="46" cy="210" r="20" fill="#845bbc"/>
+          <g fill="#ffdda1"><circle cx="57" cy="226" r="2"/><circle cx="92" cy="236" r="3"/><circle cx="112" cy="219" r="2"/><circle cx="33" cy="246" r="2"/></g>
+          <path d="M131 267L131 329 141 335 141 270Z" fill="url(#mw-water)" opacity=".9"/>
+          <!-- flux island -->
+          <path d="M172 300L257 248 354 293 351 369 291 406 213 370Z" fill="url(#mw-soil)" stroke="#625b9f" stroke-width="2"/>
+          <path d="M172 300L258 243 353 291 268 342Z" fill="url(#mw-top)" stroke="#8ab3dd" stroke-width="2"/>
+          <path d="M198 321L205 382 218 383 216 326Z" fill="url(#mw-water)"/>
+          <ellipse cx="265" cy="297" rx="54" ry="19" fill="#2d71bc" stroke="#90ecff" stroke-width="3"/>
+          <ellipse cx="266" cy="292" rx="38" ry="10" fill="#83f5ff" opacity=".55"/>
+          <path d="M222 289L235 239 247 281 238 307Z" fill="#85d7ff" stroke="#d8feff" stroke-width="2"/>
+          <path d="M245 289L269 220 290 288 265 310Z" fill="#69afff" stroke="#d6f9ff" stroke-width="2"/>
+          <path d="M283 294L300 249 320 299 303 317Z" fill="#a1b8ff" stroke="#ecf1ff" stroke-width="2"/>
+          <!-- shadow island -->
+          <path d="M113 405L183 364 273 412 253 461 193 492 127 462Z" fill="#24143e" stroke="#7d488a" stroke-width="2"/>
+          <path d="M113 405L185 361 273 411 191 447Z" fill="#522a60" stroke="#af6bad" stroke-width="2"/>
+          <path d="M160 421L179 376 198 410 213 392 231 427 194 442Z" fill="#2a103c" stroke="#d656bb" stroke-width="2"/>
+          <path d="M182 425L186 396 197 426Z" fill="#fc90f7" opacity=".8"/>
+          <circle cx="191" cy="411" r="46" fill="#ba4af2" opacity=".13" filter="url(#mw-glow)"/>
+        </g>
+        <!-- glowing route over the map -->
+        <path d="M252 165C243 207 185 201 163 233S176 302 220 307C270 313 241 361 193 407" fill="none" stroke="#f0b67d" stroke-opacity=".22" stroke-width="15" stroke-linecap="round"/>
+        <path d="M252 165C243 207 185 201 163 233S176 302 220 307C270 313 241 361 193 407" fill="none" stroke="#ffd79c" stroke-width="3" stroke-linecap="round" stroke-dasharray="5 10"/>
+        <g fill="#ffe8ab" stroke="#fff4ce" stroke-width="2"><circle cx="252" cy="165" r="7"/><circle cx="164" cy="233" r="6"/><circle cx="218" cy="306" r="6"/><circle cx="193" cy="406" r="7"/></g>
+        <g opacity=".72"><circle cx="46" cy="82" r="2" fill="#e9c8ff"/><circle cx="130" cy="58" r="1.5" fill="#ffddad"/><circle cx="316" cy="69" r="2.5" fill="#d8b6ff"/><path d="M142 117l3 -11 3 11 11 3 -11 3 -3 11 -3 -11 -11 -3z" fill="#f5d8ff"/></g>
+      </svg>
+      <span class="meta-map-hint">Touchez une région pour la découvrir</span>
+      <span class="meta-location-pin aurora" aria-hidden="true"></span>
+      <span class="meta-location-pin sylve" aria-hidden="true"></span>
+      <span class="meta-location-pin flux" aria-hidden="true"></span>
+      <span class="meta-location-pin shadow" aria-hidden="true"></span>
+      <button class="meta-region is-active" data-region="aurore" aria-pressed="true"><strong>✦ Citadelle d'Aurore</strong><span>Expédition jouable</span></button>
+      <button class="meta-region is-preview" data-region="sylve" aria-pressed="false"><strong>❀ Sylve Émeraude</strong><span>À découvrir</span></button>
+      <button class="meta-region is-preview" data-region="flux" aria-pressed="false"><strong>❖ Sanctuaire des Flux</strong><span>À découvrir</span></button>
+      <button class="meta-region is-preview" data-region="shadow" aria-pressed="false"><strong>◈ Royaume des Ombres</strong><span>Verrouillé</span></button>
+    </div>
+    <footer class="meta-footer">
+      <div class="meta-objective">
+        <div class="meta-objective-copy">
+          <div class="meta-eyebrow">✧ Prochain objectif</div>
+          <strong id="metaQuestTitle">Repousser les six vagues</strong>
+          <div class="meta-meter" aria-hidden="true"><i id="metaQuestFill"></i></div>
+          <small id="metaQuestProgress">Record 0 / 6 vagues</small>
+        </div>
+        <div class="meta-reward" aria-label="Aperçu des récompenses">
+          <span class="meta-gift">✦</span><span id="metaQuestReward">Défi PvE</span>
+        </div>
+      </div>
+      <button type="button" id="playBtn" class="meta-play">⚔ Préparer l'expédition</button>
+      <div class="meta-footnote">Prototype jouable · Déblocages permanents à venir</div>
+      <nav class="meta-nav" aria-label="Navigation principale">
+        <button type="button" data-meta-nav="world" aria-current="page"><span class="meta-nav-icon">✥</span><span class="meta-nav-label">Monde</span></button>
+        <button type="button" data-meta-nav="collection"><span class="meta-nav-icon">❀</span><span class="meta-nav-label">Gardiens</span></button>
+        <button type="button" data-meta-nav="missions"><span class="meta-nav-icon">◇</span><span class="meta-nav-label">Missions</span></button>
+        <button type="button" data-meta-nav="shop"><span class="meta-nav-icon">◆</span><span class="meta-nav-label">Boutique</span></button>
+      </nav>
+    </footer>
+    <section class="meta-panel hidden" id="metaPanel" aria-label="Section du hub" role="region">
+      <header class="meta-panel-head">
+        <button type="button" class="meta-back" id="metaBack" aria-label="Retour à la carte">‹</button>
+        <div><h2 id="metaPanelTitle">Collection</h2><small id="metaPanelSubtitle">Votre bibliothèque de gardiens</small></div>
+      </header>
+      <div class="meta-panel-body" id="metaPanelBody"></div>
+    </section>
+    <div class="meta-prep hidden" id="metaPrep" role="dialog" aria-modal="true" aria-labelledby="metaPrepTitle">
+      <div class="meta-prep-card">
+        <span class="meta-prep-kicker">EXPÉDITION · CHAPITRE I</span>
+        <h2 id="metaPrepTitle">Citadelle d'Aurore</h2>
+        <p>Choisis et fusionne tes gardiens, active les synergies et protège ton sanctuaire. La composition se construit pendant le combat.</p>
+        <div class="meta-prep-info">
+          <div><b>6</b><span>Vagues jouables</span></div>
+          <div><b>9</b><span>Gardiens de test</span></div>
+          <div><b>1★–5★</b><span>Fusion</span></div>
+        </div>
+        <p>Les autres régions et les déblocages durables ne sont pas encore intégrés dans cette démo.</p>
+        <div class="meta-prep-actions"><button type="button" class="meta-cancel" id="metaCancel">Retour</button><button type="button" class="meta-start" id="metaStart">Commencer</button></div>
+        <button type="button" class="meta-sandbox" id="sandboxBtn">Atelier libre · Tester les fusions</button>
+      </div>
+    </div>
+  </section>
+  <section id="battle" class="screen hidden" aria-label="Combat">
+    <header class="battle-top"><div class="toprow"><div class="mini-brand">✦</div><div class="wave-hud">LE SANCTUAIRE<br><strong id="waveText">Vague 1 / 6</strong><span class="countdown" id="countdown">Préparation</span></div><div class="stat-pill health"><span class="ico">♥</span><span id="lifeText">100</span></div><div class="stat-pill coin"><span class="ico">✦</span><span id="goldText">180</span></div><button class="sound-btn" style="width:33px;height:33px;border-radius:10px" id="battleSound" aria-label="Activer ou couper le son">♪</button></div><div class="health-track"><span id="healthFill"></span></div></header>
+    <div class="battle-zone" id="battleZone" aria-label="Terrain de jeu">
+      <svg class="map-art" viewBox="0 0 360 500" preserveAspectRatio="none" aria-hidden="true"><defs>
+      <linearGradient id="gGround" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#334267"/><stop offset=".48" stop-color="#32345b"/><stop offset="1" stop-color="#262449"/></linearGradient><radialGradient id="gPortal"><stop stop-color="#f9a6f7"/><stop offset=".55" stop-color="#aa5fc5"/><stop offset="1" stop-color="#39205d"/></radialGradient><radialGradient id="gCastle"><stop stop-color="#d6ffff"/><stop offset=".58" stop-color="#78c0dc"/><stop offset="1" stop-color="#346b9b"/></radialGradient><pattern id="speckles" width="57" height="49" patternUnits="userSpaceOnUse"><circle cx="9" cy="11" r="1.1" fill="#bd9df5" opacity=".4"/><circle cx="40" cy="26" r="1" fill="#e8ccff" opacity=".25"/><path d="M26 39l3-4 3 4-3 4z" fill="#a7dcbb" opacity=".25"/></pattern>
+      </defs><rect width="360" height="500" fill="url(#gGround)"/><rect width="360" height="500" fill="url(#speckles)"/>
+      <path d="M0 55L23 25 51 71 72 38 102 75 122 25 144 54V0H0ZM230 0V46L259 23 284 65 314 29 342 55 360 27V0Z" fill="#3e385d" opacity=".9"/>
+      <path d="M0 0V500H27L13 465 28 422 12 379 29 332 14 288 24 237 10 176 24 131 11 86 35 45 12 0ZM360 0V500H333L346 449 329 398 343 343 326 300 339 249 329 197 348 137 329 88 347 47 332 0Z" fill="#242342" opacity=".65"/>
+      <path id="roadBase" d="M180 -35 L180 77 Q180 106 128 124 Q86 143 93 204 Q91 231 177 247 Q265 261 265 320 Q270 363 182 393 Q167 399 180 530" fill="none" stroke="#15172d" stroke-width="52" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M180 -35 L180 77 Q180 106 128 124 Q86 143 93 204 Q91 231 177 247 Q265 261 265 320 Q270 363 182 393 Q167 399 180 530" fill="none" stroke="#68618e" stroke-width="46" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M180 -35 L180 77 Q180 106 128 124 Q86 143 93 204 Q91 231 177 247 Q265 261 265 320 Q270 363 182 393 Q167 399 180 530" fill="none" stroke="#524d79" stroke-width="39" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M180 -35 L180 77 Q180 106 128 124 Q86 143 93 204 Q91 231 177 247 Q265 261 265 320 Q270 363 182 393 Q167 399 180 530" fill="none" stroke="#b8a7df" opacity=".25" stroke-width="2" stroke-dasharray="5 15"/>
+      <g opacity=".9"><ellipse cx="180" cy="36" rx="59" ry="36" fill="#ed7ed3" opacity=".13"/><ellipse cx="180" cy="26" rx="30" ry="31" fill="#170f38" stroke="#ba65dc" stroke-width="8"/><ellipse cx="180" cy="26" rx="20" ry="22" fill="url(#gPortal)"/><path d="M144 51l-8-31 14-21 9 13v39M216 51l8-31-14-21-9 13v39" fill="#362049" stroke="#805ca6" stroke-width="3"/></g>
+      <g transform="translate(180 454)"><circle r="44" fill="#91dced" opacity=".17"/><path d="M-38 24V-18L-23-27V-37L-10-29 0-44 12-29 24-37 27-24 38-18V24Z" fill="#3f5279" stroke="#b2eaff" stroke-width="3"/><path d="M-21 23v-26l21-17 21 17v26" fill="#6e9ac2"/><rect x="-9" y="2" width="18" height="23" rx="8" fill="url(#gCastle)"/><path d="M0-34L8-20 0-10-8-20Z" fill="#fff3d6"/><circle cy="-21" r="4" fill="#d5f7ff"/></g>
+      <g fill="#bd95fa" opacity=".65"><circle cx="36" cy="150" r="3"/><circle cx="338" cy="173" r="2"/><circle cx="27" cy="399" r="2"/><circle cx="337" cy="390" r="3"/></g>
+      <g fill="#4c4c78" stroke="#8887b9" stroke-width="1.2"><path d="M37 152l7-25 9 25z"/><path d="M315 159l8-30 9 30z"/><path d="M24 297l9-29 10 29z"/><path d="M317 292l10-27 9 27z"/><path d="M28 436l8-29 8 29z"/></g>
+      <g fill="#d39bea" opacity=".38"><path d="M43 179l8-10 8 10-8 10z"/><path d="M297 142l7-9 7 9-7 9z"/><path d="M314 405l7-9 7 9-7 9z"/></g>
+      </svg><div class="field-shimmer"></div><div class="map-label top">PORTAIL DES OMBRES</div><div class="map-label bottom">VOTRE SANCTUAIRE</div><div class="board-layer" id="board"></div><div class="enemy-layer" id="enemies"></div><div class="fx-layer" id="fx"></div><div id="waveBanner" class="wave-banner hidden"></div><div class="sigil-pill" id="synergySummary">0 bonus actifs</div>
+    </div>
+    <footer class="battle-bottom">
+      <div id="coach" class="coach"><div class="coach-avatar" id="coachAvatar"></div><div class="coach-copy"><strong id="coachTitle">ÉTAPE 1 · RECRUTER</strong><span id="coachText">Choisis un gardien dans la boutique.</span></div><button type="button" id="sellBtn" class="sell-btn hidden" aria-label="Revendre le gardien sélectionné"></button><span class="coach-step" id="coachStep">1/4</span></div>
+      <div class="trait-strip" id="traits" aria-label="Synergies actives"></div>
+      <div class="deck-label"><span>RÉSERVE · <span style="color:#ffdfa7">FUSION 2 IDENTIQUES</span></span><span id="reserveHelp">5 places</span></div>
+      <div class="bench" id="bench"></div>
+      <div class="shop-header"><span>CHOISIS TES GARDIENS</span><button type="button" id="rerollBtn" class="reroll-btn">↻ RELANCER · 8 ✦</button></div>
+      <div class="shop-row" id="shop" aria-label="Boutique des gardiens"></div>
+      <div class="battle-actions"><button type="button" id="waveNowBtn" class="wave-now">⚔ LANCER VAGUE 1</button><button type="button" id="secondaryBtn" class="help-button" title="Aide">?</button></div>
+      <div class="subhelp" id="subHelp">Choisis un gardien pour consulter son pouvoir et le revendre.</div>
+    </footer>
+  </section>
+  <div class="drag-ghost" id="dragGhost"></div>
+  <div class="modal-shade hidden" id="endOverlay"><div class="modal"><div class="medal" id="endMedal">✦</div><h2 id="endTitle">Victoire !</h2><p id="endDescription">Votre sanctuaire est sauvé.</p><div id="metaResultSummary" class="meta-result-summary" style="border:1px solid #825c9f;border-radius:12px;background:#25183c;padding:10px;margin:10px 0;color:#ffe4b1;font-size:12px">Progression enregistrée sur cet appareil.</div><div class="modal-stats"><span>Vagues <b id="endWaves">6</b></span><span>Fusion max <b id="endRank">2★</b></span><span>Ennemis <b id="endKills">0</b></span></div><button class="cta" id="replayBtn">REJOUER</button><button class="text-btn" id="menuBtn">Retour au menu</button></div></div>
+</div>
+<script>
+
+(()=>{'use strict';
+const $=id=>document.getElementById(id), W=360,H=500;
+const PATH=[{x:180,y:-22},{x:180,y:77},{x:128,y:124},{x:93,y:204},{x:177,y:247},{x:265,y:320},{x:182,y:393},{x:180,y:520}];
+const SLOTS=[{x:57,y:92},{x:301,y:93},{x:47,y:213},{x:312,y:217},{x:55,y:327},{x:305,y:328},{x:68,y:431},{x:303,y:425}];
+const BENCH_SIZE=5,MAX_RANK=5,WAVES=6,ROLL_COST=8;
+const UNITS={
+  luma:{name:'Luma',family:'Aurore',role:'Arcaniste',color:'#ffd28e',hue:-40,price:32,damage:20,cooldown:.9},
+  solis:{name:'Solis',family:'Aurore',role:'Gardien',color:'#ffd98d',hue:25,price:32,damage:17,cooldown:.85},
+  aeri:{name:'Aéri',family:'Aurore',role:'Chasseur',color:'#b7e7ff',hue:60,price:34,damage:15,cooldown:.64},
+  mousse:{name:'Mousse',family:'Sylve',role:'Gardien',color:'#90edbd',hue:115,price:30,damage:17,cooldown:.87},
+  nema:{name:'Néma',family:'Sylve',role:'Arcaniste',color:'#a4e7d5',hue:155,price:32,damage:21,cooldown:1.05},
+  fougri:{name:'Fougri',family:'Sylve',role:'Chasseur',color:'#95d69c',hue:100,price:35,damage:16,cooldown:.66},
+  nyx:{name:'Nyx',family:'Crépuscule',role:'Chasseur',color:'#ff9bce',hue:240,price:36,damage:18,cooldown:.72},
+  brume:{name:'Brume',family:'Crépuscule',role:'Gardien',color:'#d9b8ff',hue:200,price:31,damage:19,cooldown:.98},
+  noctis:{name:'Noctis',family:'Crépuscule',role:'Arcaniste',color:'#d0a7ff',hue:270,price:39,damage:22,cooldown:1.06}
+};
+const TRAITS={
+ Aurore:{icon:'☀',label:'Aurore',desc:'2 gardiens distincts : vitesse d’attaque +25 %'},
+ Sylve:{icon:'❀',label:'Sylve',desc:'2 gardiens distincts : portée +25 %'},
+ Crépuscule:{icon:'☾',label:'Crépuscule',desc:'2 gardiens distincts : ralentit les ennemis touchés'},
+ Gardien:{icon:'◆',label:'Gardien',desc:'2 gardiens distincts : +25 % dégâts aux boss'},
+ Arcaniste:{icon:'✧',label:'Arcaniste',desc:'2 gardiens distincts : vitesse d’attaque des Arcanistes +20 %'},
+ Chasseur:{icon:'➶',label:'Chasseur',desc:'2 gardiens distincts : +30 % dégâts aux ennemis rapides'}
+};
+let uid=1,audioEnabled=true,actx=null,game=null,lastFrame=0,hudTimer=0,toastTimeout=null,drag=null,blockClicksUntil=0;
+const app=$('app'),battle=$('battle'),home=$('home'),zone=$('battleZone'),board=$('board'),bench=$('bench'),shop=$('shop'),fx=$('fx'),enemyLayer=$('enemies');
+function createSound(freq=620,dur=.095,type='sine',volume=.045){if(!audioEnabled)return;try{const Audio=window.AudioContext||window.webkitAudioContext;if(!Audio)return;actx=actx||new Audio();if(actx.state==='suspended')actx.resume();let o=actx.createOscillator(),g=actx.createGain(),now=actx.currentTime;o.type=type;o.frequency.setValueAtTime(freq,now);o.frequency.exponentialRampToValueAtTime(freq*.72,now+dur);g.gain.setValueAtTime(volume,now);g.gain.exponentialRampToValueAtTime(.001,now+dur);o.connect(g).connect(actx.destination);o.start(now);o.stop(now+dur+.005)}catch(e){}}
+function setAudio(v){audioEnabled=v;for(const id of ['homeSound','battleSound'])$(id).textContent=v?'♪':'×'}
+$('homeSound').onclick=()=>setAudio(!audioEnabled);$('battleSound').onclick=()=>setAudio(!audioEnabled);
+function guardianSVG(rank=1,small=false,type=null){
+ const d=type?UNITS[type]:null;
+ const family=d?.family||'Aurore',role=d?.role||'Arcaniste';
+ const colors={Aurore:{robe:'#b77583',trim:'#ffdb8a',body:'#ffe6cf',accent:'#fff0b5'},Sylve:{robe:'#3f897e',trim:'#9de1ae',body:'#d7f0d6',accent:'#a1ffdc'},Crépuscule:{robe:'#624388',trim:'#e0a4ee',body:'#e7c6ef',accent:'#eac1ff'}};
+ const c=colors[family],halo=['#d9b8ff','#a8b9ff','#a6f5ed','#ffd4f3','#ffe4ad'][rank-1];
+ const crest={Aurore:'<circle cx="62" cy="28" r="7" fill="#ffe59c"/><path d="M62 16v4m0 16v4M50 28h4m16 0h4" stroke="#ffe59c" stroke-width="2.5"/>',Sylve:'<path d="M62 37Q42 24 63 14Q85 24 62 37" fill="#85edb6" stroke="#267f70" stroke-width="2"/><path d="M61 17l2 17" stroke="#f0ffdf"/>',Crépuscule:'<path d="M67 15Q51 31 69 38Q44 37 49 23Q52 15 67 15Z" fill="#f5c3fa"/>'}[family];
+ const accessory={
+  Gardien:`<path d="M16 51Q6 45 10 29L24 20L37 29L34 47Z" fill="${c.trim}" stroke="#3d244f" stroke-width="3"/><path d="M11 38L25 28L33 38M25 22V48" fill="none" stroke="#fff5d7" stroke-width="2.5"/><path d="M43 27L41 7 61 16 82 7 79 27" fill="${c.trim}" stroke="#3f265b" stroke-width="3"/>`,
+  Arcaniste:`<path d="M27 41L49 3L61 19L75 4L99 42Z" fill="${c.robe}" stroke="${c.trim}" stroke-width="4"/><path d="M52 25L62 14L74 27" fill="none" stroke="#f7d6ff" stroke-width="3"/><path d="M99 90l17-42" stroke="#edd6fc" stroke-width="6" stroke-linecap="round"/><path d="M116 32L121 44 132 49 121 54 116 65 110 54 99 49 110 44Z" fill="${c.accent}" stroke="#fff" stroke-width="2"/>`,
+  Chasseur:`<path d="M28 23L15 9L18 38M95 23l19-14-5 32" fill="${c.robe}" stroke="${c.trim}" stroke-width="4"/><path d="M93 47Q132 69 96 103" stroke="${c.trim}" stroke-width="5" fill="none"/><path d="M97 48L97 104" stroke="#ffe7d0" stroke-width="2"/><path d="M87 76l38-12-8 9 3 8z" fill="${c.accent}" stroke="#513d75" stroke-width="2"/>`
+ }[role];
+ const armor=role==='Gardien'?`<path d="M27 91l-8 22 22-10M98 91l8 22-23-11" fill="${c.trim}" stroke="#513669" stroke-width="3"/>`:'';
+ const starCrown=rank>=3?`<path d="M29 27l-4-17 20 7 15-14 18 15 19-8-6 19" fill="${rank===5?'#ffe6a1':c.trim}" stroke="#704a96" stroke-width="3"/>`:'';
+ return `<svg viewBox="0 0 135 138" aria-hidden="true">
+ <ellipse cx="65" cy="117" rx="36" ry="10" fill="#0c0828" opacity=".45"/>
+ <circle cx="65" cy="62" r="52" fill="${halo}" opacity="${rank>=4?.19:.065}"/>
+ <path d="M29 83Q6 119 41 123L66 111L92 124Q120 119 102 81Z" fill="${c.robe}" stroke="#302046" stroke-width="4"/>
+ <path d="M36 93L28 116 65 104 101 116 93 94" fill="${c.trim}" opacity=".77"/>
+ ${accessory}${armor}
+ <path d="M23 65Q15 41 35 27L48 33 66 25 84 34 99 26Q117 44 105 72 108 103 68 107 27 107 23 65Z" fill="${c.body}" stroke="#654988" stroke-width="4"/>
+ <path d="M35 32l-10 17 20-8M97 30l8 18-22-9" fill="${c.trim}" stroke="#654988" stroke-width="2"/>
+ <path d="M27 66Q62 44 103 65" fill="none" stroke="#fff" stroke-width="3" opacity=".32"/>
+ <ellipse cx="47" cy="72" rx="6" ry="8" fill="#493465"/><ellipse cx="83" cy="72" rx="6" ry="8" fill="#493465"/>
+ <circle cx="45" cy="68" r="2.4" fill="white"/><circle cx="81" cy="68" r="2.4" fill="white"/>
+ <path d="M60 85q6 5 12 0" fill="none" stroke="#906887" stroke-width="3" stroke-linecap="round"/>
+ <ellipse cx="34" cy="84" rx="7" ry="4" fill="#ed97ba" opacity=".55"/><ellipse cx="97" cy="84" rx="7" ry="4" fill="#ed97ba" opacity=".55"/>
+ ${starCrown}${crest}
+ ${rank>=4?`<path d="M12 50l4-10 4 10 11 4-11 4-4 10-4-10-11-4z" fill="${c.accent}"/>`:''}
+ ${rank>=5?`<circle cx="65" cy="64" r="60" fill="none" stroke="#ffe5a0" stroke-width="3" stroke-dasharray="4 9"/>`:''}
+ </svg>`;
+}
+function demonSVG(boss=false){return boss?`<svg viewBox="0 0 92 96" aria-hidden="true"><path d="M20 35L5 12 30 22 46 5 62 22 87 12 72 35Q91 67 68 85 46 98 23 84 1 67 20 35Z" fill="#21112e" stroke="#b45cba" stroke-width="4"/><path d="M22 52L39 60 34 67 18 60M70 52L53 60 58 67 74 60" fill="#fa66c5"/><path d="M25 20L35 33M67 20L57 33" stroke="#e65cca" stroke-width="3"/><path d="M38 80l8 4 8-4" fill="none" stroke="#e89ad6" stroke-width="3"/></svg>`:`<svg viewBox="0 0 64 65" aria-hidden="true"><path d="M14 24L7 5 25 17 32 10 42 17 59 5 51 24Q63 44 47 56 33 67 17 56 3 45 14 24Z" fill="#22162f" stroke="#86518e" stroke-width="3.5"/><path d="M17 34l13 8-6 5-12-6M47 34l-13 8 6 5 12-6" fill="#f278c8"/><path d="M24 55q8 5 16 0" fill="none" stroke="#c178c1" stroke-width="2"/></svg>`}
+
+function unitHTML(u){let d=UNITS[u.type];return `<div class="item-unit unit-rank-${u.rank}" style="--unit-hue:0deg;--unit-color:${d.color}" data-unitid="${u.id}" title="${d.name} ${u.rank} étoiles · ${d.family} / ${d.role}">${guardianSVG(u.rank,false,u.type)}<span class="unit-gem">${TRAITS[d.family].icon}</span><span class="mana-meter" data-manaid="${u.id}" style="--mana:${Math.round((u.mana||0))}%"><i></i></span><span class="rank-bubble">${'★'.repeat(u.rank)}</span></div>`}
+function newUnit(type,rank=1){return {id:uid++,type,rank,cd:Math.random()*.15,mana:0,attacks:0,invested:UNITS[type].price*Math.pow(2,rank-1)}}
+function randUnit(){const names=Object.keys(UNITS);return names[Math.floor(Math.random()*names.length)]}
+function newOffers(initial=false){return initial?['luma','luma','mousse']:Array.from({length:3},()=>randUnit())}
+
+/* Product meta interface: persistent local demo records; no purchased currency/unlocks. */
+const META_REGIONS={
+ aurore:{name:"Chapitre I · Royaume d'Aurore",status:"Démo jouable",quest:"Repousser les six vagues",reward:"Défi PvE",playable:true},
+ sylve:{name:"Sylve Émeraude",status:"Aperçu visuel",quest:"Région à développer",reward:"À venir",playable:false},
+ flux:{name:"Sanctuaire des Flux",status:"Aperçu visuel",quest:"Région à développer",reward:"À venir",playable:false},
+ shadow:{name:"Royaume des Ombres",status:"Accès verrouillé",quest:"Région non disponible dans la démo",reward:"À venir",playable:false}
+};
+function loadMeta(){try{const data=JSON.parse(localStorage.getItem('elemental-tower-meta-v09')||'{}');return {attempts:Number(data.attempts)||0,bestWaves:Math.min(WAVES,Number(data.bestWaves)||0),wins:Number(data.wins)||0,lastFusions:Number(data.lastFusions)||0}}catch{return {attempts:0,bestWaves:0,wins:0,lastFusions:0}}}
+const metaProgress=loadMeta();let metaRegion='aurore';
+function persistMeta(){try{localStorage.setItem('elemental-tower-meta-v09',JSON.stringify(metaProgress))}catch{/*private browser*/}}
+function renderMetaHome(){
+ const info=META_REGIONS[metaRegion];$('metaLocationLabel').textContent=info.name+' ›';$('metaRegionTitle').textContent=info.name;$('metaRegionStatus').textContent=info.status;
+ $('metaQuestTitle').textContent=info.quest;$('metaQuestReward').textContent=info.reward;
+ $('metaQuestProgress').textContent=info.playable?('Record '+metaProgress.bestWaves+' / '+WAVES+' vagues'):'Contenu non encore jouable';
+ $('metaQuestFill').style.width=info.playable?(Math.min(100,metaProgress.bestWaves/WAVES*100)+'%'):'0%';
+ $('playBtn').disabled=!info.playable;$('playBtn').textContent=info.playable?'⚔ Préparer l’expédition':'Région en préparation';
+ home.querySelectorAll('[data-region]').forEach(btn=>{const selected=btn.dataset.region===metaRegion;btn.classList.toggle('is-active',selected);btn.setAttribute('aria-pressed',String(selected))});
+}
+function closeMetaPanel(){$('metaPanel').classList.add('hidden');home.querySelectorAll('[data-meta-nav]').forEach(b=>b.setAttribute('aria-current',b.dataset.metaNav==='world'?'page':'false'))}
+
+/* Meta V1.0: real prototype interactions around the validated PvE data, with clearly signalled demo content. */
+const META = {
+ familyDetails:{
+  Aurore:{color:'#f0d297',lore:'Les gardiens de la lumière défendent les sentiers du sanctuaire.'},
+  Sylve:{color:'#9fe6b4',lore:'La Sylve protège les chemins grâce à son contrôle du terrain.'},
+  'Crépuscule':{color:'#d7a4f7',lore:'Le Crépuscule manipule les ombres et perturbe les assauts.'}
+ },
+ regionDetails:{
+  aurore:{lore:'Le premier sanctuaire est assiégé. Compose ta défense et découvre tes premières synergies.',stars:3,chapters:['Sentier des éveillés','Les trois arches','Gardien du portail']},
+  sylve:{lore:'Une forêt suspendue de racines magiques et de cascades. Cette région reste une proposition artistique.',stars:3,chapters:['Le cœur des racines','Bosquet du silence','L’esprit ancien']},
+  flux:{lore:'Le monde des cascades cristallines et des courants élémentaires. Contenu à concevoir.',stars:3,chapters:['Passage des cristaux','La faille brillante','Gardiens des eaux']},
+  shadow:{lore:'Royaume des démons, encore inaccessible dans cette démo.',stars:3,chapters:['Le seuil obscur','La forteresse','Le cœur du Néant']}
+ },
+ offers:[
+  {id:'aurora',name:'Éclats d’Aurore',note:'Skin, effet de fusion, décor de terrain',color:'#f9d59f',status:'Concept'},
+  {id:'sylve',name:'Jardin de Sylve',note:'Teinte de gardien, particules végétales, terrain',color:'#a7e9b8',status:'Concept'},
+  {id:'night',name:'Échos du Crépuscule',note:'Skin, aura violette, effet de victoire',color:'#e5b2ff',status:'Concept'}
+ ],
+ pass:[
+  {level:1,free:'Cadre de profil',premium:'Skin d’Aurore'},
+  {level:2,free:'Icône de gardien',premium:'Animation de fusion'},
+  {level:3,free:'Bannière de profil',premium:'Décor cristallin'},
+  {level:4,free:'Titre explorateur',premium:'Effet de victoire'},
+  {level:5,free:'Cadre de saison',premium:'Skin de saison'}
+ ],
+ missionTemplates:[
+  {id:'first',name:'Lancer sa première expédition',desc:'Terminer une partie, victoire ou défaite',kind:'daily',goal:1,metric:'attempts'},
+  {id:'waves',name:'Franchir les premières vagues',desc:'Atteindre la vague 3 lors d’une expédition',kind:'daily',goal:3,metric:'bestWaves'},
+  {id:'fusion',name:'Expérimenter les fusions',desc:'Réaliser deux fusions dans une expédition',kind:'daily',goal:2,metric:'lastFusions'},
+  {id:'mastery',name:'Percer les défenses du boss',desc:'Terminer les six vagues du chapitre de test',kind:'weekly',goal:1,metric:'wins'},
+  {id:'veteran',name:'Affiner sa stratégie',desc:'Terminer cinq expéditions de test',kind:'weekly',goal:5,metric:'attempts'}
+ ]
+};
+let metaView={page:'world',family:'Toutes',role:'Toutes',guardian:null,guardianTab:'talents',missionTab:'daily',storeTab:'packs',detailOffer:null,passShown:false,rankTab:'hebdo'};
+const familyNames=['Toutes','Aurore','Sylve','Crépuscule'],roleNames=['Toutes','Gardien','Arcaniste','Chasseur'];
+const escapeText=t=>String(t).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+const glyph=(name,size=19)=>'<svg class="meta-kicon" width="'+size+'" height="'+size+'" viewBox="0 0 24 24" aria-hidden="true"><use href="#et-icon-'+name+'"></use></svg>';
+const metaPill=(text,kind='')=>'<span class="meta-token '+kind+'">'+escapeText(text)+'</span>';
+const meter=(value,max)=>'<div class="meta-indicator" role="progressbar" aria-valuenow="'+Math.min(value,max)+'" aria-valuemin="0" aria-valuemax="'+max+'"><i style="width:'+Math.max(0,Math.min(100,value/max*100))+'%"></i></div>';
+const metaSection=(title,desc='')=>'<div class="meta-subhead"><h3>'+title+'</h3>'+(desc?'<span>'+desc+'</span>':'')+'</div>';
+function renderMetaCollection(){
+ const selected=Object.entries(UNITS).filter(([,g])=>(metaView.family==='Toutes'||g.family===metaView.family)&&(metaView.role==='Toutes'||g.role===metaView.role));
+ return '<div class="meta-hero-panel"><span class="meta-overline">GRIMOIRE DES GARDIENS</span><h3>Compose ton équipe</h3><p>9 gardiens utilisables dans la démo · 3 familles · 3 classes. Les déblocages définitifs restent à intégrer.</p></div>'+
+ metaSection('Familles','Filtrer le catalogue')+
+ '<div class="meta-filter-row">'+familyNames.map(f=>'<button type="button" class="meta-filter '+(metaView.family===f?'selected':'')+'" data-family="'+f+'">'+f+'</button>').join('')+'</div>'+
+ '<div class="meta-filter-row">'+roleNames.map(role=>'<button type="button" class="meta-filter small '+(metaView.role===role?'selected':'')+'" data-role="'+role+'">'+role+'</button>').join('')+'</div>'+
+ '<div class="meta-collection-head"><strong>'+selected.length+' gardiens</strong><span>Appuyer pour consulter</span></div>'+
+ '<div class="meta-guardian-grid meta-v2-grid">'+selected.map(([key,g])=>{
+ const fam=META.familyDetails[g.family];return '<button type="button" class="meta-guardian-card meta-v2-guardian" data-guardian="'+key+'" style="--guardian-accent:'+fam.color+'">'+
+ '<div class="meta-guardian-art">'+guardianSVG(1,true,key)+'</div><strong>'+g.name+'</strong>'+
+ '<small>'+g.family+'</small><span class="meta-small-tag">'+g.role+'</span></button>'}).join('')+'</div>'+
+ '<div class="meta-note"><b>Évolution :</b> 2 copies du même gardien et du même rang → rang supérieur, jusqu’à 5★. Les étoiles sont réinitialisées à chaque expédition.</div>';
+}
+function renderMetaGuardianDetail(key){
+ const g=UNITS[key];if(!g)return renderMetaCollection();const f=META.familyDetails[g.family],trait=TRAITS[g.family],role=TRAITS[g.role],t=metaView.guardianTab;
+ const hero='<div class="meta-detail-hero" style="--detail-accent:'+f.color+'"><div class="meta-detail-art">'+guardianSVG(3,false,key)+'</div><div><span class="meta-overline">FICHE GARDIEN · DÉMO</span><h3>'+g.name+'</h3><p>'+g.family+' · '+g.role+'</p><div>'+metaPill('Démo PvE','violet')+metaPill('1★–5★','gold')+'</div></div></div>';
+ const tabs='<div class="meta-filter-row">'+[['talents','Capacités'],['synergy','Synergies'],['evolution','Évolution'],['looks','Apparences']].map(([id,label])=>'<button class="meta-filter small '+(id===t?'selected':'')+'" data-gtab="'+id+'">'+label+'</button>').join('')+'</div>';
+ let body='';
+ if(t==='talents')body=metaSection('Rôle et stats','Données du moteur V0.8')+
+ '<div class="meta-stat-grid">'+[['Dégâts',g.damage,'damage'],['Cadence',(1/g.cooldown).toFixed(2)+'/s','attack-speed'],['Coût',g.price+' or','gold'],['Rang max','5★','fusion']].map(([n,v,ico])=>'<div class="meta-stat">'+glyph(ico)+'<span>'+n+'</span><b>'+v+'</b></div>').join('')+'</div>'+
+ '<div class="meta-info-line">'+glyph('skill')+'<div><strong>Compétence active</strong><p>La compétence spéciale s’active pendant le combat lorsque le mana est chargé. Son effet dépend du rôle et de la famille.</p></div></div>'+
+ '<div class="meta-note">Les valeurs sont celles du prototype et peuvent changer avec l’équilibrage du collègue. Les capacités avancées des 27 augments ne sont pas encore implémentées.</div>';
+ if(t==='synergy')body=metaSection('Synergies de composition','Gardiens distincts placés sur le terrain')+
+ '<div class="meta-info-line">'+glyph('synergy',26)+'<div><strong>'+g.family+' · 2 différents</strong><p>'+trait.desc+'</p></div></div>'+
+ '<div class="meta-info-line">'+glyph('augment',26)+'<div><strong>'+g.role+' · 2 différents</strong><p>'+role.desc+'</p></div></div>'+
+ '<div class="meta-note">Le rang des gardiens, leurs classes et les bonus actifs sont visibles pendant la partie. Aucun bonus n’est appliqué depuis cette fiche.</div>';
+ if(t==='evolution')body=metaSection('Fusion de 1★ à 5★','Progression propre à chaque expédition')+
+ '<div class="meta-stars-road">'+[1,2,3,4,5].map(n=>'<span>'+n+'★</span>').join('<i>›</i>')+'</div>'+
+ '<div class="meta-info-line">'+glyph('fusion',26)+'<div><strong>Fusion identique</strong><p>Deux copies du même type et du même rang fusionnent pour devenir une seule unité du rang suivant. Le coût en exemplaires augmente à chaque rang.</p></div></div>'+
+ '<div class="meta-note">La fusion 5★ réclame 16 exemplaires de base. Sur six vagues, elle n’est pas garantie. Le rang ne reste pas acquis entre deux parties.</div>';
+ if(t==='looks')body=metaSection('Apparences et effets','Cosmétiques uniquement')+
+ '<div class="meta-offer-look">'+guardianSVG(3,false,key)+'</div>'+
+ '<div class="meta-note">Aucun skin commercial n’est encore chargé dans le dépôt. Les illustrations de référence ne sont pas des sprites importables ni des assets validés de production.</div>'+
+ '<button type="button" class="meta-wide-secondary" data-open-page="shop">Explorer les concepts de boutique</button>';
+ return '<button class="meta-inline-back" data-back-collection>‹ Tous les gardiens</button>'+hero+tabs+body;
+}
+function renderMetaMissions(){
+ const set=metaView.missionTab;
+ const templates=META.missionTemplates.filter(m=>m.kind===set);
+ const checked=templates.filter(m=>Number(metaProgress[m.metric]||0)>=m.goal).length;
+ return '<div class="meta-hero-panel"><span class="meta-overline">TABLEAU DES OBJECTIFS</span><h3>Petites victoires, grandes synergies</h3><p>Les missions ci-dessous sont des scénarios de prototype. Leur suivi utilise seulement les parties terminées sur cet appareil ; aucune récompense monétaire n’est créditée.</p></div>'+
+ '<div class="meta-switcher"><button data-mission-tab="daily" class="'+(set==='daily'?'active':'')+'">Quotidiennes</button><button data-mission-tab="weekly" class="'+(set==='weekly'?'active':'')+'">Hebdomadaires</button></div>'+
+ metaSection('Objectifs','Complétés '+checked+' / '+templates.length)+meter(checked,Math.max(1,templates.length))+
+ '<div class="meta-task-stack">'+templates.map((m,i)=>{const v=Math.min(m.goal,Number(metaProgress[m.metric]||0)),ok=v>=m.goal;return '<div class="meta-task"><div class="meta-task-symbol">'+(ok?'✓':['◇','✧','⚔'][i%3])+'</div><div class="meta-task-content"><strong>'+m.name+'</strong><p>'+m.desc+'</p>'+meter(v,m.goal)+'<small>'+v+' / '+m.goal+(ok?' · suivi local validé':'')+'</small></div><span class="meta-task-reward">'+(ok?'✓':'✦')+'</span></div>'}).join('')+'</div>'+
+ '<div class="meta-note">La date quotidienne et les récompenses ne sont pas actives : les compteurs ici ne se réinitialisent pas automatiquement. Cette présentation valide le parcours UX, pas le système de missions de production.</div>';
+}
+function renderMetaShop(){
+ const t=metaView.storeTab;
+ return '<div class="meta-hero-panel shop"><span class="meta-overline">ÉCHOPPE DES GARDIENS</span><h3>Un univers à ton image</h3><p>Packs cosmétiques à l’étude. Aucune transaction réelle, aucun bonus de combat, aucun achat de gardiens.</p><span class="meta-token gold">◆ 0 diamants · démo</span></div>'+
+ '<div class="meta-switcher"><button data-shop-tab="packs" class="'+(t==='packs'?'active':'')+'">Collections</button><button data-shop-tab="pass" class="'+(t==='pass'?'active':'')+'">Pass saisonnier</button></div>'+
+ (t==='packs'?metaSection('Collections thématiques','Aperçus non commercialisés')+
+ '<div class="meta-shop-grid">'+META.offers.map((o,i)=>'<button class="meta-shop-card" style="--product-glow:'+o.color+'" data-offer="'+o.id+'"><div class="meta-shop-visual"><span>'+['✦','❀','◈'][i]+'</span></div><strong>'+o.name+'</strong><small>'+o.note+'</small><em>Voir le concept ›</em></button>').join('')+'</div>'+
+ '<div class="meta-note">Tarifs, effets 2D et assets finaux restent à valider ; aucune offre n’a de prix inventé.</div>':
+ renderMetaPass());
+}
+function renderMetaPass(){
+ return '<div class="meta-pass-intro"><span class="meta-overline">SAISON COSMÉTIQUE · MAQUETTE</span><h3>Le Chemin des Éclats</h3><p>Une saison de présentation, sans date de fin ni progression réelle. Une voie gratuite et une voie premium purement cosmétique.</p></div>'+
+ metaSection('Paliers de démonstration','5 étapes conceptuelles')+
+ '<div class="meta-pass-list">'+META.pass.map((p,i)=>'<div class="meta-pass-step"><div class="meta-pass-level">'+p.level+'</div><div><small>GRATUIT</small><strong>'+p.free+'</strong></div><div><small>PREMIUM</small><strong>'+p.premium+'</strong></div></div>').join('')+'</div>'+
+ '<div class="meta-note">Les 20 niveaux et la durée de saison mentionnés dans le GDD sont des propositions de test, pas un catalogue implémenté. Aucun achat ni progression payante n’est autorisé dans cette maquette.</div>';
+}
+function renderMetaOfferDetail(id){
+ const offer=META.offers.find(o=>o.id===id);if(!offer)return renderMetaShop();
+ return '<button class="meta-inline-back" data-back-shop>‹ Retour à la boutique</button>'+
+ '<div class="meta-preview-offer" style="--product-glow:'+offer.color+'"><div>✦</div><h3>'+offer.name+'</h3><span>PACK THÉMATIQUE · CONCEPT</span></div>'+
+ metaSection('Contenu envisagé')+
+ offer.note.split(', ').map((part,i)=>'<div class="meta-info-line"><span class="meta-task-symbol">'+['✧','❖','✦'][i%3]+'</span><div><strong>'+part+'</strong><p>Aperçu graphique à produire ; pas de donnée commerciale réelle.</p></div></div>').join('')+
+ '<button class="meta-wide-secondary" data-back-shop>Fermer l’aperçu</button>'+
+ '<div class="meta-note">Évaluation uniquement. Le prototype ne simule pas une transaction et ne crédite aucun diamant.</div>';
+}
+function renderMetaRankings(){
+ return '<div class="meta-hero-panel rank"><span class="meta-overline">CLASSEMENTS · DÉFIS HEBDOMADAIRES</span><h3>Les meilleurs tacticiens</h3><p>Cette page présente l’architecture prévue. Aucun adversaire ni score distant n’est inventé.</p></div>'+
+ '<div class="meta-rank-card"><span class="meta-overline">TON RECORD LOCAL</span><div class="meta-rank-line"><b>'+metaProgress.bestWaves+' / '+WAVES+'</b><span>vagues atteintes</span></div>'+meter(metaProgress.bestWaves,WAVES)+'</div>'+
+ metaSection('Défi hebdomadaire','Non encore disponible')+
+ '<div class="meta-list-item"><span class="meta-icon">⚔</span><div><strong>Scénario commun</strong><small>Même carte et vagues, gardiens de la collection personnelle</small></div></div>'+
+ '<div class="meta-list-item"><span class="meta-icon">◇</span><div><strong>Classement vérifié</strong><small>Validation serveur requise avant un score officiel</small></div></div>'+
+ '<div class="meta-list-item"><span class="meta-icon">✧</span><div><strong>Récompenses cosmétiques</strong><small>Aucun avantage de puissance payé ou classé</small></div></div>'+
+ '<div class="meta-note">Le PvP de production utilisera uniquement les gardiens débloqués personnellement, et les écarts de collections seront explicités. Ce prototype ne possède ni réseau, ni matchmaking, ni classement officiel.</div>';
+}
+function renderMetaProfile(){
+ return '<div class="meta-profile-banner"><div class="meta-profile-sigil">✦</div><div><span class="meta-overline">TACTICIEN · DÉMO LOCALE</span><h3>Explorateur d’Aurore</h3><p>Profil non connecté · données sur cet appareil</p></div></div>'+
+ metaSection('Tableau de bord','Statistiques mesurées')+
+ '<div class="meta-stats-overview">'+[['Parties',metaProgress.attempts],['Victoires',metaProgress.wins],['Vagues max',metaProgress.bestWaves+'/'+WAVES],['Fusions (dernière)',metaProgress.lastFusions]].map(([n,v])=>'<div><b>'+v+'</b><span>'+n+'</span></div>').join('')+'</div>'+
+ metaSection('Succès','Présentation des jalons')+
+ '<div class="meta-list-item"><span class="meta-icon">✦</span><div><strong>Premier pas</strong><small>'+ (metaProgress.attempts?'Accompli · une expédition terminée':'À découvrir · terminer une expédition')+'</small></div></div>'+
+ '<div class="meta-list-item"><span class="meta-icon">★</span><div><strong>Défenseur du sanctuaire</strong><small>'+(metaProgress.wins?'Accompli · une victoire':'À découvrir · remporter le chapitre de test')+'</small></div></div>'+
+ '<button class="meta-wide-secondary" data-open-page="rank">Consulter les défis et classements</button>'+
+ '<button class="meta-wide-secondary" data-open-page="settings">Réglages et informations</button>';
+}
+function renderMetaSettings(){
+ return '<div class="meta-hero-panel"><span class="meta-overline">PARAMÈTRES</span><h3>Ton expérience</h3><p>Réglages du prototype local.</p></div>'+
+ metaSection('Audio et accessibilité')+
+ '<div class="meta-list-item"><span class="meta-icon">♪</span><div><strong>Effets sonores</strong><small>Actuellement '+(audioEnabled?'activés':'coupés')+'</small></div><button type="button" class="meta-mini-action" data-toggle-sound>'+(audioEnabled?'Couper':'Activer')+'</button></div>'+
+ '<div class="meta-list-item"><span class="meta-icon">◈</span><div><strong>Animations réduites</strong><small>Le navigateur suit « Réduire les animations » dans le système</small></div></div>'+
+ metaSection('Informations de version')+
+ '<div class="meta-note"><strong>Meta UI V1.0 · prototype.</strong> Moteur de combat V0.8 inchangé. Les données de missions et le record local ne sont pas synchronisés avec un compte. Sans achat, sans compte, sans prétention de conformité App Store.</div>';
+}
+function renderMetaRegion(){
+ const id=metaRegion,info=META.regionDetails[id],r=META_REGIONS[id],isAurore=id==='aurore';
+ return '<div class="meta-region-showcase"><span class="meta-overline">CARTE DU MONDE · '+(isAurore?'CHAPITRE I':'APERÇU')+'</span><h3>'+r.name+'</h3><p>'+info.lore+'</p><span class="meta-token '+(isAurore?'gold':'')+'">'+r.status+'</span></div>'+
+ metaSection('Parcours de la région',isAurore?'Démo PvE : 6 vagues':'Chapitres proposés')+
+ '<div class="meta-map-stages">'+info.chapters.map((name,i)=>'<div class="meta-stage '+(isAurore?'':'locked')+'"><span>'+(i+1)+'</span><strong>'+name+'</strong><small>'+(isAurore?'Scénario de présentation':'À produire')+'</small></div>').join('')+'</div>'+
+ (isAurore?'<button class="meta-wide-primary" data-prepare>Préparer l’expédition</button>':'<div class="meta-note">Les chapitres affichés sont des concepts éditoriaux : pas d’ennemis, récompenses ni niveaux codés dans cette région.</div>')+
+ '<button class="meta-wide-secondary" data-open-page="collection">Explorer les gardiens</button>';
+}
+function renderMetaPanelContent(){
+ const page=metaView.page,body=$('metaPanelBody'),titles={collection:['Collection','Gardiens et synergies'],missions:['Missions','Objectifs de progression'],shop:['Boutique','Packs et Pass cosmétiques'],profile:['Profil','Progression et statistiques'],rank:['Défis','Classements hebdomadaires'],settings:['Réglages','Audio et informations'],region:['Région','Carte du monde']};
+ const t=titles[page]||titles.collection;$('metaPanelTitle').textContent=t[0];$('metaPanelSubtitle').textContent=t[1];
+ if(page==='collection')body.innerHTML=metaView.guardian?renderMetaGuardianDetail(metaView.guardian):renderMetaCollection();
+ else if(page==='missions')body.innerHTML=renderMetaMissions();
+ else if(page==='shop')body.innerHTML=metaView.detailOffer?renderMetaOfferDetail(metaView.detailOffer):renderMetaShop();
+ else if(page==='profile')body.innerHTML=renderMetaProfile();
+ else if(page==='rank')body.innerHTML=renderMetaRankings();
+ else if(page==='settings')body.innerHTML=renderMetaSettings();
+ else if(page==='region')body.innerHTML=renderMetaRegion();
+ $('metaPanel').classList.remove('hidden');
+ home.querySelectorAll('[data-meta-nav]').forEach(b=>b.setAttribute('aria-current',b.dataset.metaNav===page?'page':'false'));
+}
+function openMetaPanel(page){
+ if(page==='world'){metaView.page='world';metaView.guardian=null;metaView.detailOffer=null;closeMetaPanel();return}
+ metaView.page=page;metaView.guardian=null;metaView.detailOffer=null;
+ renderMetaPanelContent();$('metaPanelBody').scrollTop=0;
+}
+$('metaPanelBody').addEventListener('click',e=>{
+ const control=e.target.closest('button');if(!control)return;
+ if(control.hasAttribute('data-family')){metaView.family=control.dataset.family;renderMetaPanelContent()}
+ else if(control.hasAttribute('data-role')){metaView.role=control.dataset.role;renderMetaPanelContent()}
+ else if(control.hasAttribute('data-guardian')){metaView.guardian=control.dataset.guardian;metaView.guardianTab='talents';renderMetaPanelContent();$('metaPanelBody').scrollTop=0}
+ else if(control.hasAttribute('data-gtab')){metaView.guardianTab=control.dataset.gtab;renderMetaPanelContent()}
+ else if(control.hasAttribute('data-back-collection')){metaView.guardian=null;renderMetaPanelContent()}
+ else if(control.hasAttribute('data-mission-tab')){metaView.missionTab=control.dataset.missionTab;renderMetaPanelContent()}
+ else if(control.hasAttribute('data-shop-tab')){metaView.storeTab=control.dataset.shopTab;metaView.detailOffer=null;renderMetaPanelContent()}
+ else if(control.hasAttribute('data-offer')){metaView.detailOffer=control.dataset.offer;renderMetaPanelContent();$('metaPanelBody').scrollTop=0}
+ else if(control.hasAttribute('data-back-shop')){metaView.detailOffer=null;renderMetaPanelContent()}
+ else if(control.hasAttribute('data-open-page'))openMetaPanel(control.dataset.openPage)
+ else if(control.hasAttribute('data-prepare')){closeMetaPanel();$('metaPrep').classList.remove('hidden');$('metaStart').focus()}
+ else if(control.hasAttribute('data-toggle-sound')){setAudio(!audioEnabled);renderMetaPanelContent()}
+});
+
+home.querySelectorAll('[data-quick]').forEach(btn=>btn.addEventListener('click',()=>{if(btn.dataset.quick==='shop'){openMetaPanel('shop');metaView.storeTab='pass';renderMetaPanelContent()}else openMetaPanel(btn.dataset.quick)}));
+$('metaLocationCard').addEventListener('click',()=>openMetaPanel('region'));
+home.querySelectorAll('[data-region]').forEach(btn=>btn.addEventListener('click',()=>{metaRegion=btn.dataset.region;renderMetaHome()}));
+home.querySelectorAll('[data-meta-nav]').forEach(btn=>btn.addEventListener('click',()=>openMetaPanel(btn.dataset.metaNav)));
+$('profileBtn').addEventListener('click',()=>openMetaPanel('profile'));
+$('metaBack').addEventListener('click',closeMetaPanel);
+$('playBtn').addEventListener('click',()=>{if(!META_REGIONS[metaRegion].playable)return;$('metaPrep').classList.remove('hidden');$('metaStart').focus()});
+$('metaCancel').addEventListener('click',()=>$('metaPrep').classList.add('hidden'));
+$('metaPrep').addEventListener('click',e=>{if(e.target===$('metaPrep'))$('metaPrep').classList.add('hidden')});
+$('metaStart').addEventListener('click',()=>{$('metaPrep').classList.add('hidden');newGame('story')});
+$('sandboxBtn').addEventListener('click',()=>{$('metaPrep').classList.add('hidden');newGame('sandbox')});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!$('metaPrep').classList.contains('hidden')){$('metaPrep').classList.add('hidden')}else if(!$('metaPanel').classList.contains('hidden'))closeMetaPanel()}});
+
+function newGame(mode='story'){
+ uid=1;game={mode,phase:'buy',gold:mode==='sandbox'?4000:160,life:100,wave:0,bench:Array(BENCH_SIZE).fill(null),board:Array(SLOTS.length).fill(null),offers:newOffers(true),enemies:[],spawn:[],spawnElapsed:0,waveActive:false,kills:0,highest:1,selected:null,finished:false,completedWaves:0,prep:0,firstBought:null,fusions:0,losses:0};
+ home.classList.add('hidden');battle.classList.remove('hidden');$('endOverlay').classList.add('hidden');enemyLayer.replaceChildren();fx.replaceChildren();redraw();createSound(680,.1,'triangle');
+}
+function countUnits(){return [...game.bench,...game.board].filter(Boolean).length}
+function traitCounts(){let types=[...new Set(game.board.filter(Boolean).map(u=>u.type))];let counts=Object.fromEntries(Object.keys(TRAITS).map(k=>[k,0]));for(let type of types){let d=UNITS[type];counts[d.family]++;counts[d.role]++}return counts}
+function isActive(name){return traitCounts()[name]>=2}
+function renderTraits(){const counts=traitCounts();const active=Object.keys(counts).filter(k=>counts[k]>=2);
+ $('synergySummary').textContent=active.length?`${active.length} SYNERGIE${active.length>1?'S':''} ACTIVE${active.length>1?'S':''}`:'COMPOSE TON ÉQUIPE';
+ const shown=Object.keys(counts).filter(k=>counts[k]>0);$('traits').innerHTML=shown.length?shown.map(name=>`<button type="button" class="trait-chip ${counts[name]>=2?'active':''}" data-trait="${name}" title="${TRAITS[name].desc}"><span>${TRAITS[name].icon} ${name}</span><span class="trait-count">${counts[name]}/2</span></button>`).join(''):'<span style="font-size:10px;color:#baa4d4;align-self:center">Place 2 gardiens différents d’une même famille ou classe pour débloquer des bonus.</span>';
+}
+const ROLE_KITS={
+ Gardien:{passive:'Ses tirs freinent',skill:'Onde protectrice · ralentit et blesse en zone'},
+ Arcaniste:{passive:'2 projectiles par tir',skill:'Orage · foudroie 10 ennemis'},
+ Chasseur:{passive:'Critique tous les 3 tirs',skill:'Salve · frappe 6 ennemis'}
+};
+const SELL_RATIO=.60;
+function resaleValue(u){return Math.floor((u.invested??UNITS[u.type].price*Math.pow(2,u.rank-1))*SELL_RATIO)}
+function sellSelected(){if(!game||game.finished||!game.selected)return;const {kind,index,u}=game.selected;if(game[kind][index]?.id!==u.id)return;const refund=resaleValue(u);game[kind][index]=null;game.gold+=refund;game.selected=null;createSound(440,.12,'triangle');toast(`${UNITS[u.type].name} revendu · +${refund} or`);redraw();}
+function updateCoach(){if(!game)return;let title,desc,step;
+ const selection=game.selected;
+ if(selection&&game[selection.kind][selection.index]?.id===selection.u.id){
+  const d=UNITS[selection.u.type],kit=ROLE_KITS[d.role];
+  title=`${d.name.toUpperCase()} · ${'★'.repeat(selection.u.rank)} · ${d.family} / ${d.role}`;
+  desc=`${kit.passive} · ${kit.skill}`;
+  step='';$('coach').classList.add('unit-focus');$('sellBtn').classList.remove('hidden');$('sellBtn').textContent=`REVENDRE +${resaleValue(selection.u)} ✦`;
+ }else{
+  $('coach').classList.remove('unit-focus');$('sellBtn').classList.add('hidden');
+  if(game.waveActive){title='DÉFENDS TON SANCTUAIRE';desc='Attaques, compétences et synergies se déclenchent automatiquement.';step='⚔'}
+  else if(!countUnits()){title='ÉTAPE 1 · CHOISIR';desc='Achète un gardien dans la boutique du bas.';step='1/4'}
+  else if(!game.board.some(Boolean)){title='ÉTAPE 2 · PLACER';desc='Touche ton gardien en réserve, puis un socle.';step='2/4'}
+  else if(game.fusions===0&&game.wave===0){title='ÉTAPE 3 · FUSIONNER';desc='Deux gardiens identiques de même rang = +1★.';step='3/4'}
+  else if(game.wave===0){title='ÉTAPE 4 · DÉFENDRE';desc='Lance la première vague.';step='4/4'}
+  else{title='TACTIQUE · FAMILLE + CLASSE';desc='Deux gardiens différents d’une même famille ou classe activent un bonus.';step='✧'}
+ }
+ $('coachTitle').textContent=title;$('coachText').textContent=desc;$('coachStep').textContent=step;
+ $('reserveHelp').textContent=game.bench.filter(Boolean).length+'/5 places';
+}
+function updateHUD(){if(!game)return;$('goldText').textContent=Math.floor(game.gold);$('lifeText').textContent=Math.max(0,Math.round(game.life));$('healthFill').style.width=Math.max(0,game.life)+'%';$('waveText').textContent='Vague '+(game.waveActive?game.wave:Math.min(WAVES,game.wave+1))+' / '+WAVES;
+ $('countdown').textContent=game.waveActive?'Défense en cours':game.prep>0?'Arrivée dans '+Math.ceil(game.prep)+' s':'Prêt à défendre';
+ $('waveNowBtn').textContent=game.waveActive?'⚔ COMBAT EN COURS':`⚔ LANCER VAGUE ${Math.min(WAVES,game.wave+1)}`;
+ $('waveNowBtn').disabled=game.waveActive||game.finished||!game.board.some(Boolean);
+ $('rerollBtn').disabled=game.gold<ROLL_COST||game.finished;
+ for(const u of [...game.board,...game.bench].filter(Boolean)){const meter=app.querySelector(`[data-manaid="${u.id}"]`);if(meter){meter.style.setProperty('--mana',Math.min(100,u.mana||0)+'%');meter.classList.toggle('ready',(u.mana||0)>=99)}}
+ shop.querySelectorAll('[data-buy]').forEach(btn=>{const d=UNITS[game.offers[Number(btn.dataset.buy)]];btn.disabled=game.finished||game.gold<d.price||game.bench.every(Boolean)});
+}
+function slotSelected(kind,index){return game.selected&&game.selected.kind===kind&&game.selected.index===index}
+function compatible(u){let s=game.selected;if(!s||!s.u||!u)return false;return s.u.type===u.type&&s.u.rank===u.rank&&u.rank<MAX_RANK&&s.u.id!==u.id}
+function renderBoard(){if(!game)return;board.innerHTML=SLOTS.map((s,i)=>{let u=game.board[i];return `<div class="board-slot drop ${!u&&game.phase==='place'?'available':''} ${slotSelected('board',i)?'selected':''} ${compatible(u)?'compatible':''}" style="left:${s.x/W*100}%;top:${s.y/H*100}%" data-drop="board:${i}" tabindex="0" role="button" aria-label="${u?UNITS[u.type].name+' '+u.rank+' étoiles':'Emplacement libre'}">${u?unitHTML(u)+`<span class="unit-name">${UNITS[u.type].name}</span>`:'<span class="plus">+</span>'}</div>`}).join('')}
+function renderBench(){if(!game)return;bench.innerHTML=game.bench.map((u,i)=>`<div class="bench-cell drop ${!u?'empty':''} ${slotSelected('bench',i)?'selected':''} ${compatible(u)?'compatible':''}" data-drop="bench:${i}" role="button" tabindex="0" aria-label="${u?UNITS[u.type].name+' '+u.rank+' étoiles':'Case de réserve vide'}">${u?unitHTML(u):''}</div>`).join('')}
+function renderShop(){if(!game)return;shop.innerHTML=game.offers.map((type,i)=>{if(!type)return `<button class="offer-card sold" disabled>RECRUTÉ ✓</button>`;let d=UNITS[type];return `<button class="offer-card" data-buy="${i}" style="--card-stroke:${d.color};--card-glow:${d.color};--unit-hue:0deg" title="${d.family} + ${d.role}"><span class="offer-art">${guardianSVG(1,false,type)}</span><span class="offer-copy"><strong>${d.name}</strong><span class="offer-traits">${d.family}<br>${d.role}</span><span class="offer-price">✦ ${d.price}</span></span></button>`}).join('')}
+function redraw(){renderBoard();renderBench();renderShop();renderTraits();updateCoach();updateHUD()}
+function buyOffer(index){if(!game||game.finished)return;let type=game.offers[index];if(!type)return;let i=game.bench.findIndex(x=>!x);if(i<0){toast('Réserve pleine. Place ou fusionne un gardien.');return}let d=UNITS[type];if(game.gold<d.price){toast('Pas assez d’or');return}game.gold-=d.price;game.bench[i]=newUnit(type);game.offers[index]=null;if(!game.firstBought)game.firstBought=type;createSound(700,.09,'triangle');burstAtDeck(i,'✦');redraw();}
+function reroll(){if(!game||game.finished)return;if(game.gold<ROLL_COST){toast('Pas assez d’or.');return}game.gold-=ROLL_COST;game.offers=newOffers();renderShop();updateHUD();createSound(460,.11,'sine');}
+function select(kind,index){const u=game[kind][index];if(!u){game.selected=null;redraw();return}game.selected={kind,index,u};redraw()}
+function attemptMove(srcKind,srcIndex,dstKind,dstIndex){if(!game||game.finished)return;if(srcKind===dstKind&&srcIndex===dstIndex)return;
+ const src=game[srcKind],dst=game[dstKind],a=src[srcIndex],b=dst[dstIndex];if(!a)return;
+ if(b&&a.type===b.type&&a.rank===b.rank&&a.rank<MAX_RANK){b.rank++;b.cd=0;b.mana=Math.max(b.mana||0,a.mana||0);b.invested=(b.invested??UNITS[b.type].price*Math.pow(2,b.rank-2))+(a.invested??UNITS[a.type].price*Math.pow(2,a.rank-1));src[srcIndex]=null;game.highest=Math.max(game.highest,b.rank);game.fusions++;createSound(740,.12,'triangle',.075);setTimeout(()=>createSound(1050,.2,'sine',.07),100);let pos=pointFor(dstKind,dstIndex);effect('✦',pos);effect('✧',{x:pos.x+8,y:pos.y+18});toast(`FUSION ! ${UNITS[b.type].name} ${b.rank}★`);if(b.rank===MAX_RANK)toast('LÉGENDAIRE · GARDIEN 5★');}
+ else if(b&&a.type===b.type&&a.rank===MAX_RANK&&b.rank===MAX_RANK){toast('Rang maximum atteint.');return}
+ else{src[srcIndex]=b||null;dst[dstIndex]=a;createSound(420,.06,'triangle')}
+ if(game.board.some(Boolean)&&!game.waveActive&&game.wave<WAVES&&game.prep<=0)game.prep=17;
+ game.selected=null;redraw();}
+function pointFor(kind,index){if(kind==='board')return SLOTS[index];const cell=bench.children[index],cr=cell?.getBoundingClientRect(),zr=zone.getBoundingClientRect();if(!cr)return{x:W/2,y:H/2};return{x:(cr.left+cr.width/2-zr.left)/zr.width*W,y:(cr.top+cr.height/2-zr.top)/zr.height*H}}
+function onDropClick(kind,index){if(!game||game.finished)return;const u=game[kind][index];if(game.selected){const sel=game.selected;if(sel.kind===kind&&sel.index===index){game.selected=null;redraw();return}attemptMove(sel.kind,sel.index,kind,index);return}if(u)select(kind,index);else if(kind==='board')toast('Choisis un gardien en réserve puis place-le ici.')}
+function toast(message){const old=app.querySelector('.toast');if(old)old.remove();const e=document.createElement('div');e.className='toast';e.textContent=message;app.appendChild(e);setTimeout(()=>e.remove(),2300)}
+function effect(content,pos){const el=document.createElement('span');el.className='burst';el.textContent=content;el.style.left=(pos.x/W*100)+'%';el.style.top=(pos.y/H*100)+'%';fx.appendChild(el);setTimeout(()=>el.remove(),820)}
+function burstAtDeck(i,content){const cell=bench.children[i];if(!cell)return;const r=cell.getBoundingClientRect(),ar=app.getBoundingClientRect();let el=document.createElement('span');el.className='burst';el.textContent=content;el.style.left=(r.left+r.width/2-ar.left)+'px';el.style.top=(r.top+r.height/2-ar.top)+'px';el.style.position='absolute';el.style.zIndex=15;app.appendChild(el);setTimeout(()=>el.remove(),820)}
+function waveSpecs(n){let arr=Array.from({length:4+n*2},(_,i)=>({at:i*Math.max(.37,.88-n*.07),kind:(n>=2&&i%5===4)?'fast':'normal'}));if(n%3===0)arr.push({at:(4+n*2)*Math.max(.37,.88-n*.07)+.5,kind:'boss'});return arr}
+function startWave(){if(!game||game.finished||game.waveActive||!game.board.some(Boolean))return;const n=game.wave+1;if(n>WAVES)return;game.wave=n;game.waveActive=true;game.prep=0;game.spawnElapsed=0;game.spawn=waveSpecs(n);game.enemies=[];game.selected=null;let t=$('waveBanner');t.textContent=n%3===0?'VAGUE DE BOSS':'VAGUE '+n;t.classList.remove('hidden');setTimeout(()=>t.classList.add('hidden'),1500);createSound(265,.25,'sawtooth',.055);redraw()}
+function spawnEnemy(kind){let boss=kind==='boss',fast=kind==='fast',hp=boss?155+game.wave*65:fast?18+game.wave*7:20+game.wave*9;game.enemies.push({id:uid++,kind,x:180,y:-22,progress:0,segment:0,hp,maxHp:hp,speed:boss?34:fast?99:66+game.wave*2,award:boss?85:fast?12:9,slowTime:0})}
+function updateEnemy(e,dt){let remaining=e.speed*(e.slowTime>0?.68:1)*dt;if(e.slowTime>0)e.slowTime-=dt;while(remaining>0&&e.segment<PATH.length-1){const a=PATH[e.segment],b=PATH[e.segment+1],len=Math.hypot(b.x-a.x,b.y-a.y),progressDist=e.progress*len;let v=Math.min(remaining,len-progressDist);e.progress+=(v/len);remaining-=v;e.x=a.x+(b.x-a.x)*e.progress;e.y=a.y+(b.y-a.y)*e.progress;if(e.progress>=1-1e-7){e.segment++;e.progress=0;}}if(e.segment>=PATH.length-1){game.life-=e.kind==='boss'?35:10;e.hp=0;e.reached=true;createSound(145,.13,'sawtooth',.04);effect('✕',{x:180,y:451});if(game.life<=0)finish(false)}}
+function shot(a,b,color){const el=document.createElement('div');el.className='shot';const dx=(b.x-a.x)*zone.clientWidth/W,dy=(b.y-a.y)*zone.clientHeight/H;el.style.left=(a.x/W*100)+'%';el.style.top=(a.y/H*100)+'%';el.style.width=Math.hypot(dx,dy)+'px';el.style.background=color;el.style.boxShadow='0 0 9px '+color;el.style.transform=`rotate(${Math.atan2(dy,dx)}rad)`;fx.appendChild(el);setTimeout(()=>el.remove(),210)}
+function ripple(pos,color='#bbddff',big=false){const e=document.createElement('span');e.className='skill-flash'+(big?' big':'');e.style.left=(pos.x/W*100)+'%';e.style.top=(pos.y/H*100)+'%';e.style.setProperty('--skill-color',color);fx.appendChild(e);setTimeout(()=>e.remove(),950)}
+function skillLabel(pos,label){const e=document.createElement('span');e.className='skill-label';e.textContent=label;e.style.left=(pos.x/W*100)+'%';e.style.top=(pos.y/H*100)+'%';fx.appendChild(e);setTimeout(()=>e.remove(),1100)}
+function dealDamage(e,power){if(!e||e.hp<=0)return;e.hp-=power}
+function castSkill(tower,slot,counts){const d=UNITS[tower.type],alive=game.enemies.filter(e=>e.hp>0);if(!alive.length)return;
+ const boost=Math.pow(1.55,tower.rank-1);tower.mana=0;
+ if(d.role==='Arcaniste'){
+  const targets=[...alive].sort((a,b)=>Math.hypot(a.x-slot.x,a.y-slot.y)-Math.hypot(b.x-slot.x,b.y-slot.y)).slice(0,10);
+  skillLabel(slot,'ORAGE ✦ '+targets.length);ripple(slot,d.color,true);
+  for(const e of targets){dealDamage(e,(23+game.wave*2)*boost);shot(slot,e,'#bceaff');effect('⚡',{x:e.x,y:e.y})}
+ }else if(d.role==='Gardien'){
+  skillLabel(slot,'ONDE PROTECTRICE');ripple(slot,'#a6ffe5',true);
+  for(const e of alive){if(Math.hypot(e.x-slot.x,e.y-slot.y)<160){e.slowTime=Math.max(e.slowTime,2.8);dealDamage(e,15*boost);effect('✧',{x:e.x,y:e.y})}}
+ }else{
+  const targets=[...alive].sort((a,b)=>b.segment-a.segment).slice(0,6);
+  skillLabel(slot,'SALVE ✦ '+targets.length);ripple(slot,'#ffdd9a');
+  for(const e of targets){dealDamage(e,19*boost);shot(slot,e,'#ffe7ae');effect('➶',{x:e.x,y:e.y})}
+ }
+ createSound(d.role==='Arcaniste'?900:d.role==='Chasseur'?580:350,.24,'triangle',.065);
+}
+function shoot(tower,slot,enemy,counts){
+ const d=UNITS[tower.type],kit=d.role;
+ let power=d.damage*Math.pow(1.85,tower.rank-1);
+ if(counts.Gardien>=2&&enemy.kind==='boss')power*=1.25;
+ if(counts.Chasseur>=2&&enemy.kind==='fast')power*=1.30;
+ if(counts.Crépuscule>=2)enemy.slowTime=Math.max(enemy.slowTime,1.3);
+ if(kit==='Gardien')enemy.slowTime=Math.max(enemy.slowTime,.8);
+ if(kit==='Chasseur'&&((tower.attacks||0)+1)%3===0){power*=1.75;effect('CRIT',{x:enemy.x,y:enemy.y})}
+ dealDamage(enemy,power);shot(slot,enemy,d.color);
+ if(kit==='Arcaniste'){
+   let extra=game.enemies.filter(e=>e.hp>0&&e.id!==enemy.id).sort((a,b)=>Math.hypot(a.x-slot.x,a.y-slot.y)-Math.hypot(b.x-slot.x,b.y-slot.y))[0];
+   if(extra&&Math.hypot(extra.x-slot.x,extra.y-slot.y)<145){dealDamage(extra,power*.70);shot(slot,extra,d.color)}
+   else {dealDamage(enemy,power*.45);shot(slot,enemy,'#f8e9ff')}
+ }
+ tower.attacks=(tower.attacks||0)+1;
+ tower.mana=Math.min(100,(tower.mana||0)+25);
+ if(tower.mana>=100)castSkill(tower,slot,counts);
+}
+function completeWave(){game.waveActive=false;game.completedWaves=game.wave;game.gold+=60+game.wave*8;game.enemies=[];if(game.wave>=WAVES){finish(true);return}game.offers=newOffers();if(game.wave===1&&game.firstBought)game.offers[1]=game.firstBought;game.prep=18;toast('VAGUE '+game.wave+' REPOUSSÉE · OR +'+(60+game.wave*8));createSound(940,.2,'triangle',.07);redraw()}
+function updateBattle(dt){if(!game||game.finished)return;if(!game.waveActive){if(game.prep>0&&game.board.some(Boolean)){game.prep-=dt;if(game.prep<=0)startWave()}else if(!game.board.some(Boolean))game.prep=0;return}
+ game.spawnElapsed+=dt;while(game.spawn.length&&game.spawn[0].at<=game.spawnElapsed)spawnEnemy(game.spawn.shift().kind);
+ const counts=traitCounts();for(const e of game.enemies)if(e.hp>0)updateEnemy(e,dt);
+ for(let i=0;i<game.board.length;i++){let u=game.board[i];if(!u)continue;u.cd-=dt;if(u.cd>0)continue;const d=UNITS[u.type],p=SLOTS[i],range=110+u.rank*7+(counts.Sylve>=2?33:0);let target=null,best=Infinity;for(const e of game.enemies){if(e.hp<=0)continue;const distance=Math.hypot(p.x-e.x,p.y-e.y);if(distance<range&&distance<best){best=distance;target=e}}if(target){shoot(u,p,target,counts);u.cd=Math.max(.22,d.cooldown/((counts.Aurore>=2?1.25:1)*(counts.Arcaniste>=2&&d.role==='Arcaniste'?1.20:1)))}}
+ for(const e of game.enemies)if(e.hp<=0&&!e.reached&&!e.rewarded){e.rewarded=true;game.gold+=e.award;game.kills++;effect('✦',{x:e.x,y:e.y});}
+ game.enemies=game.enemies.filter(e=>e.hp>0);renderEnemies();if(!game.finished&&!game.spawn.length&&!game.enemies.length)completeWave();
+}
+function renderEnemies(){if(!game)return;const ids=new Set(game.enemies.map(e=>e.id));for(const el of [...enemyLayer.children])if(!ids.has(Number(el.dataset.eid)))el.remove();for(const e of game.enemies){let node=enemyLayer.querySelector(`[data-eid="${e.id}"]`);if(!node){node=document.createElement('div');node.className='enemy '+(e.kind==='boss'?'boss':'');node.dataset.eid=e.id;node.innerHTML=demonSVG(e.kind==='boss')+'<div class="enemy-health"><span></span></div>';enemyLayer.appendChild(node)}node.style.left=(e.x/W*100)+'%';node.style.top=(e.y/H*100)+'%';node.querySelector('.enemy-health span').style.width=(e.hp/e.maxHp*100)+'%'}}
+function finish(win){if(!game||game.finished)return;metaProgress.attempts++;metaProgress.bestWaves=Math.max(metaProgress.bestWaves,game.completedWaves);metaProgress.lastFusions=game.fusions;if(win)metaProgress.wins++;persistMeta();$('metaResultSummary').textContent=(win?'Victoire du chapitre de test ! ':'Expédition terminée. ')+ 'Nouveau record : '+metaProgress.bestWaves+' / '+WAVES+' vagues. '+game.fusions+' fusion(s) sur cette partie. Aucun déblocage durable n’est attribué en démo.';game.finished=true;game.waveActive=false;game.spawn=[];$('endMedal').textContent=win?'✦':'◈';$('endTitle').textContent=win?'SANCTUAIRE SAUVÉ !':'LES OMBRES ONT GAGNÉ';$('endDescription').textContent=win?'Tes combinaisons de familles et tes fusions ont survécu aux vagues PvE.':'Recrute différentes familles et fusionne plus tôt pour renforcer ta défense.';$('endWaves').textContent=game.completedWaves;$('endRank').textContent=game.highest+'★';$('endKills').textContent=game.kills;$('endOverlay').classList.remove('hidden');createSound(win?880:180,.32,win?'sine':'sawtooth',.07)}
+$('replayBtn').onclick=()=>newGame('story');$('menuBtn').onclick=()=>{game=null;enemyLayer.innerHTML='';fx.innerHTML='';$('endOverlay').classList.add('hidden');battle.classList.add('hidden');home.classList.remove('hidden');renderMetaHome()};
+$('rerollBtn').onclick=reroll;$('waveNowBtn').onclick=startWave;$('secondaryBtn').onclick=()=>toast('2 types distincts activent un bonus. Arcanistes : 2 tirs, orage chargé. Tape un gardien pour le revendre.');$('sellBtn').onclick=sellSelected;
+shop.addEventListener('click',e=>{const btn=e.target.closest('[data-buy]');if(btn)buyOffer(Number(btn.dataset.buy))});
+$('traits').addEventListener('click',e=>{const btn=e.target.closest('[data-trait]');if(btn)toast(TRAITS[btn.dataset.trait].desc)});
+function getDrop(e){let n=e.target.closest?.('[data-drop]');if(!n)return null;let [kind,nStr]=n.dataset.drop.split(':');return {kind,index:Number(nStr)}}
+function dropClick(e){if(performance.now()<blockClicksUntil)return;let dst=getDrop(e);if(dst)onDropClick(dst.kind,dst.index)}
+board.addEventListener('click',dropClick);bench.addEventListener('click',dropClick);
+for(const region of [board,bench])region.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();let d=getDrop(e);if(d)onDropClick(d.kind,d.index)}});
+const ghost=$('dragGhost');document.addEventListener('pointerdown',e=>{if(!game||game.finished)return;const sprite=e.target.closest?.('.item-unit');if(!sprite)return;const drop=sprite.closest('[data-drop]');if(!drop)return;const [kind,idx]=drop.dataset.drop.split(':');drag={x:e.clientX,y:e.clientY,id:e.pointerId,kind,index:Number(idx),moved:false,sprite:sprite.innerHTML};});
+document.addEventListener('pointermove',e=>{if(!drag||e.pointerId!==drag.id)return;if(!drag.moved&&Math.hypot(e.clientX-drag.x,e.clientY-drag.y)>8){drag.moved=true;ghost.innerHTML=`<div class="item-unit">${drag.sprite}</div>`;ghost.style.display='block'}if(drag.moved){ghost.style.left=e.clientX+'px';ghost.style.top=e.clientY+'px'}});
+document.addEventListener('pointerup',e=>{if(!drag||e.pointerId!==drag.id)return;const d=drag;drag=null;if(d.moved){blockClicksUntil=performance.now()+240;ghost.style.display='none';const hit=document.elementFromPoint(e.clientX,e.clientY)?.closest('[data-drop]');if(hit){const [k,i]=hit.dataset.drop.split(':');attemptMove(d.kind,d.index,k,Number(i));}}});
+document.addEventListener('pointercancel',()=>{drag=null;ghost.style.display='none'});
+function frame(t){const dt=Math.min(.06,(t-lastFrame)/1000||0);lastFrame=t;if(game&&!game.finished){updateBattle(dt);hudTimer+=dt;if(hudTimer>.16){updateHUD();hudTimer=0}}requestAnimationFrame(frame)}requestAnimationFrame(frame);
+$('coachAvatar').innerHTML=guardianSVG(1);renderMetaHome();setAudio(true);
+window.ElementalTowerDebug={get state(){return game},buyOffer,reroll,startWave,updateBattle,attemptMove,traitCounts,newGame,sellSelected,resaleValue,castSkill};
+})();
+
+</script>
+</body>
+</html>
