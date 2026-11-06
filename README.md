@@ -7,6 +7,7 @@ Jeu mobile portrait associant auto-battler, Tower Defense, collection de gardien
 2. [Game Design Document V1.1](docs/GDD_V1.1.md) — règles validées, hypothèses, PvP à collection personnelle, économie et monétisation.
 3. [Plan d'exécution ET-001 à ET-012](docs/PLAN_EXECUTION_P0_P2.md) — responsables, dépendances et critères d'acceptation.
 4. [Prototype V0.8 HTML](prototypes/elemental_tower_tft_pve_v08.html) — référence jouable, pas moteur canonique.
+5. [Meta Experience V1.0 : accueil, collection, missions, boutique, Pass et combat V0.9](prototypes/elemental_tower_meta_v10.html) — prototype HTML interactif de revue. [Périmètre, visuels et tests](docs/META_V10_PRODUCT_PROTOTYPE.md).
 
 ## Décisions actées
 - Collection durable, étoiles et or réinitialisés à chaque expédition.
