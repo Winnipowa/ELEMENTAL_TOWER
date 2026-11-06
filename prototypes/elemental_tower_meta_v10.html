@@ -294,6 +294,7 @@
 .brand-brume{--sprite-x:-401px;--sprite-y:-207px;--large-x:-527px;--large-y:-277px}
 .brand-fougri{--sprite-x:-185px;--sprite-y:-331px;--large-x:-236px;--large-y:-444px}
 @media(max-width:350px){#app.has-brand-art .brand-sprite{background-size:1140px 760px}}
+.meta-detail-rank{z-index:5}
 </style>
 </head>
 <body>
@@ -927,7 +928,7 @@ const uiRealms={
  flux:{name:"Sanctuaire des Flux",status:"À venir",play:false},
  shadow:{name:"Chapitre III · Crépuscule",status:"Verrouillé",play:false}
 };
-const ui={region:"aurore",page:"world",family:"Tous",role:"Tous",availability:"Tous",mission:"daily",pass:"free",unit:"luma",tab:"skills",rank:1,effects:true};
+const ui={region:"aurore",page:"world",family:"Tous",role:"Tous",availability:"Tous",mission:"daily",pass:"Gratuit",unit:"luma",tab:"skills",rank:1,effects:true};
 const el=id=>document.getElementById(id);
 const nextUnlock=()=>UNLOCK_MILESTONES.find(x=>!profile.unlocked.includes(x.id));
 const esc=x=>String(x).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
