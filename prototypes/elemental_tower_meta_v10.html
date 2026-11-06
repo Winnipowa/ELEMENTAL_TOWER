@@ -271,6 +271,8 @@
 @media(max-height:610px){.meta-side-actions button{width:42px;min-height:38px}.meta-side-actions span{display:none}}
 @media(prefers-reduced-motion:reduce){.meta-map,.meta-map *,#metaPanel *{animation:none!important}}
 
+#app.reduce-motion *,#app.reduce-motion *:before,#app.reduce-motion *:after{animation:none!important;transition:none!important}
+.meta-guardian-card .meta-guardian-art svg{overflow:visible}
 </style>
 </head>
 <body>
@@ -564,63 +566,7 @@ function unitHTML(u){let d=UNITS[u.type];return `<div class="item-unit unit-rank
 function newUnit(type,rank=1){return {id:uid++,type,rank,cd:Math.random()*.15,mana:0,attacks:0,invested:UNITS[type].price*Math.pow(2,rank-1)}}
 function randUnit(){const names=Object.keys(UNITS);return names[Math.floor(Math.random()*names.length)]}
 function newOffers(initial=false){return initial?['luma','luma','mousse']:Array.from({length:3},()=>randUnit())}
-/* Product meta interface: persistent local demo records; no purchased currency/unlocks. */
-const META_REGIONS={
- aurore:{name:"Chapitre I · Royaume d'Aurore",status:"Démo jouable",quest:"Repousser les six vagues",reward:"Défi PvE",playable:true},
- sylve:{name:"Sylve Émeraude",status:"Aperçu visuel",quest:"Région à développer",reward:"À venir",playable:false},
- flux:{name:"Sanctuaire des Flux",status:"Aperçu visuel",quest:"Région à développer",reward:"À venir",playable:false},
- shadow:{name:"Royaume des Ombres",status:"Accès verrouillé",quest:"Région non disponible dans la démo",reward:"À venir",playable:false}
-};
-function loadMeta(){try{const data=JSON.parse(localStorage.getItem('elemental-tower-meta-v09')||'{}');return {attempts:Number(data.attempts)||0,bestWaves:Math.min(WAVES,Number(data.bestWaves)||0),wins:Number(data.wins)||0,lastFusions:Number(data.lastFusions)||0}}catch{return {attempts:0,bestWaves:0,wins:0,lastFusions:0}}}
-const metaProgress=loadMeta();let metaRegion='aurore';
-function persistMeta(){try{localStorage.setItem('elemental-tower-meta-v09',JSON.stringify(metaProgress))}catch{/*private browser*/}}
-function renderMetaHome(){
- const info=META_REGIONS[metaRegion];$('metaRegionTitle').textContent=info.name;$('metaRegionStatus').textContent=info.status;
- $('metaQuestTitle').textContent=info.quest;$('metaQuestReward').textContent=info.reward;
- $('metaQuestProgress').textContent=info.playable?('Record '+metaProgress.bestWaves+' / '+WAVES+' vagues'):'Contenu non encore jouable';
- $('metaQuestFill').style.width=info.playable?(Math.min(100,metaProgress.bestWaves/WAVES*100)+'%'):'0%';
- $('playBtn').disabled=!info.playable;$('playBtn').textContent=info.playable?'⚔ Préparer l’expédition':'Région en préparation';
- home.querySelectorAll('[data-region]').forEach(btn=>{const selected=btn.dataset.region===metaRegion;btn.classList.toggle('is-active',selected);btn.setAttribute('aria-pressed',String(selected))});
-}
-function closeMetaPanel(){$('metaPanel').classList.add('hidden');home.querySelectorAll('[data-meta-nav]').forEach(b=>b.setAttribute('aria-current',b.dataset.metaNav==='world'?'page':'false'))}
-function openMetaPanel(page){
- if(page==='world'){closeMetaPanel();return}
- const panel=$('metaPanel'),body=$('metaPanelBody'),title=$('metaPanelTitle'),subtitle=$('metaPanelSubtitle');
- const headings={collection:['Collection de gardiens','Catalogue actuellement présent dans le combat'],missions:['Missions','Vos objectifs et résultats de démonstration'],shop:['Boutique','Cosmétiques — aperçu uniquement'],profile:['Profil','Vos records du prototype']};
- const info=headings[page]||headings.collection;title.textContent=info[0];subtitle.textContent=info[1];
- if(page==='collection'){
-  body.innerHTML='<p class="meta-panel-lead">Les neuf gardiens ci-dessous sont réellement utilisables dans le prototype PvE. Les déblocages permanents ne sont pas encore codés.</p><div class="meta-guardian-grid">'+Object.entries(UNITS).map(([key,d])=>'<div class="meta-guardian-card"><div class="meta-guardian-art">'+guardianSVG(1,true,key)+'</div><strong>'+d.name+'</strong><small>'+d.family+' · '+d.role+'</small></div>').join('')+'</div><div class="meta-note">Les formes des futurs gardiens de la direction artistique (Mira, Élya, Orage, Raïka…) seront intégrées après livraison des assets validés, sans remplacer les unités du moteur.</div>';
- }else if(page==='missions'){
-  body.innerHTML='<p class="meta-panel-lead">Ces informations reflètent les records de cette démo sur cet appareil. Le système de missions quotidiennes et hebdomadaires est prévu, mais pas encore connecté.</p>'+
-  '<div class="meta-list-item"><span class="meta-icon">⚔</span><div><strong>Explorer le chapitre d’Aurore</strong><small>Meilleur résultat : '+metaProgress.bestWaves+' / '+WAVES+' vagues</small></div></div>'+
-  '<div class="meta-list-item"><span class="meta-icon">✦</span><div><strong>Expérimenter les fusions</strong><small>Fusions de la dernière partie : '+metaProgress.lastFusions+'</small></div></div>'+
-  '<div class="meta-list-item"><span class="meta-icon">◇</span><div><strong>Maîtriser les synergies</strong><small>À mesurer lors d’une prochaine version</small></div></div>'+
-  '<div class="meta-note">Aucune récompense permanente n’est attribuée par cet écran de démonstration.</div>';
- }else if(page==='shop'){
-  body.innerHTML='<p class="meta-panel-lead">Les packs thématiques cosmétiques sont prévus dans le GDD. Aucun achat, diamant ou bonus de combat n’est vendu ici.</p>'+
-  '<div class="meta-list-item"><span class="meta-icon">❀</span><div><strong>Collection Aurore</strong><small>Skins et effets cosmétiques — concept à produire</small></div></div>'+
-  '<div class="meta-list-item"><span class="meta-icon">✧</span><div><strong>Pass saisonnier</strong><small>Simple démonstration future, sans paiement</small></div></div>'+
-  '<div class="meta-note">Respect des règles du GDD : zéro puissance ou gardien achetable.</div>';
- }else{
-  body.innerHTML='<p class="meta-panel-lead">Statistiques enregistrées localement sur cet appareil. Aucune connexion de compte n’est encore intégrée.</p>'+
-  '<div class="meta-list-item"><span class="meta-icon">☷</span><div><strong>'+metaProgress.attempts+' expédition(s)</strong><small>Parties terminées</small></div></div>'+
-  '<div class="meta-list-item"><span class="meta-icon">★</span><div><strong>'+metaProgress.wins+' victoire(s)</strong><small>Chapitre de démonstration</small></div></div>'+
-  '<div class="meta-list-item"><span class="meta-icon">✦</span><div><strong>'+metaProgress.bestWaves+' / '+WAVES+' vagues</strong><small>Meilleur résultat</small></div></div>';
- }
- panel.classList.remove('hidden');home.querySelectorAll('[data-meta-nav]').forEach(b=>b.setAttribute('aria-current',b.dataset.metaNav===page?'page':'false'));
-}
-home.querySelectorAll('[data-region]').forEach(btn=>btn.addEventListener('click',()=>{metaRegion=btn.dataset.region;renderMetaHome()}));
-home.querySelectorAll('[data-meta-nav]').forEach(btn=>btn.addEventListener('click',()=>openMetaPanel(btn.dataset.metaNav)));
-$('profileBtn').addEventListener('click',()=>openMetaPanel('profile'));
-$('metaBack').addEventListener('click',closeMetaPanel);
-$('playBtn').addEventListener('click',()=>{if(!META_REGIONS[metaRegion].playable)return;$('metaPrep').classList.remove('hidden');$('metaStart').focus()});
-$('metaCancel').addEventListener('click',()=>$('metaPrep').classList.add('hidden'));
-$('metaPrep').addEventListener('click',e=>{if(e.target===$('metaPrep'))$('metaPrep').classList.add('hidden')});
-$('metaStart').addEventListener('click',()=>{$('metaPrep').classList.add('hidden');newGame('story')});
-$('sandboxBtn').addEventListener('click',()=>{$('metaPrep').classList.add('hidden');newGame('sandbox')});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!$('metaPrep').classList.contains('hidden')){$('metaPrep').classList.add('hidden')}else if(!$('metaPanel').classList.contains('hidden'))closeMetaPanel()}});
-
-
+/* Product meta 1.0 controller mounts after V0.9 profile. */
 function newGame(mode='story'){
  uid=1;game={mode,phase:'buy',gold:mode==='sandbox'?4000:160,life:100,wave:0,bench:Array(BENCH_SIZE).fill(null),board:Array(SLOTS.length).fill(null),offers:newOffers(true),enemies:[],spawn:[],spawnElapsed:0,waveActive:false,kills:0,highest:1,selected:null,finished:false,completedWaves:0,prep:0,firstBought:null,fusions:0,losses:0};
  home.classList.add('hidden');battle.classList.remove('hidden');$('endOverlay').classList.add('hidden');enemyLayer.replaceChildren();fx.replaceChildren();redraw();createSound(680,.1,'triangle');
@@ -926,6 +872,221 @@ $('secondaryBtn').onclick=()=>toast('V0.9 · 12 vagues · Boss aux 4/8/12 · Aug
 window.ElementalTowerDebugV09={get profile(){return profile},get state(){return game},newGame,chooseAugment,offerAugments,completeWave,rollAugmentChoices,isUnlocked,PILOT_AUGMENTS};
 updateHomeProfile();
 // ---- End V0.9 extension. ----
+
+
+/* PRODUCT EXPERIENCE V1.0 — integrates current V0.9 gameplay data. */
+const uiRealms={
+ aurore:{name:"Chapitre I · Royaume d’Aurore",status:"Jouable",play:true},
+ sylve:{name:"Chapitre II · Sylve Émeraude",status:"À venir",play:false},
+ flux:{name:"Sanctuaire des Flux",status:"À venir",play:false},
+ shadow:{name:"Chapitre III · Crépuscule",status:"Verrouillé",play:false}
+};
+const ui={region:"aurore",page:"world",family:"Tous",role:"Tous",availability:"Tous",mission:"daily",pass:"free",unit:"luma",tab:"skills",rank:1,effects:true};
+const el=id=>document.getElementById(id);
+const nextUnlock=()=>UNLOCK_MILESTONES.find(x=>!profile.unlocked.includes(x.id));
+const esc=x=>String(x).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const progress=v=>"<div class='meta-progress-track'><span style='width:"+Math.max(0,Math.min(100,v))+"%'></span></div>";
+const portrait=(id,n=1)=>guardianSVG(n,true,id);
+const ico=id=>"<svg class='meta-keyword-icon' aria-hidden='true'><use href='#sys-"+id+"'></use></svg>";
+const concept="<div class='meta-note'>Maquette de conception : cet écran n'effectue aucun achat, n'attribue aucune récompense fictive et ne présente pas de classement réel.</div>";
+function drawHome(){
+ let r=uiRealms[ui.region],n=nextUnlock(),ok=r.play;
+ el("metaRegionTitle").textContent=r.name;
+ el("metaRegionStatus").textContent=r.status;
+ el("metaAvatarArt").innerHTML=portrait("luma");
+ el("metaProfileHint").textContent=profile.unlocked.length+"/9 gardiens · "+profile.xp+" XP";
+ el("metaQuestTitle").textContent=ok?(n?"Débloquer "+UNITS[n.id].name:"Achever le chapitre"):"Région en préparation";
+ el("metaQuestReward").textContent=ok?(n?"Gardien · "+UNITS[n.id].name:"Victoire PvE"):"À venir";
+ el("metaQuestProgress").textContent=ok?("Meilleure vague "+profile.bestWave+" / "+WAVES):"Pas encore jouable";
+ el("metaQuestFill").style.width=ok?Math.min(100,100*profile.bestWave/(n?.wave||WAVES))+"%":"0%";
+ el("metaRewardArt").innerHTML=ok&&n?portrait(n.id):"✦";
+ el("playBtn").disabled=!ok;
+ el("playBtn").textContent=ok?"⚔ Préparer l’expédition":"Région bientôt disponible";
+ el("metaPrepRoster").textContent=profile.unlocked.length;
+ el("metaPrepNext").textContent=n?("Prochain déblocage : "+UNITS[n.id].name+" · vague "+n.wave):"Tous les gardiens sont débloqués";
+ home.querySelectorAll("[data-region]").forEach(b=>{const selected=b.dataset.region===ui.region;b.classList.toggle("is-active",selected);b.setAttribute("aria-pressed",String(selected))})
+}
+function navState(){home.querySelectorAll("[data-meta-nav]").forEach(b=>b.setAttribute("aria-current",b.dataset.metaNav===ui.page?"page":"false"))}
+function closeDetail(){el("metaDetail").classList.add("hidden")}
+function goHome(){closeDetail();ui.page="world";el("metaPanel").classList.add("hidden");navState();drawHome()}
+function page(name){
+ if(name==="world"){goHome();return}
+ closeDetail();ui.page=name;
+ const titles={collection:["Collection","Gardiens, capacités et déblocages"],missions:["Missions","Quotidiennes et hebdomadaires"],shop:["Boutique","Packs cosmétiques"],synergies:["Synergies","Familles, classes et effets"],augments:["Augments","10 augments réellement codés"],challenges:["Défis","Compétition asynchrone · à venir"],pass:["Pass saisonnier","Cosmétiques et récompenses"],profile:["Profil","Progression enregistrée"],settings:["Paramètres","Contrôles et accessibilité"]};
+ const h=titles[name]||titles.collection;el("metaPanelTitle").textContent=h[0];el("metaPanelSubtitle").textContent=h[1];
+ el("metaPanel").classList.remove("hidden");navState();drawPage();el("metaPanelBody").scrollTop=0
+}
+function quest(icon,title,desc,pct,stat){
+ return "<div class='meta-quest-row'><span class='meta-quest-icon'>"+icon+"</span><div class='text'><strong>"+title+"</strong><small>"+desc+"</small>"+progress(pct)+"</div><span class='status'>"+stat+"</span></div>"
+}
+function hero(label,title,copy,id="luma"){
+ return "<div class='meta-hero-card'><div class='meta-hero-content'><div class='eyebrow'>"+label+"</div><h3>"+title+"</h3><p>"+copy+"</p></div><div class='meta-hero-portrait'>"+portrait(id,3)+"</div></div>"
+}
+function tabs(items,attr,active){
+ return "<div class='meta-segment'>"+items.map(x=>"<button type='button' data-"+attr+"='"+x+"' class='"+(active===x?"active":"")+"'>"+x+"</button>").join("")+"</div>"
+}
+function unitCard(id,u){
+ const owned=profile.unlocked.includes(id),m=UNLOCK_MILESTONES.find(x=>x.id===id);
+ return "<button type='button' class='meta-guardian-card"+(owned?"":" locked")+"' data-unit='"+id+"' style='--guardian-glow:"+u.color+"88'><span class='unlock-pill"+(owned?" is-ready":"")+"'>"+(owned?"✓ Acquis":"Vague "+(m?.wave||"?"))+"</span><span class='meta-guardian-art'>"+portrait(id)+"</span><strong>"+(owned?esc(u.name):"???")+"</strong><small>"+u.family+" · "+u.role+"</small></button>"
+}
+function viewCollection(){
+ const units=Object.entries(UNITS).filter(([id,u])=>(ui.family==="Tous"||u.family===ui.family)&&(ui.role==="Tous"||u.role===ui.role)&&(ui.availability==="Tous"||(ui.availability==="Acquis")===profile.unlocked.includes(id)));
+ return hero("GRIMOIRE DES GARDIENS",profile.unlocked.length+" / 9 gardiens découverts","Débloque de nouveaux gardiens pour enrichir tes choix stratégiques.")+
+ "<div class='meta-section-label'>Familles <small>Filtres</small></div>"+tabs(["Tous","Aurore","Sylve","Crépuscule"],"family",ui.family)+
+ "<div class='meta-section-label'>Classes</div>"+tabs(["Tous","Arcaniste","Gardien","Chasseur"],"role",ui.role)+
+ tabs(["Tous","Acquis","Verrouillés"],"availability",ui.availability)+
+ "<div class='meta-guardian-grid'>"+units.map(([id,u])=>unitCard(id,u)).join("")+"</div>"+
+ "<div class='meta-note'>Les 9 gardiens et leurs capacités viennent de l'actuel moteur V0.9. Les silhouettes sont débloquées gratuitement à des vagues déterminées.</div>"
+}
+function viewSynergies(){
+ return "<p class='meta-panel-lead'>Deux gardiens <b>distincts</b> de même famille ou classe déployés sur le terrain déclenchent une synergie. Les copies en réserve ne comptent pas.</p>"+
+ "<div class='meta-section-label'>Effets jouables <small>6 synergies</small></div>"+
+ Object.keys(TRAITS).map(name=>{
+ const t=TRAITS[name],units=Object.keys(UNITS).filter(id=>UNITS[id].family===name||UNITS[id].role===name),owned=units.filter(id=>profile.unlocked.includes(id));
+ return quest(t.icon,name,esc(t.desc)+" · "+owned.length+" / "+units.length+" gardiens acquis",Math.min(100,owned.length/2*100),"2 requis")
+ }).join("")+
+ "<div class='meta-section-label'>Pour aller plus loin</div><button type='button' class='meta-cta-secondary' data-open='augments'>Explorer les augments réels</button>";
+}
+function viewAugments(){
+ return "<p class='meta-panel-lead'>Dix augments pilotes sont jouables dans le moteur. Un choix parmi trois est proposé après les vagues 5 et 10, pour la partie en cours uniquement.</p>"+
+ PILOT_AUGMENTS.map(a=>"<div class='meta-quest-row'><span class='meta-quest-icon'>"+a.icon+"</span><div class='text'><strong>"+esc(a.title)+"</strong><small>"+esc(a.desc)+"</small><small>"+(a.tier==="silver"?"ARGENT":a.tier==="gold"?"OR":"PRISMATIQUE")+(a.needs?" · "+a.needs:"")+"</small></div></div>").join("")
+}
+function viewMissions(){
+ const daily=ui.mission==="daily";
+ const records=daily?[
+ ["✧","Créer une synergie","Déployer deux gardiens distincts d'une même classe ou famille","0/1"],
+ ["⚔","Finir une expédition","Terminer une partie, même en défaite","0/1"],
+ ["✦","Fusionner une unité","Fusionner deux copies identiques de même rang","0/1"]
+ ]:[
+ ["♜","Vaincre un boss","Terminer une vague de boss","0/1"],
+ ["❀","Découvrir un gardien","Débloquer une nouvelle option tactique","0/1"],
+ ["◇","Explorer trois compositions","Tester des synergies différentes","0/3"]
+ ];
+ return hero("RITUEL STRATÉGIQUE","Un nouveau défi chaque jour","Objectifs de collection et synergies, sans énergie ni pénalité de série.","mousse")+
+ "<div class='meta-section-label'>Missions proposées <small>Non encore suivies</small></div>"+
+ "<div class='meta-segment'><button data-mission='daily' class='"+(daily?"active":"")+"'>Quotidiennes</button><button data-mission='weekly' class='"+(!daily?"active":"")+"'>Hebdomadaires</button></div>"+
+ records.map(x=>quest(x[0],x[1],x[2],0,x[3])).join("")+
+ "<div class='meta-section-label'>Progression enregistrée</div>"+
+ quest("✧","Collection",profile.unlocked.length+" gardiens acquis sur neuf",profile.unlocked.length/9*100,profile.unlocked.length+"/9")+
+ quest("♜","Record d'expédition","Vagues réellement terminées dans le prototype",profile.bestWave/12*100,profile.bestWave+"/12")+
+ "<div class='meta-note'>Les missions ci-dessus sont des maquettes sans récompense active. Les deux barres de progression finales proviennent du profil sauvegardé.</div>"
+}
+function viewShop(){
+ const cards=[["Aurore","✦","Lumière céleste","Apparence, effet de fusion et décor d'arène."],["Sylve","❀","Floraison mystique","Particules végétales, couleurs et arène."],["Crépuscule","☾","Rêves obscurs","Skins mauves et animation de victoire."]];
+ return "<p class='meta-panel-lead'>Les diamants ne peuvent financer que des cosmétiques et un Pass. Aucun gardien, dégât, rang ou or n'est achetable.</p>"+
+ cards.map(c=>"<div class='meta-shop-pack'><span class='pack-art'>"+c[1]+"</span><div class='meta-section-label' style='margin:0 0 4px'>COLLECTION "+c[0].toUpperCase()+"</div><h3>"+c[2]+"</h3><p>"+c[3]+"</p><button type='button' data-pack='"+c[0]+"'>Voir le concept</button></div>").join("")+
+ "<div class='meta-micro-card'><span class='micro-icon'>◆</span><strong>Solde diamants : 0</strong><small>Paiements non activés dans le prototype.</small></div><button data-open='pass' class='meta-cta-secondary'>Voir le Pass</button>"
+}
+function viewPass(){
+ const premium=ui.pass==="Premium";
+ return hero("SAISON DÉMONSTRATION","Le Pass des Éléments","Progression visuelle par paliers : deux voies, gratuites et premium, sans bonus de puissance.","nyx")+
+ "<div class='meta-section-label'>Voies de récompenses</div>"+
+ tabs(["Gratuit","Premium"],"pass",ui.pass)+
+ "<div class='meta-pass-steps'>"+[1,5,10,15,20].map(n=>"<div class='meta-pass-step'><b>"+n+"</b><small>"+(premium?"Skin":"Décor")+"</small></div>").join("")+"</div>"+
+ "<div class='meta-quest-row'><span class='meta-quest-icon'>✦</span><div class='text'><strong>"+(premium?"Parcours premium":"Parcours gratuit")+"</strong><small>"+(premium?"Skins, effets de fusion et cadres proposés":"Cosmétiques et décorations de profil proposés")+"</small></div></div>"+concept
+}
+function viewChallenges(){
+ return hero("COMPÉTITION ASYNCHRONE","Une carte. Des stratégies différentes.","Défis hebdomadaires avec ta propre collection. Aucune puissance ne s'achète.","nyx")+
+ "<div class='meta-section-label'>Accès proposé <small>Non encore codé</small></div>"+
+ quest("✧","Collection personnelle","Seuil hypothétique : six gardiens débloqués",profile.unlocked.length/6*100,profile.unlocked.length+"/6")+
+ quest("♜","Record réel PvE","Ta meilleure vague sur cet appareil",profile.bestWave/12*100,profile.bestWave+"/12")+
+ "<div class='meta-empty-state'><span class='symbol'>♜</span><h3>Classement à venir</h3><p>Aucun adversaire inventé : le matchmaking et la vérification serveur devront être développés avant toute compétition.</p></div>"+concept
+}
+function viewProfile(){
+ const next=nextUnlock(),level=Math.floor(profile.xp/200)+1;
+ return hero("AVENTURIER DU SANCTUAIRE","Profil de tacticien","XP réellement accumulée : "+profile.xp+". Niveau indicatif dans cette maquette : "+level+".")+
+ "<div class='meta-stat-grid'><div class='meta-stat'><strong>"+profile.runs+"</strong><span>Expéditions</span></div><div class='meta-stat'><strong>"+profile.wins+"</strong><span>Victoires</span></div><div class='meta-stat'><strong>"+profile.bestWave+"/12</strong><span>Record</span></div></div>"+
+ "<div class='meta-section-label'>Ma progression</div>"+
+ quest("✧","Collection",profile.unlocked.length+" gardiens débloqués",profile.unlocked.length/9*100,profile.unlocked.length+"/9")+
+ (next?quest("✦","Prochain gardien : "+UNITS[next.id].name,"Terminer la vague "+next.wave,profile.bestWave/next.wave*100,profile.bestWave+"/"+next.wave):quest("✦","Collection complète","Tous les gardiens débloqués",100,"9/9"))+
+ "<div class='meta-note'>Profil réellement sauvegardé en localStorage. L'XP est réelle ; le niveau indiqué est une simulation visuelle.</div>"
+}
+function viewSettings(){
+ return "<div class='meta-settings-item'><span>Son du jeu</span><button data-setting='sound'>"+(audioEnabled?"Activé":"Désactivé")+"</button></div>"+
+ "<div class='meta-settings-item'><span>Animations d'interface</span><button data-setting='effects'>"+(ui.effects?"Normales":"Réduites")+"</button></div>"+
+ "<div class='meta-settings-item'><span>Orientation</span><b>Portrait</b></div>"+
+ "<div class='meta-settings-item'><span>Sauvegarde</span><b>Sur cet appareil</b></div>"+
+ "<div class='meta-note'>Pas encore de compte en ligne, paiements réels, synchronisation cloud ou données nominatives.</div>"
+}
+function drawPage(){
+ const views={collection:viewCollection,missions:viewMissions,shop:viewShop,synergies:viewSynergies,augments:viewAugments,challenges:viewChallenges,pass:viewPass,profile:viewProfile,settings:viewSettings};
+ el("metaPanelBody").innerHTML=(views[ui.page]||viewCollection)();
+}
+function showUnit(id){
+ if(!Object.hasOwn(UNITS,id))return;
+ ui.unit=id;ui.tab="skills";ui.rank=1;el("metaDetail").classList.remove("hidden");drawUnit()
+}
+function drawUnit(){
+ const id=ui.unit,u=UNITS[id],owned=profile.unlocked.includes(id),milestone=UNLOCK_MILESTONES.find(x=>x.id===id);
+ el("metaDetailTitle").textContent=owned?u.name:"Gardien inconnu";
+ el("metaDetailSubtitle").textContent=u.family+" · "+u.role+(owned?" · Débloqué":" · Vague "+milestone?.wave);
+ let html="<div class='meta-detail-art"+(owned?"":" locked")+"'>"+portrait(id,ui.rank)+"<span class='meta-detail-rank'>"+ui.rank+"★</span></div>"+
+ "<div class='meta-section-label'>Rang de combat <small>Réinitialisé chaque partie</small></div>"+
+ "<div class='meta-segment'>"+[1,2,3,4,5].map(n=>"<button data-rank='"+n+"' class='"+(ui.rank===n?"active":"")+"'>"+n+"★</button>").join("")+"</div>"+
+ "<div class='meta-segment'>"+[["skills","Compétences"],["synergies","Synergies"],["fusion","Fusion"],["skins","Skins"]].map(x=>"<button data-unit-tab='"+x[0]+"' class='"+(ui.tab===x[0]?"active":"")+"'>"+x[1]+"</button>").join("")+"</div>";
+ if(!owned)html+="<div class='meta-note'>Condition de déblocage réelle : terminer la vague "+(milestone?.wave||"?")+" dans le mode Expédition.</div>";
+ if(ui.tab==="skills"){
+   const kit=ROLE_KITS[u.role];
+   html+="<div class='meta-stat-grid'><div class='meta-stat'><strong>"+u.damage+"</strong><span>Dégâts</span></div><div class='meta-stat'><strong>"+u.cooldown+" s</strong><span>Intervalle tir</span></div><div class='meta-stat'><strong>"+u.price+"</strong><span>Coût en or</span></div></div>"+
+   "<div class='meta-detail-description'>"+ico("skill")+" <b>Compétence</b><br>"+esc(kit.skill)+"<br><br>"+ico("damage")+" <b>Passif</b><br>"+esc(kit.passive)+"</div>";
+ }else if(ui.tab==="synergies"){
+   html+="<div class='meta-detail-description'><b>"+u.family+"</b><br>"+esc(TRAITS[u.family].desc)+"<br><br><b>"+u.role+"</b><br>"+esc(TRAITS[u.role].desc)+"</div>"+
+   "<div class='meta-section-label'>Alliés compatibles disponibles</div><div class='meta-guardian-grid'>"+
+   Object.entries(UNITS).filter(([other,v])=>other!==id&&profile.unlocked.includes(other)&&(v.family===u.family||v.role===u.role)).map(([k,v])=>unitCard(k,v)).join("")+"</div>";
+ }else if(ui.tab==="fusion"){
+   html+="<div class='meta-detail-description'>Deux copies identiques de même rang fusionnent en une copie du rang supérieur. L'or et les étoiles sont réinitialisés à chaque nouvelle expédition. Avec le système 2 → 1, obtenir 5★ réclame 16 copies 1★.</div>";
+ }else html+="<div class='meta-empty-state'><span class='symbol'>✧</span><h3>Apparences à produire</h3><p>Les skins n'affectent ni dégâts, ni portée, ni attaque.</p></div>";
+ el("metaDetailBody").innerHTML=html
+}
+function showPack(name){
+ const offers={Aurore:["✦","Lumière céleste","Skin lumineux, effet de fusion doré et décor du Nexus."],Sylve:["❀","Floraison mystique","Skins végétaux, particules et terrain fleuri."],Crépuscule:["☾","Rêves obscurs","Effets magiques violets et animations de victoire."]};
+ const x=offers[name]||offers.Aurore;
+ el("metaDetailTitle").textContent=x[1];el("metaDetailSubtitle").textContent="Collection "+name+" · concept";
+ el("metaDetailBody").innerHTML=hero("COSMÉTIQUE · "+name,x[0]+" "+x[1],x[2])+
+ "<div class='meta-section-label'>Contenu envisagé</div>"+
+ "<div class='meta-micro-card'><span class='micro-icon'>✧</span><strong>Apparence de gardien</strong><small>Sans puissance supplémentaire</small></div>"+
+ "<div class='meta-micro-card' style='margin-top:9px'><span class='micro-icon'>✦</span><strong>Effet de fusion</strong><small>Animation purement visuelle</small></div>"+
+ "<div class='meta-micro-card' style='margin-top:9px'><span class='micro-icon'>◇</span><strong>Décor de combat</strong><small>Personnalisation de l'environnement</small></div>"+concept;
+ el("metaDetail").classList.remove("hidden")
+}
+home.querySelectorAll("[data-region]").forEach(b=>b.addEventListener("click",()=>{ui.region=b.dataset.region;drawHome()}));
+home.querySelectorAll("[data-meta-nav]").forEach(b=>b.addEventListener("click",()=>page(b.dataset.metaNav)));
+home.querySelectorAll("[data-quick-page]").forEach(b=>b.addEventListener("click",()=>page(b.dataset.quickPage)));
+el("profileBtn").onclick=()=>page("profile");
+el("metaSettings").onclick=()=>page("settings");
+el("metaBack").onclick=goHome;
+el("metaDetailBack").onclick=closeDetail;
+el("metaPanelBody").addEventListener("click",e=>{
+ const b=e.target.closest("button");if(!b)return;
+ if(b.dataset.unit)showUnit(b.dataset.unit);
+ else if(b.dataset.family){ui.family=b.dataset.family;drawPage()}
+ else if(b.dataset.role){ui.role=b.dataset.role;drawPage()}
+ else if(b.dataset.availability){ui.availability=b.dataset.availability;drawPage()}
+ else if(b.dataset.mission){ui.mission=b.dataset.mission;drawPage()}
+ else if(b.dataset.pass){ui.pass=b.dataset.pass;drawPage()}
+ else if(b.dataset.open)page(b.dataset.open);
+ else if(b.dataset.pack)showPack(b.dataset.pack);
+ else if(b.dataset.setting==="sound"){setAudio(!audioEnabled);drawPage()}
+ else if(b.dataset.setting==="effects"){ui.effects=!ui.effects;app.classList.toggle("reduce-motion",!ui.effects);drawPage()}
+});
+el("metaDetailBody").addEventListener("click",e=>{
+ const b=e.target.closest("button");if(!b)return;
+ if(b.dataset.rank){ui.rank=Number(b.dataset.rank);drawUnit()}
+ else if(b.dataset.unitTab){ui.tab=b.dataset.unitTab;drawUnit()}
+ else if(b.dataset.unit)showUnit(b.dataset.unit)
+});
+el("playBtn").addEventListener("click",()=>{if(!uiRealms[ui.region].play)return;drawHome();el("metaPrep").classList.remove("hidden");el("metaStart").focus()});
+el("metaCancel").onclick=()=>el("metaPrep").classList.add("hidden");
+el("metaPrep").addEventListener("click",e=>{if(e.target===el("metaPrep"))el("metaPrep").classList.add("hidden")});
+el("metaStart").onclick=()=>{el("metaPrep").classList.add("hidden");goHome();newGame("story")};
+el("sandboxBtn").onclick=()=>{el("metaPrep").classList.add("hidden");goHome();newGame("sandbox")};
+document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;if(!el("metaPrep").classList.contains("hidden"))el("metaPrep").classList.add("hidden");else if(!el("metaDetail").classList.contains("hidden"))closeDetail();else if(!el("metaPanel").classList.contains("hidden"))goHome()});
+const prevMetaFinish=finish;
+finish=function(win){prevMetaFinish(win);drawHome()};
+const prevMetaMenu=el("menuBtn").onclick;
+el("menuBtn").onclick=()=>{prevMetaMenu();goHome();drawHome()};
+drawHome();
+window.ElementalTowerMeta={get profile(){return profile},get state(){return ui},openPage:page,refresh:drawHome};
 
 window.ElementalTowerDebug={get state(){return game},buyOffer,reroll,startWave,updateBattle,attemptMove,traitCounts,newGame,sellSelected,resaleValue,castSkill};
 })();
