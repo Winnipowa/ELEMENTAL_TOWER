@@ -273,6 +273,27 @@
 
 #app.reduce-motion *,#app.reduce-motion *:before,#app.reduce-motion *:after{animation:none!important;transition:none!important}
 .meta-guardian-card .meta-guardian-art svg{overflow:visible}
+
+/* Optional visual identity pack. SVG guardians remain as offline fallbacks. */
+#app.has-brand-art .brand-sprite{background-image:url("../assets/visuals/pack_visuel_v014.png");background-size:1140px 760px;background-repeat:no-repeat;background-position:var(--sprite-x) var(--sprite-y);display:block;border-radius:9px}
+#app.has-brand-art .brand-sprite svg{opacity:0}
+#app.has-brand-art .meta-guardian-card.locked .brand-sprite{filter:grayscale(1) brightness(.22)}
+#app .brand-large,#app .brand-hero{display:none}
+#app.has-brand-art .meta-detail-art .brand-large{display:block;position:absolute;width:160px;height:145px;left:50%;top:50%;transform:translate(-50%,-50%);background-image:url("../assets/visuals/pack_visuel_v014.png");background-repeat:no-repeat;background-size:1536px 1024px;background-position:var(--large-x) var(--large-y);mix-blend-mode:screen;filter:drop-shadow(0 0 7px #cf88fe)}
+#app.has-brand-art .meta-detail-art .brand-large + .meta-detail-rank{z-index:3}
+#app.has-brand-art .meta-detail-art:has(.brand-large) > svg{opacity:0}
+#app.has-brand-art .meta-detail-art.locked .brand-large{filter:grayscale(1) brightness(.2)}
+#app.has-brand-art .meta-hero-portrait .brand-hero{display:block;position:absolute;inset:0;background-image:url("../assets/visuals/pack_visuel_v014.png");background-size:1140px 760px;background-position:var(--sprite-x) var(--sprite-y);background-repeat:no-repeat;mix-blend-mode:screen}
+#app.has-brand-art .meta-hero-portrait:has(.brand-hero)>svg{opacity:0}
+.brand-luma{--sprite-x:-82px;--sprite-y:-82px;--large-x:-98px;--large-y:-108px}
+.brand-aeri{--sprite-x:-188px;--sprite-y:-82px;--large-x:-241px;--large-y:-109px}
+.brand-mousse{--sprite-x:-404px;--sprite-y:-83px;--large-x:-532px;--large-y:-110px}
+.brand-nema{--sprite-x:-507px;--sprite-y:-85px;--large-x:-670px;--large-y:-112px}
+.brand-solis{--sprite-x:-183px;--sprite-y:-209px;--large-x:-234px;--large-y:-280px}
+.brand-nyx{--sprite-x:-292px;--sprite-y:-207px;--large-x:-380px;--large-y:-277px}
+.brand-brume{--sprite-x:-401px;--sprite-y:-207px;--large-x:-527px;--large-y:-277px}
+.brand-fougri{--sprite-x:-185px;--sprite-y:-331px;--large-x:-236px;--large-y:-444px}
+@media(max-width:350px){#app.has-brand-art .brand-sprite{background-size:1140px 760px}}
 </style>
 </head>
 <body>
@@ -874,6 +895,31 @@ updateHomeProfile();
 // ---- End V0.9 extension. ----
 
 
+
+/* Visual pack from the shared Elemental Tower / Visuels / V2 assets.
+   Cosmetic presentation only: the V0.9 unit IDs and stats are unchanged. */
+const BRAND_SPRITES={
+ luma:[178,180],aeri:[321,181],mousse:[612,182],nema:[750,184],
+ solis:[314,352],nyx:[460,349],brume:[607,349],fougri:[316,516]
+};
+const brandAsset="../assets/visuals/pack_visuel_v014.png";
+const brandCheck=new Image();
+brandCheck.onload=()=>app.classList.add("has-brand-art");
+brandCheck.onerror=()=>app.classList.remove("has-brand-art");
+brandCheck.src=brandAsset;
+function decorateBrandArt(root){
+ root.querySelectorAll("[data-unit]").forEach(button=>{
+   const id=button.dataset.unit;
+   const slot=button.querySelector(".meta-guardian-art");
+   if(slot&&BRAND_SPRITES[id])slot.classList.add("brand-sprite","brand-"+id);
+ });
+ root.querySelectorAll("[data-hero-unit]").forEach(wrapper=>{
+   const id=wrapper.dataset.heroUnit;
+   if(!BRAND_SPRITES[id])return;
+   const span=document.createElement("span");span.className="brand-hero brand-"+id;span.setAttribute("aria-hidden","true");wrapper.appendChild(span);
+ });
+}
+
 /* PRODUCT EXPERIENCE V1.0 — integrates current V0.9 gameplay data. */
 const uiRealms={
  aurore:{name:"Chapitre I · Royaume d’Aurore",status:"Jouable",play:true},
@@ -920,7 +966,7 @@ function quest(icon,title,desc,pct,stat){
  return "<div class='meta-quest-row'><span class='meta-quest-icon'>"+icon+"</span><div class='text'><strong>"+title+"</strong><small>"+desc+"</small>"+progress(pct)+"</div><span class='status'>"+stat+"</span></div>"
 }
 function hero(label,title,copy,id="luma"){
- return "<div class='meta-hero-card'><div class='meta-hero-content'><div class='eyebrow'>"+label+"</div><h3>"+title+"</h3><p>"+copy+"</p></div><div class='meta-hero-portrait'>"+portrait(id,3)+"</div></div>"
+ return "<div class='meta-hero-card'><div class='meta-hero-content'><div class='eyebrow'>"+label+"</div><h3>"+title+"</h3><p>"+copy+"</p></div><div class='meta-hero-portrait' data-hero-unit='"+id+"'>"+portrait(id,3)+"</div></div>"
 }
 function tabs(items,attr,active){
  return "<div class='meta-segment'>"+items.map(x=>"<button type='button' data-"+attr+"='"+x+"' class='"+(active===x?"active":"")+"'>"+x+"</button>").join("")+"</div>"
@@ -1011,6 +1057,7 @@ function viewSettings(){
 function drawPage(){
  const views={collection:viewCollection,missions:viewMissions,shop:viewShop,synergies:viewSynergies,augments:viewAugments,challenges:viewChallenges,pass:viewPass,profile:viewProfile,settings:viewSettings};
  el("metaPanelBody").innerHTML=(views[ui.page]||viewCollection)();
+ decorateBrandArt(el("metaPanelBody"));
 }
 function showUnit(id){
  if(!Object.hasOwn(UNITS,id))return;
@@ -1036,7 +1083,10 @@ function drawUnit(){
  }else if(ui.tab==="fusion"){
    html+="<div class='meta-detail-description'>Deux copies identiques de même rang fusionnent en une copie du rang supérieur. L'or et les étoiles sont réinitialisés à chaque nouvelle expédition. Avec le système 2 → 1, obtenir 5★ réclame 16 copies 1★.</div>";
  }else html+="<div class='meta-empty-state'><span class='symbol'>✧</span><h3>Apparences à produire</h3><p>Les skins n'affectent ni dégâts, ni portée, ni attaque.</p></div>";
- el("metaDetailBody").innerHTML=html
+ el("metaDetailBody").innerHTML=html;
+ decorateBrandArt(el("metaDetailBody"));
+ const area=el("metaDetailBody").querySelector(".meta-detail-art");
+ if(area&&BRAND_SPRITES[id]){const extra=document.createElement("span");extra.className="brand-large brand-"+id;extra.setAttribute("aria-hidden","true");area.appendChild(extra)}
 }
 function showPack(name){
  const offers={Aurore:["✦","Lumière céleste","Skin lumineux, effet de fusion doré et décor du Nexus."],Sylve:["❀","Floraison mystique","Skins végétaux, particules et terrain fleuri."],Crépuscule:["☾","Rêves obscurs","Effets magiques violets et animations de victoire."]};
@@ -1047,6 +1097,7 @@ function showPack(name){
  "<div class='meta-micro-card'><span class='micro-icon'>✧</span><strong>Apparence de gardien</strong><small>Sans puissance supplémentaire</small></div>"+
  "<div class='meta-micro-card' style='margin-top:9px'><span class='micro-icon'>✦</span><strong>Effet de fusion</strong><small>Animation purement visuelle</small></div>"+
  "<div class='meta-micro-card' style='margin-top:9px'><span class='micro-icon'>◇</span><strong>Décor de combat</strong><small>Personnalisation de l'environnement</small></div>"+concept;
+ decorateBrandArt(el("metaDetailBody"));
  el("metaDetail").classList.remove("hidden")
 }
 home.querySelectorAll("[data-region]").forEach(b=>b.addEventListener("click",()=>{ui.region=b.dataset.region;drawHome()}));
