@@ -26,6 +26,3 @@ export async function testProgression(page,width){
  const empty=structuredClone(fixture);for(const key of ['guardians','regions','families','classes','synergies','chapters','objectives'])empty[key]=[];await page.route('**/data/catalog.demo.json',route=>route.fulfill({json:empty}));await page.reload();await page.getByRole('heading',{name:'Aucun gardien'}).waitFor();await page.screenshot({path:`test-results/meta03-empty-${width}.png`,fullPage:true});await page.unroute('**/data/catalog.demo.json');
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);console.log(`${width}px META-03: filters, locked/unlocked codex, save/reload, mock-win isolation, catalog update, portrait fallback, migration, save/network error and empty catalog OK`);
 }
-
-
-
