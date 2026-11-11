@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "status": "proposed-requires-product-privacy-and-engine-validation",
+  "transport": "none",
+  "instrumentation": "none",
+  "enabledByDefault": false,
+  "commonProperties": {
+    "event_schema_version": "integer:1",
+    "app_version": "allowlisted-build-version",
+    "environment": "enum:demonstration|qa|beta",
+    "catalog_version": "allowlisted-catalog-version",
+    "source": "enum:ui|mock|verified-engine"
+  },
+  "forbiddenProperties": ["player_name", "email", "account_id", "device_id", "advertising_id", "ip_address", "full_url", "search_text", "profile_text", "save_payload", "composition", "raw_error", "run_id", "session_id"],
+  "events": [
+    {"name":"app_opened","trigger":"Shell ready once per document, not once per hash route","availability":"existing-ui-not-instrumented","properties":{"entry":"enum:root|deep-link","mode":"enum:browser|standalone|wrapper"}},
+    {"name":"onboarding_step_viewed","trigger":"Actual onboarding step visible","availability":"onboarding-absent","properties":{"step":"future-allowlisted-step"}},
+    {"name":"onboarding_completed","trigger":"Actual completion of the last approved step","availability":"onboarding-absent","properties":{"flow_version":"future-allowlisted-flow"}},
+    {"name":"collection_viewed","trigger":"Collection rendered with loading state resolved","availability":"existing-ui-not-instrumented","properties":{"state":"enum:ready|empty|error","filter_kind":"enum:none|family|class|status|search"}},
+    {"name":"guardian_viewed","trigger":"Guardian detail displayed","availability":"existing-ui-not-instrumented","properties":{"guardian_key":"allowlisted-catalog-id","availability":"enum:available|locked|missing"}},
+    {"name":"expedition_prepared","trigger":"Valid preparation submitted, once per deliberate attempt","availability":"existing-ui-not-instrumented","properties":{"region_key":"allowlisted-catalog-id","team_size_bucket":"enum:0|1|2|3-plus"}},
+    {"name":"run_launch_requested","trigger":"Explicit launch action accepted by UI","availability":"existing-ui-not-instrumented","properties":{"region_key":"allowlisted-catalog-id"}},
+    {"name":"run_started","trigger":"Engine confirms ready, never merely a click or a request","availability":"requires-engine-event-contract","properties":{"region_key":"allowlisted-catalog-id","verification":"enum:mock|local|server"}},
+    {"name":"run_finished","trigger":"Accepted terminal result, once; verified events only in real funnels","availability":"requires-engine-event-contract","properties":{"outcome":"enum:victory|defeat|abandoned","verification":"enum:mock|local|server","duration_bucket":"enum:under-1m|1-5m|5-15m|15m-plus","waves_bucket":"future-allowlisted-bucket"}},
+    {"name":"cosmetic_previewed","trigger":"Preview actually opened, once per explicit preview action","availability":"existing-ui-not-instrumented","properties":{"product_key":"allowlisted-catalog-id","category":"enum:guardian-skin|skill-effect|animation|decor|profile"}}
+  ]
+}

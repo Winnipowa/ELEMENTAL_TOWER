@@ -1,0 +1,58 @@
+[
+  {
+    "name": "static",
+    "args": [
+      "tests/reference-audit.mjs"
+    ],
+    "status": 0,
+    "elapsedMs": 2665
+  },
+  {
+    "name": "unit",
+    "args": [
+      "--test",
+      "tests/analytics-plan.test.mjs",
+      "tests/bridge.test.mjs",
+      "tests/guardian-art.test.mjs",
+      "tests/mobile-assets.test.mjs",
+      "tests/products.test.mjs",
+      "tests/progression.test.mjs",
+      "tests/server.test.mjs",
+      "tests/views.test.mjs"
+    ],
+    "status": 0,
+    "elapsedMs": 178
+  },
+  {
+    "name": "navigation",
+    "args": [
+      "tests/navigation.mjs"
+    ],
+    "status": 0,
+    "elapsedMs": 37281
+  },
+  {
+    "name": "products",
+    "args": [
+      "tests/products-browser.mjs"
+    ],
+    "status": 0,
+    "elapsedMs": 16821
+  },
+  {
+    "name": "reference-browser",
+    "args": [
+      "tests/reference-browser.mjs"
+    ],
+    "status": 0,
+    "elapsedMs": 6621
+  },
+  {
+    "name": "visual-history",
+    "args": [
+      "tests/replay-visuals.mjs"
+    ],
+    "status": 0,
+    "elapsedMs": 46346
+  }
+]

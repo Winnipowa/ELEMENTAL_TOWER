@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "source": "Derived from unchanged DA-03 source sheets",
+  "encoder": "ffmpeg version 9.0.2-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers",
+  "recipe": "PNG compression_level=9 pred=mixed pix_fmt=rgba; dimensions unchanged",
+  "verification": "Full decoded RGBA exact including transparent pixels; no resizing, cropping or mapping changes",
+  "records": [
+    {
+      "source": "spell-areas.png",
+      "sourceSha256": "7be53794d8b20881c4265a5493ac40ad4b682a5bb7d0788727893be7793b2e95",
+      "file": "spell-areas.png",
+      "sha256": "ecda63ba87600487b2af7d99052b2d6b36bf2f3a41d50a2293e0afe4717eed1e",
+      "width": 1122,
+      "height": 1402,
+      "sourceBytes": 3220399,
+      "bytes": 2858008,
+      "rgbaSha256": "e51ed6f32604f32c34dad4076f150bd3d4fbcdf1c7f27bcfa2077a71e65c289c",
+      "rgbaIdentical": true
+    },
+    {
+      "source": "guardians-secondary.png",
+      "sourceSha256": "23b4a6a4db8463f2c1d4a2664fcf2f70fa92f8a46853d26f33f4e78c3c66a33e",
+      "file": "guardians-secondary.png",
+      "sha256": "130a7f4a5238036cf4cac1f9b0b68bd5508be9dbaf1e46951b3f2b8af90c55e8",
+      "width": 1122,
+      "height": 1402,
+      "sourceBytes": 2628604,
+      "bytes": 2327504,
+      "rgbaSha256": "d5308b9ca7d265222a56747ff2297ce6a75d51f4a1d7dbc646b8a0db190c4af4",
+      "rgbaIdentical": true
+    },
+    {
+      "source": "ranks-luma-mousse-raika.png",
+      "sourceSha256": "9e0d044e6bb0ca645b06857ff6e5fdda35936958056f4bc9580160c40c67e009",
+      "file": "ranks-luma-mousse-raika.png",
+      "sha256": "19ae1b1f9723852f52690c968926b7e590c36039951d70eafa54456d9f767d46",
+      "width": 1122,
+      "height": 1402,
+      "sourceBytes": 3113994,
+      "bytes": 2636477,
+      "rgbaSha256": "1768cd9859cf87c0a83a6720b511b0c389a1ec3f50cc2371f9409e61768c0a37",
+      "rgbaIdentical": true
+    },
+    {
+      "source": "guardians-primary.png",
+      "sourceSha256": "57703b5165356cedc0c731396a67cca14fabc446d37b1a9900956b90f2855661",
+      "file": "guardians-primary.png",
+      "sha256": "94d39fcd83ea01ae4b8d9c45dcd047ce02522b1c91b59af0d323d1a7de5426a7",
+      "width": 1122,
+      "height": 1402,
+      "sourceBytes": 2642429,
+      "bytes": 2351219,
+      "rgbaSha256": "9190d40af5be6a019dcfb0a751ec09fa1beb6b958ea558d2def6fb8d85a5d2e4",
+      "rgbaIdentical": true
+    },
+    {
+      "source": "spell-projectiles.png",
+      "sourceSha256": "5798655265a622045bb12385b1160af0f13ac41338f47726cc3b98644cfd595f",
+      "file": "spell-projectiles.png",
+      "sha256": "bcc919a1a8416b8c4535473b0bc4377e290f2c15012558ee67d34f3dada31452",
+      "width": 1122,
+      "height": 1402,
+      "sourceBytes": 2504634,
+      "bytes": 2105554,
+      "rgbaSha256": "786138e5562636fc6b0545a1bc5b60496a6ccc5ac7ff364030dfa1e85fbc5b6a",
+      "rgbaIdentical": true
+    },
+    {
+      "source": "halos-pedestals.png",
+      "sourceSha256": "34d2f19e6f88db54e36118add3a2d8141bf0319bdc1953e8d0ed944c9df6f883",
+      "file": "halos-pedestals.png",
+      "sha256": "36cee655ddd9826e8a985577896c04426d3a898432dae8c4f249dcfd56a94825",
+      "width": 1122,
+      "height": 1402,
+      "sourceBytes": 2910195,
+      "bytes": 2659687,
+      "rgbaSha256": "413ca0adbd1dd292ac32d1c90d8551605acaf917fd217f997b6c16a5e9abb053",
+      "rgbaIdentical": true
+    }
+  ]
+}

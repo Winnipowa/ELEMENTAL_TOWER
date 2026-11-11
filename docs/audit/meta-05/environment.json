@@ -1,0 +1,120 @@
+{
+  "auditDate": "2026-11-11",
+  "version": "0.4.1-meta.5",
+  "branch": "feature/meta-05-mobile-readiness",
+  "baseCommit": "d2184f51dc26de6e6592ce3aa8ae988f1efc58a2",
+  "node": "v24.2.0",
+  "npm": "11.3.0",
+  "playwright": "1.65.0",
+  "platform": "win32",
+  "engines": [
+    {
+      "name": "edge",
+      "version": "157.0.4341.46"
+    },
+    {
+      "name": "webkit",
+      "version": "27.2"
+    }
+  ],
+  "physicalDevicesTested": false,
+  "analyticsTransport": "none",
+  "productionDependencies": {},
+  "protectedFiles": [
+    {
+      "file": "meta/bridge.js",
+      "unchanged": true
+    },
+    {
+      "file": "meta/expedition.js",
+      "unchanged": true
+    },
+    {
+      "file": "meta/progression.js",
+      "unchanged": true
+    },
+    {
+      "file": "meta/catalog.js",
+      "unchanged": true
+    },
+    {
+      "file": "meta/products/service.js",
+      "unchanged": true
+    },
+    {
+      "file": "meta/products/preferences.js",
+      "unchanged": true
+    },
+    {
+      "file": "meta/data/catalog.demo.json",
+      "unchanged": true
+    },
+    {
+      "file": "meta/products/cosmetics.demo.json",
+      "unchanged": true
+    },
+    {
+      "file": "meta/products/missions.demo.json",
+      "unchanged": true
+    },
+    {
+      "file": "meta/products/pass.demo.json",
+      "unchanged": true
+    },
+    {
+      "file": "meta/art/provenance.json",
+      "unchanged": true
+    },
+    {
+      "file": "meta/shell.css",
+      "unchanged": true
+    },
+    {
+      "file": "docs/GAME_BRIDGE_CONTRACT_V0.md",
+      "unchanged": true
+    },
+    {
+      "file": "docs/META_APP_SCOPE_V1.md",
+      "unchanged": true
+    },
+    {
+      "file": "docs/GDD_V1.1.md",
+      "unchanged": true
+    },
+    {
+      "file": "meta/art/sources/spell-areas.png",
+      "unchanged": true
+    },
+    {
+      "file": "meta/art/sources/guardians-secondary.png",
+      "unchanged": true
+    },
+    {
+      "file": "meta/art/sources/ranks-luma-mousse-raika.png",
+      "unchanged": true
+    },
+    {
+      "file": "meta/art/sources/guardians-primary.png",
+      "unchanged": true
+    },
+    {
+      "file": "meta/art/sources/spell-projectiles.png",
+      "unchanged": true
+    },
+    {
+      "file": "meta/art/sources/halos-pedestals.png",
+      "unchanged": true
+    }
+  ],
+  "artTransportOnlyException": "Only derivative URL and source fallback attribute; exact reversal checked by static audit, mappings checked against original module",
+  "gameplayUnchanged": true,
+  "gameplayPaths": [
+    "prototypes",
+    "game-data",
+    "assets/ui"
+  ],
+  "unitFinal": "npm test: 30/30, exit 0, localhost permission enabled",
+  "command": "npm run test:mobile",
+  "exitCode": 0,
+  "sourceArtBuild": "npm run assets:mobile (FFmpeg 9.0.2 local tool, not a runtime dependency)"
+}

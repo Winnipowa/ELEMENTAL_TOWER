@@ -1,0 +1,841 @@
+{
+  "physicalDevicesTested": false,
+  "engines": [
+    {
+      "engine": "edge",
+      "version": "157.0.4341.46",
+      "width": 320,
+      "height": 844,
+      "routes": 24,
+      "historyBack": true,
+      "controlsReachable": true,
+      "storageUnchanged": true,
+      "support": {
+        "dvh": true,
+        "colorMix": true,
+        "safeArea": true,
+        "inputFont": "11px",
+        "headerTop": "14px",
+        "navBottom": "8px"
+      }
+    },
+    {
+      "engine": "edge",
+      "version": "157.0.4341.46",
+      "width": 390,
+      "height": 844,
+      "routes": 24,
+      "historyBack": true,
+      "controlsReachable": true,
+      "storageUnchanged": true,
+      "support": {
+        "dvh": true,
+        "colorMix": true,
+        "safeArea": true,
+        "inputFont": "11px",
+        "headerTop": "14px",
+        "navBottom": "8px"
+      }
+    },
+    {
+      "engine": "edge",
+      "version": "157.0.4341.46",
+      "width": 430,
+      "height": 844,
+      "routes": 24,
+      "historyBack": true,
+      "controlsReachable": true,
+      "storageUnchanged": true,
+      "support": {
+        "dvh": true,
+        "colorMix": true,
+        "safeArea": true,
+        "inputFont": "11px",
+        "headerTop": "14px",
+        "navBottom": "8px"
+      }
+    },
+    {
+      "engine": "edge",
+      "version": "157.0.4341.46",
+      "width": 320,
+      "height": 568,
+      "routes": 24,
+      "historyBack": true,
+      "controlsReachable": true,
+      "storageUnchanged": true,
+      "support": {
+        "dvh": true,
+        "colorMix": true,
+        "safeArea": true,
+        "inputFont": "11px",
+        "headerTop": "14px",
+        "navBottom": "8px"
+      }
+    },
+    {
+      "engine": "webkit",
+      "version": "27.2",
+      "width": 320,
+      "height": 844,
+      "routes": 24,
+      "historyBack": true,
+      "controlsReachable": true,
+      "storageUnchanged": true,
+      "support": {
+        "dvh": true,
+        "colorMix": true,
+        "safeArea": true,
+        "inputFont": "11px",
+        "headerTop": "14px",
+        "navBottom": "8px"
+      }
+    },
+    {
+      "engine": "webkit",
+      "version": "27.2",
+      "width": 390,
+      "height": 844,
+      "routes": 24,
+      "historyBack": true,
+      "controlsReachable": true,
+      "storageUnchanged": true,
+      "support": {
+        "dvh": true,
+        "colorMix": true,
+        "safeArea": true,
+        "inputFont": "11px",
+        "headerTop": "14px",
+        "navBottom": "8px"
+      }
+    },
+    {
+      "engine": "webkit",
+      "version": "27.2",
+      "width": 430,
+      "height": 844,
+      "routes": 24,
+      "historyBack": true,
+      "controlsReachable": true,
+      "storageUnchanged": true,
+      "support": {
+        "dvh": true,
+        "colorMix": true,
+        "safeArea": true,
+        "inputFont": "11px",
+        "headerTop": "14px",
+        "navBottom": "8px"
+      }
+    },
+    {
+      "engine": "webkit",
+      "version": "27.2",
+      "width": 320,
+      "height": 568,
+      "routes": 24,
+      "historyBack": true,
+      "controlsReachable": true,
+      "storageUnchanged": true,
+      "support": {
+        "dvh": true,
+        "colorMix": true,
+        "safeArea": true,
+        "inputFont": "11px",
+        "headerTop": "14px",
+        "navBottom": "8px"
+      }
+    }
+  ],
+  "pixels": [
+    {
+      "engine": "edge",
+      "file": "spell-areas.png",
+      "width": 1122,
+      "height": 1402,
+      "results": [
+        {
+          "background": null,
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#07111F",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#132345",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#FFFFFF",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        }
+      ]
+    },
+    {
+      "engine": "edge",
+      "file": "guardians-secondary.png",
+      "width": 1122,
+      "height": 1402,
+      "results": [
+        {
+          "background": null,
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#07111F",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#132345",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#FFFFFF",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        }
+      ]
+    },
+    {
+      "engine": "edge",
+      "file": "ranks-luma-mousse-raika.png",
+      "width": 1122,
+      "height": 1402,
+      "results": [
+        {
+          "background": null,
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#07111F",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#132345",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#FFFFFF",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        }
+      ]
+    },
+    {
+      "engine": "edge",
+      "file": "guardians-primary.png",
+      "width": 1122,
+      "height": 1402,
+      "results": [
+        {
+          "background": null,
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#07111F",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#132345",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#FFFFFF",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        }
+      ]
+    },
+    {
+      "engine": "edge",
+      "file": "spell-projectiles.png",
+      "width": 1122,
+      "height": 1402,
+      "results": [
+        {
+          "background": null,
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#07111F",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#132345",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#FFFFFF",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        }
+      ]
+    },
+    {
+      "engine": "edge",
+      "file": "halos-pedestals.png",
+      "width": 1122,
+      "height": 1402,
+      "results": [
+        {
+          "background": null,
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#07111F",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#132345",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#FFFFFF",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        }
+      ]
+    },
+    {
+      "engine": "webkit",
+      "file": "spell-areas.png",
+      "width": 1122,
+      "height": 1402,
+      "results": [
+        {
+          "background": null,
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#07111F",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#132345",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#FFFFFF",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        }
+      ]
+    },
+    {
+      "engine": "webkit",
+      "file": "guardians-secondary.png",
+      "width": 1122,
+      "height": 1402,
+      "results": [
+        {
+          "background": null,
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#07111F",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#132345",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#FFFFFF",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        }
+      ]
+    },
+    {
+      "engine": "webkit",
+      "file": "ranks-luma-mousse-raika.png",
+      "width": 1122,
+      "height": 1402,
+      "results": [
+        {
+          "background": null,
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#07111F",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#132345",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#FFFFFF",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        }
+      ]
+    },
+    {
+      "engine": "webkit",
+      "file": "guardians-primary.png",
+      "width": 1122,
+      "height": 1402,
+      "results": [
+        {
+          "background": null,
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#07111F",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#132345",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#FFFFFF",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        }
+      ]
+    },
+    {
+      "engine": "webkit",
+      "file": "spell-projectiles.png",
+      "width": 1122,
+      "height": 1402,
+      "results": [
+        {
+          "background": null,
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#07111F",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#132345",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#FFFFFF",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        }
+      ]
+    },
+    {
+      "engine": "webkit",
+      "file": "halos-pedestals.png",
+      "width": 1122,
+      "height": 1402,
+      "results": [
+        {
+          "background": null,
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#07111F",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#132345",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        },
+        {
+          "background": "#FFFFFF",
+          "differingChannels": 0,
+          "maxChannelDelta": 0,
+          "alphaDifferences": 0
+        }
+      ]
+    }
+  ],
+  "visualComparisons": [
+    {
+      "engine": "edge",
+      "width": 320,
+      "screens": [
+        {
+          "route": "collection",
+          "maxChannelDelta": 16,
+          "differingChannels": 271,
+          "differingPixels": 124
+        },
+        {
+          "route": "guardian/demo-luma",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        },
+        {
+          "route": "guardian/demo-mousse",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        },
+        {
+          "route": "guardian/demo-nyx",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        },
+        {
+          "route": "synergies",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        },
+        {
+          "route": "product/demo-skin-luma",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        }
+      ],
+      "pixelEqualityGate": false,
+      "requiresHumanReview": true,
+      "exactAssetRgbaGate": true,
+      "renderer": "software-for-comparison",
+      "note": "Whole-page raster differences are informational; A/A raster-cache variation observed. No claim of screenshot pixel identity."
+    },
+    {
+      "engine": "edge",
+      "width": 390,
+      "screens": [
+        {
+          "route": "collection",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        },
+        {
+          "route": "guardian/demo-luma",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        },
+        {
+          "route": "guardian/demo-mousse",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        },
+        {
+          "route": "guardian/demo-nyx",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        },
+        {
+          "route": "synergies",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        },
+        {
+          "route": "product/demo-skin-luma",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        }
+      ],
+      "pixelEqualityGate": false,
+      "requiresHumanReview": true,
+      "exactAssetRgbaGate": true,
+      "renderer": "software-for-comparison",
+      "note": "Whole-page raster differences are informational; A/A raster-cache variation observed. No claim of screenshot pixel identity."
+    },
+    {
+      "engine": "edge",
+      "width": 430,
+      "screens": [
+        {
+          "route": "collection",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        },
+        {
+          "route": "guardian/demo-luma",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        },
+        {
+          "route": "guardian/demo-mousse",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        },
+        {
+          "route": "guardian/demo-nyx",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        },
+        {
+          "route": "synergies",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        },
+        {
+          "route": "product/demo-skin-luma",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        }
+      ],
+      "pixelEqualityGate": false,
+      "requiresHumanReview": true,
+      "exactAssetRgbaGate": true,
+      "renderer": "software-for-comparison",
+      "note": "Whole-page raster differences are informational; A/A raster-cache variation observed. No claim of screenshot pixel identity."
+    },
+    {
+      "engine": "webkit",
+      "width": 320,
+      "screens": [
+        {
+          "route": "collection",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        },
+        {
+          "route": "guardian/demo-luma",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        },
+        {
+          "route": "guardian/demo-mousse",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        },
+        {
+          "route": "guardian/demo-nyx",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        },
+        {
+          "route": "synergies",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        },
+        {
+          "route": "product/demo-skin-luma",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        }
+      ],
+      "pixelEqualityGate": false,
+      "requiresHumanReview": true,
+      "exactAssetRgbaGate": true,
+      "renderer": "default",
+      "note": "Whole-page raster differences are informational; A/A raster-cache variation observed. No claim of screenshot pixel identity."
+    },
+    {
+      "engine": "webkit",
+      "width": 390,
+      "screens": [
+        {
+          "route": "collection",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        },
+        {
+          "route": "guardian/demo-luma",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        },
+        {
+          "route": "guardian/demo-mousse",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        },
+        {
+          "route": "guardian/demo-nyx",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        },
+        {
+          "route": "synergies",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        },
+        {
+          "route": "product/demo-skin-luma",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        }
+      ],
+      "pixelEqualityGate": false,
+      "requiresHumanReview": true,
+      "exactAssetRgbaGate": true,
+      "renderer": "default",
+      "note": "Whole-page raster differences are informational; A/A raster-cache variation observed. No claim of screenshot pixel identity."
+    },
+    {
+      "engine": "webkit",
+      "width": 430,
+      "screens": [
+        {
+          "route": "collection",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        },
+        {
+          "route": "guardian/demo-luma",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        },
+        {
+          "route": "guardian/demo-mousse",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        },
+        {
+          "route": "guardian/demo-nyx",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        },
+        {
+          "route": "synergies",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        },
+        {
+          "route": "product/demo-skin-luma",
+          "maxChannelDelta": 0,
+          "differingChannels": 0,
+          "differingPixels": 0
+        }
+      ],
+      "pixelEqualityGate": false,
+      "requiresHumanReview": true,
+      "exactAssetRgbaGate": true,
+      "renderer": "default",
+      "note": "Whole-page raster differences are informational; A/A raster-cache variation observed. No claim of screenshot pixel identity."
+    }
+  ],
+  "degraded": [
+    {
+      "engine": "edge",
+      "derivativeFallback": true,
+      "missingPortraitLabel": true,
+      "delayedCatalogLoading": true,
+      "http503Retry": true,
+      "warmInMemoryNavigationOffline": true,
+      "offlineReloadSupported": false,
+      "recoveryAfterOffline": true
+    },
+    {
+      "engine": "webkit",
+      "derivativeFallback": true,
+      "missingPortraitLabel": true,
+      "delayedCatalogLoading": true,
+      "http503Retry": true,
+      "warmInMemoryNavigationOffline": true,
+      "offlineReloadSupported": false,
+      "recoveryAfterOffline": true
+    }
+  ]
+}
