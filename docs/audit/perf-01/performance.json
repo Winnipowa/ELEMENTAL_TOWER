@@ -1,0 +1,2255 @@
+{
+  "baseline": "50329e3d9bf09602b821e79f42975967dc678c9b (PR #17)",
+  "physicalDevices": false,
+  "method": "Cold contexts, real localhost HTTP image bodies, cache disabled, same module interception for both modes. Readiness is visible artwork loaded/decoded + fonts + two composition frames, not all hidden images.",
+  "profile": {
+    "downloadBytesPerSecond": 500000,
+    "uploadBytesPerSecond": 125000,
+    "latencyMs": 80,
+    "cpuRate": 4
+  },
+  "samples": [
+    {
+      "route": "collection",
+      "width": 320,
+      "height": 844,
+      "trials": 3,
+      "trial": 1,
+      "mode": "before",
+      "visibleArtReadyMs": 15079,
+      "fcpMs": 468,
+      "domContentLoadedMs": 500.20000000298023,
+      "completedImagesAtVisibleReady": {
+        "requests": 3,
+        "uniqueImages": 3,
+        "encodedImageBytes": 7116460,
+        "decodedRgbaEstimate": 18876528,
+        "images": [
+          {
+            "path": "/meta/art/mobile/halos-pedestals.png",
+            "bytes": 2659687,
+            "duration": 14411.09999999404
+          },
+          {
+            "path": "/meta/art/mobile/guardians-primary.png",
+            "bytes": 2351219,
+            "duration": 13774.70000000298
+          },
+          {
+            "path": "/meta/art/mobile/spell-projectiles.png",
+            "bytes": 2105554,
+            "duration": 12790.09999999404
+          }
+        ]
+      },
+      "requests": 3,
+      "uniqueImages": 3,
+      "encodedImageBytes": 7116460,
+      "decodedRgbaEstimate": 18876528,
+      "images": [
+        {
+          "path": "/meta/art/mobile/halos-pedestals.png",
+          "bytes": 2659687,
+          "duration": 14411.09999999404
+        },
+        {
+          "path": "/meta/art/mobile/guardians-primary.png",
+          "bytes": 2351219,
+          "duration": 13774.70000000298
+        },
+        {
+          "path": "/meta/art/mobile/spell-projectiles.png",
+          "bytes": 2105554,
+          "duration": 12790.09999999404
+        }
+      ]
+    },
+    {
+      "route": "collection",
+      "width": 320,
+      "height": 844,
+      "trials": 3,
+      "trial": 1,
+      "mode": "after",
+      "visibleArtReadyMs": 2717.699999988079,
+      "fcpMs": 452,
+      "domContentLoadedMs": 493.59999999403954,
+      "completedImagesAtVisibleReady": {
+        "requests": 8,
+        "uniqueImages": 8,
+        "encodedImageBytes": 947278,
+        "decodedRgbaEstimate": 2561920,
+        "images": [
+          {
+            "path": "/meta/art/sprites/halos-pedestals_0_1090_280_310.png",
+            "bytes": 161536,
+            "duration": 1735.699999988079
+          },
+          {
+            "path": "/meta/art/sprites/spell-projectiles_0_0_225_235.png",
+            "bytes": 81028,
+            "duration": 1062.6000000089407
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_5_215_210.png",
+            "bytes": 91735,
+            "duration": 1172.4000000059605
+          },
+          {
+            "path": "/meta/art/sprites/halos-pedestals_560_1090_280_310.png",
+            "bytes": 178857,
+            "duration": 1859.2999999970198
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_590_215_175.png",
+            "bytes": 99971,
+            "duration": 1264.7000000029802
+          },
+          {
+            "path": "/meta/art/sprites/spell-projectiles_675_0_225_235.png",
+            "bytes": 85367,
+            "duration": 1139.6000000089407
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_1170_220_220.png",
+            "bytes": 89570,
+            "duration": 1890.199999988079
+          },
+          {
+            "path": "/meta/art/sprites/halos-pedestals_840_1090_280_310.png",
+            "bytes": 159214,
+            "duration": 2015.5
+          }
+        ]
+      },
+      "requests": 8,
+      "uniqueImages": 8,
+      "encodedImageBytes": 947278,
+      "decodedRgbaEstimate": 2561920,
+      "images": [
+        {
+          "path": "/meta/art/sprites/halos-pedestals_0_1090_280_310.png",
+          "bytes": 161536,
+          "duration": 1735.699999988079
+        },
+        {
+          "path": "/meta/art/sprites/spell-projectiles_0_0_225_235.png",
+          "bytes": 81028,
+          "duration": 1062.6000000089407
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_5_215_210.png",
+          "bytes": 91735,
+          "duration": 1172.4000000059605
+        },
+        {
+          "path": "/meta/art/sprites/halos-pedestals_560_1090_280_310.png",
+          "bytes": 178857,
+          "duration": 1859.2999999970198
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_590_215_175.png",
+          "bytes": 99971,
+          "duration": 1264.7000000029802
+        },
+        {
+          "path": "/meta/art/sprites/spell-projectiles_675_0_225_235.png",
+          "bytes": 85367,
+          "duration": 1139.6000000089407
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_1170_220_220.png",
+          "bytes": 89570,
+          "duration": 1890.199999988079
+        },
+        {
+          "path": "/meta/art/sprites/halos-pedestals_840_1090_280_310.png",
+          "bytes": 159214,
+          "duration": 2015.5
+        }
+      ]
+    },
+    {
+      "route": "collection",
+      "width": 320,
+      "height": 844,
+      "trials": 3,
+      "trial": 2,
+      "mode": "after",
+      "visibleArtReadyMs": 2727.6000000089407,
+      "fcpMs": 444,
+      "domContentLoadedMs": 499.30000001192093,
+      "completedImagesAtVisibleReady": {
+        "requests": 8,
+        "uniqueImages": 8,
+        "encodedImageBytes": 947278,
+        "decodedRgbaEstimate": 2561920,
+        "images": [
+          {
+            "path": "/meta/art/sprites/halos-pedestals_0_1090_280_310.png",
+            "bytes": 161536,
+            "duration": 1730.300000011921
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_5_215_210.png",
+            "bytes": 91735,
+            "duration": 1168.5999999940395
+          },
+          {
+            "path": "/meta/art/sprites/spell-projectiles_0_0_225_235.png",
+            "bytes": 81028,
+            "duration": 1074.4000000059605
+          },
+          {
+            "path": "/meta/art/sprites/halos-pedestals_560_1090_280_310.png",
+            "bytes": 178857,
+            "duration": 1853.7999999970198
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_590_215_175.png",
+            "bytes": 99971,
+            "duration": 1245.800000011921
+          },
+          {
+            "path": "/meta/art/sprites/spell-projectiles_675_0_225_235.png",
+            "bytes": 85367,
+            "duration": 1134.7999999970198
+          },
+          {
+            "path": "/meta/art/sprites/halos-pedestals_840_1090_280_310.png",
+            "bytes": 159214,
+            "duration": 2024.9000000059605
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_1170_220_220.png",
+            "bytes": 89570,
+            "duration": 1898.8999999910593
+          }
+        ]
+      },
+      "requests": 8,
+      "uniqueImages": 8,
+      "encodedImageBytes": 947278,
+      "decodedRgbaEstimate": 2561920,
+      "images": [
+        {
+          "path": "/meta/art/sprites/halos-pedestals_0_1090_280_310.png",
+          "bytes": 161536,
+          "duration": 1730.300000011921
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_5_215_210.png",
+          "bytes": 91735,
+          "duration": 1168.5999999940395
+        },
+        {
+          "path": "/meta/art/sprites/spell-projectiles_0_0_225_235.png",
+          "bytes": 81028,
+          "duration": 1074.4000000059605
+        },
+        {
+          "path": "/meta/art/sprites/halos-pedestals_560_1090_280_310.png",
+          "bytes": 178857,
+          "duration": 1853.7999999970198
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_590_215_175.png",
+          "bytes": 99971,
+          "duration": 1245.800000011921
+        },
+        {
+          "path": "/meta/art/sprites/spell-projectiles_675_0_225_235.png",
+          "bytes": 85367,
+          "duration": 1134.7999999970198
+        },
+        {
+          "path": "/meta/art/sprites/halos-pedestals_840_1090_280_310.png",
+          "bytes": 159214,
+          "duration": 2024.9000000059605
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_1170_220_220.png",
+          "bytes": 89570,
+          "duration": 1898.8999999910593
+        }
+      ]
+    },
+    {
+      "route": "collection",
+      "width": 320,
+      "height": 844,
+      "trials": 3,
+      "trial": 2,
+      "mode": "before",
+      "visibleArtReadyMs": 15064.29999999702,
+      "fcpMs": 472,
+      "domContentLoadedMs": 503,
+      "completedImagesAtVisibleReady": {
+        "requests": 3,
+        "uniqueImages": 3,
+        "encodedImageBytes": 7116460,
+        "decodedRgbaEstimate": 18876528,
+        "images": [
+          {
+            "path": "/meta/art/mobile/halos-pedestals.png",
+            "bytes": 2659687,
+            "duration": 14408.10000000894
+          },
+          {
+            "path": "/meta/art/mobile/guardians-primary.png",
+            "bytes": 2351219,
+            "duration": 13777.60000000894
+          },
+          {
+            "path": "/meta/art/mobile/spell-projectiles.png",
+            "bytes": 2105554,
+            "duration": 12810.70000000298
+          }
+        ]
+      },
+      "requests": 3,
+      "uniqueImages": 3,
+      "encodedImageBytes": 7116460,
+      "decodedRgbaEstimate": 18876528,
+      "images": [
+        {
+          "path": "/meta/art/mobile/halos-pedestals.png",
+          "bytes": 2659687,
+          "duration": 14408.10000000894
+        },
+        {
+          "path": "/meta/art/mobile/guardians-primary.png",
+          "bytes": 2351219,
+          "duration": 13777.60000000894
+        },
+        {
+          "path": "/meta/art/mobile/spell-projectiles.png",
+          "bytes": 2105554,
+          "duration": 12810.70000000298
+        }
+      ]
+    },
+    {
+      "route": "collection",
+      "width": 320,
+      "height": 844,
+      "trials": 3,
+      "trial": 3,
+      "mode": "before",
+      "visibleArtReadyMs": 15086.79999999702,
+      "fcpMs": 452,
+      "domContentLoadedMs": 503.3999999910593,
+      "completedImagesAtVisibleReady": {
+        "requests": 3,
+        "uniqueImages": 3,
+        "encodedImageBytes": 7116460,
+        "decodedRgbaEstimate": 18876528,
+        "images": [
+          {
+            "path": "/meta/art/mobile/halos-pedestals.png",
+            "bytes": 2659687,
+            "duration": 14425.90000000596
+          },
+          {
+            "path": "/meta/art/mobile/guardians-primary.png",
+            "bytes": 2351219,
+            "duration": 13807.5
+          },
+          {
+            "path": "/meta/art/mobile/spell-projectiles.png",
+            "bytes": 2105554,
+            "duration": 12793.20000000298
+          }
+        ]
+      },
+      "requests": 3,
+      "uniqueImages": 3,
+      "encodedImageBytes": 7116460,
+      "decodedRgbaEstimate": 18876528,
+      "images": [
+        {
+          "path": "/meta/art/mobile/halos-pedestals.png",
+          "bytes": 2659687,
+          "duration": 14425.90000000596
+        },
+        {
+          "path": "/meta/art/mobile/guardians-primary.png",
+          "bytes": 2351219,
+          "duration": 13807.5
+        },
+        {
+          "path": "/meta/art/mobile/spell-projectiles.png",
+          "bytes": 2105554,
+          "duration": 12793.20000000298
+        }
+      ]
+    },
+    {
+      "route": "collection",
+      "width": 320,
+      "height": 844,
+      "trials": 3,
+      "trial": 3,
+      "mode": "after",
+      "visibleArtReadyMs": 2702.7000000029802,
+      "fcpMs": 436,
+      "domContentLoadedMs": 479.5,
+      "completedImagesAtVisibleReady": {
+        "requests": 8,
+        "uniqueImages": 8,
+        "encodedImageBytes": 947278,
+        "decodedRgbaEstimate": 2561920,
+        "images": [
+          {
+            "path": "/meta/art/sprites/halos-pedestals_0_1090_280_310.png",
+            "bytes": 161536,
+            "duration": 1722.8999999910593
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_5_215_210.png",
+            "bytes": 91735,
+            "duration": 1172.2999999970198
+          },
+          {
+            "path": "/meta/art/sprites/spell-projectiles_0_0_225_235.png",
+            "bytes": 81028,
+            "duration": 1077.1000000089407
+          },
+          {
+            "path": "/meta/art/sprites/halos-pedestals_560_1090_280_310.png",
+            "bytes": 178857,
+            "duration": 1848.5999999940395
+          },
+          {
+            "path": "/meta/art/sprites/spell-projectiles_675_0_225_235.png",
+            "bytes": 85367,
+            "duration": 1125.2000000029802
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_590_215_175.png",
+            "bytes": 99971,
+            "duration": 1249.7000000029802
+          },
+          {
+            "path": "/meta/art/sprites/halos-pedestals_840_1090_280_310.png",
+            "bytes": 159214,
+            "duration": 2021.0999999940395
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_1170_220_220.png",
+            "bytes": 89570,
+            "duration": 1879.1000000089407
+          }
+        ]
+      },
+      "requests": 8,
+      "uniqueImages": 8,
+      "encodedImageBytes": 947278,
+      "decodedRgbaEstimate": 2561920,
+      "images": [
+        {
+          "path": "/meta/art/sprites/halos-pedestals_0_1090_280_310.png",
+          "bytes": 161536,
+          "duration": 1722.8999999910593
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_5_215_210.png",
+          "bytes": 91735,
+          "duration": 1172.2999999970198
+        },
+        {
+          "path": "/meta/art/sprites/spell-projectiles_0_0_225_235.png",
+          "bytes": 81028,
+          "duration": 1077.1000000089407
+        },
+        {
+          "path": "/meta/art/sprites/halos-pedestals_560_1090_280_310.png",
+          "bytes": 178857,
+          "duration": 1848.5999999940395
+        },
+        {
+          "path": "/meta/art/sprites/spell-projectiles_675_0_225_235.png",
+          "bytes": 85367,
+          "duration": 1125.2000000029802
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_590_215_175.png",
+          "bytes": 99971,
+          "duration": 1249.7000000029802
+        },
+        {
+          "path": "/meta/art/sprites/halos-pedestals_840_1090_280_310.png",
+          "bytes": 159214,
+          "duration": 2021.0999999940395
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_1170_220_220.png",
+          "bytes": 89570,
+          "duration": 1879.1000000089407
+        }
+      ]
+    },
+    {
+      "route": "collection",
+      "width": 390,
+      "height": 844,
+      "trials": 3,
+      "trial": 1,
+      "mode": "before",
+      "visibleArtReadyMs": 15049.89999999106,
+      "fcpMs": 440,
+      "domContentLoadedMs": 493.8999999910593,
+      "completedImagesAtVisibleReady": {
+        "requests": 3,
+        "uniqueImages": 3,
+        "encodedImageBytes": 7116460,
+        "decodedRgbaEstimate": 18876528,
+        "images": [
+          {
+            "path": "/meta/art/mobile/halos-pedestals.png",
+            "bytes": 2659687,
+            "duration": 14391.89999999106
+          },
+          {
+            "path": "/meta/art/mobile/guardians-primary.png",
+            "bytes": 2351219,
+            "duration": 13778.79999999702
+          },
+          {
+            "path": "/meta/art/mobile/spell-projectiles.png",
+            "bytes": 2105554,
+            "duration": 12759.60000000894
+          }
+        ]
+      },
+      "requests": 3,
+      "uniqueImages": 3,
+      "encodedImageBytes": 7116460,
+      "decodedRgbaEstimate": 18876528,
+      "images": [
+        {
+          "path": "/meta/art/mobile/halos-pedestals.png",
+          "bytes": 2659687,
+          "duration": 14391.89999999106
+        },
+        {
+          "path": "/meta/art/mobile/guardians-primary.png",
+          "bytes": 2351219,
+          "duration": 13778.79999999702
+        },
+        {
+          "path": "/meta/art/mobile/spell-projectiles.png",
+          "bytes": 2105554,
+          "duration": 12759.60000000894
+        }
+      ]
+    },
+    {
+      "route": "collection",
+      "width": 390,
+      "height": 844,
+      "trials": 3,
+      "trial": 1,
+      "mode": "after",
+      "visibleArtReadyMs": 2709.7999999970198,
+      "fcpMs": 468,
+      "domContentLoadedMs": 496.3999999910593,
+      "completedImagesAtVisibleReady": {
+        "requests": 8,
+        "uniqueImages": 8,
+        "encodedImageBytes": 947278,
+        "decodedRgbaEstimate": 2561920,
+        "images": [
+          {
+            "path": "/meta/art/sprites/halos-pedestals_0_1090_280_310.png",
+            "bytes": 161536,
+            "duration": 1735.2000000029802
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_5_215_210.png",
+            "bytes": 91735,
+            "duration": 1171.800000011921
+          },
+          {
+            "path": "/meta/art/sprites/spell-projectiles_0_0_225_235.png",
+            "bytes": 81028,
+            "duration": 1077.5
+          },
+          {
+            "path": "/meta/art/sprites/halos-pedestals_560_1090_280_310.png",
+            "bytes": 178857,
+            "duration": 1843.3999999910593
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_590_215_175.png",
+            "bytes": 99971,
+            "duration": 1249
+          },
+          {
+            "path": "/meta/art/sprites/spell-projectiles_675_0_225_235.png",
+            "bytes": 85367,
+            "duration": 1139.7000000029802
+          },
+          {
+            "path": "/meta/art/sprites/halos-pedestals_840_1090_280_310.png",
+            "bytes": 159214,
+            "duration": 2014.1000000089407
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_1170_220_220.png",
+            "bytes": 89570,
+            "duration": 1874.2000000029802
+          }
+        ]
+      },
+      "requests": 8,
+      "uniqueImages": 8,
+      "encodedImageBytes": 947278,
+      "decodedRgbaEstimate": 2561920,
+      "images": [
+        {
+          "path": "/meta/art/sprites/halos-pedestals_0_1090_280_310.png",
+          "bytes": 161536,
+          "duration": 1735.2000000029802
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_5_215_210.png",
+          "bytes": 91735,
+          "duration": 1171.800000011921
+        },
+        {
+          "path": "/meta/art/sprites/spell-projectiles_0_0_225_235.png",
+          "bytes": 81028,
+          "duration": 1077.5
+        },
+        {
+          "path": "/meta/art/sprites/halos-pedestals_560_1090_280_310.png",
+          "bytes": 178857,
+          "duration": 1843.3999999910593
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_590_215_175.png",
+          "bytes": 99971,
+          "duration": 1249
+        },
+        {
+          "path": "/meta/art/sprites/spell-projectiles_675_0_225_235.png",
+          "bytes": 85367,
+          "duration": 1139.7000000029802
+        },
+        {
+          "path": "/meta/art/sprites/halos-pedestals_840_1090_280_310.png",
+          "bytes": 159214,
+          "duration": 2014.1000000089407
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_1170_220_220.png",
+          "bytes": 89570,
+          "duration": 1874.2000000029802
+        }
+      ]
+    },
+    {
+      "route": "collection",
+      "width": 390,
+      "height": 844,
+      "trials": 3,
+      "trial": 2,
+      "mode": "after",
+      "visibleArtReadyMs": 2711.0999999940395,
+      "fcpMs": 444,
+      "domContentLoadedMs": 487,
+      "completedImagesAtVisibleReady": {
+        "requests": 8,
+        "uniqueImages": 8,
+        "encodedImageBytes": 947278,
+        "decodedRgbaEstimate": 2561920,
+        "images": [
+          {
+            "path": "/meta/art/sprites/halos-pedestals_0_1090_280_310.png",
+            "bytes": 161536,
+            "duration": 1721.5
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_5_215_210.png",
+            "bytes": 91735,
+            "duration": 1176.300000011921
+          },
+          {
+            "path": "/meta/art/sprites/spell-projectiles_0_0_225_235.png",
+            "bytes": 81028,
+            "duration": 1081.7000000029802
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_590_215_175.png",
+            "bytes": 99971,
+            "duration": 1253.2999999970198
+          },
+          {
+            "path": "/meta/art/sprites/halos-pedestals_560_1090_280_310.png",
+            "bytes": 178857,
+            "duration": 1846.5
+          },
+          {
+            "path": "/meta/art/sprites/spell-projectiles_675_0_225_235.png",
+            "bytes": 85367,
+            "duration": 1143.7999999970198
+          },
+          {
+            "path": "/meta/art/sprites/halos-pedestals_840_1090_280_310.png",
+            "bytes": 159214,
+            "duration": 2016.6000000089407
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_1170_220_220.png",
+            "bytes": 89570,
+            "duration": 1892
+          }
+        ]
+      },
+      "requests": 8,
+      "uniqueImages": 8,
+      "encodedImageBytes": 947278,
+      "decodedRgbaEstimate": 2561920,
+      "images": [
+        {
+          "path": "/meta/art/sprites/halos-pedestals_0_1090_280_310.png",
+          "bytes": 161536,
+          "duration": 1721.5
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_5_215_210.png",
+          "bytes": 91735,
+          "duration": 1176.300000011921
+        },
+        {
+          "path": "/meta/art/sprites/spell-projectiles_0_0_225_235.png",
+          "bytes": 81028,
+          "duration": 1081.7000000029802
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_590_215_175.png",
+          "bytes": 99971,
+          "duration": 1253.2999999970198
+        },
+        {
+          "path": "/meta/art/sprites/halos-pedestals_560_1090_280_310.png",
+          "bytes": 178857,
+          "duration": 1846.5
+        },
+        {
+          "path": "/meta/art/sprites/spell-projectiles_675_0_225_235.png",
+          "bytes": 85367,
+          "duration": 1143.7999999970198
+        },
+        {
+          "path": "/meta/art/sprites/halos-pedestals_840_1090_280_310.png",
+          "bytes": 159214,
+          "duration": 2016.6000000089407
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_1170_220_220.png",
+          "bytes": 89570,
+          "duration": 1892
+        }
+      ]
+    },
+    {
+      "route": "collection",
+      "width": 390,
+      "height": 844,
+      "trials": 3,
+      "trial": 2,
+      "mode": "before",
+      "visibleArtReadyMs": 15078.70000000298,
+      "fcpMs": 452,
+      "domContentLoadedMs": 504,
+      "completedImagesAtVisibleReady": {
+        "requests": 3,
+        "uniqueImages": 3,
+        "encodedImageBytes": 7116460,
+        "decodedRgbaEstimate": 18876528,
+        "images": [
+          {
+            "path": "/meta/art/mobile/halos-pedestals.png",
+            "bytes": 2659687,
+            "duration": 14417.10000000894
+          },
+          {
+            "path": "/meta/art/mobile/guardians-primary.png",
+            "bytes": 2351219,
+            "duration": 13797.60000000894
+          },
+          {
+            "path": "/meta/art/mobile/spell-projectiles.png",
+            "bytes": 2105554,
+            "duration": 12805.20000000298
+          }
+        ]
+      },
+      "requests": 3,
+      "uniqueImages": 3,
+      "encodedImageBytes": 7116460,
+      "decodedRgbaEstimate": 18876528,
+      "images": [
+        {
+          "path": "/meta/art/mobile/halos-pedestals.png",
+          "bytes": 2659687,
+          "duration": 14417.10000000894
+        },
+        {
+          "path": "/meta/art/mobile/guardians-primary.png",
+          "bytes": 2351219,
+          "duration": 13797.60000000894
+        },
+        {
+          "path": "/meta/art/mobile/spell-projectiles.png",
+          "bytes": 2105554,
+          "duration": 12805.20000000298
+        }
+      ]
+    },
+    {
+      "route": "collection",
+      "width": 390,
+      "height": 844,
+      "trials": 3,
+      "trial": 3,
+      "mode": "before",
+      "visibleArtReadyMs": 15081.90000000596,
+      "fcpMs": 472,
+      "domContentLoadedMs": 503.20000000298023,
+      "completedImagesAtVisibleReady": {
+        "requests": 3,
+        "uniqueImages": 3,
+        "encodedImageBytes": 7116460,
+        "decodedRgbaEstimate": 18876528,
+        "images": [
+          {
+            "path": "/meta/art/mobile/halos-pedestals.png",
+            "bytes": 2659687,
+            "duration": 14412.300000011921
+          },
+          {
+            "path": "/meta/art/mobile/guardians-primary.png",
+            "bytes": 2351219,
+            "duration": 13772.79999999702
+          },
+          {
+            "path": "/meta/art/mobile/spell-projectiles.png",
+            "bytes": 2105554,
+            "duration": 12787.5
+          }
+        ]
+      },
+      "requests": 3,
+      "uniqueImages": 3,
+      "encodedImageBytes": 7116460,
+      "decodedRgbaEstimate": 18876528,
+      "images": [
+        {
+          "path": "/meta/art/mobile/halos-pedestals.png",
+          "bytes": 2659687,
+          "duration": 14412.300000011921
+        },
+        {
+          "path": "/meta/art/mobile/guardians-primary.png",
+          "bytes": 2351219,
+          "duration": 13772.79999999702
+        },
+        {
+          "path": "/meta/art/mobile/spell-projectiles.png",
+          "bytes": 2105554,
+          "duration": 12787.5
+        }
+      ]
+    },
+    {
+      "route": "collection",
+      "width": 390,
+      "height": 844,
+      "trials": 3,
+      "trial": 3,
+      "mode": "after",
+      "visibleArtReadyMs": 2715.6000000089407,
+      "fcpMs": 440,
+      "domContentLoadedMs": 494.1000000089407,
+      "completedImagesAtVisibleReady": {
+        "requests": 8,
+        "uniqueImages": 8,
+        "encodedImageBytes": 947278,
+        "decodedRgbaEstimate": 2561920,
+        "images": [
+          {
+            "path": "/meta/art/sprites/halos-pedestals_0_1090_280_310.png",
+            "bytes": 161536,
+            "duration": 1733.699999988079
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_5_215_210.png",
+            "bytes": 91735,
+            "duration": 1184.199999988079
+          },
+          {
+            "path": "/meta/art/sprites/spell-projectiles_0_0_225_235.png",
+            "bytes": 81028,
+            "duration": 1090.0999999940395
+          },
+          {
+            "path": "/meta/art/sprites/halos-pedestals_560_1090_280_310.png",
+            "bytes": 178857,
+            "duration": 1858.3999999910593
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_590_215_175.png",
+            "bytes": 99971,
+            "duration": 1246.4000000059605
+          },
+          {
+            "path": "/meta/art/sprites/spell-projectiles_675_0_225_235.png",
+            "bytes": 85367,
+            "duration": 1136.5
+          },
+          {
+            "path": "/meta/art/sprites/halos-pedestals_840_1090_280_310.png",
+            "bytes": 159214,
+            "duration": 2028.300000011921
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_1170_220_220.png",
+            "bytes": 89570,
+            "duration": 1904
+          }
+        ]
+      },
+      "requests": 8,
+      "uniqueImages": 8,
+      "encodedImageBytes": 947278,
+      "decodedRgbaEstimate": 2561920,
+      "images": [
+        {
+          "path": "/meta/art/sprites/halos-pedestals_0_1090_280_310.png",
+          "bytes": 161536,
+          "duration": 1733.699999988079
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_5_215_210.png",
+          "bytes": 91735,
+          "duration": 1184.199999988079
+        },
+        {
+          "path": "/meta/art/sprites/spell-projectiles_0_0_225_235.png",
+          "bytes": 81028,
+          "duration": 1090.0999999940395
+        },
+        {
+          "path": "/meta/art/sprites/halos-pedestals_560_1090_280_310.png",
+          "bytes": 178857,
+          "duration": 1858.3999999910593
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_590_215_175.png",
+          "bytes": 99971,
+          "duration": 1246.4000000059605
+        },
+        {
+          "path": "/meta/art/sprites/spell-projectiles_675_0_225_235.png",
+          "bytes": 85367,
+          "duration": 1136.5
+        },
+        {
+          "path": "/meta/art/sprites/halos-pedestals_840_1090_280_310.png",
+          "bytes": 159214,
+          "duration": 2028.300000011921
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_1170_220_220.png",
+          "bytes": 89570,
+          "duration": 1904
+        }
+      ]
+    },
+    {
+      "route": "collection",
+      "width": 430,
+      "height": 844,
+      "trials": 3,
+      "trial": 1,
+      "mode": "before",
+      "visibleArtReadyMs": 15085.89999999106,
+      "fcpMs": 452,
+      "domContentLoadedMs": 498.8999999910593,
+      "completedImagesAtVisibleReady": {
+        "requests": 3,
+        "uniqueImages": 3,
+        "encodedImageBytes": 7116460,
+        "decodedRgbaEstimate": 18876528,
+        "images": [
+          {
+            "path": "/meta/art/mobile/halos-pedestals.png",
+            "bytes": 2659687,
+            "duration": 14431.5
+          },
+          {
+            "path": "/meta/art/mobile/guardians-primary.png",
+            "bytes": 2351219,
+            "duration": 13789.70000000298
+          },
+          {
+            "path": "/meta/art/mobile/spell-projectiles.png",
+            "bytes": 2105554,
+            "duration": 12794
+          }
+        ]
+      },
+      "requests": 3,
+      "uniqueImages": 3,
+      "encodedImageBytes": 7116460,
+      "decodedRgbaEstimate": 18876528,
+      "images": [
+        {
+          "path": "/meta/art/mobile/halos-pedestals.png",
+          "bytes": 2659687,
+          "duration": 14431.5
+        },
+        {
+          "path": "/meta/art/mobile/guardians-primary.png",
+          "bytes": 2351219,
+          "duration": 13789.70000000298
+        },
+        {
+          "path": "/meta/art/mobile/spell-projectiles.png",
+          "bytes": 2105554,
+          "duration": 12794
+        }
+      ]
+    },
+    {
+      "route": "collection",
+      "width": 430,
+      "height": 844,
+      "trials": 3,
+      "trial": 1,
+      "mode": "after",
+      "visibleArtReadyMs": 2713.7999999970198,
+      "fcpMs": 448,
+      "domContentLoadedMs": 505.8999999910593,
+      "completedImagesAtVisibleReady": {
+        "requests": 8,
+        "uniqueImages": 8,
+        "encodedImageBytes": 947278,
+        "decodedRgbaEstimate": 2561920,
+        "images": [
+          {
+            "path": "/meta/art/sprites/halos-pedestals_0_1090_280_310.png",
+            "bytes": 161536,
+            "duration": 1716.7000000029802
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_5_215_210.png",
+            "bytes": 91735,
+            "duration": 1171.7000000029802
+          },
+          {
+            "path": "/meta/art/sprites/spell-projectiles_0_0_225_235.png",
+            "bytes": 81028,
+            "duration": 1077
+          },
+          {
+            "path": "/meta/art/sprites/halos-pedestals_560_1090_280_310.png",
+            "bytes": 178857,
+            "duration": 1840.2000000029802
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_590_215_175.png",
+            "bytes": 99971,
+            "duration": 1248.2999999970198
+          },
+          {
+            "path": "/meta/art/sprites/spell-projectiles_675_0_225_235.png",
+            "bytes": 85367,
+            "duration": 1138.1000000089407
+          },
+          {
+            "path": "/meta/art/sprites/halos-pedestals_840_1090_280_310.png",
+            "bytes": 159214,
+            "duration": 2011.2000000029802
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_1170_220_220.png",
+            "bytes": 89570,
+            "duration": 1886.2000000029802
+          }
+        ]
+      },
+      "requests": 8,
+      "uniqueImages": 8,
+      "encodedImageBytes": 947278,
+      "decodedRgbaEstimate": 2561920,
+      "images": [
+        {
+          "path": "/meta/art/sprites/halos-pedestals_0_1090_280_310.png",
+          "bytes": 161536,
+          "duration": 1716.7000000029802
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_5_215_210.png",
+          "bytes": 91735,
+          "duration": 1171.7000000029802
+        },
+        {
+          "path": "/meta/art/sprites/spell-projectiles_0_0_225_235.png",
+          "bytes": 81028,
+          "duration": 1077
+        },
+        {
+          "path": "/meta/art/sprites/halos-pedestals_560_1090_280_310.png",
+          "bytes": 178857,
+          "duration": 1840.2000000029802
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_590_215_175.png",
+          "bytes": 99971,
+          "duration": 1248.2999999970198
+        },
+        {
+          "path": "/meta/art/sprites/spell-projectiles_675_0_225_235.png",
+          "bytes": 85367,
+          "duration": 1138.1000000089407
+        },
+        {
+          "path": "/meta/art/sprites/halos-pedestals_840_1090_280_310.png",
+          "bytes": 159214,
+          "duration": 2011.2000000029802
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_1170_220_220.png",
+          "bytes": 89570,
+          "duration": 1886.2000000029802
+        }
+      ]
+    },
+    {
+      "route": "collection",
+      "width": 430,
+      "height": 844,
+      "trials": 3,
+      "trial": 2,
+      "mode": "after",
+      "visibleArtReadyMs": 2674.9000000059605,
+      "fcpMs": 440,
+      "domContentLoadedMs": 476.30000001192093,
+      "completedImagesAtVisibleReady": {
+        "requests": 8,
+        "uniqueImages": 8,
+        "encodedImageBytes": 947278,
+        "decodedRgbaEstimate": 2561920,
+        "images": [
+          {
+            "path": "/meta/art/sprites/halos-pedestals_0_1090_280_310.png",
+            "bytes": 161536,
+            "duration": 1699.7999999970198
+          },
+          {
+            "path": "/meta/art/sprites/spell-projectiles_0_0_225_235.png",
+            "bytes": 81028,
+            "duration": 1092.9000000059605
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_5_215_210.png",
+            "bytes": 91735,
+            "duration": 1171.5
+          },
+          {
+            "path": "/meta/art/sprites/halos-pedestals_560_1090_280_310.png",
+            "bytes": 178857,
+            "duration": 1837.2999999970198
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_590_215_175.png",
+            "bytes": 99971,
+            "duration": 1248.5999999940395
+          },
+          {
+            "path": "/meta/art/sprites/spell-projectiles_675_0_225_235.png",
+            "bytes": 85367,
+            "duration": 1155.300000011921
+          },
+          {
+            "path": "/meta/art/sprites/halos-pedestals_840_1090_280_310.png",
+            "bytes": 159214,
+            "duration": 2007.7999999970198
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_1170_220_220.png",
+            "bytes": 89570,
+            "duration": 1883.7999999970198
+          }
+        ]
+      },
+      "requests": 8,
+      "uniqueImages": 8,
+      "encodedImageBytes": 947278,
+      "decodedRgbaEstimate": 2561920,
+      "images": [
+        {
+          "path": "/meta/art/sprites/halos-pedestals_0_1090_280_310.png",
+          "bytes": 161536,
+          "duration": 1699.7999999970198
+        },
+        {
+          "path": "/meta/art/sprites/spell-projectiles_0_0_225_235.png",
+          "bytes": 81028,
+          "duration": 1092.9000000059605
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_5_215_210.png",
+          "bytes": 91735,
+          "duration": 1171.5
+        },
+        {
+          "path": "/meta/art/sprites/halos-pedestals_560_1090_280_310.png",
+          "bytes": 178857,
+          "duration": 1837.2999999970198
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_590_215_175.png",
+          "bytes": 99971,
+          "duration": 1248.5999999940395
+        },
+        {
+          "path": "/meta/art/sprites/spell-projectiles_675_0_225_235.png",
+          "bytes": 85367,
+          "duration": 1155.300000011921
+        },
+        {
+          "path": "/meta/art/sprites/halos-pedestals_840_1090_280_310.png",
+          "bytes": 159214,
+          "duration": 2007.7999999970198
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_1170_220_220.png",
+          "bytes": 89570,
+          "duration": 1883.7999999970198
+        }
+      ]
+    },
+    {
+      "route": "collection",
+      "width": 430,
+      "height": 844,
+      "trials": 3,
+      "trial": 2,
+      "mode": "before",
+      "visibleArtReadyMs": 15058.70000000298,
+      "fcpMs": 460,
+      "domContentLoadedMs": 498.5,
+      "completedImagesAtVisibleReady": {
+        "requests": 3,
+        "uniqueImages": 3,
+        "encodedImageBytes": 7116460,
+        "decodedRgbaEstimate": 18876528,
+        "images": [
+          {
+            "path": "/meta/art/mobile/halos-pedestals.png",
+            "bytes": 2659687,
+            "duration": 14398.59999999404
+          },
+          {
+            "path": "/meta/art/mobile/guardians-primary.png",
+            "bytes": 2351219,
+            "duration": 13774.09999999404
+          },
+          {
+            "path": "/meta/art/mobile/spell-projectiles.png",
+            "bytes": 2105554,
+            "duration": 12790.5
+          }
+        ]
+      },
+      "requests": 3,
+      "uniqueImages": 3,
+      "encodedImageBytes": 7116460,
+      "decodedRgbaEstimate": 18876528,
+      "images": [
+        {
+          "path": "/meta/art/mobile/halos-pedestals.png",
+          "bytes": 2659687,
+          "duration": 14398.59999999404
+        },
+        {
+          "path": "/meta/art/mobile/guardians-primary.png",
+          "bytes": 2351219,
+          "duration": 13774.09999999404
+        },
+        {
+          "path": "/meta/art/mobile/spell-projectiles.png",
+          "bytes": 2105554,
+          "duration": 12790.5
+        }
+      ]
+    },
+    {
+      "route": "collection",
+      "width": 430,
+      "height": 844,
+      "trials": 3,
+      "trial": 3,
+      "mode": "before",
+      "visibleArtReadyMs": 15107.09999999404,
+      "fcpMs": 448,
+      "domContentLoadedMs": 493.20000000298023,
+      "completedImagesAtVisibleReady": {
+        "requests": 3,
+        "uniqueImages": 3,
+        "encodedImageBytes": 7116460,
+        "decodedRgbaEstimate": 18876528,
+        "images": [
+          {
+            "path": "/meta/art/mobile/halos-pedestals.png",
+            "bytes": 2659687,
+            "duration": 14453.70000000298
+          },
+          {
+            "path": "/meta/art/mobile/guardians-primary.png",
+            "bytes": 2351219,
+            "duration": 13829.59999999404
+          },
+          {
+            "path": "/meta/art/mobile/spell-projectiles.png",
+            "bytes": 2105554,
+            "duration": 12815
+          }
+        ]
+      },
+      "requests": 3,
+      "uniqueImages": 3,
+      "encodedImageBytes": 7116460,
+      "decodedRgbaEstimate": 18876528,
+      "images": [
+        {
+          "path": "/meta/art/mobile/halos-pedestals.png",
+          "bytes": 2659687,
+          "duration": 14453.70000000298
+        },
+        {
+          "path": "/meta/art/mobile/guardians-primary.png",
+          "bytes": 2351219,
+          "duration": 13829.59999999404
+        },
+        {
+          "path": "/meta/art/mobile/spell-projectiles.png",
+          "bytes": 2105554,
+          "duration": 12815
+        }
+      ]
+    },
+    {
+      "route": "collection",
+      "width": 430,
+      "height": 844,
+      "trials": 3,
+      "trial": 3,
+      "mode": "after",
+      "visibleArtReadyMs": 2729.7999999970198,
+      "fcpMs": 448,
+      "domContentLoadedMs": 496.29999999701977,
+      "completedImagesAtVisibleReady": {
+        "requests": 8,
+        "uniqueImages": 8,
+        "encodedImageBytes": 947278,
+        "decodedRgbaEstimate": 2561920,
+        "images": [
+          {
+            "path": "/meta/art/sprites/halos-pedestals_0_1090_280_310.png",
+            "bytes": 161536,
+            "duration": 1709.9000000059605
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_5_215_210.png",
+            "bytes": 91735,
+            "duration": 1178.1000000089407
+          },
+          {
+            "path": "/meta/art/sprites/spell-projectiles_0_0_225_235.png",
+            "bytes": 81028,
+            "duration": 1084.2999999970198
+          },
+          {
+            "path": "/meta/art/sprites/halos-pedestals_560_1090_280_310.png",
+            "bytes": 178857,
+            "duration": 1848
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_590_215_175.png",
+            "bytes": 99971,
+            "duration": 1254.5
+          },
+          {
+            "path": "/meta/art/sprites/spell-projectiles_675_0_225_235.png",
+            "bytes": 85367,
+            "duration": 1146.1000000089407
+          },
+          {
+            "path": "/meta/art/sprites/halos-pedestals_840_1090_280_310.png",
+            "bytes": 159214,
+            "duration": 2020.5999999940395
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_1170_220_220.png",
+            "bytes": 89570,
+            "duration": 1893.7000000029802
+          }
+        ]
+      },
+      "requests": 8,
+      "uniqueImages": 8,
+      "encodedImageBytes": 947278,
+      "decodedRgbaEstimate": 2561920,
+      "images": [
+        {
+          "path": "/meta/art/sprites/halos-pedestals_0_1090_280_310.png",
+          "bytes": 161536,
+          "duration": 1709.9000000059605
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_5_215_210.png",
+          "bytes": 91735,
+          "duration": 1178.1000000089407
+        },
+        {
+          "path": "/meta/art/sprites/spell-projectiles_0_0_225_235.png",
+          "bytes": 81028,
+          "duration": 1084.2999999970198
+        },
+        {
+          "path": "/meta/art/sprites/halos-pedestals_560_1090_280_310.png",
+          "bytes": 178857,
+          "duration": 1848
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_590_215_175.png",
+          "bytes": 99971,
+          "duration": 1254.5
+        },
+        {
+          "path": "/meta/art/sprites/spell-projectiles_675_0_225_235.png",
+          "bytes": 85367,
+          "duration": 1146.1000000089407
+        },
+        {
+          "path": "/meta/art/sprites/halos-pedestals_840_1090_280_310.png",
+          "bytes": 159214,
+          "duration": 2020.5999999940395
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_1170_220_220.png",
+          "bytes": 89570,
+          "duration": 1893.7000000029802
+        }
+      ]
+    },
+    {
+      "route": "collection",
+      "width": 320,
+      "height": 568,
+      "trials": 3,
+      "trial": 1,
+      "mode": "before",
+      "visibleArtReadyMs": 15041.09999999404,
+      "fcpMs": 448,
+      "domContentLoadedMs": 493.8999999910593,
+      "completedImagesAtVisibleReady": {
+        "requests": 3,
+        "uniqueImages": 3,
+        "encodedImageBytes": 7116460,
+        "decodedRgbaEstimate": 18876528,
+        "images": [
+          {
+            "path": "/meta/art/mobile/halos-pedestals.png",
+            "bytes": 2659687,
+            "duration": 14387.5
+          },
+          {
+            "path": "/meta/art/mobile/guardians-primary.png",
+            "bytes": 2351219,
+            "duration": 13761
+          },
+          {
+            "path": "/meta/art/mobile/spell-projectiles.png",
+            "bytes": 2105554,
+            "duration": 12777.79999999702
+          }
+        ]
+      },
+      "requests": 3,
+      "uniqueImages": 3,
+      "encodedImageBytes": 7116460,
+      "decodedRgbaEstimate": 18876528,
+      "images": [
+        {
+          "path": "/meta/art/mobile/halos-pedestals.png",
+          "bytes": 2659687,
+          "duration": 14387.5
+        },
+        {
+          "path": "/meta/art/mobile/guardians-primary.png",
+          "bytes": 2351219,
+          "duration": 13761
+        },
+        {
+          "path": "/meta/art/mobile/spell-projectiles.png",
+          "bytes": 2105554,
+          "duration": 12777.79999999702
+        }
+      ]
+    },
+    {
+      "route": "collection",
+      "width": 320,
+      "height": 568,
+      "trials": 3,
+      "trial": 1,
+      "mode": "after",
+      "visibleArtReadyMs": 1847.9000000059605,
+      "fcpMs": 440,
+      "domContentLoadedMs": 475.80000001192093,
+      "completedImagesAtVisibleReady": {
+        "requests": 4,
+        "uniqueImages": 4,
+        "encodedImageBytes": 532099,
+        "decodedRgbaEstimate": 1335432,
+        "images": [
+          {
+            "path": "/meta/art/sprites/halos-pedestals_0_1090_280_310.png",
+            "bytes": 161536,
+            "duration": 1134.7000000029802
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_5_215_210.png",
+            "bytes": 91735,
+            "duration": 835.6999999880791
+          },
+          {
+            "path": "/meta/art/sprites/halos-pedestals_560_1090_280_310.png",
+            "bytes": 178857,
+            "duration": 1181.4000000059605
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_590_215_175.png",
+            "bytes": 99971,
+            "duration": 898.2000000029802
+          }
+        ]
+      },
+      "requests": 4,
+      "uniqueImages": 4,
+      "encodedImageBytes": 532099,
+      "decodedRgbaEstimate": 1335432,
+      "images": [
+        {
+          "path": "/meta/art/sprites/halos-pedestals_0_1090_280_310.png",
+          "bytes": 161536,
+          "duration": 1134.7000000029802
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_5_215_210.png",
+          "bytes": 91735,
+          "duration": 835.6999999880791
+        },
+        {
+          "path": "/meta/art/sprites/halos-pedestals_560_1090_280_310.png",
+          "bytes": 178857,
+          "duration": 1181.4000000059605
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_590_215_175.png",
+          "bytes": 99971,
+          "duration": 898.2000000029802
+        }
+      ]
+    },
+    {
+      "route": "collection",
+      "width": 320,
+      "height": 568,
+      "trials": 3,
+      "trial": 2,
+      "mode": "after",
+      "visibleArtReadyMs": 1838.6000000089407,
+      "fcpMs": 432,
+      "domContentLoadedMs": 480.1000000089407,
+      "completedImagesAtVisibleReady": {
+        "requests": 4,
+        "uniqueImages": 4,
+        "encodedImageBytes": 532099,
+        "decodedRgbaEstimate": 1335432,
+        "images": [
+          {
+            "path": "/meta/art/sprites/halos-pedestals_0_1090_280_310.png",
+            "bytes": 161536,
+            "duration": 1125.5
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_5_215_210.png",
+            "bytes": 91735,
+            "duration": 826.5
+          },
+          {
+            "path": "/meta/art/sprites/halos-pedestals_560_1090_280_310.png",
+            "bytes": 178857,
+            "duration": 1171.7999999970198
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_590_215_175.png",
+            "bytes": 99971,
+            "duration": 889
+          }
+        ]
+      },
+      "requests": 4,
+      "uniqueImages": 4,
+      "encodedImageBytes": 532099,
+      "decodedRgbaEstimate": 1335432,
+      "images": [
+        {
+          "path": "/meta/art/sprites/halos-pedestals_0_1090_280_310.png",
+          "bytes": 161536,
+          "duration": 1125.5
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_5_215_210.png",
+          "bytes": 91735,
+          "duration": 826.5
+        },
+        {
+          "path": "/meta/art/sprites/halos-pedestals_560_1090_280_310.png",
+          "bytes": 178857,
+          "duration": 1171.7999999970198
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_590_215_175.png",
+          "bytes": 99971,
+          "duration": 889
+        }
+      ]
+    },
+    {
+      "route": "collection",
+      "width": 320,
+      "height": 568,
+      "trials": 3,
+      "trial": 2,
+      "mode": "before",
+      "visibleArtReadyMs": 15040.70000000298,
+      "fcpMs": 448,
+      "domContentLoadedMs": 486.1000000089407,
+      "completedImagesAtVisibleReady": {
+        "requests": 3,
+        "uniqueImages": 3,
+        "encodedImageBytes": 7116460,
+        "decodedRgbaEstimate": 18876528,
+        "images": [
+          {
+            "path": "/meta/art/mobile/halos-pedestals.png",
+            "bytes": 2659687,
+            "duration": 14398.699999988079
+          },
+          {
+            "path": "/meta/art/mobile/guardians-primary.png",
+            "bytes": 2351219,
+            "duration": 13776.699999988079
+          },
+          {
+            "path": "/meta/art/mobile/spell-projectiles.png",
+            "bytes": 2105554,
+            "duration": 12778.800000011921
+          }
+        ]
+      },
+      "requests": 3,
+      "uniqueImages": 3,
+      "encodedImageBytes": 7116460,
+      "decodedRgbaEstimate": 18876528,
+      "images": [
+        {
+          "path": "/meta/art/mobile/halos-pedestals.png",
+          "bytes": 2659687,
+          "duration": 14398.699999988079
+        },
+        {
+          "path": "/meta/art/mobile/guardians-primary.png",
+          "bytes": 2351219,
+          "duration": 13776.699999988079
+        },
+        {
+          "path": "/meta/art/mobile/spell-projectiles.png",
+          "bytes": 2105554,
+          "duration": 12778.800000011921
+        }
+      ]
+    },
+    {
+      "route": "collection",
+      "width": 320,
+      "height": 568,
+      "trials": 3,
+      "trial": 3,
+      "mode": "before",
+      "visibleArtReadyMs": 15035.60000000894,
+      "fcpMs": 436,
+      "domContentLoadedMs": 473.1000000089407,
+      "completedImagesAtVisibleReady": {
+        "requests": 3,
+        "uniqueImages": 3,
+        "encodedImageBytes": 7116460,
+        "decodedRgbaEstimate": 18876528,
+        "images": [
+          {
+            "path": "/meta/art/mobile/halos-pedestals.png",
+            "bytes": 2659687,
+            "duration": 14399.800000011921
+          },
+          {
+            "path": "/meta/art/mobile/guardians-primary.png",
+            "bytes": 2351219,
+            "duration": 13775.60000000894
+          },
+          {
+            "path": "/meta/art/mobile/spell-projectiles.png",
+            "bytes": 2105554,
+            "duration": 12774.5
+          }
+        ]
+      },
+      "requests": 3,
+      "uniqueImages": 3,
+      "encodedImageBytes": 7116460,
+      "decodedRgbaEstimate": 18876528,
+      "images": [
+        {
+          "path": "/meta/art/mobile/halos-pedestals.png",
+          "bytes": 2659687,
+          "duration": 14399.800000011921
+        },
+        {
+          "path": "/meta/art/mobile/guardians-primary.png",
+          "bytes": 2351219,
+          "duration": 13775.60000000894
+        },
+        {
+          "path": "/meta/art/mobile/spell-projectiles.png",
+          "bytes": 2105554,
+          "duration": 12774.5
+        }
+      ]
+    },
+    {
+      "route": "collection",
+      "width": 320,
+      "height": 568,
+      "trials": 3,
+      "trial": 3,
+      "mode": "after",
+      "visibleArtReadyMs": 1839.2999999970198,
+      "fcpMs": 448,
+      "domContentLoadedMs": 475.8999999910593,
+      "completedImagesAtVisibleReady": {
+        "requests": 4,
+        "uniqueImages": 4,
+        "encodedImageBytes": 532099,
+        "decodedRgbaEstimate": 1335432,
+        "images": [
+          {
+            "path": "/meta/art/sprites/halos-pedestals_0_1090_280_310.png",
+            "bytes": 161536,
+            "duration": 1130.9000000059605
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_5_215_210.png",
+            "bytes": 91735,
+            "duration": 834.7999999970198
+          },
+          {
+            "path": "/meta/art/sprites/halos-pedestals_560_1090_280_310.png",
+            "bytes": 178857,
+            "duration": 1177.4000000059605
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_590_215_175.png",
+            "bytes": 99971,
+            "duration": 879.4000000059605
+          }
+        ]
+      },
+      "requests": 4,
+      "uniqueImages": 4,
+      "encodedImageBytes": 532099,
+      "decodedRgbaEstimate": 1335432,
+      "images": [
+        {
+          "path": "/meta/art/sprites/halos-pedestals_0_1090_280_310.png",
+          "bytes": 161536,
+          "duration": 1130.9000000059605
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_5_215_210.png",
+          "bytes": 91735,
+          "duration": 834.7999999970198
+        },
+        {
+          "path": "/meta/art/sprites/halos-pedestals_560_1090_280_310.png",
+          "bytes": 178857,
+          "duration": 1177.4000000059605
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_590_215_175.png",
+          "bytes": 99971,
+          "duration": 879.4000000059605
+        }
+      ]
+    },
+    {
+      "route": "guardian/demo-luma",
+      "width": 390,
+      "height": 844,
+      "trials": 1,
+      "trial": 1,
+      "mode": "before",
+      "visibleArtReadyMs": 26029.20000000298,
+      "fcpMs": 436,
+      "domContentLoadedMs": 490.20000000298023,
+      "completedImagesAtVisibleReady": {
+        "requests": 5,
+        "uniqueImages": 5,
+        "encodedImageBytes": 12610945,
+        "decodedRgbaEstimate": 31460880,
+        "images": [
+          {
+            "path": "/meta/art/mobile/halos-pedestals.png",
+            "bytes": 2659687,
+            "duration": 25008.39999999106
+          },
+          {
+            "path": "/meta/art/mobile/guardians-primary.png",
+            "bytes": 2351219,
+            "duration": 23180.90000000596
+          },
+          {
+            "path": "/meta/art/mobile/spell-projectiles.png",
+            "bytes": 2105554,
+            "duration": 21181
+          },
+          {
+            "path": "/meta/art/mobile/spell-areas.png",
+            "bytes": 2858008,
+            "duration": 25396.59999999404
+          },
+          {
+            "path": "/meta/art/mobile/ranks-luma-mousse-raika.png",
+            "bytes": 2636477,
+            "duration": 24912.90000000596
+          }
+        ]
+      },
+      "requests": 5,
+      "uniqueImages": 5,
+      "encodedImageBytes": 12610945,
+      "decodedRgbaEstimate": 31460880,
+      "images": [
+        {
+          "path": "/meta/art/mobile/halos-pedestals.png",
+          "bytes": 2659687,
+          "duration": 25008.39999999106
+        },
+        {
+          "path": "/meta/art/mobile/guardians-primary.png",
+          "bytes": 2351219,
+          "duration": 23180.90000000596
+        },
+        {
+          "path": "/meta/art/mobile/spell-projectiles.png",
+          "bytes": 2105554,
+          "duration": 21181
+        },
+        {
+          "path": "/meta/art/mobile/spell-areas.png",
+          "bytes": 2858008,
+          "duration": 25396.59999999404
+        },
+        {
+          "path": "/meta/art/mobile/ranks-luma-mousse-raika.png",
+          "bytes": 2636477,
+          "duration": 24912.90000000596
+        }
+      ]
+    },
+    {
+      "route": "guardian/demo-luma",
+      "width": 390,
+      "height": 844,
+      "trials": 1,
+      "trial": 1,
+      "mode": "after",
+      "visibleArtReadyMs": 1733.0999999940395,
+      "fcpMs": 432,
+      "domContentLoadedMs": 475.79999999701977,
+      "completedImagesAtVisibleReady": {
+        "requests": 4,
+        "uniqueImages": 4,
+        "encodedImageBytes": 475125,
+        "decodedRgbaEstimate": 1232912,
+        "images": [
+          {
+            "path": "/meta/art/sprites/halos-pedestals_0_1090_280_310.png",
+            "bytes": 161536,
+            "duration": 1081.0999999940395
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_5_215_210.png",
+            "bytes": 91735,
+            "duration": 831.2000000029802
+          },
+          {
+            "path": "/meta/art/sprites/spell-projectiles_0_0_225_235.png",
+            "bytes": 81028,
+            "duration": 754.3999999910593
+          },
+          {
+            "path": "/meta/art/sprites/spell-areas_0_0_280_235.png",
+            "bytes": 140826,
+            "duration": 1032.5999999940395
+          }
+        ]
+      },
+      "requests": 4,
+      "uniqueImages": 4,
+      "encodedImageBytes": 475125,
+      "decodedRgbaEstimate": 1232912,
+      "images": [
+        {
+          "path": "/meta/art/sprites/halos-pedestals_0_1090_280_310.png",
+          "bytes": 161536,
+          "duration": 1081.0999999940395
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_5_215_210.png",
+          "bytes": 91735,
+          "duration": 831.2000000029802
+        },
+        {
+          "path": "/meta/art/sprites/spell-projectiles_0_0_225_235.png",
+          "bytes": 81028,
+          "duration": 754.3999999910593
+        },
+        {
+          "path": "/meta/art/sprites/spell-areas_0_0_280_235.png",
+          "bytes": 140826,
+          "duration": 1032.5999999940395
+        }
+      ]
+    },
+    {
+      "route": "synergies",
+      "width": 390,
+      "height": 844,
+      "trials": 1,
+      "trial": 1,
+      "mode": "before",
+      "visibleArtReadyMs": 16571.70000000298,
+      "fcpMs": 440,
+      "domContentLoadedMs": 488.3999999910593,
+      "completedImagesAtVisibleReady": {
+        "requests": 3,
+        "uniqueImages": 3,
+        "encodedImageBytes": 7868914,
+        "decodedRgbaEstimate": 18876528,
+        "images": [
+          {
+            "path": "/meta/art/mobile/spell-areas.png",
+            "bytes": 2858008,
+            "duration": 15923
+          },
+          {
+            "path": "/meta/art/mobile/halos-pedestals.png",
+            "bytes": 2659687,
+            "duration": 15518.59999999404
+          },
+          {
+            "path": "/meta/art/mobile/guardians-primary.png",
+            "bytes": 2351219,
+            "duration": 14266.79999999702
+          }
+        ]
+      },
+      "requests": 3,
+      "uniqueImages": 3,
+      "encodedImageBytes": 7868914,
+      "decodedRgbaEstimate": 18876528,
+      "images": [
+        {
+          "path": "/meta/art/mobile/spell-areas.png",
+          "bytes": 2858008,
+          "duration": 15923
+        },
+        {
+          "path": "/meta/art/mobile/halos-pedestals.png",
+          "bytes": 2659687,
+          "duration": 15518.59999999404
+        },
+        {
+          "path": "/meta/art/mobile/guardians-primary.png",
+          "bytes": 2351219,
+          "duration": 14266.79999999702
+        }
+      ]
+    },
+    {
+      "route": "synergies",
+      "width": 390,
+      "height": 844,
+      "trials": 1,
+      "trial": 1,
+      "mode": "after",
+      "visibleArtReadyMs": 3320.199999988079,
+      "fcpMs": 436,
+      "domContentLoadedMs": 477,
+      "completedImagesAtVisibleReady": {
+        "requests": 9,
+        "uniqueImages": 9,
+        "encodedImageBytes": 1253041,
+        "decodedRgbaEstimate": 2987832,
+        "images": [
+          {
+            "path": "/meta/art/sprites/spell-areas_0_0_280_235.png",
+            "bytes": 140826,
+            "duration": 1770.2999999970198
+          },
+          {
+            "path": "/meta/art/sprites/spell-areas_825_280_295_220.png",
+            "bytes": 176049,
+            "duration": 2129
+          },
+          {
+            "path": "/meta/art/sprites/spell-areas_0_810_280_205.png",
+            "bytes": 155283,
+            "duration": 1926.5
+          },
+          {
+            "path": "/meta/art/sprites/halos-pedestals_0_1090_280_310.png",
+            "bytes": 161536,
+            "duration": 1988.7000000029802
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_5_215_210.png",
+            "bytes": 91735,
+            "duration": 1225
+          },
+          {
+            "path": "/meta/art/sprites/halos-pedestals_560_1090_280_310.png",
+            "bytes": 178857,
+            "duration": 2175
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_590_215_175.png",
+            "bytes": 99971,
+            "duration": 2316.0999999940395
+          },
+          {
+            "path": "/meta/art/sprites/halos-pedestals_840_1090_280_310.png",
+            "bytes": 159214,
+            "duration": 2642.9000000059605
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_1170_220_220.png",
+            "bytes": 89570,
+            "duration": 2517.9000000059605
+          }
+        ]
+      },
+      "requests": 9,
+      "uniqueImages": 9,
+      "encodedImageBytes": 1253041,
+      "decodedRgbaEstimate": 2987832,
+      "images": [
+        {
+          "path": "/meta/art/sprites/spell-areas_0_0_280_235.png",
+          "bytes": 140826,
+          "duration": 1770.2999999970198
+        },
+        {
+          "path": "/meta/art/sprites/spell-areas_825_280_295_220.png",
+          "bytes": 176049,
+          "duration": 2129
+        },
+        {
+          "path": "/meta/art/sprites/spell-areas_0_810_280_205.png",
+          "bytes": 155283,
+          "duration": 1926.5
+        },
+        {
+          "path": "/meta/art/sprites/halos-pedestals_0_1090_280_310.png",
+          "bytes": 161536,
+          "duration": 1988.7000000029802
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_5_215_210.png",
+          "bytes": 91735,
+          "duration": 1225
+        },
+        {
+          "path": "/meta/art/sprites/halos-pedestals_560_1090_280_310.png",
+          "bytes": 178857,
+          "duration": 2175
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_590_215_175.png",
+          "bytes": 99971,
+          "duration": 2316.0999999940395
+        },
+        {
+          "path": "/meta/art/sprites/halos-pedestals_840_1090_280_310.png",
+          "bytes": 159214,
+          "duration": 2642.9000000059605
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_1170_220_220.png",
+          "bytes": 89570,
+          "duration": 2517.9000000059605
+        }
+      ]
+    },
+    {
+      "route": "shop",
+      "width": 390,
+      "height": 844,
+      "trials": 1,
+      "trial": 1,
+      "mode": "before",
+      "visibleArtReadyMs": 16568.19999998808,
+      "fcpMs": 452,
+      "domContentLoadedMs": 498.5,
+      "completedImagesAtVisibleReady": {
+        "requests": 3,
+        "uniqueImages": 3,
+        "encodedImageBytes": 7868914,
+        "decodedRgbaEstimate": 18876528,
+        "images": [
+          {
+            "path": "/meta/art/mobile/halos-pedestals.png",
+            "bytes": 2659687,
+            "duration": 15516.40000000596
+          },
+          {
+            "path": "/meta/art/mobile/guardians-primary.png",
+            "bytes": 2351219,
+            "duration": 14264.09999999404
+          },
+          {
+            "path": "/meta/art/mobile/spell-areas.png",
+            "bytes": 2858008,
+            "duration": 15906.09999999404
+          }
+        ]
+      },
+      "requests": 3,
+      "uniqueImages": 3,
+      "encodedImageBytes": 7868914,
+      "decodedRgbaEstimate": 18876528,
+      "images": [
+        {
+          "path": "/meta/art/mobile/halos-pedestals.png",
+          "bytes": 2659687,
+          "duration": 15516.40000000596
+        },
+        {
+          "path": "/meta/art/mobile/guardians-primary.png",
+          "bytes": 2351219,
+          "duration": 14264.09999999404
+        },
+        {
+          "path": "/meta/art/mobile/spell-areas.png",
+          "bytes": 2858008,
+          "duration": 15906.09999999404
+        }
+      ]
+    },
+    {
+      "route": "shop",
+      "width": 390,
+      "height": 844,
+      "trials": 1,
+      "trial": 1,
+      "mode": "after",
+      "visibleArtReadyMs": 2245.5,
+      "fcpMs": 436,
+      "domContentLoadedMs": 480.70000000298023,
+      "completedImagesAtVisibleReady": {
+        "requests": 5,
+        "uniqueImages": 5,
+        "encodedImageBytes": 729360,
+        "decodedRgbaEstimate": 1730324,
+        "images": [
+          {
+            "path": "/meta/art/sprites/halos-pedestals_0_1090_280_310.png",
+            "bytes": 161536,
+            "duration": 1532.7000000029802
+          },
+          {
+            "path": "/meta/art/sprites/guardians-primary_225_5_215_210.png",
+            "bytes": 91735,
+            "duration": 1017.8999999910593
+          },
+          {
+            "path": "/meta/art/sprites/spell-areas_825_280_295_220.png",
+            "bytes": 176049,
+            "duration": 1579
+          },
+          {
+            "path": "/meta/art/sprites/spell-areas_0_0_280_235.png",
+            "bytes": 140826,
+            "duration": 1422.2999999970198
+          },
+          {
+            "path": "/meta/art/sprites/halos-pedestals_840_1090_280_310.png",
+            "bytes": 159214,
+            "duration": 1547
+          }
+        ]
+      },
+      "requests": 5,
+      "uniqueImages": 5,
+      "encodedImageBytes": 729360,
+      "decodedRgbaEstimate": 1730324,
+      "images": [
+        {
+          "path": "/meta/art/sprites/halos-pedestals_0_1090_280_310.png",
+          "bytes": 161536,
+          "duration": 1532.7000000029802
+        },
+        {
+          "path": "/meta/art/sprites/guardians-primary_225_5_215_210.png",
+          "bytes": 91735,
+          "duration": 1017.8999999910593
+        },
+        {
+          "path": "/meta/art/sprites/spell-areas_825_280_295_220.png",
+          "bytes": 176049,
+          "duration": 1579
+        },
+        {
+          "path": "/meta/art/sprites/spell-areas_0_0_280_235.png",
+          "bytes": 140826,
+          "duration": 1422.2999999970198
+        },
+        {
+          "path": "/meta/art/sprites/halos-pedestals_840_1090_280_310.png",
+          "bytes": 159214,
+          "duration": 1547
+        }
+      ]
+    }
+  ],
+  "browserVersion": "157.0.4341.46",
+  "relativeBudgetsPassed": true
+}

@@ -1,0 +1,943 @@
+{
+  "version": "0.5.0-perf.1",
+  "syntaxFiles": 50,
+  "imports": [
+    {
+      "file": "meta/app.js",
+      "target": "./products/screens.js"
+    },
+    {
+      "file": "meta/app.js",
+      "target": "./mobile-assets.js"
+    },
+    {
+      "file": "meta/app.js",
+      "target": "./products/preferences.js"
+    },
+    {
+      "file": "meta/app.js",
+      "target": "./views.js"
+    },
+    {
+      "file": "meta/app.js",
+      "target": "./art.js"
+    },
+    {
+      "file": "meta/app.js",
+      "target": "./progression.js"
+    },
+    {
+      "file": "meta/app.js",
+      "target": "./bridge.js"
+    },
+    {
+      "file": "meta/app.js",
+      "target": "./expedition.js"
+    },
+    {
+      "file": "meta/art.js",
+      "target": "./mobile-assets.js"
+    },
+    {
+      "file": "meta/bridge.js",
+      "target": "./catalog.js"
+    },
+    {
+      "file": "meta/catalog.js",
+      "target": "node:fs/promises"
+    },
+    {
+      "file": "meta/mobile-assets.js",
+      "target": "./art/sprites/index.js"
+    },
+    {
+      "file": "meta/products/screens.js",
+      "target": "../version.js"
+    },
+    {
+      "file": "meta/products/screens.js",
+      "target": "./service.js"
+    },
+    {
+      "file": "meta/products/screens.js",
+      "target": "./preferences.js"
+    },
+    {
+      "file": "meta/products/screens.js",
+      "target": "../art.js"
+    },
+    {
+      "file": "meta/products/service.js",
+      "target": "node:fs/promises"
+    },
+    {
+      "file": "tests/analytics-plan.test.mjs",
+      "target": "node:test"
+    },
+    {
+      "file": "tests/analytics-plan.test.mjs",
+      "target": "node:assert/strict"
+    },
+    {
+      "file": "tests/analytics-plan.test.mjs",
+      "target": "node:fs"
+    },
+    {
+      "file": "tests/bridge.test.mjs",
+      "target": "node:test"
+    },
+    {
+      "file": "tests/bridge.test.mjs",
+      "target": "node:assert/strict"
+    },
+    {
+      "file": "tests/bridge.test.mjs",
+      "target": "../meta/bridge.js"
+    },
+    {
+      "file": "tests/bridge.test.mjs",
+      "target": "../meta/expedition.js"
+    },
+    {
+      "file": "tests/browser-server.mjs",
+      "target": "./browser-target.mjs"
+    },
+    {
+      "file": "tests/browser-server.mjs",
+      "target": "node:child_process"
+    },
+    {
+      "file": "tests/expedition-ui.mjs",
+      "target": "./browser-target.mjs"
+    },
+    {
+      "file": "tests/expedition-ui.mjs",
+      "target": "node:assert/strict"
+    },
+    {
+      "file": "tests/guardian-art-review.mjs",
+      "target": "playwright"
+    },
+    {
+      "file": "tests/guardian-art-review.mjs",
+      "target": "node:child_process"
+    },
+    {
+      "file": "tests/guardian-art-review.mjs",
+      "target": "node:fs"
+    },
+    {
+      "file": "tests/guardian-art-review.mjs",
+      "target": "node:assert/strict"
+    },
+    {
+      "file": "tests/guardian-art.test.mjs",
+      "target": "node:test"
+    },
+    {
+      "file": "tests/guardian-art.test.mjs",
+      "target": "node:assert/strict"
+    },
+    {
+      "file": "tests/guardian-art.test.mjs",
+      "target": "node:fs"
+    },
+    {
+      "file": "tests/guardian-art.test.mjs",
+      "target": "node:crypto"
+    },
+    {
+      "file": "tests/guardian-art.test.mjs",
+      "target": "../meta/art.js"
+    },
+    {
+      "file": "tests/mobile-assets.test.mjs",
+      "target": "node:test"
+    },
+    {
+      "file": "tests/mobile-assets.test.mjs",
+      "target": "node:assert/strict"
+    },
+    {
+      "file": "tests/mobile-assets.test.mjs",
+      "target": "node:fs"
+    },
+    {
+      "file": "tests/mobile-assets.test.mjs",
+      "target": "node:crypto"
+    },
+    {
+      "file": "tests/mobile-assets.test.mjs",
+      "target": "node:child_process"
+    },
+    {
+      "file": "tests/mobile-assets.test.mjs",
+      "target": "../meta/art.js"
+    },
+    {
+      "file": "tests/mobile-assets.test.mjs",
+      "target": "../meta/mobile-assets.js"
+    },
+    {
+      "file": "tests/mobile-assets.test.mjs",
+      "target": "data:text/javascript;base64,"
+    },
+    {
+      "file": "tests/mobile-browser.mjs",
+      "target": "node:assert/strict"
+    },
+    {
+      "file": "tests/mobile-browser.mjs",
+      "target": "node:fs"
+    },
+    {
+      "file": "tests/mobile-browser.mjs",
+      "target": "./browser-target.mjs"
+    },
+    {
+      "file": "tests/mobile-browser.mjs",
+      "target": "./browser-server.mjs"
+    },
+    {
+      "file": "tests/mobile-browser.mjs",
+      "target": "./mobile-helpers.mjs"
+    },
+    {
+      "file": "tests/mobile-helpers.mjs",
+      "target": "node:fs"
+    },
+    {
+      "file": "tests/mobile-helpers.mjs",
+      "target": "playwright"
+    },
+    {
+      "file": "tests/mobile-helpers.mjs",
+      "target": "./browser-target.mjs"
+    },
+    {
+      "file": "tests/mobile-helpers.mjs",
+      "target": "./art-ready.mjs"
+    },
+    {
+      "file": "tests/mobile-helpers.mjs",
+      "target": "node:child_process"
+    },
+    {
+      "file": "tests/mobile-performance.mjs",
+      "target": "node:assert/strict"
+    },
+    {
+      "file": "tests/mobile-performance.mjs",
+      "target": "node:fs"
+    },
+    {
+      "file": "tests/mobile-performance.mjs",
+      "target": "./browser-server.mjs"
+    },
+    {
+      "file": "tests/mobile-performance.mjs",
+      "target": "./mobile-helpers.mjs"
+    },
+    {
+      "file": "tests/navigation.mjs",
+      "target": "./browser-target.mjs"
+    },
+    {
+      "file": "tests/navigation.mjs",
+      "target": "./browser-server.mjs"
+    },
+    {
+      "file": "tests/navigation.mjs",
+      "target": "./ux-ui.mjs"
+    },
+    {
+      "file": "tests/navigation.mjs",
+      "target": "./progression-ui.mjs"
+    },
+    {
+      "file": "tests/navigation.mjs",
+      "target": "./expedition-ui.mjs"
+    },
+    {
+      "file": "tests/navigation.mjs",
+      "target": "playwright"
+    },
+    {
+      "file": "tests/navigation.mjs",
+      "target": "node:assert/strict"
+    },
+    {
+      "file": "tests/navigation.mjs",
+      "target": "node:fs"
+    },
+    {
+      "file": "tests/palette-review.mjs",
+      "target": "playwright"
+    },
+    {
+      "file": "tests/palette-review.mjs",
+      "target": "node:child_process"
+    },
+    {
+      "file": "tests/palette-review.mjs",
+      "target": "node:fs"
+    },
+    {
+      "file": "tests/palette-review.mjs",
+      "target": "node:assert/strict"
+    },
+    {
+      "file": "tests/perf-browser.mjs",
+      "target": "node:assert/strict"
+    },
+    {
+      "file": "tests/perf-browser.mjs",
+      "target": "./mobile-helpers.mjs"
+    },
+    {
+      "file": "tests/perf-browser.mjs",
+      "target": "./browser-target.mjs"
+    },
+    {
+      "file": "tests/perf-browser.mjs",
+      "target": "./browser-server.mjs"
+    },
+    {
+      "file": "tests/perf-browser.mjs",
+      "target": "./perf-helpers.mjs"
+    },
+    {
+      "file": "tests/perf-helpers.mjs",
+      "target": "node:fs"
+    },
+    {
+      "file": "tests/perf-helpers.mjs",
+      "target": "node:child_process"
+    },
+    {
+      "file": "tests/perf-helpers.mjs",
+      "target": "./art-ready.mjs"
+    },
+    {
+      "file": "tests/perf-measure.mjs",
+      "target": "node:assert/strict"
+    },
+    {
+      "file": "tests/perf-measure.mjs",
+      "target": "./mobile-helpers.mjs"
+    },
+    {
+      "file": "tests/perf-measure.mjs",
+      "target": "./browser-target.mjs"
+    },
+    {
+      "file": "tests/perf-measure.mjs",
+      "target": "./browser-server.mjs"
+    },
+    {
+      "file": "tests/perf-measure.mjs",
+      "target": "./perf-helpers.mjs"
+    },
+    {
+      "file": "tests/products-browser.mjs",
+      "target": "./browser-target.mjs"
+    },
+    {
+      "file": "tests/products-browser.mjs",
+      "target": "./art-ready.mjs"
+    },
+    {
+      "file": "tests/products-browser.mjs",
+      "target": "./browser-server.mjs"
+    },
+    {
+      "file": "tests/products-browser.mjs",
+      "target": "playwright"
+    },
+    {
+      "file": "tests/products-browser.mjs",
+      "target": "node:fs"
+    },
+    {
+      "file": "tests/products-browser.mjs",
+      "target": "node:assert/strict"
+    },
+    {
+      "file": "tests/products-browser.mjs",
+      "target": "../meta/catalog.js"
+    },
+    {
+      "file": "tests/products-browser.mjs",
+      "target": "../meta/progression.js"
+    },
+    {
+      "file": "tests/products-browser.mjs",
+      "target": "../meta/products/preferences.js"
+    },
+    {
+      "file": "tests/products-browser.mjs",
+      "target": "../meta/products/service.js"
+    },
+    {
+      "file": "tests/products.test.mjs",
+      "target": "node:test"
+    },
+    {
+      "file": "tests/products.test.mjs",
+      "target": "node:assert/strict"
+    },
+    {
+      "file": "tests/products.test.mjs",
+      "target": "../meta/products/service.js"
+    },
+    {
+      "file": "tests/products.test.mjs",
+      "target": "../meta/products/preferences.js"
+    },
+    {
+      "file": "tests/products.test.mjs",
+      "target": "../meta/products/screens.js"
+    },
+    {
+      "file": "tests/progression-ui.mjs",
+      "target": "./browser-target.mjs"
+    },
+    {
+      "file": "tests/progression-ui.mjs",
+      "target": "node:assert/strict"
+    },
+    {
+      "file": "tests/progression-ui.mjs",
+      "target": "../meta/catalog.js"
+    },
+    {
+      "file": "tests/progression-ui.mjs",
+      "target": "../meta/progression.js"
+    },
+    {
+      "file": "tests/progression.test.mjs",
+      "target": "node:test"
+    },
+    {
+      "file": "tests/progression.test.mjs",
+      "target": "node:assert/strict"
+    },
+    {
+      "file": "tests/progression.test.mjs",
+      "target": "../meta/catalog.js"
+    },
+    {
+      "file": "tests/progression.test.mjs",
+      "target": "../meta/progression.js"
+    },
+    {
+      "file": "tests/reference-audit.mjs",
+      "target": "node:assert/strict"
+    },
+    {
+      "file": "tests/reference-audit.mjs",
+      "target": "node:fs"
+    },
+    {
+      "file": "tests/reference-audit.mjs",
+      "target": "node:path"
+    },
+    {
+      "file": "tests/reference-audit.mjs",
+      "target": "node:child_process"
+    },
+    {
+      "file": "tests/reference-audit.mjs",
+      "target": "node:crypto"
+    },
+    {
+      "file": "tests/reference-audit.mjs",
+      "target": "../meta/catalog.js"
+    },
+    {
+      "file": "tests/reference-audit.mjs",
+      "target": "../meta/products/service.js"
+    },
+    {
+      "file": "tests/reference-audit.mjs",
+      "target": "../meta/version.js"
+    },
+    {
+      "file": "tests/reference-audit.mjs",
+      "target": ","
+    },
+    {
+      "file": "tests/reference-audit.mjs",
+      "target": ","
+    },
+    {
+      "file": "tests/reference-browser.mjs",
+      "target": "./browser-target.mjs"
+    },
+    {
+      "file": "tests/reference-browser.mjs",
+      "target": "./art-ready.mjs"
+    },
+    {
+      "file": "tests/reference-browser.mjs",
+      "target": "playwright"
+    },
+    {
+      "file": "tests/reference-browser.mjs",
+      "target": "node:assert/strict"
+    },
+    {
+      "file": "tests/reference-browser.mjs",
+      "target": "node:fs"
+    },
+    {
+      "file": "tests/reference-browser.mjs",
+      "target": "./browser-server.mjs"
+    },
+    {
+      "file": "tests/reference-browser.mjs",
+      "target": "../meta/catalog.js"
+    },
+    {
+      "file": "tests/reference-browser.mjs",
+      "target": "../meta/progression.js"
+    },
+    {
+      "file": "tests/reference-browser.mjs",
+      "target": "../meta/products/preferences.js"
+    },
+    {
+      "file": "tests/replay-visuals.mjs",
+      "target": "./browser-target.mjs"
+    },
+    {
+      "file": "tests/replay-visuals.mjs",
+      "target": "node:fs"
+    },
+    {
+      "file": "tests/replay-visuals.mjs",
+      "target": "node:path"
+    },
+    {
+      "file": "tests/replay-visuals.mjs",
+      "target": "node:child_process"
+    },
+    {
+      "file": "tests/run-mobile.mjs",
+      "target": "node:fs"
+    },
+    {
+      "file": "tests/run-mobile.mjs",
+      "target": "node:net"
+    },
+    {
+      "file": "tests/run-mobile.mjs",
+      "target": "node:path"
+    },
+    {
+      "file": "tests/run-mobile.mjs",
+      "target": "node:child_process"
+    },
+    {
+      "file": "tests/run-perf.mjs",
+      "target": "node:fs"
+    },
+    {
+      "file": "tests/run-perf.mjs",
+      "target": "node:net"
+    },
+    {
+      "file": "tests/run-perf.mjs",
+      "target": "node:path"
+    },
+    {
+      "file": "tests/run-perf.mjs",
+      "target": "node:child_process"
+    },
+    {
+      "file": "tests/run-reference.mjs",
+      "target": "node:net"
+    },
+    {
+      "file": "tests/run-reference.mjs",
+      "target": "node:fs"
+    },
+    {
+      "file": "tests/run-reference.mjs",
+      "target": "node:child_process"
+    },
+    {
+      "file": "tests/server.mjs",
+      "target": "./browser-target.mjs"
+    },
+    {
+      "file": "tests/server.mjs",
+      "target": "node:fs"
+    },
+    {
+      "file": "tests/server.mjs",
+      "target": "node:path"
+    },
+    {
+      "file": "tests/server.mjs",
+      "target": "node:http"
+    },
+    {
+      "file": "tests/server.mjs",
+      "target": "node:url"
+    },
+    {
+      "file": "tests/server.test.mjs",
+      "target": "node:test"
+    },
+    {
+      "file": "tests/server.test.mjs",
+      "target": "node:assert/strict"
+    },
+    {
+      "file": "tests/server.test.mjs",
+      "target": "./server.mjs"
+    },
+    {
+      "file": "tests/soft-fantasy-review.mjs",
+      "target": "playwright"
+    },
+    {
+      "file": "tests/soft-fantasy-review.mjs",
+      "target": "node:child_process"
+    },
+    {
+      "file": "tests/soft-fantasy-review.mjs",
+      "target": "node:fs"
+    },
+    {
+      "file": "tests/soft-fantasy-review.mjs",
+      "target": "node:assert/strict"
+    },
+    {
+      "file": "tests/sprites.test.mjs",
+      "target": "node:test"
+    },
+    {
+      "file": "tests/sprites.test.mjs",
+      "target": "node:assert/strict"
+    },
+    {
+      "file": "tests/sprites.test.mjs",
+      "target": "node:fs"
+    },
+    {
+      "file": "tests/sprites.test.mjs",
+      "target": "node:crypto"
+    },
+    {
+      "file": "tests/sprites.test.mjs",
+      "target": "../meta/art/sprites/index.js"
+    },
+    {
+      "file": "tests/sprites.test.mjs",
+      "target": "../meta/art.js"
+    },
+    {
+      "file": "tests/ui-color-review.mjs",
+      "target": "playwright"
+    },
+    {
+      "file": "tests/ui-color-review.mjs",
+      "target": "node:child_process"
+    },
+    {
+      "file": "tests/ui-color-review.mjs",
+      "target": "node:fs"
+    },
+    {
+      "file": "tests/ui-color-review.mjs",
+      "target": "node:assert/strict"
+    },
+    {
+      "file": "tests/ux-review.mjs",
+      "target": "playwright"
+    },
+    {
+      "file": "tests/ux-review.mjs",
+      "target": "node:child_process"
+    },
+    {
+      "file": "tests/ux-review.mjs",
+      "target": "node:fs"
+    },
+    {
+      "file": "tests/ux-review.mjs",
+      "target": "node:assert/strict"
+    },
+    {
+      "file": "tests/ux-ui.mjs",
+      "target": "./browser-target.mjs"
+    },
+    {
+      "file": "tests/ux-ui.mjs",
+      "target": "node:assert/strict"
+    },
+    {
+      "file": "tests/views.test.mjs",
+      "target": "node:test"
+    },
+    {
+      "file": "tests/views.test.mjs",
+      "target": "node:assert/strict"
+    },
+    {
+      "file": "tests/views.test.mjs",
+      "target": "../meta/catalog.js"
+    },
+    {
+      "file": "tests/views.test.mjs",
+      "target": "../meta/progression.js"
+    },
+    {
+      "file": "tests/views.test.mjs",
+      "target": "../meta/views.js"
+    },
+    {
+      "file": "scripts/build-mobile-art.mjs",
+      "target": "node:fs"
+    },
+    {
+      "file": "scripts/build-mobile-art.mjs",
+      "target": "node:crypto"
+    },
+    {
+      "file": "scripts/build-mobile-art.mjs",
+      "target": "node:child_process"
+    },
+    {
+      "file": "scripts/build-sprite-art.mjs",
+      "target": "node:fs"
+    },
+    {
+      "file": "scripts/build-sprite-art.mjs",
+      "target": "node:crypto"
+    },
+    {
+      "file": "scripts/build-sprite-art.mjs",
+      "target": "node:child_process"
+    },
+    {
+      "file": "scripts/build-sprite-art.mjs",
+      "target": ","
+    },
+    {
+      "file": "scripts/build-sprite-art.mjs",
+      "target": ","
+    },
+    {
+      "file": "scripts/build-sprite-art.mjs",
+      "target": ");\nconst buildTransport="
+    },
+    {
+      "file": "scripts/build-sprite-art.mjs",
+      "target": "data:text/javascript;base64,"
+    }
+  ],
+  "protectedFiles": [
+    "meta/bridge.js",
+    "meta/expedition.js",
+    "meta/progression.js",
+    "meta/catalog.js",
+    "meta/products/service.js",
+    "meta/products/preferences.js",
+    "meta/data/catalog.demo.json",
+    "meta/products/cosmetics.demo.json",
+    "meta/products/missions.demo.json",
+    "meta/products/pass.demo.json",
+    "meta/art.js",
+    "meta/art/provenance.json",
+    "meta/shell.css",
+    "docs/GAME_BRIDGE_CONTRACT_V0.md",
+    "docs/META_APP_SCOPE_V1.md",
+    "docs/GDD_V1.1.md",
+    "meta/art/sources/spell-areas.png",
+    "meta/art/sources/guardians-secondary.png",
+    "meta/art/sources/ranks-luma-mousse-raika.png",
+    "meta/art/sources/guardians-primary.png",
+    "meta/art/sources/spell-projectiles.png",
+    "meta/art/sources/halos-pedestals.png"
+  ],
+  "prs": [
+    {
+      "number": 5,
+      "title": "docs(meta): périmètre indépendant de l'app et contrat GameBridge V0",
+      "head": "feature/meta-app-shell-v1",
+      "head_sha": "d9445f5cf0a357ab1867d13820bb03f19b6d64b9",
+      "base": "main",
+      "base_sha": "73e0639312465b132a7b786b3822ae1cbf805a86",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "commits": 4,
+      "changed_files": 17,
+      "inherited": true
+    },
+    {
+      "number": 6,
+      "title": "META-01 : développement de la coquille mobile — revue distincte",
+      "head": "feature/meta-01-mobile-shell",
+      "head_sha": "8d45fe6e7dcbf8d546a0509988e2cfdc84a27172",
+      "base": "main",
+      "base_sha": "73e0639312465b132a7b786b3822ae1cbf805a86",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "commits": 5,
+      "changed_files": 17,
+      "inherited": true
+    },
+    {
+      "number": 7,
+      "title": "feat(meta): META-02 — parcours d’expédition de démonstration",
+      "head": "feature/meta-02-expedition-flow",
+      "head_sha": "8a8bdd9e0fe45e124dd58807fa3bcb511c2eb1bd",
+      "base": "feature/meta-01-mobile-shell",
+      "base_sha": "8d45fe6e7dcbf8d546a0509988e2cfdc84a27172",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "commits": 1,
+      "changed_files": 48,
+      "inherited": true
+    },
+    {
+      "number": 8,
+      "title": "feat(meta): META-03 — collection, codex et progression locale de démonstration",
+      "head": "feature/meta-03-collection-progression",
+      "head_sha": "812d579a7848d300cffae024b47af5c6621a4f70",
+      "base": "feature/meta-02-expedition-flow",
+      "base_sha": "8a8bdd9e0fe45e124dd58807fa3bcb511c2eb1bd",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "commits": 2,
+      "changed_files": 44,
+      "inherited": true
+    },
+    {
+      "number": 9,
+      "title": "docs(da): DA-01 — bleu nuit et accents élémentaires",
+      "head": "feature/da-01-midnight-elemental",
+      "head_sha": "371f8d9e1f32d2bce5d9d876e57653fbbc19ce2a",
+      "base": "feature/meta-03-collection-progression",
+      "base_sha": "812d579a7848d300cffae024b47af5c6621a4f70",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "commits": 1,
+      "changed_files": 1,
+      "inherited": false
+    },
+    {
+      "number": 10,
+      "title": "style(meta): DA-01 — palette bleu nuit, cyan et violet",
+      "head": "feature/da-01-night-palette",
+      "head_sha": "2346dcf4a5380f9e71eac175fbcd4bd093def16a",
+      "base": "feature/meta-03-collection-progression",
+      "base_sha": "812d579a7848d300cffae024b47af5c6621a4f70",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "commits": 1,
+      "changed_files": 12,
+      "inherited": true
+    },
+    {
+      "number": 11,
+      "title": "style(meta): DA-02 — fantasy nocturne douce et organique",
+      "head": "feature/da-02-soft-fantasy",
+      "head_sha": "9f6070becf04b4055ccd42223cb19e4c514d10eb",
+      "base": "feature/da-01-night-palette",
+      "base_sha": "2346dcf4a5380f9e71eac175fbcd4bd093def16a",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "commits": 1,
+      "changed_files": 18,
+      "inherited": true
+    },
+    {
+      "number": 12,
+      "title": "style(meta): DA-03 — vrais guardians et magie pastel issue des références",
+      "head": "feature/da-03-guardian-art",
+      "head_sha": "36da594c84cf7c2cc1004b27c98ededa42d9447b",
+      "base": "feature/da-02-soft-fantasy",
+      "base_sha": "9f6070becf04b4055ccd42223cb19e4c514d10eb",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "commits": 1,
+      "changed_files": 27,
+      "inherited": true
+    },
+    {
+      "number": 13,
+      "title": "style(meta): DA-04 — accents pastel répartis dans les blocs UI",
+      "head": "feature/da-04-ui-color",
+      "head_sha": "66814ef665fa35de6b268e7edc3378cb4613c4e3",
+      "base": "feature/da-03-guardian-art",
+      "base_sha": "36da594c84cf7c2cc1004b27c98ededa42d9447b",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "commits": 1,
+      "changed_files": 22,
+      "inherited": true
+    },
+    {
+      "number": 14,
+      "title": "feat(ui): UX-01 — fiches de jeu, codex illustré et navigation sans recouvrement",
+      "head": "feature/ux-01-game-interface",
+      "head_sha": "bf7524a97aed14131f9dede6f6c5e59696a6a941",
+      "base": "feature/da-04-ui-color",
+      "base_sha": "66814ef665fa35de6b268e7edc3378cb4613c4e3",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "commits": 1,
+      "changed_files": 31,
+      "inherited": true
+    },
+    {
+      "number": 15,
+      "title": "feat(meta): META-04 — missions, cosmétiques, Pass et préférences de démonstration",
+      "head": "feature/meta-04-products-settings",
+      "head_sha": "832959fba650f55e301de2dddc4e2e6db53e829f",
+      "base": "feature/ux-01-game-interface",
+      "base_sha": "bf7524a97aed14131f9dede6f6c5e59696a6a941",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "commits": 1,
+      "changed_files": 36,
+      "inherited": true
+    }
+  ],
+  "missingDocumentLinks": [],
+  "identicalRuntimeFiles": [],
+  "catalogCounts": {
+    "guardians": 3,
+    "regions": 4,
+    "families": 3,
+    "classes": 2,
+    "synergies": 1,
+    "chapters": 2,
+    "objectives": 2,
+    "missions": 6,
+    "products": 5,
+    "tiers": 3
+  },
+  "dependencies": {
+    "production": {},
+    "development": {
+      "playwright": "1.65.0"
+    },
+    "node": "v24.2.0"
+  }
+}

@@ -1,4 +1,5 @@
 import {APP_URL,TEST_ORIGIN} from './browser-target.mjs';
+import {visibleArtReady} from './art-ready.mjs';
 import {chromium} from 'playwright';import assert from 'node:assert/strict';import fs from 'node:fs';
 import {startBrowserServer} from './browser-server.mjs';import {loadCatalog} from '../meta/catalog.js';import {initialState,SAVE_KEY} from '../meta/progression.js';import {PREFERENCE_KEY,DEFAULT_PREFERENCES} from '../meta/products/preferences.js';
 const server=await startBrowserServer();let browser;const dir='test-results/int-01/screens';fs.mkdirSync(dir,{recursive:true});const results=[];
@@ -16,7 +17,7 @@ try{
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,route);
    const duplicateIds=await page.evaluate(()=>{const seen=new Set(),duplicates=[];for(const el of document.querySelectorAll('[id]')){if(seen.has(el.id))duplicates.push(el.id);seen.add(el.id);}return duplicates;});assert.deepEqual(duplicateIds,[],route);
    if(['home','collection','guardian/demo-luma','missions','shop','pass','profile','settings','prepare','challenges'].includes(route)){
-    await page.evaluate(async()=>{for(const el of document.querySelectorAll('.art-sprite image')){const image=new Image();image.src=el.getAttribute('href');await image.decode();}});
+    await visibleArtReady(page);
     await page.screenshot({path:`${dir}/${route.replaceAll('/','-')}-${width}x${height}.png`});
    }
   }

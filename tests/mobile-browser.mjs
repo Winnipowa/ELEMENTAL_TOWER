@@ -94,8 +94,8 @@ try{
    }finally{if(visualBrowser!==browser)await visualBrowser.close();}
    const page=await browser.newPage({viewport:{width:320,height:568}});await openCollection(page);
    // Derivative failure falls back to original; failure of both keeps the portrait label.
-   await page.route('**/art/mobile/guardians-primary.png',route=>route.abort());await page.reload();
-   await page.waitForFunction(()=>{const images=[...document.querySelectorAll('.guardian-figure image')];return images.length===3&&images.every(x=>x.getAttribute('href').includes('/sources/'));});await artReady(page);
+   await page.route('**/art/sprites/guardians-primary_*.png',route=>route.abort());await page.reload();
+   await page.waitForFunction(()=>{const images=[...document.querySelectorAll('.guardian-figure image[href]')];return images.length>0&&images.every(x=>x.getAttribute('href').includes('/sources/'));});await artReady(page);
    await page.route('**/art/sources/guardians-primary.png',route=>route.abort());await page.reload();await page.locator('.portrait-fallback:not([hidden])').first().waitFor();
    await page.screenshot({path:`${OUT}/screens/${engine}-asset-unavailable-320x568.png`});await page.unrouteAll();
    let release;const held=new Promise(resolve=>release=resolve);

@@ -1,0 +1,34 @@
+[
+  {
+    "name": "reference",
+    "args": [
+      "tests/run-reference.mjs"
+    ],
+    "status": 0,
+    "elapsedMs": 108567
+  },
+  {
+    "name": "mobile-regression",
+    "args": [
+      "tests/mobile-browser.mjs"
+    ],
+    "status": 0,
+    "elapsedMs": 60177
+  },
+  {
+    "name": "perf-browser",
+    "args": [
+      "tests/perf-browser.mjs"
+    ],
+    "status": 0,
+    "elapsedMs": 53742
+  },
+  {
+    "name": "perf-measure",
+    "args": [
+      "tests/perf-measure.mjs"
+    ],
+    "status": 0,
+    "elapsedMs": 295767
+  }
+]

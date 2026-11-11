@@ -2,6 +2,10 @@
 
 Jeu mobile portrait associant auto-battler, Tower Defense, collection de gardiens, synergies et fusion de 1★ à 5★.
 
+## Illustrations PERF-01
+
+[Rapport avant/après](docs/PERF_01_REPORT.md) : crops PNG sans perte, coordonnées et sources conservées, chargement à la visibilité et à l’ouverture des galeries. `npm run test:perf` exécute la non-régression et les mesures simulées ; `npm run assets:sprites` régénère les découpes avec FFmpeg. Aucun résultat de simulation ne vaut une validation sur téléphone physique.
+
 ## Préparation mobile META-05
 
 Référence `0.4.1-meta.5`, dérivée d’INT-01 : [rapport QA](docs/META_05_QA_REPORT.md), [assets/performance](docs/META_05_PERFORMANCE.md), [packaging conditionnel](docs/META_05_PACKAGING.md), [analytics sans collecte](docs/META_05_ANALYTICS_PLAN.md), [protocole physique](docs/META_05_DEVICE_PROTOCOL.md) et [checklist bêta](docs/META_05_BETA_CHECKLIST.md).

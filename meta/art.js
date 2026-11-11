@@ -1,4 +1,4 @@
-import {sheetHref} from './mobile-assets.js';
+import {spriteImage} from './mobile-assets.js';
 /** Presentation-only viewports into the supplied, byte-identical PNG sheets.
  * Keys refer to existing demo portrait keys, never canonical engine IDs.
  * Element labels and FX associations are visual proposals, not mechanics.
@@ -20,7 +20,7 @@ let spriteSequence=0;
 export function sprite(sheetName,rect,label='',className=''){
  const sheet=SHEETS[sheetName],clip=`guardian-art-clip-${++spriteSequence}`;
  // All rectangles and file names are trusted application presentation constants.
- return `<span class="art-sprite ${className}" ${label?`role="img" aria-label="${label}"`:'aria-hidden="true"'}><svg viewBox="${rect.join(' ')}" aria-hidden="true" focusable="false"><defs><clipPath id="${clip}"><rect x="${rect[0]}" y="${rect[1]}" width="${rect[2]}" height="${rect[3]}"/></clipPath></defs><image clip-path="url(#${clip})" href="${sheetHref(sheet.file)}" data-source-href="./art/sources/${sheet.file}" width="${sheet.width}" height="${sheet.height}"/></svg></span>`;
+ return `<span class="art-sprite ${className}" ${label?`role="img" aria-label="${label}"`:'aria-hidden="true"'}><svg viewBox="${rect.join(' ')}" aria-hidden="true" focusable="false"><defs><clipPath id="${clip}"><rect x="${rect[0]}" y="${rect[1]}" width="${rect[2]}" height="${rect[3]}"/></clipPath></defs>${spriteImage(sheet,rect,clip)}</svg></span>`;
 }
 export function guardianVisual(g){
  const art=GUARDIAN_ART[g.portraitKey];if(!art)return null;

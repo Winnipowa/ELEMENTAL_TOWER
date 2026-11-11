@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import crypto from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {SHEETS,GUARDIAN_ART,sprite} from '../meta/art.js';
-import {bindArtFallbacks,sheetHref} from '../meta/mobile-assets.js';
+import {attachArtFallback,sheetHref} from '../meta/mobile-assets.js';
 const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
 const originals=JSON.parse(fs.readFileSync('meta/art/provenance.json','utf8'));
 const manifest=JSON.parse(fs.readFileSync('meta/art/mobile/provenance.json','utf8'));
@@ -30,7 +30,7 @@ test('mobile derivatives retain all six original sheets, provenance, dimensions 
 test('asset fallback retries PNG once, then exposes portrait fallback without a retry loop',()=>{
  let listener,changes=0;const fallback={hidden:true};let unavailable=false;
  const portrait={classList:{add(){unavailable=true;}},querySelector(){return fallback;}};
- const image={dataset:{sourceHref:'./art/sources/guardians-primary.png'},addEventListener(type,fn){assert.equal(type,'error');listener=fn;},setAttribute(key,value){assert.equal(key,'href');assert.equal(value,this.dataset.sourceHref);changes++;},closest(selector){return selector==='.portrait'?portrait:{};}};
- bindArtFallbacks({querySelectorAll(){return [image];}});listener();assert.equal(changes,1);assert.equal(fallback.hidden,true);
+ const image={dataset:{sourceHref:'./art/sources/guardians-primary.png',sheetWidth:'1122',sheetHeight:'1402'},addEventListener(type,fn){if(type==='error')listener=fn;},setAttribute(key,value){if(key==='href'){assert.equal(value,this.dataset.sourceHref);changes++;}else assert.equal(value,{x:'0',y:'0',width:'1122',height:'1402'}[key]);},closest(selector){return selector==='.portrait'?portrait:{};}};
+ attachArtFallback(image);listener();assert.equal(changes,1);assert.equal(fallback.hidden,true);
  listener();listener();assert.equal(changes,1);assert.equal(fallback.hidden,false);assert.equal(unavailable,true);
 });
