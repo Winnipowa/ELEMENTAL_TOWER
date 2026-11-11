@@ -1,0 +1,384 @@
+{
+  "viewports": [
+    [
+      320,
+      844
+    ],
+    [
+      390,
+      844
+    ],
+    [
+      430,
+      844
+    ],
+    [
+      320,
+      568
+    ]
+  ],
+  "captures": [
+    {
+      "name": "missions",
+      "width": 320,
+      "height": 844
+    },
+    {
+      "name": "mission-conditions",
+      "width": 320,
+      "height": 844
+    },
+    {
+      "name": "qa-products",
+      "width": 320,
+      "height": 844
+    },
+    {
+      "name": "missions-qa",
+      "width": 320,
+      "height": 844
+    },
+    {
+      "name": "pass-free",
+      "width": 320,
+      "height": 844
+    },
+    {
+      "name": "pass-premium",
+      "width": 320,
+      "height": 844
+    },
+    {
+      "name": "shop",
+      "width": 320,
+      "height": 844
+    },
+    {
+      "name": "product",
+      "width": 320,
+      "height": 844
+    },
+    {
+      "name": "preview-dialog",
+      "width": 320,
+      "height": 844
+    },
+    {
+      "name": "illustration-slot",
+      "width": 320,
+      "height": 844
+    },
+    {
+      "name": "settings",
+      "width": 320,
+      "height": 844
+    },
+    {
+      "name": "settings-accessible",
+      "width": 320,
+      "height": 844
+    },
+    {
+      "name": "loading",
+      "width": 320,
+      "height": 844
+    },
+    {
+      "name": "catalog-error",
+      "width": 320,
+      "height": 844
+    },
+    {
+      "name": "missions-empty",
+      "width": 320,
+      "height": 844
+    },
+    {
+      "name": "shop-empty",
+      "width": 320,
+      "height": 844
+    },
+    {
+      "name": "pass-empty",
+      "width": 320,
+      "height": 844
+    },
+    {
+      "name": "preferences-error",
+      "width": 320,
+      "height": 844
+    },
+    {
+      "name": "missions",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "name": "mission-conditions",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "name": "qa-products",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "name": "missions-qa",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "name": "pass-free",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "name": "pass-premium",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "name": "shop",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "name": "product",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "name": "preview-dialog",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "name": "illustration-slot",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "name": "settings",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "name": "settings-accessible",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "name": "loading",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "name": "catalog-error",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "name": "missions-empty",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "name": "shop-empty",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "name": "pass-empty",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "name": "preferences-error",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "name": "missions",
+      "width": 430,
+      "height": 844
+    },
+    {
+      "name": "mission-conditions",
+      "width": 430,
+      "height": 844
+    },
+    {
+      "name": "qa-products",
+      "width": 430,
+      "height": 844
+    },
+    {
+      "name": "missions-qa",
+      "width": 430,
+      "height": 844
+    },
+    {
+      "name": "pass-free",
+      "width": 430,
+      "height": 844
+    },
+    {
+      "name": "pass-premium",
+      "width": 430,
+      "height": 844
+    },
+    {
+      "name": "shop",
+      "width": 430,
+      "height": 844
+    },
+    {
+      "name": "product",
+      "width": 430,
+      "height": 844
+    },
+    {
+      "name": "preview-dialog",
+      "width": 430,
+      "height": 844
+    },
+    {
+      "name": "illustration-slot",
+      "width": 430,
+      "height": 844
+    },
+    {
+      "name": "settings",
+      "width": 430,
+      "height": 844
+    },
+    {
+      "name": "settings-accessible",
+      "width": 430,
+      "height": 844
+    },
+    {
+      "name": "loading",
+      "width": 430,
+      "height": 844
+    },
+    {
+      "name": "catalog-error",
+      "width": 430,
+      "height": 844
+    },
+    {
+      "name": "missions-empty",
+      "width": 430,
+      "height": 844
+    },
+    {
+      "name": "shop-empty",
+      "width": 430,
+      "height": 844
+    },
+    {
+      "name": "pass-empty",
+      "width": 430,
+      "height": 844
+    },
+    {
+      "name": "preferences-error",
+      "width": 430,
+      "height": 844
+    },
+    {
+      "name": "missions",
+      "width": 320,
+      "height": 568
+    },
+    {
+      "name": "mission-conditions",
+      "width": 320,
+      "height": 568
+    },
+    {
+      "name": "qa-products",
+      "width": 320,
+      "height": 568
+    },
+    {
+      "name": "missions-qa",
+      "width": 320,
+      "height": 568
+    },
+    {
+      "name": "pass-free",
+      "width": 320,
+      "height": 568
+    },
+    {
+      "name": "pass-premium",
+      "width": 320,
+      "height": 568
+    },
+    {
+      "name": "shop",
+      "width": 320,
+      "height": 568
+    },
+    {
+      "name": "product",
+      "width": 320,
+      "height": 568
+    },
+    {
+      "name": "preview-dialog",
+      "width": 320,
+      "height": 568
+    },
+    {
+      "name": "illustration-slot",
+      "width": 320,
+      "height": 568
+    },
+    {
+      "name": "settings",
+      "width": 320,
+      "height": 568
+    },
+    {
+      "name": "settings-accessible",
+      "width": 320,
+      "height": 568
+    },
+    {
+      "name": "loading",
+      "width": 320,
+      "height": 568
+    },
+    {
+      "name": "catalog-error",
+      "width": 320,
+      "height": 568
+    },
+    {
+      "name": "missions-empty",
+      "width": 320,
+      "height": 568
+    },
+    {
+      "name": "shop-empty",
+      "width": 320,
+      "height": 568
+    },
+    {
+      "name": "pass-empty",
+      "width": 320,
+      "height": 568
+    },
+    {
+      "name": "preferences-error",
+      "width": 320,
+      "height": 568
+    }
+  ],
+  "protectedStorageUnchanged": true,
+  "noAttribution": true
+}

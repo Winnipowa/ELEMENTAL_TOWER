@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "source": "demonstration",
+  "catalogVersion": "demo-missions-1",
+  "missions": [
+    {
+      "id": "demo-m-dawn",
+      "title": "Explorer Aurore",
+      "period": "daily",
+      "target": 1,
+      "eventType": "expedition_completed",
+      "requiresMissionIds": [],
+      "condition": "Objectif illustratif à raccorder à des événements de jeu vérifiés.",
+      "reward": {
+        "kind": "cosmetic",
+        "productId": "demo-profile-moon",
+        "label": "Aperçu cosmétique fictif — aucune attribution."
+      }
+    },
+    {
+      "id": "demo-m-journeys",
+      "title": "Carnet de voyage",
+      "period": "daily",
+      "target": 3,
+      "eventType": "expedition_completed",
+      "requiresMissionIds": [],
+      "condition": "Objectif illustratif à raccorder à des événements de jeu vérifiés.",
+      "reward": {
+        "kind": "cosmetic",
+        "productId": "demo-decor-crystal",
+        "label": "Aperçu cosmétique fictif — aucune attribution."
+      }
+    },
+    {
+      "id": "demo-m-fusions",
+      "title": "Échos de fusion",
+      "period": "weekly",
+      "target": 5,
+      "eventType": "fusion_verified",
+      "requiresMissionIds": [],
+      "condition": "Objectif illustratif à raccorder à des événements de jeu vérifiés.",
+      "reward": {
+        "kind": "cosmetic",
+        "productId": "demo-animation-stars",
+        "label": "Aperçu cosmétique fictif — aucune attribution."
+      }
+    },
+    {
+      "id": "demo-m-garden",
+      "title": "Jardin des îles",
+      "period": "weekly",
+      "target": 2,
+      "eventType": "expedition_completed",
+      "requiresMissionIds": [
+        "demo-m-dawn"
+      ],
+      "condition": "Objectif illustratif à raccorder à des événements de jeu vérifiés.",
+      "reward": {
+        "kind": "cosmetic",
+        "productId": "demo-skill-bloom",
+        "label": "Aperçu cosmétique fictif — aucune attribution."
+      }
+    },
+    {
+      "id": "demo-m-codex",
+      "title": "Mémoire des gardiens",
+      "period": "permanent",
+      "target": 3,
+      "eventType": "collection_unlock_verified",
+      "requiresMissionIds": [],
+      "condition": "Objectif illustratif à raccorder à des événements de jeu vérifiés.",
+      "reward": {
+        "kind": "cosmetic",
+        "productId": "demo-skin-luma",
+        "label": "Aperçu cosmétique fictif — aucune attribution."
+      }
+    },
+    {
+      "id": "demo-m-path",
+      "title": "Un nouveau regard",
+      "period": "permanent",
+      "target": 2,
+      "eventType": "chapter_completed_verified",
+      "requiresMissionIds": [
+        "demo-m-codex"
+      ],
+      "condition": "Objectif illustratif à raccorder à des événements de jeu vérifiés.",
+      "reward": {
+        "kind": "cosmetic",
+        "productId": "demo-decor-crystal",
+        "label": "Aperçu cosmétique fictif — aucune attribution."
+      }
+    }
+  ]
+}

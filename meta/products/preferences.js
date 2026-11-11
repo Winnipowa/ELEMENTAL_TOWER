@@ -1,0 +1,12 @@
+export const PREFERENCE_KEY='elemental-tower.meta-preferences.v1';
+export const DEFAULT_PREFERENCES=Object.freeze({reduceMotion:false,largeText:false,highContrast:false,softGlows:true});
+function decode(raw){const value=JSON.parse(raw);if(value?.schemaVersion!==1||value.source!=='demonstration'||!value.preferences||!Object.keys(DEFAULT_PREFERENCES).every(k=>typeof value.preferences[k]==='boolean'))throw new Error('Préférences incompatibles');return Object.fromEntries(Object.keys(DEFAULT_PREFERENCES).map(k=>[k,value.preferences[k]]));}
+/** Dedicated preference storage. Never reads or writes gameplay/META-03 keys. */
+export class DemoPreferences{
+ constructor(storage){this.storage=storage;this.values={...DEFAULT_PREFERENCES};this.writable=true;this.raw=null;this.message='Préférences locales de démonstration.';try{this.raw=storage.getItem(PREFERENCE_KEY);if(this.raw!==null)this.values=decode(this.raw);}catch{this.writable=false;this.message='Préférences illisibles ou stockage inaccessible : original préservé, valeurs par défaut en lecture seule.';}}
+ update(key,value){if(!Object.hasOwn(DEFAULT_PREFERENCES,key)||typeof value!=='boolean')throw new Error('Préférence inconnue.');if(!this.writable){this.message='Écriture des préférences bloquée. Réinitialisez explicitement ces préférences pour reprendre.';return false;}
+  try{if(this.storage.getItem(PREFERENCE_KEY)!==this.raw){this.writable=false;this.message='Préférences modifiées dans un autre onglet. Rechargez avant de continuer.';return false;}const next={...this.values,[key]:value};const raw=JSON.stringify({schemaVersion:1,source:'demonstration',preferences:next});this.storage.setItem(PREFERENCE_KEY,raw);this.values=next;this.raw=raw;this.message='Préférences de démonstration enregistrées sur cet appareil.';return true;}catch{this.message='Enregistrement impossible. Préférences précédentes conservées.';return false;}
+ }
+ reset(){try{this.storage.removeItem(PREFERENCE_KEY);this.raw=null;this.values={...DEFAULT_PREFERENCES};this.writable=true;this.message='Préférences de démonstration réinitialisées.';return true;}catch{this.message='Réinitialisation impossible : stockage inaccessible.';return false;}}
+}
+export function applyPreferences(preferences,target=typeof document==='undefined'?null:document.body){if(!target)return;target.classList.toggle('reduce-motion',preferences.reduceMotion);target.classList.toggle('large-text',preferences.largeText);target.classList.toggle('high-contrast',preferences.highContrast);target.classList.toggle('quiet-glows',!preferences.softGlows);}

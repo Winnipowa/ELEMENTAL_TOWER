@@ -36,3 +36,7 @@ Prototype local : [ouvrir les sources](meta/index.html). Installation et tests :
 ## Collection et progression META-03
 
 [Rapport et tests](docs/META_03_REPORT.md) · [Catalogue et raccordement du collègue](docs/META_03_CATALOG_HANDOFF.md). Catalogue externe et sauvegarde locale de démonstration uniquement ; aucun résultat mock n’accorde de progression.
+
+## Missions, cosmétiques, Pass et préférences META-04
+
+[Rapport fonctionnel](docs/META_04_REPORT.md) · [Raccordement futur](docs/META_04_INTEGRATION.md). Catalogues et progression QA fictifs, sans attribution ni paiement. Tests dédiés : npm run test:products.
