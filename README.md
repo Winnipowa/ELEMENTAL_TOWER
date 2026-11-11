@@ -28,4 +28,3 @@ Conversion portrait V0.5 dans [PR #1](https://github.com/Winnipowa/ELEMENTAL_TOW
 ## Coquille mobile META-01
 
 Prototype local : [ouvrir les sources](meta/index.html). Installation et tests : [rapport META-01](docs/META_01_REPORT.md). Données fictives, moteur absent, aucune transaction.
-
