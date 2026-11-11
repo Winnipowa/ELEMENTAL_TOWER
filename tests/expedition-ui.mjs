@@ -7,13 +7,13 @@ export async function testExpedition(page,width){
  for(const scenario of ['victory','defeat','abandoned','connection-error','open-error']){
   await page.getByRole('link',{name:'Monde',exact:true}).click();
   await page.getByRole('button',{name:/Aurore/}).click();
-  await page.getByLabel('Scénario de démonstration').selectOption(scenario);
+  await page.getByRole('link',{name:'Changer le scénario · Outils QA'}).click();await page.getByLabel('Scénario de démonstration').selectOption(scenario);await page.getByRole('link',{name:'Revenir à la préparation'}).click();
   await page.screenshot({path:`test-results/meta02-prepare-${scenario}-${width}.png`,fullPage:true});
   await page.getByRole('button',{name:'Lancer la démonstration',exact:true}).click();
   if(scenario.includes('error')){
    await page.getByRole('heading',{name:'Connexion impossible'}).waitFor();
    await page.screenshot({path:`test-results/meta02-${scenario}-${width}.png`,fullPage:true});
-   await page.getByLabel('Scénario de démonstration').selectOption('victory');
+   await page.getByRole('link',{name:'Changer le scénario · Outils QA'}).click();await page.getByLabel('Scénario de démonstration').selectOption('victory');await page.getByRole('link',{name:'Revenir à la préparation'}).click();
    await page.getByRole('button',{name:'Lancer la démonstration',exact:true}).click();
    await page.getByRole('button',{name:'Abandonner la démonstration',exact:true}).click();
    await page.getByRole('heading',{name:'Abandon · Démonstration',exact:true}).waitFor();
