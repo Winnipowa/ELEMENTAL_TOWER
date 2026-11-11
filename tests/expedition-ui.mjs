@@ -1,6 +1,7 @@
+import {APP_URL} from './browser-target.mjs';
 import assert from 'node:assert/strict';
 export async function testExpedition(page,width){
- const root='http://127.0.0.1:4173/meta/index.html';
+ const root=APP_URL;
  await page.goto(root);
  await page.evaluate(()=>localStorage.setItem('meta02-preservation-probe','unchanged'));
  const snapshot=await page.evaluate(()=>JSON.stringify({...localStorage}));

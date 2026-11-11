@@ -1,0 +1,52 @@
+[
+  {
+    "lot": "DA-01",
+    "revision": "2346dcf",
+    "script": "palette-review.mjs",
+    "port": 51444,
+    "portAdaptationOnly": true,
+    "status": 0,
+    "elapsedMs": 9001,
+    "directory": "test-results/int-01/replays/DA-01-Sy4i0V"
+  },
+  {
+    "lot": "DA-02",
+    "revision": "9f6070b",
+    "script": "soft-fantasy-review.mjs",
+    "port": 51444,
+    "portAdaptationOnly": true,
+    "status": 0,
+    "elapsedMs": 10872,
+    "directory": "test-results/int-01/replays/DA-02-bN8431"
+  },
+  {
+    "lot": "DA-03",
+    "revision": "36da594",
+    "script": "guardian-art-review.mjs",
+    "port": 51444,
+    "portAdaptationOnly": true,
+    "status": 0,
+    "elapsedMs": 9365,
+    "directory": "test-results/int-01/replays/DA-03-X9vVmm"
+  },
+  {
+    "lot": "DA-04",
+    "revision": "66814ef",
+    "script": "ui-color-review.mjs",
+    "port": 51444,
+    "portAdaptationOnly": true,
+    "status": 0,
+    "elapsedMs": 12548,
+    "directory": "test-results/int-01/replays/DA-04-1tyeEH"
+  },
+  {
+    "lot": "UX-01",
+    "revision": "bf7524a",
+    "script": "ux-review.mjs",
+    "port": 51444,
+    "portAdaptationOnly": true,
+    "status": 0,
+    "elapsedMs": 9582,
+    "directory": "test-results/int-01/replays/UX-01-aSWtRo"
+  }
+]

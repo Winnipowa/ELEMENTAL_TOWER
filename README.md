@@ -2,6 +2,14 @@
 
 Jeu mobile portrait associant auto-battler, Tower Defense, collection de gardiens, synergies et fusion de 1★ à 5★.
 
+## Référence hors combat INT-01
+
+La référence consolidée `0.4.0-int.1` part de la PR #15 et reste entièrement en démonstration, sans moteur canonique ni récompense réelle. Les sections historiques ci-dessous documentent les lots précédents.
+
+[Audit et résultats](docs/INT_01_AUDIT.md) · [Inventaire fonctionnel/simulé/absent](docs/INT_01_INVENTORY.md) · [Compatibilité GameBridge](docs/INT_01_GAMEBRIDGE_COMPATIBILITY.md) · [Avant build mobile](docs/INT_01_MOBILE_CHECKLIST.md) · [Charte de référence et provenance #9](docs/ART_DIRECTION_REFERENCE.md).
+
+Avec Node 24+ et Edge installé : `npm ci --ignore-scripts`, puis `npm run test:reference`. La campagne utilise un port isolé et nécessite l’historique Git pour les replays visuels. Pour consulter le prototype : `npm start`, puis ouvrir `http://127.0.0.1:4173/meta/index.html` (port adaptable via `ELEMENTAL_TEST_PORT`). Aucun déploiement n’est nécessaire.
+
 ## Documentation — à partager au collègue
 1. [Synthèse des décisions / responsabilités (04/11/2026)](docs/HANDOFF_COLLEGUE_2026-11-04.md)
 2. [Game Design Document V1.1](docs/GDD_V1.1.md) — règles validées, hypothèses, PvP à collection personnelle, économie et monétisation.
