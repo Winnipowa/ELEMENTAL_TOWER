@@ -36,7 +36,7 @@ function portrait(g){const visual=guardianVisual(g);if(visual)return visual;retu
 function ui(){return {data,portrait,elementBadge,abilityArt,referenceStudy,codexArt,link,empty,tone:g=>GUARDIAN_ART[g.portraitKey]?.tone||'neutral',chapterAvailable:ch=>chapterAvailable(ch,progression.state,data)};}
 function codex(){return codexPage(data,ui());}
 function profileView(){return profilePage(data,progression,completedChapters(progression.state,data),ui());}
-function notice(title,copy,visual=''){document.querySelector('#dialog-preview').innerHTML=visual;document.querySelector('#dialog-title').textContent=title;document.querySelector('#dialog-copy').textContent=copy;dialog.showModal();}
+function notice(title,copy,visual=''){document.querySelector('#dialog-preview').innerHTML=visual;document.querySelector('#dialog-title').textContent=title;document.querySelector('#dialog-copy').textContent=copy;dialog.showModal();bindArtFallbacks(dialog);}
 document.querySelector('#close-dialog').onclick=()=>dialog.close();
 dialog.addEventListener('click',e=>{if(e.target===dialog && (e.clientX<dialog.getBoundingClientRect().left || e.clientX>dialog.getBoundingClientRect().right))dialog.close();});
 function parent(route){return ({product:'shop',demo:'settings',settings:'profile',pass:'shop',challenges:'home',prepare:'home',results:'home',synergies:'collection',guardian:'collection'})[route]||'home';}

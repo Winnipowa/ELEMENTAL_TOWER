@@ -1,4 +1,5 @@
 import {APP_URL} from './browser-target.mjs';
+import {visibleArtReady} from './art-ready.mjs';
 import {startBrowserServer} from './browser-server.mjs';
 import {chromium} from 'playwright';
 import fs from 'node:fs';
@@ -19,7 +20,7 @@ try{
   const protectedStorage=await page.evaluate(key=>{const state={...localStorage};delete state[key];return JSON.stringify(state);},PREFERENCE_KEY);
   const checkProtected=async()=>assert.equal(await page.evaluate(key=>{const state={...localStorage};delete state[key];return JSON.stringify(state);},PREFERENCE_KEY),protectedStorage);
   async function go(route){await page.evaluate(r=>location.hash='/'+r,route);await page.waitForFunction(r=>document.querySelector('main').dataset.view===r.split('/')[0],route);}
-  async function capture(name){await page.evaluate(async()=>{await document.fonts.ready;for(const el of document.querySelectorAll('.art-sprite image')){const im=new Image();im.src=el.getAttribute('href');await im.decode();}});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,`${size} ${name}`);await page.screenshot({path:`${dir}/${name}-${size}.png`});captures.push({name,width,height});}
+  async function capture(name){await visibleArtReady(page);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,`${size} ${name}`);await page.screenshot({path:`${dir}/${name}-${size}.png`});captures.push({name,width,height});}
   assert.equal(await page.locator('.mission-card').count(),6);assert.equal(await page.locator('[data-qa-mission]').count(),0);await capture('missions');await page.locator('.mission-card').first().locator('summary').click();await page.locator('.mission-card').first().getByText('Aperçu cosmétique fictif — aucune attribution.',{exact:true}).waitFor();await capture('mission-conditions');
   await page.locator('#mission-period').selectOption('weekly');assert.equal(await page.locator('.mission-card').count(),2);await page.locator('#mission-status').selectOption('locked');assert.equal(await page.locator('.mission-card').count(),1);await page.locator('#mission-period').selectOption('all');await page.locator('#mission-status').selectOption('all');
   await go('demo');await page.locator('.qa-products').waitFor();

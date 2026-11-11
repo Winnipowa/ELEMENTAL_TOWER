@@ -13,10 +13,11 @@ const provenance=JSON.parse(fs.readFileSync('meta/art/provenance.json','utf8'));
 const protectedFiles=['meta/bridge.js','meta/expedition.js','meta/progression.js','meta/catalog.js','meta/products/service.js','meta/products/preferences.js','meta/data/catalog.demo.json','meta/products/cosmetics.demo.json','meta/products/missions.demo.json','meta/products/pass.demo.json','meta/art.js','meta/art/provenance.json','meta/shell.css','docs/GAME_BRIDGE_CONTRACT_V0.md','docs/META_APP_SCOPE_V1.md','docs/GDD_V1.1.md',...provenance.records.map(x=>'meta/art/sources/'+x.file)];
 for(const file of protectedFiles){
  if(file==='meta/art.js'){
-  // META-05 explicitly permits only the derivative URL + original-source fallback attribute.
-  const transportImport=['import','{sheetHref}','from',"'./mobile-assets.js';"].join(' ')+'\n';
-  const reversed=fs.readFileSync(file,'utf8').replaceAll('\r\n','\n').replace(transportImport,'').replace('href="${sheetHref(sheet.file)}" data-source-href=','href=').trim();
-  assert.equal(reversed,git('show','832959f:'+file),'Art mappings/rendering changed beyond transport-only META-05 exception');
+  // PERF-01 changes only image delivery. Reverse it to prove all logical mappings/viewBoxes remain exact.
+  const transportImport=['import','{spriteImage}','from',"'./mobile-assets.js';"].join(' ')+'\n';
+  const oldImage='<image clip-path="url(#${clip})" href="./art/sources/${sheet.file}" width="${sheet.width}" height="${sheet.height}"/>';
+  const reversed=fs.readFileSync(file,'utf8').replaceAll('\r\n','\n').replace(transportImport,'').replace('${spriteImage(sheet,rect,clip)}',oldImage).trim();
+  assert.equal(reversed,git('show','832959f:'+file),'Art mappings/viewBoxes changed beyond PERF-01 transport exception');
  }else assert.equal(git('hash-object','--path='+file,file),git('rev-parse','832959f:'+file),'Protected file changed: '+file);
 }
 const prs=JSON.parse(fs.readFileSync('docs/audit/int-01/pr-history.json','utf8')).map(p=>({...p,inherited:spawnSync('git',['merge-base','--is-ancestor',p.head_sha,'832959f']).status===0}));assert.deepEqual(prs.filter(p=>!p.inherited).map(p=>p.number),[9]);
