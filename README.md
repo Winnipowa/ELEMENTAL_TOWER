@@ -24,3 +24,7 @@ Conversion portrait V0.5 dans [PR #1](https://github.com/Winnipowa/ELEMENTAL_TOW
 - [Glossaire](docs/systems/SYSTEM_GLOSSARY.md) · [Conventions UI / tooltips](docs/systems/UI_KEYWORDS_STYLEGUIDE.md) · [Fiche gardien](docs/systems/GUARDIAN_TEMPLATE.md) · [Bibliothèque d’augments](docs/systems/AUGMENT_LIBRARY.md).
 
 > Les valeurs et compétences des augments sont des propositions de test PvE, non des fonctionnalités déjà implémentées ; ne pas intégrer automatiquement au moteur sans l’alignement des IDs et des stats du collègue.
+
+## Coquille mobile META-01
+
+Prototype local : [ouvrir les sources](meta/index.html). Installation et tests : [rapport META-01](docs/META_01_REPORT.md). Données fictives, moteur absent, aucune transaction.
