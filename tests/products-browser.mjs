@@ -1,5 +1,6 @@
+import {APP_URL} from './browser-target.mjs';
+import {startBrowserServer} from './browser-server.mjs';
 import {chromium} from 'playwright';
-import {spawn} from 'node:child_process';
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {loadCatalog} from '../meta/catalog.js';
@@ -7,13 +8,13 @@ import {initialState,SAVE_KEY} from '../meta/progression.js';
 import {PREFERENCE_KEY} from '../meta/products/preferences.js';
 import {LocalProductCatalogs} from '../meta/products/service.js';
 const fixtures=await new LocalProductCatalogs().load(),core=await loadCatalog();
-const server=spawn(process.execPath,['tests/server.mjs'],{stdio:'ignore'});let browser;
+const server=await startBrowserServer();let browser;
 const dir='test-results/meta-04';fs.mkdirSync(dir,{recursive:true});const captures=[];
 try{
- await new Promise(r=>setTimeout(r,500));browser=await chromium.launch({channel:'msedge',headless:true});
+ browser=await chromium.launch({channel:'msedge',headless:true});
  for(const [width,height]of [[320,844],[390,844],[430,844],[320,568]]){
   const size=`${width}x${height}`,page=await browser.newPage({viewport:{width,height},isMobile:true,hasTouch:true});const errors=[];page.on('pageerror',e=>errors.push(e.message));
-  const root='http://127.0.0.1:4173/meta/index.html';await page.goto(root+'#/missions');await page.locator('.mission-card').first().waitFor();
+  const root=APP_URL;await page.goto(root+'#/missions');await page.locator('.mission-card').first().waitFor();
   await page.evaluate(([key,state])=>{localStorage.setItem(key,JSON.stringify(state));localStorage.setItem('meta04-v09-probe','unchanged');},[SAVE_KEY,initialState(core)]);await page.reload();await page.locator('.mission-card').first().waitFor();
   const protectedStorage=await page.evaluate(key=>{const state={...localStorage};delete state[key];return JSON.stringify(state);},PREFERENCE_KEY);
   const checkProtected=async()=>assert.equal(await page.evaluate(key=>{const state={...localStorage};delete state[key];return JSON.stringify(state);},PREFERENCE_KEY),protectedStorage);

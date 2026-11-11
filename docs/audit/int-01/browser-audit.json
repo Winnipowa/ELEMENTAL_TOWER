@@ -1,0 +1,397 @@
+{
+  "viewports": [
+    {
+      "width": 320,
+      "height": 844,
+      "routes": 24,
+      "engineRequests": 0,
+      "jsErrors": 0,
+      "storageUnchanged": true,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:51444/meta/index.html",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/shell.css",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/app.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/products/screens.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/views.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/bridge.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/products/preferences.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/progression.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/art.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/expedition.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/products/service.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/catalog.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/version.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/data/catalog.demo.json",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/products/cosmetics.demo.json",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/products/missions.demo.json",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/products/pass.demo.json",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/art/sources/spell-projectiles.png",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/art/sources/halos-pedestals.png",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/art/sources/guardians-primary.png",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/art/sources/ranks-luma-mousse-raika.png",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/art/sources/spell-areas.png",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "routes": 24,
+      "engineRequests": 0,
+      "jsErrors": 0,
+      "storageUnchanged": true,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:51444/meta/index.html",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/shell.css",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/app.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/products/screens.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/products/preferences.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/views.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/art.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/progression.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/bridge.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/expedition.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/version.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/products/service.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/catalog.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/data/catalog.demo.json",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/products/missions.demo.json",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/products/cosmetics.demo.json",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/products/pass.demo.json",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/art/sources/guardians-primary.png",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/art/sources/spell-projectiles.png",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/art/sources/halos-pedestals.png",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/art/sources/ranks-luma-mousse-raika.png",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/art/sources/spell-areas.png",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "width": 430,
+      "height": 844,
+      "routes": 24,
+      "engineRequests": 0,
+      "jsErrors": 0,
+      "storageUnchanged": true,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:51444/meta/index.html",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/shell.css",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/app.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/products/preferences.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/products/screens.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/progression.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/views.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/art.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/expedition.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/bridge.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/version.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/products/service.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/catalog.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/data/catalog.demo.json",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/products/missions.demo.json",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/products/cosmetics.demo.json",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/products/pass.demo.json",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/art/sources/spell-projectiles.png",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/art/sources/halos-pedestals.png",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/art/sources/guardians-primary.png",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/art/sources/ranks-luma-mousse-raika.png",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/art/sources/spell-areas.png",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "routes": 24,
+      "engineRequests": 0,
+      "jsErrors": 0,
+      "storageUnchanged": true,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:51444/meta/index.html",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/shell.css",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/app.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/products/screens.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/products/preferences.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/views.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/art.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/progression.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/expedition.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/bridge.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/version.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/catalog.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/products/service.js",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/data/catalog.demo.json",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/products/missions.demo.json",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/products/cosmetics.demo.json",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/products/pass.demo.json",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/art/sources/spell-projectiles.png",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/art/sources/guardians-primary.png",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/art/sources/halos-pedestals.png",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/art/sources/ranks-luma-mousse-raika.png",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:51444/meta/art/sources/spell-areas.png",
+          "status": 200
+        }
+      ]
+    }
+  ],
+  "legacyReadOnlyCases": 4
+}

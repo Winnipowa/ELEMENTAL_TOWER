@@ -1,8 +1,9 @@
+import {APP_URL} from './browser-target.mjs';
 import assert from 'node:assert/strict';
 import {loadCatalog} from '../meta/catalog.js';
 import {SAVE_KEY} from '../meta/progression.js';
 export async function testProgression(page,width){
- const fixture=await loadCatalog(),root='http://127.0.0.1:4173/meta/index.html';
+ const fixture=await loadCatalog(),root=APP_URL;
  await page.evaluate(key=>localStorage.removeItem(key),SAVE_KEY);await page.goto(root+'#/collection');await page.reload();await page.getByRole('heading',{name:'Collection',exact:true}).waitFor();
  await page.locator('#class-filter').selectOption('Protecteur');assert.equal(await page.locator('.guardian').count(),1);
  await page.locator('#class-filter').selectOption('Toutes');await page.locator('#status').selectOption('Verrouillés');assert.equal(await page.locator('.guardian').count(),1);

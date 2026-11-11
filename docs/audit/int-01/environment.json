@@ -1,0 +1,24 @@
+{
+  "auditDate": "2026-11-11",
+  "platform": "Windows",
+  "node": "24.2.0",
+  "npm": "11.3.0",
+  "edge": "157.0.4341.46",
+  "playwright": "1.65.0",
+  "installation": "npm ci --ignore-scripts: exit 0",
+  "baseCommit": "832959fba650f55e301de2dddc4e2e6db53e829f",
+  "branch": "feature/int-01-consolidated-reference",
+  "gameplayDiffAgainstBase": [],
+  "gameplayPathsChecked": ["prototypes", "game-data", "assets/ui"],
+  "auditCommand": "npm audit --json",
+  "auditExitCode": 0,
+  "npmAudit": {
+    "auditReportVersion": 2,
+    "vulnerabilities": {},
+    "metadata": {
+      "vulnerabilities": {"info": 0, "low": 0, "moderate": 0, "high": 0, "critical": 0, "total": 0},
+      "dependencies": {"prod": 1, "dev": 2, "optional": 0, "peer": 0, "peerOptional": 0, "total": 2}
+    }
+  },
+  "note": "The root package counts as prod in npm audit metadata; package.json declares no production dependencies. Registry snapshot only. Browser contexts contain test fixtures, not user saves."
+}

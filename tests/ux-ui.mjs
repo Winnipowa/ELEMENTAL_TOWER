@@ -1,6 +1,7 @@
+import {APP_URL} from './browser-target.mjs';
 import assert from 'node:assert/strict';
 export async function testUX(page,width){
- const root='http://127.0.0.1:4173/meta/index.html';await page.goto(root+'#/collection');await page.reload();await page.locator('.guardian').first().waitFor();
+ const root=APP_URL;await page.goto(root+'#/collection');await page.reload();await page.locator('.guardian').first().waitFor();
  const before=await page.evaluate(()=>JSON.stringify({...localStorage}));
  await page.getByRole('link',{name:/Voir le déblocage/}).click();await page.getByRole('heading',{name:'Nyx',level:1,exact:true}).waitFor();assert.equal(await page.locator('main h1').count(),1);
  assert.equal(await page.getByRole('heading',{name:'Nyx',level:2,exact:true}).count(),0);

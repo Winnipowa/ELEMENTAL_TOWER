@@ -1,18 +1,18 @@
+import {APP_URL} from './browser-target.mjs';
+import {startBrowserServer} from './browser-server.mjs';
 import {testUX} from './ux-ui.mjs';
 import {testProgression} from './progression-ui.mjs';
 import {testExpedition} from './expedition-ui.mjs';
 import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-const {spawn}=await import('node:child_process');
-const server=spawn(process.execPath,['tests/server.mjs'],{stdio:'ignore'});
-await new Promise(r=>setTimeout(r,500));
+const server=await startBrowserServer();
 process.on('exit',()=>server.kill());
 const browser=await chromium.launch({channel:'msedge',headless:true});
 fs.mkdirSync('test-results',{recursive:true});
 for(const width of [320,390,430]){
  const page=await browser.newPage({viewport:{width,height:844},isMobile:true,hasTouch:true});const errors=[];page.on('pageerror',e=>errors.push(e.message));
- await page.goto('http://127.0.0.1:4173/meta/index.html');await page.getByRole('heading',{name:'Un monde à découvrir'}).waitFor();
+ await page.goto(APP_URL);await page.getByRole('heading',{name:'Un monde à découvrir'}).waitFor();
  await page.screenshot({path:`test-results/home-${width}.png`,fullPage:true});
  for(const route of ['collection','missions','shop','profile','settings','demo','pass','challenges','prepare','results','synergies','guardian/demo-luma','guardian/demo-nyx','guardian/missing','unknown']){
   await page.evaluate(r=>location.hash='/'+r,route);await page.waitForTimeout(50);
