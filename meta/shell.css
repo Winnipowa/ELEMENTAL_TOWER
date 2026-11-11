@@ -190,3 +190,78 @@ nav a[href="#/shop"]{--nav-accent:#F2C8FF;--nav-tint:#E49CFF24}
 nav a[href="#/profile"]{--nav-accent:#FFE6B4;--nav-tint:#FFE89E24}
 nav a[aria-current]{color:var(--nav-accent);background:radial-gradient(ellipse at 50% 10%,var(--nav-tint),#132345 92%);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--nav-accent) 40%,transparent),0 0 22px var(--nav-tint)}
 nav a[aria-current] span{text-shadow:0 0 12px var(--nav-tint)}
+/* UX-01: one content scroll region; the navigation occupies its own safe row. */
+html,body{height:100%;overflow:hidden}
+#app{height:100dvh;min-height:0;display:flex;flex-direction:column;overflow:hidden}
+header,aside,nav{flex:none}
+main{flex:1;min-height:0;overflow:auto;overscroll-behavior-y:contain;padding:18px 16px 28px;scroll-padding-block:16px 28px}
+nav{position:relative;bottom:auto;width:100%;max-width:none;z-index:5}
+main h1{font-size:30px;margin:10px 0 16px}
+main h2{font-size:22px}
+.back{min-height:44px;display:inline-flex;font-size:13px;margin-bottom:2px}
+.quiet-note{font-size:12px;line-height:1.5;color:var(--text-secondary)}
+.secondary-link{min-height:44px;justify-content:flex-start;color:var(--cyan-glow);font-size:13px}
+.card h2{margin:0 0 10px}
+.secondary-panel{padding:12px 16px}
+.secondary-panel summary,.codex-entry summary{cursor:pointer;min-height:44px;align-content:center;color:var(--ui-accent);font-size:14px;line-height:1.4}
+.secondary-panel[open] summary{margin-bottom:8px}
+.guardian-hero{margin:0 0 12px;padding:4px 8px 8px}
+.guardian-hero .portrait{height:214px}
+.guardian-hero .element-badge small,.guardian .element-badge small{display:none!important}
+.guardian-hero .element-badge{margin:0 0 4px}
+.identity-row{display:flex;align-items:center;flex-wrap:wrap;gap:8px;font-size:12px;color:var(--text-secondary);margin-bottom:20px}
+.guardian-status{color:var(--element);border-color:var(--element-line);background:var(--aura)}
+.section-heading{display:flex;align-items:center;gap:8px;color:var(--violet)}
+.section-heading h2{margin:0}
+.guardian-skill>p{margin:10px 0}
+.guardian-skill .ability-reference{padding:8px 12px}
+.guardian-skill .ability-reference>.art-sprite{height:90px}
+.unlock-panel{border-color:var(--element-line)!important}
+.unlock-panel small{font-size:11px}
+.trait-list{display:flex;flex-wrap:wrap;gap:6px}
+.collection-overview{display:flex;flex-wrap:wrap;gap:3px;align-items:baseline;justify-content:space-between;margin:0 0 14px}
+.collection-overview p{margin:0;color:var(--text)}
+.collection-overview>span{font-size:11px;color:var(--text-secondary)}
+.filters{margin-bottom:14px}
+.filters label{font-size:11px}
+.filters input,.filters select{padding:10px}
+.guardian.card{position:relative;padding:12px 10px;margin:0}
+.guardian .portrait{height:132px;margin:-2px -5px 2px}
+.guardian h2{font-size:20px;color:var(--element);margin:0 0 3px}
+.guardian .element-badge{margin:0 0 4px}
+.guardian small{font-size:10px}
+.guardian .pill{font-size:10px;padding:5px 6px;margin-top:8px}
+.collection-state{position:absolute;top:11px;right:12px;color:var(--element);font-size:13px}
+.card-invitation{display:block;font-size:10px;color:var(--text-secondary);margin-top:10px}
+.guardian.is-locked{border-style:dashed;background:radial-gradient(ellipse at 50% 26%,var(--aura),transparent 75%),#0A1630}
+.guardian.is-locked .collection-state{color:var(--text-secondary)}
+.collection-grid{gap:10px}
+.codex-section{margin-top:22px}
+.codex-section>h2{margin:0 0 12px;color:var(--violet)}
+.codex-section:last-child>h2{color:var(--cyan-glow)}
+.codex-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.codex-entry.card{padding:12px;margin:0;min-width:0;border-radius:28px}
+.codex-entry h3{font-size:18px;margin:2px 0 6px}
+.codex-section:first-of-type .codex-grid{grid-template-columns:minmax(0,1fr)}
+.codex-companions{display:flex;justify-content:center;gap:6px;flex-wrap:wrap}
+.codex-companions>a{display:flex;flex-direction:column;min-width:44px;flex:1;max-width:100px;font-size:10px}
+.codex-companions .portrait{height:72px;width:100%;max-width:96px}
+.codex-entry details{margin-top:6px}
+.codex-entry summary{font-size:11px;min-height:44px}
+.codex-entry p{font-size:12px}
+.profile-identity{text-align:center}
+.profile-identity h2{margin:5px 0}
+.profile-emblem{font-size:34px;color:var(--violet)}
+.stat-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.stat-grid>div{display:flex;flex-direction:column;gap:6px;align-items:center;text-align:center;padding:12px 0}
+.stat-grid strong{font-size:21px;color:var(--cyan-glow)}
+.stat-grid span{font-size:11px;color:var(--text-secondary)}
+.chapter-summary ul{padding-left:18px;margin-bottom:0}
+.chapter-summary li{font-size:13px;line-height:1.5;margin:8px 0}
+.chapter-summary li small{display:block}
+.preparation-roster{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;border-radius:28px;padding:8px;background:#0A1630}
+.preparation-roster a{display:flex;flex-direction:column;font-size:11px;gap:4px}
+.preparation-roster .portrait{height:82px;width:100%}
+[data-view="demo"] .card button{margin:5px 0}
+[data-view="demo"] h1{font-size:26px}
+@media(max-width:344px){.guardian-hero .portrait{height:190px}.guardian .portrait{height:116px}.guardian h2{font-size:18px}.guardian .pill{font-size:9px}.codex-entry h3{font-size:16px}}

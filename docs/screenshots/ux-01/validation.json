@@ -1,0 +1,328 @@
+{
+  "baseline": "66814ef",
+  "widths": [
+    320,
+    390,
+    430
+  ],
+  "viewportHeight": 844,
+  "captures": [
+    {
+      "name": "home",
+      "width": 320,
+      "mode": "before"
+    },
+    {
+      "name": "collection",
+      "width": 320,
+      "mode": "before"
+    },
+    {
+      "name": "luma",
+      "width": 320,
+      "mode": "before"
+    },
+    {
+      "name": "luma-evolutions-bottom",
+      "width": 320,
+      "mode": "before"
+    },
+    {
+      "name": "nyx",
+      "width": 320,
+      "mode": "before"
+    },
+    {
+      "name": "codex",
+      "width": 320,
+      "mode": "before"
+    },
+    {
+      "name": "codex-bottom",
+      "width": 320,
+      "mode": "before"
+    },
+    {
+      "name": "profile",
+      "width": 320,
+      "mode": "before"
+    },
+    {
+      "name": "prepare",
+      "width": 320,
+      "mode": "before"
+    },
+    {
+      "name": "results",
+      "width": 320,
+      "mode": "before"
+    },
+    {
+      "name": "home",
+      "width": 320,
+      "mode": "after"
+    },
+    {
+      "name": "collection",
+      "width": 320,
+      "mode": "after"
+    },
+    {
+      "name": "luma",
+      "width": 320,
+      "mode": "after"
+    },
+    {
+      "name": "luma-evolutions-bottom",
+      "width": 320,
+      "mode": "after"
+    },
+    {
+      "name": "nyx",
+      "width": 320,
+      "mode": "after"
+    },
+    {
+      "name": "codex",
+      "width": 320,
+      "mode": "after"
+    },
+    {
+      "name": "codex-bottom",
+      "width": 320,
+      "mode": "after"
+    },
+    {
+      "name": "profile",
+      "width": 320,
+      "mode": "after"
+    },
+    {
+      "name": "prepare",
+      "width": 320,
+      "mode": "after"
+    },
+    {
+      "name": "results",
+      "width": 320,
+      "mode": "after"
+    },
+    {
+      "name": "demo-tools",
+      "width": 320,
+      "mode": "after"
+    },
+    {
+      "name": "home",
+      "width": 390,
+      "mode": "before"
+    },
+    {
+      "name": "collection",
+      "width": 390,
+      "mode": "before"
+    },
+    {
+      "name": "luma",
+      "width": 390,
+      "mode": "before"
+    },
+    {
+      "name": "luma-evolutions-bottom",
+      "width": 390,
+      "mode": "before"
+    },
+    {
+      "name": "nyx",
+      "width": 390,
+      "mode": "before"
+    },
+    {
+      "name": "codex",
+      "width": 390,
+      "mode": "before"
+    },
+    {
+      "name": "codex-bottom",
+      "width": 390,
+      "mode": "before"
+    },
+    {
+      "name": "profile",
+      "width": 390,
+      "mode": "before"
+    },
+    {
+      "name": "prepare",
+      "width": 390,
+      "mode": "before"
+    },
+    {
+      "name": "results",
+      "width": 390,
+      "mode": "before"
+    },
+    {
+      "name": "home",
+      "width": 390,
+      "mode": "after"
+    },
+    {
+      "name": "collection",
+      "width": 390,
+      "mode": "after"
+    },
+    {
+      "name": "luma",
+      "width": 390,
+      "mode": "after"
+    },
+    {
+      "name": "luma-evolutions-bottom",
+      "width": 390,
+      "mode": "after"
+    },
+    {
+      "name": "nyx",
+      "width": 390,
+      "mode": "after"
+    },
+    {
+      "name": "codex",
+      "width": 390,
+      "mode": "after"
+    },
+    {
+      "name": "codex-bottom",
+      "width": 390,
+      "mode": "after"
+    },
+    {
+      "name": "profile",
+      "width": 390,
+      "mode": "after"
+    },
+    {
+      "name": "prepare",
+      "width": 390,
+      "mode": "after"
+    },
+    {
+      "name": "results",
+      "width": 390,
+      "mode": "after"
+    },
+    {
+      "name": "demo-tools",
+      "width": 390,
+      "mode": "after"
+    },
+    {
+      "name": "home",
+      "width": 430,
+      "mode": "before"
+    },
+    {
+      "name": "collection",
+      "width": 430,
+      "mode": "before"
+    },
+    {
+      "name": "luma",
+      "width": 430,
+      "mode": "before"
+    },
+    {
+      "name": "luma-evolutions-bottom",
+      "width": 430,
+      "mode": "before"
+    },
+    {
+      "name": "nyx",
+      "width": 430,
+      "mode": "before"
+    },
+    {
+      "name": "codex",
+      "width": 430,
+      "mode": "before"
+    },
+    {
+      "name": "codex-bottom",
+      "width": 430,
+      "mode": "before"
+    },
+    {
+      "name": "profile",
+      "width": 430,
+      "mode": "before"
+    },
+    {
+      "name": "prepare",
+      "width": 430,
+      "mode": "before"
+    },
+    {
+      "name": "results",
+      "width": 430,
+      "mode": "before"
+    },
+    {
+      "name": "home",
+      "width": 430,
+      "mode": "after"
+    },
+    {
+      "name": "collection",
+      "width": 430,
+      "mode": "after"
+    },
+    {
+      "name": "luma",
+      "width": 430,
+      "mode": "after"
+    },
+    {
+      "name": "luma-evolutions-bottom",
+      "width": 430,
+      "mode": "after"
+    },
+    {
+      "name": "nyx",
+      "width": 430,
+      "mode": "after"
+    },
+    {
+      "name": "codex",
+      "width": 430,
+      "mode": "after"
+    },
+    {
+      "name": "codex-bottom",
+      "width": 430,
+      "mode": "after"
+    },
+    {
+      "name": "profile",
+      "width": 430,
+      "mode": "after"
+    },
+    {
+      "name": "prepare",
+      "width": 430,
+      "mode": "after"
+    },
+    {
+      "name": "results",
+      "width": 430,
+      "mode": "after"
+    },
+    {
+      "name": "demo-tools",
+      "width": 430,
+      "mode": "after"
+    }
+  ],
+  "storageUnchanged": true,
+  "scope": "UX layout comparison; viewport captures include explicit lower scroll positions."
+}
