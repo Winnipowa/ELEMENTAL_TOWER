@@ -1,3 +1,4 @@
+import {testProgression} from './progression-ui.mjs';
 import {testExpedition} from './expedition-ui.mjs';
 import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
@@ -22,8 +23,9 @@ for(const width of [320,390,430]){
  await page.getByRole('button',{name:/Aurore/}).click();await page.getByRole('button',{name:'Vérifier l’accès au combat'}).click();assert.equal(await page.locator('dialog').isVisible(),true);await page.getByRole('button',{name:'Fermer',exact:true}).click();await page.goBack();await page.getByRole('heading',{name:'Un monde à découvrir'}).waitFor();
  await page.evaluate(()=>location.hash='/collection');await page.getByLabel('Rechercher').fill('inexistant');await page.getByLabel('Rechercher').press('Tab');await page.getByRole('heading',{name:'Aucun gardien'}).waitFor();await page.getByRole('button',{name:'Réinitialiser les filtres'}).click();
  await page.evaluate(()=>location.hash='/settings');await page.getByRole('button',{name:'Catalogue vide'}).click();await page.getByRole('heading',{name:'Aucun gardien'}).waitFor();
- await page.evaluate(()=>location.hash='/settings');await page.getByRole('button',{name:'Erreur catalogue'}).click();await page.getByRole('heading',{name:'Catalogue indisponible'}).waitFor();await page.getByRole('button',{name:'Réessayer'}).click();await page.getByRole('heading',{name:'Collection',exact:true}).waitFor();assert.equal(await page.locator('.guardian').count(),3);
+ await page.evaluate(()=>location.hash='/settings');await page.getByRole('button',{name:'Erreur catalogue'}).click();await page.getByRole('heading',{name:'Catalogue indisponible'}).waitFor();await page.getByRole('button',{name:'Réessayer'}).click();await page.getByRole('heading',{name:'Collection',exact:true}).waitFor();await page.locator('.guardian').first().waitFor();assert.equal(await page.locator('.guardian').count(),3);
  await testExpedition(page,width);
+ await testProgression(page,width);
  assert.deepEqual(errors,[]);console.log(`${width}px: routes, retours, modales, recherche vide, catalogue vide/erreur/reprise, overflow OK`);await page.close();
 }
 await browser.close();

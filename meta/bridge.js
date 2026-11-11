@@ -1,22 +1,17 @@
-// Fixtures UI only. No gameplay constants or canonical IDs are imported.
-export const catalog = {
- rulesetVersion: 'demo-meta-01',
- regions: [
- {id:'demo-dawn',title:'Aurore',status:'available',objective:'Découvrir le territoire d’Aurore'},
- {id:'demo-forest',title:'Sylve',status:'locked'},
- {id:'demo-flux',title:'Sanctuaire des Flux',status:'coming_soon'},
- {id:'demo-shadow',title:'Crépuscule',status:'locked'}],
- guardians: [
- {id:'demo-luma',name:'Luma',familyId:'Aurore',classId:'Arcaniste',traitIds:[],unlocked:true,color:'#ffd396'},
- {id:'demo-mousse',name:'Mousse',familyId:'Sylve',classId:'Protecteur',traitIds:[],unlocked:true,color:'#94dfc7'},
- {id:'demo-nyx',name:'Nyx',familyId:'Crépuscule',classId:'Arcaniste',traitIds:[],unlocked:false,color:'#cf9bfb'}]
-};
+import {loadCatalog} from './catalog.js';
 /** Proposed V0 port. Only this adapter owns mock lifecycle and fixtures.
  * Scenario selection is mock-only configuration, never part of StartRunRequest.
  * No persistence, rewards, gameplay simulation or canonical engine imports.
  */
 export class MockGameBridge {
  #runs = new Map();
+ #catalog;
+ #loader;
+ #unlocked;
+ constructor(loader=loadCatalog){this.#loader=loader;}
+ // Mock-only player collection projection. Never authoritative for a real engine.
+ setDemoCollection(ids){this.#unlocked=[...ids];}
+
  #handlers = new Set();
  #sequence = 0;
  #scenario = 'victory';
@@ -24,12 +19,13 @@ export class MockGameBridge {
   if (!['victory','defeat','abandoned','connection-error','open-error'].includes(scenario)) throw new Error('Scénario inconnu');
   this.#scenario = scenario;
  }
- async getCatalog(){ return structuredClone(catalog); }
+ async getCatalog(){ this.#catalog=await this.#loader(); return structuredClone(this.#catalog); }
  async startRun(request){
+  const catalog=this.#catalog || await this.getCatalog();
   if (!request || request.rulesetVersion !== catalog.rulesetVersion) throw new Error('Version du catalogue incompatible.');
   if (!catalog.regions.some(r=>r.id===request.regionId && r.status==='available')) throw new Error('Région indisponible.');
   const ids=request.playerUnlockedGuardianIds;
-  if (!Array.isArray(ids) || !ids.length || new Set(ids).size!==ids.length || ids.some(id=>!catalog.guardians.some(g=>g.id===id && g.unlocked))) throw new Error('Collection admissible invalide.');
+  if (!Array.isArray(ids) || !ids.length || new Set(ids).size!==ids.length || ids.some(id=>!catalog.guardians.some(g=>g.id===id && (this.#unlocked?this.#unlocked.includes(id):g.unlocked)))) throw new Error('Collection admissible invalide.');
   if (request.selectedDoctrineId) throw new Error('Doctrine non disponible dans cette démonstration.');
   if (this.#scenario==='connection-error') throw new Error('Connexion au moteur simulée impossible. Réessayez avec un autre scénario.');
   const runId=`demo-run-${++this.#sequence}`;

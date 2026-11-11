@@ -32,3 +32,7 @@ Prototype local : [ouvrir les sources](meta/index.html). Installation et tests :
 ## Parcours META-02
 
 [Rapport et validation](docs/META_02_REPORT.md) : Monde → Préparation → GameBridge fictif → Résultats → Monde. Démonstration locale, sans récompense persistante.
+
+## Collection et progression META-03
+
+[Rapport et tests](docs/META_03_REPORT.md) · [Catalogue et raccordement du collègue](docs/META_03_CATALOG_HANDOFF.md). Catalogue externe et sauvegarde locale de démonstration uniquement ; aucun résultat mock n’accorde de progression.
