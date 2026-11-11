@@ -1,0 +1,220 @@
+{
+  "widths": [
+    320,
+    390,
+    430
+  ],
+  "screens": 11,
+  "layoutUnchanged": true,
+  "storageUnchanged": true,
+  "textContrast": [
+    {
+      "foreground": "#F3F7FF",
+      "background": "#132345",
+      "ratio": 14.45
+    },
+    {
+      "foreground": "#B8C7E6",
+      "background": "#132345",
+      "ratio": 9.12
+    },
+    {
+      "foreground": "#7DDCFF",
+      "background": "#132345",
+      "ratio": 10.01
+    },
+    {
+      "foreground": "#A6F0FF",
+      "background": "#132345",
+      "ratio": 12.21
+    },
+    {
+      "foreground": "#B8A7FF",
+      "background": "#132345",
+      "ratio": 7.39
+    },
+    {
+      "foreground": "#B7FFB0",
+      "background": "#132345",
+      "ratio": 13.25
+    },
+    {
+      "foreground": "#07111F",
+      "background": "#7DDCFF",
+      "ratio": 12.22
+    },
+    {
+      "foreground": "#07111F",
+      "background": "#A6F0FF",
+      "ratio": 14.9
+    }
+  ],
+  "coverageMethod": "Approximate blue-dominant RGB pixels, max channel <=110; excludes text, portraits and accents",
+  "coverage": [
+    {
+      "screen": "home",
+      "width": 320,
+      "deepBluePercent": 92.3
+    },
+    {
+      "screen": "collection",
+      "width": 320,
+      "deepBluePercent": 92.5
+    },
+    {
+      "screen": "guardian-demo-nyx",
+      "width": 320,
+      "deepBluePercent": 92.4
+    },
+    {
+      "screen": "missions",
+      "width": 320,
+      "deepBluePercent": 93
+    },
+    {
+      "screen": "shop",
+      "width": 320,
+      "deepBluePercent": 89.8
+    },
+    {
+      "screen": "profile",
+      "width": 320,
+      "deepBluePercent": 93.3
+    },
+    {
+      "screen": "settings",
+      "width": 320,
+      "deepBluePercent": 92.6
+    },
+    {
+      "screen": "pass",
+      "width": 320,
+      "deepBluePercent": 93.9
+    },
+    {
+      "screen": "prepare",
+      "width": 320,
+      "deepBluePercent": 91
+    },
+    {
+      "screen": "bridge",
+      "width": 320,
+      "deepBluePercent": 89.1
+    },
+    {
+      "screen": "results",
+      "width": 320,
+      "deepBluePercent": 92.2
+    },
+    {
+      "screen": "home",
+      "width": 390,
+      "deepBluePercent": 90.6
+    },
+    {
+      "screen": "collection",
+      "width": 390,
+      "deepBluePercent": 93.1
+    },
+    {
+      "screen": "guardian-demo-nyx",
+      "width": 390,
+      "deepBluePercent": 93.8
+    },
+    {
+      "screen": "missions",
+      "width": 390,
+      "deepBluePercent": 93.8
+    },
+    {
+      "screen": "shop",
+      "width": 390,
+      "deepBluePercent": 90.3
+    },
+    {
+      "screen": "profile",
+      "width": 390,
+      "deepBluePercent": 94.2
+    },
+    {
+      "screen": "settings",
+      "width": 390,
+      "deepBluePercent": 93.5
+    },
+    {
+      "screen": "pass",
+      "width": 390,
+      "deepBluePercent": 94.6
+    },
+    {
+      "screen": "prepare",
+      "width": 390,
+      "deepBluePercent": 90.5
+    },
+    {
+      "screen": "bridge",
+      "width": 390,
+      "deepBluePercent": 90.1
+    },
+    {
+      "screen": "results",
+      "width": 390,
+      "deepBluePercent": 92.5
+    },
+    {
+      "screen": "home",
+      "width": 430,
+      "deepBluePercent": 91.3
+    },
+    {
+      "screen": "collection",
+      "width": 430,
+      "deepBluePercent": 93.7
+    },
+    {
+      "screen": "guardian-demo-nyx",
+      "width": 430,
+      "deepBluePercent": 94.3
+    },
+    {
+      "screen": "missions",
+      "width": 430,
+      "deepBluePercent": 94.2
+    },
+    {
+      "screen": "shop",
+      "width": 430,
+      "deepBluePercent": 90.7
+    },
+    {
+      "screen": "profile",
+      "width": 430,
+      "deepBluePercent": 94.6
+    },
+    {
+      "screen": "settings",
+      "width": 430,
+      "deepBluePercent": 94
+    },
+    {
+      "screen": "pass",
+      "width": 430,
+      "deepBluePercent": 94.9
+    },
+    {
+      "screen": "prepare",
+      "width": 430,
+      "deepBluePercent": 90.9
+    },
+    {
+      "screen": "bridge",
+      "width": 430,
+      "deepBluePercent": 90.6
+    },
+    {
+      "screen": "results",
+      "width": 430,
+      "deepBluePercent": 92.8
+    }
+  ]
+}
