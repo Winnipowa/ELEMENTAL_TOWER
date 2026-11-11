@@ -1,0 +1,42 @@
+// Reproducible color-only comparison against the META-03 parent stylesheet.
+import {chromium} from 'playwright';
+import {spawn,execFileSync} from 'node:child_process';
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+const baseline=execFileSync('git',['show','812d579:meta/shell.css'],{encoding:'utf8'});
+const server=spawn(process.execPath,['tests/server.mjs'],{stdio:'ignore'});
+const dir='test-results/da-01';fs.mkdirSync(dir,{recursive:true});
+let browser;
+const geometry=new Map();
+try{
+ await new Promise(r=>setTimeout(r,500));browser=await chromium.launch({channel:'msedge',headless:true});
+ for(const width of [320,390,430])for(const mode of ['before','after']){
+  const page=await browser.newPage({viewport:{width,height:844},isMobile:true,hasTouch:true});
+  const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  if(mode==='before')await page.route('**/shell.css',route=>route.fulfill({contentType:'text/css',body:baseline}));
+  await page.goto('http://127.0.0.1:4173/meta/index.html');await page.getByRole('heading',{name:'Un monde à découvrir'}).waitFor();
+  const storage=await page.evaluate(()=>JSON.stringify({...localStorage}));
+  async function capture(name){
+   await page.evaluate(async()=>{await document.fonts.ready;await Promise.all([...document.images].map(img=>img.complete?Promise.resolve():new Promise(r=>{img.addEventListener('load',r,{once:true});img.addEventListener('error',r,{once:true});})));window.scrollTo(0,0);});
+   const layout=await page.evaluate(()=>[...document.querySelectorAll('header,aside,main,nav,main h1,main h2,main p,main a,main button,main .card')].map(el=>{const r=el.getBoundingClientRect();return [el.tagName,el.textContent.trim(),r.x,r.y,r.width,r.height];}));
+   const key=`${name}-${width}`;
+   if(mode==='before')geometry.set(key,layout);else assert.deepEqual(layout,geometry.get(key),`Layout changed: ${key}`);
+   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+   await page.screenshot({path:`${dir}/${name}-${width}-${mode}.png`,fullPage:true});
+  }
+  await capture('home');
+  for(const [route,title] of [['collection','Collection'],['guardian/demo-nyx','Gardien'],['missions','Missions'],['shop','Boutique'],['profile','Profil'],['settings','Paramètres'],['pass','Pass'],['prepare','Préparation']]){
+   await page.evaluate(route=>location.hash='/'+route,route);await page.getByRole('heading',{name:title,level:1,exact:true}).waitFor();await capture(route.replace('/','-'));
+  }
+  await page.getByRole('button',{name:'Lancer la démonstration',exact:true}).click();await page.getByRole('heading',{name:'GameBridge · Démonstration',exact:true}).waitFor();await capture('bridge');
+  await page.getByRole('button',{name:'Afficher le résultat simulé',exact:true}).click();await page.getByRole('heading',{name:'Victoire · Démonstration',exact:true}).waitFor();await capture('results');
+  assert.equal(await page.evaluate(()=>JSON.stringify({...localStorage})),storage);assert.deepEqual(errors,[]);
+  await page.close();console.log(`${width}px ${mode}: 11 captures, layout/overflow/storage OK`);
+ }
+}finally{await browser?.close();server.kill();}
+const luminance=hex=>{const rgb=hex.match(/\w\w/g).map(x=>parseInt(x,16)/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4);return rgb[0]*.2126+rgb[1]*.7152+rgb[2]*.0722;};
+const ratio=(a,b)=>{const x=luminance(a),y=luminance(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);};
+const contrasts=[];
+for(const [fg,bg] of [['F2F7FF','101D38'],['A9BEDA','101D38'],['46B8FF','101D38'],['6EE7FF','101D38'],['FF9A5A','101D38'],['07111F','46B8FF'],['07111F','6EE7FF']]){const value=ratio(fg,bg);assert.ok(value>=4.5);contrasts.push({foreground:'#'+fg,background:'#'+bg,ratio:Number(value.toFixed(2))});}
+fs.writeFileSync(`${dir}/validation.json`,JSON.stringify({widths:[320,390,430],screens:11,layoutUnchanged:true,storageUnchanged:true,textContrast:contrasts},null,2));
+console.log('Text palette contrast >= 4.5:1 on tested pairs.');

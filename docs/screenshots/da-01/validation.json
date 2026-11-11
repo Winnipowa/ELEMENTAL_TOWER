@@ -1,0 +1,47 @@
+{
+  "widths": [
+    320,
+    390,
+    430
+  ],
+  "screens": 11,
+  "layoutUnchanged": true,
+  "storageUnchanged": true,
+  "textContrast": [
+    {
+      "foreground": "#F2F7FF",
+      "background": "#101D38",
+      "ratio": 15.56
+    },
+    {
+      "foreground": "#A9BEDA",
+      "background": "#101D38",
+      "ratio": 8.82
+    },
+    {
+      "foreground": "#46B8FF",
+      "background": "#101D38",
+      "ratio": 7.62
+    },
+    {
+      "foreground": "#6EE7FF",
+      "background": "#101D38",
+      "ratio": 11.58
+    },
+    {
+      "foreground": "#FF9A5A",
+      "background": "#101D38",
+      "ratio": 7.99
+    },
+    {
+      "foreground": "#07111F",
+      "background": "#46B8FF",
+      "ratio": 8.62
+    },
+    {
+      "foreground": "#07111F",
+      "background": "#6EE7FF",
+      "ratio": 13.11
+    }
+  ]
+}
