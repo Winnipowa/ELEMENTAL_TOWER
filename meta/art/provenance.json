@@ -1,0 +1,48 @@
+{
+  "source": "User attachments — DA-03",
+  "processing": "None. Byte-identical source sheets; viewport clipping in HTML/SVG only.",
+  "records": [
+    {
+      "file": "spell-areas.png",
+      "original": "99c40151-18e4-478c-94cd-4f80264ad793.png",
+      "sha256": "7be53794d8b20881c4265a5493ac40ad4b682a5bb7d0788727893be7793b2e95",
+      "width": 1122,
+      "height": 1402
+    },
+    {
+      "file": "guardians-secondary.png",
+      "original": "919b2199-fbf8-46de-9ad6-9ccac41c43c0.png",
+      "sha256": "23b4a6a4db8463f2c1d4a2664fcf2f70fa92f8a46853d26f33f4e78c3c66a33e",
+      "width": 1122,
+      "height": 1402
+    },
+    {
+      "file": "ranks-luma-mousse-raika.png",
+      "original": "13e65166-0c6a-4b9d-be03-b52ecdd358cb.png",
+      "sha256": "9e0d044e6bb0ca645b06857ff6e5fdda35936958056f4bc9580160c40c67e009",
+      "width": 1122,
+      "height": 1402
+    },
+    {
+      "file": "guardians-primary.png",
+      "original": "82753c2c-c2e2-423d-864a-82ab3ca4196e.png",
+      "sha256": "57703b5165356cedc0c731396a67cca14fabc446d37b1a9900956b90f2855661",
+      "width": 1122,
+      "height": 1402
+    },
+    {
+      "file": "spell-projectiles.png",
+      "original": "406e1656-75b9-44f7-975d-d116bd5db283.png",
+      "sha256": "5798655265a622045bb12385b1160af0f13ac41338f47726cc3b98644cfd595f",
+      "width": 1122,
+      "height": 1402
+    },
+    {
+      "file": "halos-pedestals.png",
+      "original": "21c658d4-9909-4013-be21-3d6216531f75.png",
+      "sha256": "34d2f19e6f88db54e36118add3a2d8141bf0319bdc1953e8d0ed944c9df6f883",
+      "width": 1122,
+      "height": 1402
+    }
+  ]
+}

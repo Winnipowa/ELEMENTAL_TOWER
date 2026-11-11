@@ -1,0 +1,246 @@
+{
+  "baseline": "9f6070b",
+  "widths": [
+    320,
+    390,
+    430
+  ],
+  "storageUnchanged": true,
+  "coverageMethod": "RGB blue-dominant, max channel <=110; approximate, not perceptual",
+  "captures": [
+    {
+      "screen": "collection",
+      "width": 320,
+      "mode": "before",
+      "deepBluePercent": 93.4
+    },
+    {
+      "screen": "luma",
+      "width": 320,
+      "mode": "before",
+      "deepBluePercent": 92.5
+    },
+    {
+      "screen": "mousse",
+      "width": 320,
+      "mode": "before",
+      "deepBluePercent": 92.5
+    },
+    {
+      "screen": "nyx",
+      "width": 320,
+      "mode": "before",
+      "deepBluePercent": 92.4
+    },
+    {
+      "screen": "codex",
+      "width": 320,
+      "mode": "before",
+      "deepBluePercent": 94.4
+    },
+    {
+      "screen": "collection",
+      "width": 320,
+      "mode": "after",
+      "deepBluePercent": 90.3
+    },
+    {
+      "screen": "luma",
+      "width": 320,
+      "mode": "after",
+      "deepBluePercent": 88.7
+    },
+    {
+      "screen": "luma-references",
+      "width": 320,
+      "mode": "after",
+      "deepBluePercent": 85.9
+    },
+    {
+      "screen": "mousse",
+      "width": 320,
+      "mode": "after",
+      "deepBluePercent": 88.6
+    },
+    {
+      "screen": "mousse-references",
+      "width": 320,
+      "mode": "after",
+      "deepBluePercent": 84.6
+    },
+    {
+      "screen": "nyx",
+      "width": 320,
+      "mode": "after",
+      "deepBluePercent": 90.6
+    },
+    {
+      "screen": "nyx-references",
+      "width": 320,
+      "mode": "after",
+      "deepBluePercent": 90.2
+    },
+    {
+      "screen": "codex",
+      "width": 320,
+      "mode": "after",
+      "deepBluePercent": 93.4
+    },
+    {
+      "screen": "collection",
+      "width": 390,
+      "mode": "before",
+      "deepBluePercent": 93.8
+    },
+    {
+      "screen": "luma",
+      "width": 390,
+      "mode": "before",
+      "deepBluePercent": 93.9
+    },
+    {
+      "screen": "mousse",
+      "width": 390,
+      "mode": "before",
+      "deepBluePercent": 93.9
+    },
+    {
+      "screen": "nyx",
+      "width": 390,
+      "mode": "before",
+      "deepBluePercent": 93.8
+    },
+    {
+      "screen": "codex",
+      "width": 390,
+      "mode": "before",
+      "deepBluePercent": 95
+    },
+    {
+      "screen": "collection",
+      "width": 390,
+      "mode": "after",
+      "deepBluePercent": 91.6
+    },
+    {
+      "screen": "luma",
+      "width": 390,
+      "mode": "after",
+      "deepBluePercent": 89.3
+    },
+    {
+      "screen": "luma-references",
+      "width": 390,
+      "mode": "after",
+      "deepBluePercent": 86.9
+    },
+    {
+      "screen": "mousse",
+      "width": 390,
+      "mode": "after",
+      "deepBluePercent": 88.6
+    },
+    {
+      "screen": "mousse-references",
+      "width": 390,
+      "mode": "after",
+      "deepBluePercent": 85.4
+    },
+    {
+      "screen": "nyx",
+      "width": 390,
+      "mode": "after",
+      "deepBluePercent": 90.7
+    },
+    {
+      "screen": "nyx-references",
+      "width": 390,
+      "mode": "after",
+      "deepBluePercent": 90
+    },
+    {
+      "screen": "codex",
+      "width": 390,
+      "mode": "after",
+      "deepBluePercent": 93.4
+    },
+    {
+      "screen": "collection",
+      "width": 430,
+      "mode": "before",
+      "deepBluePercent": 94.4
+    },
+    {
+      "screen": "luma",
+      "width": 430,
+      "mode": "before",
+      "deepBluePercent": 94.4
+    },
+    {
+      "screen": "mousse",
+      "width": 430,
+      "mode": "before",
+      "deepBluePercent": 94.4
+    },
+    {
+      "screen": "nyx",
+      "width": 430,
+      "mode": "before",
+      "deepBluePercent": 94.3
+    },
+    {
+      "screen": "codex",
+      "width": 430,
+      "mode": "before",
+      "deepBluePercent": 95.2
+    },
+    {
+      "screen": "collection",
+      "width": 430,
+      "mode": "after",
+      "deepBluePercent": 92.3
+    },
+    {
+      "screen": "luma",
+      "width": 430,
+      "mode": "after",
+      "deepBluePercent": 90.3
+    },
+    {
+      "screen": "luma-references",
+      "width": 430,
+      "mode": "after",
+      "deepBluePercent": 88.1
+    },
+    {
+      "screen": "mousse",
+      "width": 430,
+      "mode": "after",
+      "deepBluePercent": 89.7
+    },
+    {
+      "screen": "mousse-references",
+      "width": 430,
+      "mode": "after",
+      "deepBluePercent": 86.7
+    },
+    {
+      "screen": "nyx",
+      "width": 430,
+      "mode": "after",
+      "deepBluePercent": 91.5
+    },
+    {
+      "screen": "nyx-references",
+      "width": 430,
+      "mode": "after",
+      "deepBluePercent": 90.9
+    },
+    {
+      "screen": "codex",
+      "width": 430,
+      "mode": "after",
+      "deepBluePercent": 93.3
+    }
+  ]
+}
