@@ -144,3 +144,49 @@ progress{accent-color:var(--violet)}
 @media(max-width:344px){.guardian .portrait{height:125px}.guardian-hero .portrait{height:225px}.codex-art-strip .art-sprite{height:76px}}
 .portrait-reference.art-unavailable .art-sprite{display:none}
 .portrait-reference .portrait-fallback:not([hidden]){display:grid;place-items:center;height:100%;font-size:48px}
+/* DA-04: redistribute pastel light into UI panels, not the global backdrop. */
+:root{--ui-accent:#A6E7FF;--ui-tint:#7DDCFF18;--ui-line:#7DDCFF55}
+/* Decorative panel colors have no gameplay or progression meaning. */
+main .card:nth-of-type(3n+2){--ui-accent:#D2C3FF;--ui-tint:#B8A7FF1C;--ui-line:#B8A7FF55}
+main .card:nth-of-type(3n+3){--ui-accent:#C7F5D5;--ui-tint:#B7FFB016;--ui-line:#B7FFB04D}
+.card:not(.guardian):not(.art-study){
+ border-color:var(--ui-line);
+ background:radial-gradient(ellipse 110% 90% at 6% 0,var(--ui-tint),transparent 78%),linear-gradient(150deg,#142443,#0C1932);
+ box-shadow:inset 0 1px color-mix(in srgb,var(--ui-accent) 18%,transparent),0 8px 30px #02081030,0 0 24px color-mix(in srgb,var(--ui-accent) 4%,transparent);
+}
+.card:not(.guardian) h3{color:var(--ui-accent)}
+.pill{color:#C8EFFF;border-color:#A6F0FF55;background:linear-gradient(135deg,#7DDCFF1C,#B8A7FF12);box-shadow:inset 0 1px #F3F7FF10}
+.empty{border-color:#B8A7FF44;background:radial-gradient(ellipse at 20% 0,#B8A7FF13,transparent 75%),#0B1730}
+/* Element-tinted game cards remain grounded in marine surfaces. */
+.guardian.card{border-color:color-mix(in srgb,var(--element) 48%,transparent);background:radial-gradient(ellipse 110% 75% at 50% 22%,var(--aura),transparent 82%),linear-gradient(150deg,#152644,#0A1630);box-shadow:inset 0 1px color-mix(in srgb,var(--element) 22%,transparent),0 0 26px color-mix(in srgb,var(--element) 5%,transparent)}
+.guardian h3{color:var(--element)}
+.guardian .portrait-reference{background:radial-gradient(ellipse at 50% 55%,color-mix(in srgb,var(--element) 24%,transparent),transparent 74%)}
+.guardian .element-badge{filter:drop-shadow(0 0 7px var(--aura))}
+.guardian .pill{border-color:color-mix(in srgb,var(--element) 60%,transparent);background:linear-gradient(130deg,var(--aura),#0E1B38);box-shadow:inset 0 1px color-mix(in srgb,var(--element) 20%,transparent),0 0 12px color-mix(in srgb,var(--element) 6%,transparent)}
+.guardian-hero,.ability-reference,.art-study{box-shadow:inset 0 1px var(--element-line),0 0 30px color-mix(in srgb,var(--element) 5%,transparent)}
+/* Filters: persistent selected/filled cues, with an explicit keyboard focus ring. */
+.filters label{color:#C6DAF3}
+.filters label:nth-child(2){color:#D2C3FF}
+.filters label:nth-child(3){color:#C7F5D5}
+.filters select,.filters input,.scenario select,.scenario input{border-color:#86D8FF66;background:linear-gradient(140deg,#173044,#101F39);box-shadow:inset 0 1px #A6F0FF14}
+.filters #family{border-color:#B8A7FF66;background:linear-gradient(140deg,#242440,#121E39)}
+.filters #class-filter{border-color:#B7FFB055;background:linear-gradient(140deg,#19333D,#101F39)}
+.filters select:has(option:checked:not(:first-child)),.filters input:not(:placeholder-shown){border-color:#C2EEFF;box-shadow:inset 0 0 0 1px #7DDCFF44,0 0 18px #7DDCFF12}
+.filters select:focus-visible,.filters input:focus-visible,.scenario select:focus-visible,.scenario input:focus-visible{outline:2px solid #A6F0FF;outline-offset:3px;box-shadow:0 0 24px #7DDCFF24}
+/* Codex has clearer luminous identities without adding or moving sections. */
+main:has(.codex-art-strip)>.card:nth-of-type(3n+1){--ui-accent:#D9C8FF;--ui-tint:#B8A7FF26;--ui-line:#B8A7FF70}
+main:has(.codex-art-strip)>.card:nth-of-type(3n+2){--ui-accent:#FFE7B5;--ui-tint:#FFDCA51C;--ui-line:#FFE7B55C}
+main:has(.codex-art-strip)>.card:nth-of-type(3n+3){--ui-accent:#C0F5D0;--ui-tint:#B7FFB020;--ui-line:#B7FFB05C}
+main:has(.codex-art-strip)>h2{color:#D9C8FF;text-shadow:0 0 20px #B8A7FF15}
+main:has(.codex-art-strip)>h2:nth-of-type(2){color:#A6E7FF}
+.codex-art-strip{border-color:#B8A7FF60;background:radial-gradient(ellipse at 50% 0,#B8A7FF14,transparent 80%),#0A1630;box-shadow:inset 0 1px #B8A7FF22}
+.codex-art-strip figure{background:radial-gradient(ellipse at 50% 40%,var(--aura),#0E1B38 95%);box-shadow:inset 0 0 0 1px var(--element-line),0 0 16px var(--aura)}
+.codex-art-strip figcaption{color:var(--element)}
+/* Route color belongs to the active capsule, not a multicolored nav bar. */
+nav a{--nav-accent:#A6F0FF;--nav-tint:#7DDCFF28}
+nav a[href="#/collection"]{--nav-accent:#DBC7FF;--nav-tint:#B8A7FF2B}
+nav a[href="#/missions"]{--nav-accent:#C4F7CA;--nav-tint:#B7FFB024}
+nav a[href="#/shop"]{--nav-accent:#F2C8FF;--nav-tint:#E49CFF24}
+nav a[href="#/profile"]{--nav-accent:#FFE6B4;--nav-tint:#FFE89E24}
+nav a[aria-current]{color:var(--nav-accent);background:radial-gradient(ellipse at 50% 10%,var(--nav-tint),#132345 92%);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--nav-accent) 40%,transparent),0 0 22px var(--nav-tint)}
+nav a[aria-current] span{text-shadow:0 0 12px var(--nav-tint)}

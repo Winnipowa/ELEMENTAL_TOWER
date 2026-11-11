@@ -1,0 +1,250 @@
+{
+  "widths": [
+    320,
+    390,
+    430
+  ],
+  "screens": 13,
+  "layoutUnchanged": true,
+  "storageUnchanged": true,
+  "textContrast": [
+    {
+      "foreground": "#F3F7FF",
+      "background": "#132345",
+      "ratio": 14.45
+    },
+    {
+      "foreground": "#B8C7E6",
+      "background": "#132345",
+      "ratio": 9.12
+    },
+    {
+      "foreground": "#7DDCFF",
+      "background": "#132345",
+      "ratio": 10.01
+    },
+    {
+      "foreground": "#A6F0FF",
+      "background": "#132345",
+      "ratio": 12.21
+    },
+    {
+      "foreground": "#B8A7FF",
+      "background": "#132345",
+      "ratio": 7.39
+    },
+    {
+      "foreground": "#B7FFB0",
+      "background": "#132345",
+      "ratio": 13.25
+    },
+    {
+      "foreground": "#07111F",
+      "background": "#7DDCFF",
+      "ratio": 12.22
+    },
+    {
+      "foreground": "#07111F",
+      "background": "#A6F0FF",
+      "ratio": 14.9
+    }
+  ],
+  "coverageMethod": "Approximate blue-dominant RGB pixels, max channel <=110; excludes text, portraits and accents",
+  "coverage": [
+    {
+      "screen": "home",
+      "width": 320,
+      "deepBluePercent": 91.9
+    },
+    {
+      "screen": "collection",
+      "width": 320,
+      "deepBluePercent": 88.4
+    },
+    {
+      "screen": "collection-filter-active",
+      "width": 320,
+      "deepBluePercent": 91.7
+    },
+    {
+      "screen": "guardian-demo-nyx",
+      "width": 320,
+      "deepBluePercent": 88.9
+    },
+    {
+      "screen": "missions",
+      "width": 320,
+      "deepBluePercent": 92.5
+    },
+    {
+      "screen": "shop",
+      "width": 320,
+      "deepBluePercent": 89.5
+    },
+    {
+      "screen": "profile",
+      "width": 320,
+      "deepBluePercent": 92.3
+    },
+    {
+      "screen": "settings",
+      "width": 320,
+      "deepBluePercent": 91.9
+    },
+    {
+      "screen": "pass",
+      "width": 320,
+      "deepBluePercent": 93.2
+    },
+    {
+      "screen": "synergies",
+      "width": 320,
+      "deepBluePercent": 91.3
+    },
+    {
+      "screen": "prepare",
+      "width": 320,
+      "deepBluePercent": 90.3
+    },
+    {
+      "screen": "bridge",
+      "width": 320,
+      "deepBluePercent": 88.6
+    },
+    {
+      "screen": "results",
+      "width": 320,
+      "deepBluePercent": 91.2
+    },
+    {
+      "screen": "home",
+      "width": 390,
+      "deepBluePercent": 90.3
+    },
+    {
+      "screen": "collection",
+      "width": 390,
+      "deepBluePercent": 89.9
+    },
+    {
+      "screen": "collection-filter-active",
+      "width": 390,
+      "deepBluePercent": 92.7
+    },
+    {
+      "screen": "guardian-demo-nyx",
+      "width": 390,
+      "deepBluePercent": 89.1
+    },
+    {
+      "screen": "missions",
+      "width": 390,
+      "deepBluePercent": 93.3
+    },
+    {
+      "screen": "shop",
+      "width": 390,
+      "deepBluePercent": 89.9
+    },
+    {
+      "screen": "profile",
+      "width": 390,
+      "deepBluePercent": 93.2
+    },
+    {
+      "screen": "settings",
+      "width": 390,
+      "deepBluePercent": 92.8
+    },
+    {
+      "screen": "pass",
+      "width": 390,
+      "deepBluePercent": 94
+    },
+    {
+      "screen": "synergies",
+      "width": 390,
+      "deepBluePercent": 91.4
+    },
+    {
+      "screen": "prepare",
+      "width": 390,
+      "deepBluePercent": 89.7
+    },
+    {
+      "screen": "bridge",
+      "width": 390,
+      "deepBluePercent": 89.7
+    },
+    {
+      "screen": "results",
+      "width": 390,
+      "deepBluePercent": 91.7
+    },
+    {
+      "screen": "home",
+      "width": 430,
+      "deepBluePercent": 91
+    },
+    {
+      "screen": "collection",
+      "width": 430,
+      "deepBluePercent": 90.7
+    },
+    {
+      "screen": "collection-filter-active",
+      "width": 430,
+      "deepBluePercent": 93.3
+    },
+    {
+      "screen": "guardian-demo-nyx",
+      "width": 430,
+      "deepBluePercent": 90
+    },
+    {
+      "screen": "missions",
+      "width": 430,
+      "deepBluePercent": 93.7
+    },
+    {
+      "screen": "shop",
+      "width": 430,
+      "deepBluePercent": 90.3
+    },
+    {
+      "screen": "profile",
+      "width": 430,
+      "deepBluePercent": 93.6
+    },
+    {
+      "screen": "settings",
+      "width": 430,
+      "deepBluePercent": 93.2
+    },
+    {
+      "screen": "pass",
+      "width": 430,
+      "deepBluePercent": 94.3
+    },
+    {
+      "screen": "synergies",
+      "width": 430,
+      "deepBluePercent": 91.3
+    },
+    {
+      "screen": "prepare",
+      "width": 430,
+      "deepBluePercent": 90.2
+    },
+    {
+      "screen": "bridge",
+      "width": 430,
+      "deepBluePercent": 90.1
+    },
+    {
+      "screen": "results",
+      "width": 430,
+      "deepBluePercent": 92
+    }
+  ]
+}
