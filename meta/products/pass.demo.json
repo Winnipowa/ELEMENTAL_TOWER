@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "source": "demonstration",
+  "catalogVersion": "demo-pass-1",
+  "title": "Échos des îles",
+  "maxPoints": 100,
+  "tiers": [
+    {
+      "id": "demo-tier-1",
+      "level": 1,
+      "requiredPoints": 0,
+      "freeProductId": "demo-profile-moon",
+      "premiumProductId": "demo-skin-luma"
+    },
+    {
+      "id": "demo-tier-2",
+      "level": 2,
+      "requiredPoints": 50,
+      "freeProductId": "demo-skill-bloom",
+      "premiumProductId": "demo-animation-stars"
+    },
+    {
+      "id": "demo-tier-3",
+      "level": 3,
+      "requiredPoints": 100,
+      "freeProductId": "demo-decor-crystal",
+      "premiumProductId": "demo-skill-bloom"
+    }
+  ]
+}

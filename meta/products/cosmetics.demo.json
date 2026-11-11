@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "source": "demonstration",
+  "catalogVersion": "demo-cosmetics-1",
+  "products": [
+    {
+      "id": "demo-skin-luma",
+      "title": "Éclat de Luma",
+      "category": "guardian_skin",
+      "description": "Étude cosmétique du gardien. Le visuel montre la référence existante ; aucune nouvelle apparence jouable.",
+      "availability": "preview",
+      "previewKey": "luma",
+      "illustrationNote": "Portrait de référence — apparence définitive à produire."
+    },
+    {
+      "id": "demo-skill-bloom",
+      "title": "Floraison magique",
+      "category": "skill_effect",
+      "description": "Piste visuelle pour un effet de compétence. Aucun effet de combat modifié.",
+      "availability": "preview",
+      "previewKey": "bloom",
+      "illustrationNote": "FX de référence — produit cosmétique à valider."
+    },
+    {
+      "id": "demo-animation-stars",
+      "title": "Éveil des étoiles",
+      "category": "animation",
+      "description": "Intention d’animation cosmétique, présentée par une image fixe.",
+      "availability": "preview",
+      "previewKey": "stars",
+      "illustrationNote": "Référence statique — animation non réalisée."
+    },
+    {
+      "id": "demo-decor-crystal",
+      "title": "Refuge de cristal",
+      "category": "decor",
+      "description": "Étude de décor nocturne. Aucun terrain de combat remplacé.",
+      "availability": "preview",
+      "previewKey": "pedestal",
+      "illustrationNote": "Piédestal fourni — décor définitif à produire."
+    },
+    {
+      "id": "demo-profile-moon",
+      "title": "Cadre des songes",
+      "category": "profile",
+      "description": "Emplacement pour un cadre de profil cosmétique.",
+      "availability": "coming_soon",
+      "previewKey": "pending",
+      "illustrationNote": "Illustration définitive à fournir."
+    }
+  ]
+}
