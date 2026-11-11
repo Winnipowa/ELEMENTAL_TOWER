@@ -1,7 +1,8 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {MockGameBridge,catalog} from '../meta/bridge.js';
+import {MockGameBridge} from '../meta/bridge.js';
 import {ExpeditionSession} from '../meta/expedition.js';
+const catalog=await new MockGameBridge().getCatalog();
 const request=()=>({regionId:'demo-dawn',rulesetVersion:catalog.rulesetVersion,playerUnlockedGuardianIds:['demo-luma'],settings:{}});
 test('isolated catalog and missing request rejection',async()=>{const b=new MockGameBridge();const a=await b.getCatalog();a.guardians.length=0;assert.equal((await b.getCatalog()).guardians.length,3);await assert.rejects(b.startRun(),/Version/);await assert.rejects(b.openRun(),/indisponible/);});
 for(const outcome of ['victory','defeat','abandoned'])test(`lifecycle ${outcome}, exactly one result, no catalog mutation`,async()=>{const b=new MockGameBridge();b.configureDemo(outcome);const before=await b.getCatalog();let count=0;b.subscribeRunCompleted(()=>count++);const s=new ExpeditionSession(b);await s.start(request());assert.equal(s.state,'running');await s.finish();assert.equal(s.state,'completed');assert.equal(s.result.outcome,outcome);assert.equal(s.result.verificationStatus,'mock');assert.deepEqual(s.result.earnedUnlocks,[]);await b.stopRun(s.runId);assert.equal(count,1);assert.deepEqual(await b.getCatalog(),before);s.dispose();});

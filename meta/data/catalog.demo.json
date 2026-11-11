@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "catalogVersion": "demo-catalog-1",
+  "source": "demonstration",
+  "rulesetVersion": "demo-meta-01",
+  "regions": [
+    {
+      "id": "demo-dawn",
+      "title": "Aurore",
+      "status": "available",
+      "objective": "Découvrir le territoire d’Aurore"
+    },
+    {
+      "id": "demo-forest",
+      "title": "Sylve",
+      "status": "locked"
+    },
+    {
+      "id": "demo-flux",
+      "title": "Sanctuaire des Flux",
+      "status": "coming_soon"
+    },
+    {
+      "id": "demo-shadow",
+      "title": "Crépuscule",
+      "status": "locked"
+    }
+  ],
+  "families": [
+    {
+      "id": "Aurore",
+      "name": "Aurore",
+      "description": "Famille illustrative, effets canoniques à recevoir."
+    },
+    {
+      "id": "Sylve",
+      "name": "Sylve",
+      "description": "Famille illustrative, effets canoniques à recevoir."
+    },
+    {
+      "id": "Crépuscule",
+      "name": "Crépuscule",
+      "description": "Famille illustrative, effets canoniques à recevoir."
+    }
+  ],
+  "classes": [
+    {
+      "id": "Arcaniste",
+      "name": "Arcaniste",
+      "description": "Classe illustrative, aucun effet de combat implémenté."
+    },
+    {
+      "id": "Protecteur",
+      "name": "Protecteur",
+      "description": "Classe illustrative, aucun effet de combat implémenté."
+    }
+  ],
+  "synergies": [
+    {
+      "id": "demo-bond",
+      "name": "Lien des îles",
+      "description": "Exemple de lien de codex. Aucun bonus de combat défini."
+    }
+  ],
+  "guardians": [
+    {
+      "id": "demo-luma",
+      "name": "Luma",
+      "familyId": "Aurore",
+      "classId": "Arcaniste",
+      "traitIds": [
+        "demo-bond"
+      ],
+      "unlocked": true,
+      "color": "#ffd396",
+      "portraitKey": "demo-luma",
+      "description": "Luma, silhouette fictive du carnet des îles.",
+      "abilitySummary": "Compétence illustrative : description canonique à recevoir. Aucun effet ni statistique défini.",
+      "unlockHint": "Disponible dans le scénario initial."
+    },
+    {
+      "id": "demo-mousse",
+      "name": "Mousse",
+      "familyId": "Sylve",
+      "classId": "Protecteur",
+      "traitIds": [
+        "demo-bond"
+      ],
+      "unlocked": true,
+      "color": "#94dfc7",
+      "portraitKey": "demo-mousse",
+      "description": "Mousse, silhouette fictive du carnet des îles.",
+      "abilitySummary": "Compétence illustrative : description canonique à recevoir. Aucun effet ni statistique défini.",
+      "unlockHint": "Disponible dans le scénario initial."
+    },
+    {
+      "id": "demo-nyx",
+      "name": "Nyx",
+      "familyId": "Crépuscule",
+      "classId": "Arcaniste",
+      "traitIds": [
+        "demo-bond"
+      ],
+      "unlocked": false,
+      "color": "#cf9bfb",
+      "portraitKey": "demo-nyx",
+      "description": "Nyx, silhouette fictive du carnet des îles.",
+      "abilitySummary": "Compétence illustrative : description canonique à recevoir. Aucun effet ni statistique défini.",
+      "unlockHint": "Valider manuellement le carnet d’Aurore dans les outils de progression démo."
+    }
+  ],
+  "chapters": [
+    {
+      "id": "demo-chapter-1",
+      "title": "I · Carnet d’Aurore",
+      "regionId": "demo-dawn",
+      "objectiveIds": [
+        "demo-read"
+      ]
+    },
+    {
+      "id": "demo-chapter-2",
+      "title": "II · Regards sur Sylve",
+      "regionId": "demo-forest",
+      "requiresChapterId": "demo-chapter-1",
+      "objectiveIds": [
+        "demo-study"
+      ]
+    }
+  ],
+  "objectives": [
+    {
+      "id": "demo-read",
+      "title": "Consulter le carnet d’Aurore",
+      "description": "Validation manuelle de test, indépendante de toute partie.",
+      "unlockGuardianIds": [
+        "demo-nyx"
+      ]
+    },
+    {
+      "id": "demo-study",
+      "title": "Étudier les liens du codex",
+      "description": "Objectif de démonstration, sans récompense de combat.",
+      "unlockGuardianIds": []
+    }
+  ]
+}
