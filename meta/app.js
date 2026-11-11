@@ -1,4 +1,5 @@
 import {ProductScreens} from './products/screens.js';
+import {bindArtFallbacks} from './mobile-assets.js';
 import {DemoPreferences,applyPreferences} from './products/preferences.js';
 import {guardianPage,collectionPage,codexPage,profilePage,demoPage,preparationPage,resultsPage} from './views.js';
 import {guardianVisual,elementBadge,referenceStudy,abilityArt,codexArt,GUARDIAN_ART} from './art.js';
@@ -81,9 +82,7 @@ function render(focus=false){
 }
 function bind(){
  products.bind(main,{render,preview:notice,confirmReset:()=>window.confirm('Effacer uniquement les préférences de démonstration sur cet appareil ?')});
- main.querySelectorAll('.portrait-reference .guardian-figure image').forEach(image=>image.addEventListener('error',()=>{
-  const container=image.closest('.portrait');container.classList.add('art-unavailable');container.querySelector('.portrait-fallback').hidden=false;
- }));
+ bindArtFallbacks(main);
 
  main.querySelectorAll('.portrait img').forEach(img=>{img.onerror=()=>{img.hidden=true;img.nextElementSibling.hidden=false;};});
  main.querySelector('[data-save-profile]')?.addEventListener('click',()=>{progression.save({...progression.state,profile:{name:main.querySelector('#profile-name').value.trim()||'Voyageur · Démo'}});projectProgression();render();});

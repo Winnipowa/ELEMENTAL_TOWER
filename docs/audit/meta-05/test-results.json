@@ -1,0 +1,26 @@
+[
+  {
+    "name": "reference",
+    "args": [
+      "tests/run-reference.mjs"
+    ],
+    "status": 0,
+    "elapsedMs": 109954
+  },
+  {
+    "name": "mobile-browser",
+    "args": [
+      "tests/mobile-browser.mjs"
+    ],
+    "status": 0,
+    "elapsedMs": 60455
+  },
+  {
+    "name": "mobile-performance",
+    "args": [
+      "tests/mobile-performance.mjs"
+    ],
+    "status": 0,
+    "elapsedMs": 101888
+  }
+]

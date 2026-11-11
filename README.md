@@ -2,6 +2,12 @@
 
 Jeu mobile portrait associant auto-battler, Tower Defense, collection de gardiens, synergies et fusion de 1★ à 5★.
 
+## Préparation mobile META-05
+
+Référence `0.4.1-meta.5`, dérivée d’INT-01 : [rapport QA](docs/META_05_QA_REPORT.md), [assets/performance](docs/META_05_PERFORMANCE.md), [packaging conditionnel](docs/META_05_PACKAGING.md), [analytics sans collecte](docs/META_05_ANALYTICS_PLAN.md), [protocole physique](docs/META_05_DEVICE_PROTOCOL.md) et [checklist bêta](docs/META_05_BETA_CHECKLIST.md).
+
+`npm run test:mobile` exécute les tests hérités puis Edge/WebKit et les mesures desktop. Installer le runtime de test avec `npx playwright install webkit` si nécessaire ; `PLAYWRIGHT_BROWSERS_PATH` permet un emplacement local. `npm run assets:mobile` régénère les PNG dérivés avec FFmpeg, sans modifier les sources. Aucun téléphone physique, packaging natif, moteur réel ou service analytics n’est déclaré validé par ces commandes.
+
 ## Référence hors combat INT-01
 
 La référence consolidée `0.4.0-int.1` part de la PR #15 et reste entièrement en démonstration, sans moteur canonique ni récompense réelle. Les sections historiques ci-dessous documentent les lots précédents.
